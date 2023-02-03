@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DeckController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,8 +30,7 @@ Route::get('/backend', function () {
     return view('backend.dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/backend/decks-manager', function () {
-    return view('backend.decks-manager');
-})->middleware(['auth'])->name('decks-manager');
+Route::get('/backend/decks-manager', [DeckController::class, 'index'
+])->middleware(['auth'])->name('decks-manager');
 
 require __DIR__.'/auth.php';
