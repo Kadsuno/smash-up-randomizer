@@ -1,0 +1,56 @@
+version: "3.9"
+
+volumes:
+  dbdata:
+
+services:
+  apache:
+    build: .docker/apache
+    container_name: laravel_smash_up_apache
+    volumes:
+      - ./:/var/www/html:delegated
+    networks:
+      - default
+    links:
+      - "mariadb:database"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.laravel.rule=Host(`laravel-smash-up.test`)"
+      - "traefik.http.routers.laravel.entrypoints=web"
+      - "traefik.port=80"
+  mariadb:
+    image: mariadb:latest
+    container_name: laravel_smash_up_mariadb
+    networks:
+      - default
+    volumes:
+      - dbdata:/var/libs/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=dev
+      - MYSQL_USER=dev
+      - MYSQL_PASSWORD=dev
+      - MYSQL_DATABASE=laravel-smash-up
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.laravel-mariadb.rule=Host(`laravel-smash-up-mariadb.test`)"
+      - "traefik.http.routers.laravel-mariadb.entrypoints=mysql"
+      - "traefik.port=3306"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: laravel_smash_up_phpmyadmin
+    networks:
+      - default
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mariadb
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.laravel-phpmyadmin.rule=Host(`laravel-smash-up-phpmyadmin.test`)"
+      - "traefik.http.routers.laravel-phpmyadmin.entrypoints=web"
+      - "traefik.port=80"
+
+
+networks:
+  default:
+    external: true
+    name: traefik_default
