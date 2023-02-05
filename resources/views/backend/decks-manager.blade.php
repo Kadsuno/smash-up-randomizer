@@ -18,7 +18,7 @@
                     <div class="ms-2 me-auto">
                         <div class="fw-bold">{{ $deck->name }}</div>
                     </div>
-                    <a class="btn btn-sm btn-primary rounded-pill" href="#">Delete</a>
+                    <a class="btn btn-sm btn-primary rounded-pill" href="{{ route('delete-decks', $deck->name) }}">Delete</a>
                 </li>
                 @endforeach
             </ol>
@@ -30,11 +30,16 @@
                 Add new decks
             </h2>
             <div>
-                <form method="GET" action="{{ route('decks-manager') }}">
+                <form class="needs-validation" method="GET" action="{{ route('add-deck') }}" novalidate>
                     <div class="row mb-2">
                         <label for="deckName" class="form-label">Deck name</label>
                         <div class="col-4">
-                            <input type="text" class="form-control bg-white" name="deckName">
+                            <div class="has-validation">
+                                <input type="text" class="form-control bg-white" name="deckName" required>
+                                <div class="invalid-feedback">
+                                    Please choose a deck name.
+                                </div>
+                            </div>
                         </div>
                         <div class="col-4">
                             <button type="submit" class="btn btn-primary">Save</button>
@@ -44,9 +49,4 @@
             </div>
         </div>
     </div>
-    @if ($deckExists == 1)
-        <script>
-            window.alert("The deck already exists!");
-        </script>
-    @endif
 </x-layouts.backend.backendMain>
