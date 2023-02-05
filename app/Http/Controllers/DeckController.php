@@ -9,9 +9,18 @@ class DeckController extends Controller
 {
     public function index()
     {
+
+
+        $decks = DB::table('decks')->get();
+ 
+        return view('backend.decks-manager', ['decks' => $decks]);
+    }
+
+    public function add()
+    {
         $deckExists = FALSE;
 
-        if (isset($_GET['deckName']) && $_GET['deckName'] != '') {
+        if ($_GET['deckName'] != '') {
             $deckName = $_GET['deckName'];
 
             $decks = DB::table('decks')->get();
@@ -29,8 +38,13 @@ class DeckController extends Controller
             }
         }
 
-        $decks = DB::table('decks')->get();
- 
-        return view('backend.decks-manager', ['decks' => $decks, 'deckExists' => $deckExists]);
+        return redirect()->route('decks-manager');
+    }
+
+    public function delete($name)
+    {
+        $deleted = DB::table('decks')->where('name', '=', $name)->delete();
+
+        return redirect()->route('decks-manager');
     }
 }
