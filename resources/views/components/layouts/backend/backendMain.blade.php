@@ -1,8 +1,8 @@
 <x-layouts.backend.backendHeader />
     <div class="container-fluid pl-0">
         <div class="row">
-            <div class="col-2">
-                <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark sidebar border-top">
+            <div class="col-2 bg-dark border-top">
+                <div class="d-flex flex-column flex-shrink-0 p-3 text-white sidebar">
                     <ul class="nav nav-pills flex-column mb-auto">
                       <li class="nav-item">
                         <a href="{{ route('dashboard') }}" class="nav-link text-white sidebar-link" aria-current="page">
