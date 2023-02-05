@@ -33,4 +33,10 @@ Route::get('/backend', function () {
 Route::get('/backend/decks-manager', [DeckController::class, 'index'
 ])->middleware(['auth'])->name('decks-manager');
 
+Route::get('/backend/decks-manager/add-deck', [DeckController::class, 'add'
+])->middleware(['auth'])->name('add-deck');
+
+Route::get('/backend/decks-manager/delete/{name}', [DeckController::class, 'delete'
+])->middleware(['auth'])->name('delete-decks');
+
 require __DIR__.'/auth.php';
