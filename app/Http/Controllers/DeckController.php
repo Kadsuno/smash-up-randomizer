@@ -47,4 +47,39 @@ class DeckController extends Controller
 
         return redirect()->route('decks-manager');
     }
+
+    public function shuffle()
+    {
+        $numberOfPlayers = $_GET['numberOfPlayers'];
+
+        $decks = DB::table('decks')->get();
+        $selectedDecks = [];
+        $playerPointer = 1;
+
+        for ($i = 1; $i <= $numberOfPlayers; $i++) {
+            $index = 1;
+            $random1 = random_int(1, count($decks));
+            while (!isset($decks[$random1])) {
+                $random1 = random_int(1, count($decks));
+            }
+
+            $selectedDecks[$playerPointer][$index]['player'] = $i;
+            $selectedDecks[$playerPointer][$index]['name'] = $decks[$random1]->name;
+            $index++;
+            unset($decks[$random1]);    
+
+            $random2 = random_int(1, count($decks));
+            while (!isset($decks[$random2])) {
+                $random2 = random_int(1, count($decks));
+            }
+
+            $selectedDecks[$playerPointer][$index]['player'] = $i;
+            $selectedDecks[$playerPointer][$index]['name'] = $decks[$random2]->name;
+            unset($decks[$random2]);
+            
+            $playerPointer++;
+        }
+
+        return view('start.shuffle-deck', ['selectedDecks' => $selectedDecks]);
+    }
 }
