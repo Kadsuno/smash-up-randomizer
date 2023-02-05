@@ -39,4 +39,7 @@ Route::get('/backend/decks-manager/add-deck', [DeckController::class, 'add'
 Route::get('/backend/decks-manager/delete/{name}', [DeckController::class, 'delete'
 ])->middleware(['auth'])->name('delete-decks');
 
+Route::get('/shuffle', [DeckController::class, 'shuffle'
+])->name('shuffle-decks');
+
 require __DIR__.'/auth.php';
