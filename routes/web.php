@@ -15,7 +15,7 @@ use App\Http\Controllers\DeckController;
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('start.home');
 })->name('home');
 
 Route::get('/help/smash-up', function () {
