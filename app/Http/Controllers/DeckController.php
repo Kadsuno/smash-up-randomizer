@@ -80,6 +80,8 @@ class DeckController extends Controller
             $playerPointer++;
         }
 
-        return view('start.shuffle-deck', ['selectedDecks' => $selectedDecks]);
+        //var_dump($selectedDecks);
+
+        return view('start.shuffle-decks', ['selectedDecks' => $selectedDecks]);
     }
 }
