@@ -17,7 +17,7 @@
                     </ul>
                   </div>
             </div>
-            <div class="col-10">
+            <div class="col-10 mt-5">
                 <main class="flex flex-1 container max-w-7xl mx-auto px-5 lg:px-40 space-x-5 mb-5">
                     {{ $slot }}
                 </main>        
