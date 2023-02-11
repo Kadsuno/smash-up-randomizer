@@ -14,6 +14,12 @@ use App\Http\Controllers\DeckController;
 |
 */
 
+Route::get('language/{locale}', function ($locale) {
+    app()->setLocale($locale);
+    session()->put('locale', $locale);
+    return redirect()->back();
+});
+
 Route::get('/', function () {
     return view('start.home');
 })->name('home');
@@ -41,5 +47,9 @@ Route::get('/backend/decks-manager/delete/{name}', [DeckController::class, 'dele
 
 Route::get('/shuffle', [DeckController::class, 'shuffle'
 ])->name('shuffle-decks');
+
+Route::get('/imprint', function () {
+    return view('components.layouts.bottom-navigation.imprint');
+})->name('imprint');
 
 require __DIR__.'/auth.php';
