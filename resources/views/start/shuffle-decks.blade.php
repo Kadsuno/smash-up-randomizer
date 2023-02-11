@@ -2,7 +2,7 @@
     <div class="container-fluid mb-5">
         <div class="row">
             <h1>
-                Shuffle Result
+                Ergebnis
             </h1>
         </div>
     </div>
@@ -20,7 +20,7 @@
                         @if ($loop->odd)
                             <div class="row text-center">
                                 <h2>
-                                    {{ $loop->parent->iteration }}. Player
+                                    {{ $loop->parent->iteration }}. {{ __('frontend.player') }}
                                 </h2>
                             </div>
                         @endif
