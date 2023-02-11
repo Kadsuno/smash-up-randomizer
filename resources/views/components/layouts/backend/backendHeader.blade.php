@@ -5,10 +5,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Smash Up Randomizer</title>
+    <title>Smash Up Randomizer Backend</title>
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/favicons/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicons/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicons/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ asset('images/favicons/site.webmanifest') }}">  
     <script src="https://kit.fontawesome.com/e3f061e841.js" crossorigin="anonymous"></script>
 </head>
 
@@ -36,7 +40,7 @@
                                 <x-responsive-nav-link :href="route('logout')"
                                         onclick="event.preventDefault();
                                                     this.closest('form').submit();">
-                                    {{ __('Log Out') }}
+                                    {{ __('backend.logout') }}
                                 </x-responsive-nav-link>
                             </form>
                             </li>
