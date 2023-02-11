@@ -15,39 +15,39 @@
 
                     <!-- Email Address -->
                     <div class="form-outline mb-4">
-                        <x-label for="email" :value="__('Email address')" />
+                        <label class="mb-2" for="email">{{ __('frontend.email') }}</label>
                         <x-input id="email" class="form-control form-control-lg" type="email" name="email" :value="old('email')"
                         required autofocus />
                     </div>
 
                     <!-- Password -->
                     <div class="form-outline mb-4">
-                        <x-label for="password" :value="__('Password')" />
+                        <label for="password" class="mb-2">{{ __('frontend.password') }}</label>
                         <x-input id="password" class="form-control form-control-lg" type="password" name="password" required
                         autocomplete="current-password" />
                     </div>
 
                     <!-- Remember Me -->
-                    <div class="d-flex justify-content-around align-items-center mb-4">
+                    <div class="d-flex mb-4">
                         <label for="remember_me" class="form-check-label">
                             <input id="remember_me" type="checkbox"
                                 class="form-check-input"
                                 name="remember">
-                            <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                            <span class="ml-2 text-sm text-gray-600">{{ __('frontend.remember_me') }}</span>
                         </label>
-                        @if (Route::has('password.request'))
+{{--                         @if (Route::has('password.request'))
                         <a class="text-decoration-none"
                             href="{{ route('password.request') }}">
-                            {{ __('Forgot your password?') }}
+                            {{ __('frontend.password_forget') }}
                         </a>
                         @endif
-                    </div>
+ --}}                    </div>
 
                     <div class="d-flex justify-content-center">
                         
 
                         <x-button class="btn btn-primary btn-lg btn-block">
-                            {{ __('Log in') }}
+                            {{ __('frontend.login') }}
                         </x-button>
                     </div>
                 </form>

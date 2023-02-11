@@ -1,11 +1,13 @@
 <x-layouts.backend.backendMain>
     <div class="container-fluid">
-        <div class="row no-gutters">
+        <div class="row mb-5">
             <h1>
-                Welcome in the Backend Area!
+                {{ __('backend.dashboard_header') }}
             </h1>
+        </div>
+        <div class="row">
             <p>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                {{ __('backend.dashboard_body') }}
             </p>
         </div>
     </div>
