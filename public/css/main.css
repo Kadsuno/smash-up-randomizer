@@ -29,3 +29,24 @@
 .border-right {
     border-right: 1px solid;
 }
+
+.flag-icon {
+    position: relative;
+    display: inline-block;
+    width: 1.333rem;
+    line-height: 1em;
+    height: 1rem;
+    font-size: 1em;
+}
+
+.flag-icon-de {
+    background-image: url(../images/flags/flag_de.svg);
+}
+
+.flag-icon-en {
+    background-image: url(../images/flags/flag_gb.svg);
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+}
