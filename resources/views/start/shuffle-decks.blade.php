@@ -2,7 +2,7 @@
     <div class="container-fluid mb-5">
         <div class="row">
             <h1>
-                Ergebnis
+                {{ __('frontend.result') }}
             </h1>
         </div>
     </div>
@@ -28,7 +28,9 @@
                             <div class="row text-center">
                         @endif
                         <div class="col-6">
-                            {{ $playerDeck['name'] }}
+                            <span class="badge badge-lg rounded-pill bg-primary">
+                                {{ $playerDeck['name'] }}
+                            </span>
                         </div>
                         @if ($loop->last)
                             </div>
