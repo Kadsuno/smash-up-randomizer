@@ -13,6 +13,7 @@ return [
     'help_howto_body' => 'To mix fractions and distribute them to the participating players, the number of players must be determined via the selection field. When this is done, just press the Mix button to get the mixed fractions displayed.',
     'help_howto_fun' => 'Have fun!',
     'player' => 'Player',
+    'result' => 'Result',
     'email' => 'Email address',
     'password' => 'Password',
     'remember_me' => 'Remember me',

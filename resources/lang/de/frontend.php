@@ -13,6 +13,7 @@ return [
     'help_howto_body' => 'Um Fraktionen zu mischen und an die beteiligten Spieler zu verteilen, muss über das Auswahlfeld die Anzahl der Spieler bestimmt werden. Wenn dies erledigt ist, reicht ein Betätigen des Misch-Buttons, um die gemischten Fraktionen angezeigt zu bekommen.',
     'help_howto_fun' => 'Viel Spaß beim Spielen!',
     'player' => 'Spieler',
+    'result' => 'Ergebnis',
     'email' => 'E-Mail-Adresse',
     'password' => 'Passwort',
     'remember_me' => 'Login speichern',
