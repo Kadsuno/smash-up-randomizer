@@ -56,7 +56,7 @@
               @foreach($available_locales as $locale_name => $available_locale)
               @if($available_locale !== $current_locale)
               <li>
-                <a class="dropdown-item" href="language/{{ $available_locale }}"><span class="flag-icon flag-icon-{{ $available_locale }}"></span> {{ strtoupper($available_locale) }}</a>
+                <a class="dropdown-item" href="/public/language/{{ $available_locale }}"><span class="flag-icon flag-icon-{{ $available_locale }}"></span> {{ strtoupper($available_locale) }}</a>
               </li>
               @endif
               @endforeach
