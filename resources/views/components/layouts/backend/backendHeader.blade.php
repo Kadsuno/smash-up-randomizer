@@ -13,7 +13,6 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicons/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicons/favicon-16x16.png') }}">
     <link rel="manifest" href="{{ asset('images/favicons/site.webmanifest') }}">  
-    <script src="https://kit.fontawesome.com/e3f061e841.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
