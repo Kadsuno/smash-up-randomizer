@@ -23,8 +23,7 @@
                 </main>        
             </div>
         </div>
-    
-    </div>    
-<x-layouts.footer />
+    </div>   
+    <x-layouts.backend.backendFooter /> 
 </body>
 </html>
