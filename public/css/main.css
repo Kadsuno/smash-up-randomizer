@@ -1,3 +1,11 @@
+a {
+    color: white;
+}
+
+a:hover {
+    color: white;
+}
+
 .bg-light-blue {
     background-color: #e3f2fd;
 }
@@ -47,6 +55,20 @@
     background-image: url(../images/flags/flag_gb.svg);
 }
 
-.nav-link:hover {
-    text-decoration: underline;
+@media all and (min-width: 992px) {
+	.navbar .nav-item .dropdown-menu { 
+        display: none; 
+    }
+	.navbar .nav-item:hover .dropdown-menu { 
+        display: block; 
+    }
+	.navbar .nav-item .dropdown-menu { 
+        margin-top: 0; 
+    }
 }
+
+.dropdown-item:hover {
+    background-color: #0d6efd;
+    color: white;
+}
+
