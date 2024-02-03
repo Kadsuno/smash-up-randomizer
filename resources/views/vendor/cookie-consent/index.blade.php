@@ -3,7 +3,7 @@
 @endphp
 
 <div role="dialog" aria-labelledby="lcc-modal-alert-label" aria-describedby="lcc-modal-alert-desc" aria-modal="true"
-    class="lcc-modal lcc-modal--alert js-lcc-modal js-lcc-modal-alert bg-primary text-white" style="display: none;"
+    class="lcc-modal lcc-modal--alert js-lcc-modal js-lcc-modal-alert bg-success text-white" style="display: none;"
     data-cookie-key="{{ config('cookie-consent.cookie_key') }}"
     data-cookie-value-analytics="{{ config('cookie-consent.cookie_value_analytics') }}"
     data-cookie-value-marketing="{{ config('cookie-consent.cookie_value_marketing') }}"
@@ -24,21 +24,21 @@
         <div class="container-fluid">
             <div class="row text-center">
                 <div class="col mb-3">
-                    <button type="button" class="js-lcc-accept btn btn-light text-primary">
+                    <button type="button" class="js-lcc-accept btn btn-dark">
                         @lang('cookie-consent::texts.alert_accept')
                     </button>
                 </div>
             </div>
             <div class="row text-center">
                 <div class="col mb-3">
-                    <button type="button" class="js-lcc-essentials btn btn-light text-primary">
+                    <button type="button" class="js-lcc-essentials btn btn-dark">
                         @lang('cookie-consent::texts.alert_essential_only')
                     </button>
                 </div>
             </div>
             <div class="row text-center">
                 <div class="col">
-                    <button type="button" class="js-lcc-settings-toggle btn btn-light text-primary">
+                    <button type="button" class="js-lcc-settings-toggle btn btn-dark">
                         @lang('cookie-consent::texts.alert_settings')
                     </button>
                 </div>
@@ -48,7 +48,7 @@
 </div>
 
 <div role="dialog" aria-labelledby="lcc-modal-settings-label" aria-describedby="lcc-modal-settings-desc"
-    aria-modal="true" class="lcc-modal lcc-modal--settings js-lcc-modal js-lcc-modal-settings bg-primary" style="display: none;">
+    aria-modal="true" class="lcc-modal lcc-modal--settings js-lcc-modal js-lcc-modal-settings bg-success text-white" style="display: none;">
     <button class="lcc-modal__close js-lcc-settings-toggle" type="button">
         <span class="lcc-u-sr-only">
             @lang('cookie-consent::texts.settings_close')
@@ -64,7 +64,7 @@
                 {!! trans('cookie-consent::texts.settings_text', ['policyUrl' => config("cookie-consent.policy_url_$locale")]) !!}
             </p>
             <div class="lcc-modal__section lcc-u-text-center">
-                <button type="button" class="js-lcc-accept btn btn-light text-primary">
+                <button type="button" class="js-lcc-accept btn btn-dark">
                     @lang('cookie-consent::texts.settings_accept_all')
                 </button>
             </div>
@@ -109,7 +109,7 @@
     <div class="lcc-modal__actions">
         <div class="row text-center">
             <div class="col">
-                <button type="button" class="js-lcc-settings-save btn btn-light text-primary">
+                <button type="button" class="js-lcc-settings-save btn btn-dark">
                     @lang('cookie-consent::texts.settings_save')
                 </button>
             </div>

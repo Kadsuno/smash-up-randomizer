@@ -21146,3 +21146,94 @@ readers do not read off random characters that represent icons */
   src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-v4compatibility.woff2?497d535001197a9c5b389e695116b6cc) format("woff2"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-v4compatibility.ttf?6c0a7b774ffa1cf0a0597e099f672114) format("truetype");
   unicode-range: U+F041, U+F047, U+F065-F066, U+F07D-F07E, U+F080, U+F08B, U+F08E, U+F090, U+F09A, U+F0AC, U+F0AE, U+F0B2, U+F0D0, U+F0D6, U+F0E4, U+F0EC, U+F10A-F10B, U+F123, U+F13E, U+F148-F149, U+F14C, U+F156, U+F15E, U+F160-F161, U+F163, U+F175-F178, U+F195, U+F1F8, U+F219, U+F27A;
 }
+a {
+  color: white;
+}
+
+a:hover {
+  color: white;
+}
+
+.bg-light-blue {
+  background-color: #e3f2fd;
+}
+
+.sidebar {
+  height: 100vh;
+}
+
+.pl-0 {
+  padding-left: 0px;
+}
+
+.sidebar-link:hover {
+  color: #0d6efd !important;
+}
+
+.active {
+  border: solid 1px !important;
+}
+
+.active:hover {
+  background-color: #212529 !important;
+}
+
+.border-left {
+  border-left: 1px solid;
+}
+
+.border-right {
+  border-right: 1px solid;
+}
+
+.flag-icon {
+  position: relative;
+  display: inline-block;
+  width: 1.333rem;
+  line-height: 1em;
+  height: 1rem;
+  font-size: 1em;
+}
+
+.dropdown-item:hover {
+  background-color: #0d6efd;
+  color: white;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+.hero-height {
+  height: 30rem;
+}
+@media screen and (max-width: 768px) {
+  .hero-height {
+    height: 40rem;
+  }
+}
+
+.container-fluid-margin {
+  margin-left: 3rem !important;
+  margin-right: 3rem !important;
+  margin-top: 6rem !important;
+}
+
+.bg-transparent {
+  background: rgba(0, 0, 0, 0.5) !important;
+  border-radius: 18px;
+}
+
+.opacity-90 {
+  opacity: 0.9;
+}
+
+.bg-options {
+  background-repeat: no-repeat;
+  background-position: center;
+}
+@media screen and (max-width: 768px) {
+  .bg-options {
+    background-attachment: fixed;
+  }
+}

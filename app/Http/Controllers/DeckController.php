@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-use Illuminate\View\Factory;
 
 class DeckController extends Controller
 {
     /**
-     * Index action to send the factions
+     * Index action to send the factions to the view
      * @return \Illuminate\Contracts\View\View
      */
     public function index(): \Illuminate\Contracts\View\View

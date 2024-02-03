@@ -1,6 +1,6 @@
 <x-layouts.main>
-    <div class="container-fluid">
-        <div class="row mb-5">
+    <div class="container-fluid mt-5 pt-5">
+        <div class="row mb-5 mx-5">
             <h1 class="mb-3">
                 {{ __('frontend.privacyPolicy_header') }}
             </h1>
@@ -8,108 +8,48 @@
                 {{ __('frontend.privacyPolicy_teaser') }}
             </p>
         </div>
-        <div class="row mb-5">
+        <div class="row mx-5 mb-5">
             <h2 class="mb-3">
-                {{ __('frontend.privacyPolicy_accessData_header') }}
+                {{ __('frontend.privacyPolicy_dataCollection_header') }}
             </h2>
             <p>
-                {{ __('frontend.privacyPolicy_accessData_body') }}
-            </p>
-            <ul class="ms-3">
-                <li class="list-item">
-                    {{ __('frontend.privacyPolicy_accessData_list_1') }}
-                </li>
-                <li class="list-item">
-                    {{ __('frontend.privacyPolicy_accessData_list_2') }}
-                </li>
-                <li class="list-item">
-                    {{ __('frontend.privacyPolicy_accessData_list_3') }}
-                </li>
-                <li class="list-item">
-                    {{ __('frontend.privacyPolicy_accessData_list_4') }}
-                </li>
-                <li class="list-item">
-                    {{ __('frontend.privacyPolicy_accessData_list_5') }}
-                </li>
-            </ul>
-            <p>
-                {{ __('frontend.privacyPolicy_purpose_body') }}
-            </p>
-            <ul class="ms-3">
-                <li class="list-item">
-                    {{ __('frontend.privacyPolicy_purpose_list_1') }}
-                </li>
-                <li class="list-item">
-                    {{ __('frontend.privacyPolicy_purpose_list_2') }}
-                </li>
-                <li class="list-item">
-                    {{ __('frontend.privacyPolicy_purpose_list_3') }}
-                </li>
-                <li class="list-item">
-                    {{ __('frontend.privacyPolicy_purpose_list_4') }}
-                </li>
-            </ul>
-            <p>
-                {{ __('frontend.privacyPolicy_legalBasis_body') }}
+                {{ __('frontend.privacyPolicy_dataCollection_body') }}
             </p>
         </div>
-        <div class="row mb-5">
+        <div class="row mx-5 mb-5">
             <h2 class="mb-3">
-                {{ __('frontend.privacyPolicy_dataTransfer_header') }}
+                {{ __('frontend.privacyPolicy_security_header') }}
             </h2>
             <p>
-                {{ __('frontend.privacyPolicy_dataTransfer_body') }}
+                {{ __('frontend.privacyPolicy_security_body') }}
             </p>
-            <ul class="ms-3">
-                <li class="list-item">
-                    {{ __('frontend.privacyPolicy_dataTransfer_list_1') }}
-                </li>
-                <li class="list-item">
-                    {{ __('frontend.privacyPolicy_dataTransfer_list_2') }}
-                </li>
-                <li class="list-item">
-                    {{ __('frontend.privacyPolicy_dataTransfer_list_3') }}
-                </li>
-            </ul>
         </div>
-        <div class="row mb-5">
+        <div class="row mx-5 mb-5">
             <h2 class="mb-3">
                 {{ __('frontend.privacyPolicy_cookies_header') }}
             </h2>
             <p>
-                {{ __('frontend.privacyPolicy_cookies_body_1') }}
-            </p>
-            <p>
-                {{ __('frontend.privacyPolicy_cookies_body_2') }}
-            </p>
-            <p>
-                {{ __('frontend.privacyPolicy_cookies_body_3') }}
-            </p>
-            <p>
-                {{ __('frontend.privacyPolicy_cookies_body_4') }}
-            </p>
-            <p>
-                {{ __('frontend.privacyPolicy_cookies_body_5') }}
+                {{ __('frontend.privacyPolicy_cookies_body') }}
             </p>
         </div>
-        <div class="row">
+        <div class="row mx-5 mb-5">
             <h2 class="mb-3">
-                {{ __('frontend.privacyPolicy_dataSubject_header') }}
+                {{ __('frontend.privacyPolicy_rights_header') }}
             </h2>
             <p>
-                {{ __('frontend.privacyPolicy_dataSubject_body') }}
+                {{ __('frontend.privacyPolicy_rights_body') }}
             </p>
-            <ul class="ms-3">
-                <li class="list-item">
-                    {{ __('frontend.privacyPolicy_dataSubject_list_1') }}
-                </li>
-                <li class="list-item">
-                    {{ __('frontend.privacyPolicy_dataSubject_list_2') }}
-                </li>
-                <li class="list-item">
-                    {{ __('frontend.privacyPolicy_dataSubject_list_3') }}
-                </li>
-            </ul>
+        </div>
+        <div class="row mx-5 mb-5">
+            <h2 class="mb-3">
+                {{ __('frontend.privacyPolicy_dataSharing_header') }}
+            </h2>
+            <p>
+                {{ __('frontend.privacyPolicy_dataSharing_body') }}
+            </p>
+            <p>
+                {{ __('frontend.privacyPolicy_lastWords') }}
+            </p>
         </div>
     </div>
 </x-layouts.main>

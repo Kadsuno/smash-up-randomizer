@@ -1,5 +1,5 @@
 <x-layouts.main>
-    <section class="w-100 px-4 py-5">
+    <section class="w-100 px-5 py-5 mt-5">
         <div class="row d-flex justify-content-center">
             <div class="col-md-8 col-lg-7 col-xl-6">
                 <img src="{{ asset('images/login.svg') }}" class="img-fluid" alt="Phone image">
@@ -16,7 +16,7 @@
                     <!-- Email Address -->
                     <div class="form-outline mb-4">
                         <label class="mb-2" for="email">{{ __('frontend.email') }}</label>
-                        <x-input id="email" class="form-control form-control-lg" type="email" name="email" :value="old('email')"
+                        <x-input id="email" class="form-control form-control-lg" type="email" placeholder="name@example.com" name="email" :value="old('email')"
                         required autofocus />
                     </div>
 
@@ -53,6 +53,5 @@
                 </form>
             </div>
         </div>
-
     </section>
 </x-layouts.main>

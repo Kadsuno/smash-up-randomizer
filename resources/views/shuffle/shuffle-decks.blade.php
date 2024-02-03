@@ -1,42 +1,34 @@
 <x-layouts.main>
-    <div class="container-fluid mb-5">
-        <div class="row">
-            <h1>
-                {{ __('frontend.result') }}
-            </h1>
-        </div>
-    </div>
-    <div class="container-fluid">
-        
-            @foreach ($selectedDecks as $playerDecks)
-                @if ($loop->first)
-                <div class="row mb-3">
-                @elseif ($loop->last)
-                <div class="row mb-3">
-                @else
-                <div class="row mb-3">
-                @endif
-                    @foreach ($playerDecks as $playerDeck)
-                        @if ($loop->odd)
-                            <div class="text-center">
-                                <h2>
-                                    {{ $loop->parent->iteration }}. {{ __('frontend.player') }}
-                                </h2>
+    <div id="hero-header">
+        <div class="position-relative w-100 overflow-hidden">
+            <div class="bg-options" id="hero-js" style="background-image: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)), url('{{ asset('images/result.png') }}'); background-position: center">
+                <div class="container-fluid pb-5">
+                    <div class="row justify-content-center">
+                        @foreach ($selectedDecks as $playerDecks)
+                        <div class="col-md-3 mt-5 pt-5">
+                            <div class="h-100 p-5 bg-success opacity-90 text-white rounded-3">
+                                <div class="row mb-3">
+                                    <div class="col-md-12">
+                                        <h2 class="text-center">
+                                            {{ __('frontend.player') }} {{ $loop->iteration }}
+                                        </h2>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    @foreach ($playerDecks as $deck)
+                                    <div class="col-md-6 text-center">
+                                        <span class="">
+                                            {{ $deck['name'] }}
+                                        </span>
+                                    </div>
+                                    @endforeach
+                                </div>
                             </div>
-                        @endif
-                        @if ($loop->first)
-                            <div class="text-center">
-                        @endif
-                        <div class="col">
-                            <span class="badge badge-lg rounded-pill bg-primary">
-                                {{ $playerDeck['name'] }}
-                            </span>
                         </div>
-                        @if ($loop->last)
-                            </div>
-                        @endif
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
-            @endforeach
+            </div>
+        </div>
     </div>
 </x-layouts.main>

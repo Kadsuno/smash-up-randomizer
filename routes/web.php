@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DeckController;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,8 +46,12 @@ Route::get('/admin/backend/decks-manager/delete/{name}', [DeckController::class,
 Route::get('/admin/backend/decks-manager/decks/{name}/edit', [DeckController::class, 'edit'
 ])->middleware(['auth'])->name('edit-deck');
 
-Route::get('/shuffle', [DeckController::class, 'shuffle'
-])->name('shuffle-decks');
+Route::get('/shuffle', function () {
+    return view('shuffle.form');
+})->name('shuffle-form');
+
+Route::get('/shuffle/result', [DeckController::class, 'shuffle'
+])->name('shuffle-result');
 
 Route::get('/imprint', function () {
     return view('components.layouts.bottom-navigation.imprint');
@@ -55,5 +60,10 @@ Route::get('/imprint', function () {
 Route::get('/privacy-policy', function () {
     return view('components.layouts.bottom-navigation.privacyPolicy');
 })->name('privacyPolicy');
+
+Route::get('contact-us', [ContactController::class, 'index'
+])->name('contact');
+Route::post('contact-us', [ContactController::class, 'store'
+])->name('contact.us.store');
 
 require __DIR__.'/auth.php';
