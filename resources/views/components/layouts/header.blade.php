@@ -17,6 +17,8 @@
     <meta name="twitter:title" content="Assigning randomized factions" />
     <meta name="twitter:description" content="With the help of the Smash Up Randomizer, factions of the card game Smash Up can be shuffled and assigned to players." />
     <meta name="twitter:image" content="{{ asset('images/favicons/favicon.ico') }}" />
+    <meta name="robots" content="index,follow" />
+    <meta name="googlebot" content="index,follow" />
     <title>Smash Up Randomizer</title>
     <link rel="stylesheet" type="text/css" href="{{asset('vendor/cookie-consent/css/cookie-consent.css')}}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
