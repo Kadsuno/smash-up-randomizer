@@ -61,7 +61,6 @@
                                 <label for="numberOfPlayers" class="form-label">{{ __('frontend.number_players') }}</label>
                                 <div class="col">
                                     <select class="form-select" name="numberOfPlayers">
-                                        <option selected>{{ __('frontend.number_players_choose') }}</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
                                         <option value="4">4</option>
