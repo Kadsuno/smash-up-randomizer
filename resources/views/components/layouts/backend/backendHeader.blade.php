@@ -29,7 +29,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ Auth::user()->name }}
+                            <i class="fa-regular fa-user"></i> {{ Auth::user()->name }}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li>
@@ -39,7 +39,7 @@
                                 <x-responsive-nav-link :href="route('logout')"
                                         onclick="event.preventDefault();
                                                     this.closest('form').submit();">
-                                    {{ __('backend.logout') }}
+                                    <i class="fa-solid fa-arrow-right-from-bracket"></i> {{ __('backend.logout') }}
                                 </x-responsive-nav-link>
                             </form>
                             </li>
