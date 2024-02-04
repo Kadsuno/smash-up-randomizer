@@ -1,7 +1,5 @@
 <script src="{{ asset('js/app.js') }}"></script>
-<script src="{{ asset('js/main.js') }}"></script>
-<script src="{{ asset('js/hero.js') }}"></script>
-<script src="{{ asset('js/nav.js') }}"></script>
+
 
 <footer class="footer px-5 container-fluid">
     <div class="row">
