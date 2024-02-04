@@ -81,8 +81,8 @@ a:hover {
 .bg-options {
     background-repeat: no-repeat;
     background-position: center;
+}
 
-    @media screen and (max-width: 768px) {
-        background-attachment: fixed;
-    }
+.container-full-w {
+    max-width: 1920px !important;
 }

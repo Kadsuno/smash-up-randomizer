@@ -1,12 +1,12 @@
 <x-layouts.main>
     <div id="hero-header">
-        <div class="position-relative w-100 overflow-hidden hero-height">
-            <div class="hero-height bg-options" id="hero-js" style="background-image: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)), url('{{ asset('images/contact_2.png') }}')">
+        <div class="position-relative w-100 overflow-hidden">
+            <div class="bg-options" id="hero-js" style="background-image: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)), url('{{ asset('images/contact_2.png') }}')">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6 pt-5">
                             <div class="my-5 mx-5 text-white bg-transparent">
-                                <div class="px-5 py-5">
+                                <div class="px-3 py-3">
                                     <h1 class="mb-3">
                                         Contact Us
                                     </h1>
