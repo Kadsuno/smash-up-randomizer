@@ -1,6 +1,3 @@
-<script src="{{ asset('js/app.js') }}"></script>
-
-
 <footer class="footer px-5 container-fluid">
     <div class="row">
         <div class="col">
