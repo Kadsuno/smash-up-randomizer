@@ -1,3 +1,5 @@
+@vite(['resources/js/app.js', 'resources/js/bootstrap.js', 'resources/js/form.js', 'resources/js/hero.js', 'resources/js/nav.js'])
+
 <footer class="footer px-5 container-fluid">
     <div class="row">
         <div class="col">

@@ -8,6 +8,10 @@ export default defineConfig({
         laravel([
             'resources/sass/app.scss',
             'resources/js/app.js',
+            'resources/js/bootstrap.js',
+            'resources/js/form.js',
+            'resources/js/hero.js',
+            'resources/js/nav.js',
         ]),
         // react(),
         // vue({
