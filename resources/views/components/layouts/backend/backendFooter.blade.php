@@ -1,2 +1,1 @@
-<script src="{{ asset('js/app.js') }}"></script>
-<script src="{{ asset('js/main.js') }}"></script>
+@vite(['resources/js/app.js', 'resources/js/bootstrap.js', 'resources/js/form.js', 'resources/js/hero.js'])
