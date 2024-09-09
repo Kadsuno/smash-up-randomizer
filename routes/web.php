@@ -34,7 +34,7 @@ Route::get('/admin/backend', function () {
 Route::get('/admin/backend/decks-manager', [DeckController::class, 'index'
 ])->middleware(['auth'])->name('decks-manager');
 
-Route::get('/admin/backend/decks-manager/add-deck', [DeckController::class, 'add'
+Route::post('/admin/backend/decks-manager/add-deck', [DeckController::class, 'add'
 ])->middleware(['auth'])->name('add-deck');
 
 Route::post('/admin/backend/decks-manager/add-deck-csv', [DeckController::class, 'addCsv'
@@ -43,7 +43,7 @@ Route::post('/admin/backend/decks-manager/add-deck-csv', [DeckController::class,
 Route::get('/admin/backend/decks-manager/delete/{name}', [DeckController::class, 'delete'
 ])->middleware(['auth'])->name('delete-decks');
 
-Route::get('/admin/backend/decks-manager/decks/{name}/edit', [DeckController::class, 'edit'
+Route::post('/admin/backend/decks-manager/decks/{name}/edit', [DeckController::class, 'edit'
 ])->middleware(['auth'])->name('edit-deck');
 
 Route::get('/shuffle', function () {
@@ -65,5 +65,8 @@ Route::get('contact-us', [ContactController::class, 'index'
 ])->name('contact');
 Route::post('contact-us', [ContactController::class, 'store'
 ])->name('contact.us.store');
+
+Route::get('/factions', [DeckController::class, 'index'
+])->name('factionList');
 
 require __DIR__.'/auth.php';

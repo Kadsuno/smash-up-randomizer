@@ -1,0 +1,8 @@
+.form-control {
+    background-color: #212529;
+    color: white;
+
+    &::placeholder {
+        color: darkgray;
+    }
+}

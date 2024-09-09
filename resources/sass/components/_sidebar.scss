@@ -1,0 +1,29 @@
+.sidebar {
+    height: 100vh;
+}
+
+.backend-nav {
+    border-radius: 20px;
+    .sidebar-link {
+        color: white;
+        border-radius: 20px;
+    }
+}
+
+.backend-nav {
+    &.active {
+        background-color: #198754;
+        color: #198754;
+    }
+}
+
+.backend-nav:hover {
+    .sidebar-link {
+        background-color: white;
+        color: #198754;
+    }
+}
+
+.active {
+    border: solid 1px !important;
+}

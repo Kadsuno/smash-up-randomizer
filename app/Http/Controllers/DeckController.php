@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use App\Models\Deck;
+use Illuminate\Http\Request;
 
 class DeckController extends Controller
 {
@@ -13,35 +15,69 @@ class DeckController extends Controller
      */
     public function index(): \Illuminate\Contracts\View\View
     {
-        $decks = DB::table('decks')->get();
+        $decks = Deck::all();
+
+        $decks = $decks->sortBy('name');
 
         return view('backend.decks-manager', ['decks' => $decks]);
     }
 
     /**
+     * Index action to send the factions to the view
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function list(): \Illuminate\Contracts\View\View
+    {
+        $decks = Deck::all();
+
+        $decks = $decks->sortBy('name');
+
+        return view('decks.list', ['decks' => $decks]);
+    }
+
+    /**
      * Add action to add new factions
+     * @param Request $request Request object
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function add(): \Illuminate\Http\RedirectResponse
+    public function add(Request $request): \Illuminate\Http\RedirectResponse
     {
-        $deckExists = FALSE;
+        $deck = Deck::where('name', $request->deckName)->first();
 
-        if ($_GET['deckName'] != '') {
-            $deckName = $_GET['deckName'];
+        if ($deck) {
+            Deck::where('name', $request->deckName)->update([
+                'image' => $request->deckImage,
+                'teaser' => $request->deckTeaser,
+                'description' => $request->deckDescription,
+                'strengths' => $request->deckStrengths,
+                'weaknesses' => $request->deckWeaknesses,
+                'strategy' => $request->deckStrategy,
+                'counterStrategy' => $request->deckCounterStrategy,
+                'deckType' => $request->deckType,
+                'synergy' => $request->deckSynergy,
+                'antiSynergy' => $request->deckAntiSynergy,
+                'tips' => $request->deckTips
+            ]);
 
-            $decks = DB::table('decks')->get();
+            session()->flash('success', 'Faction (' . $deck->name . ', ID: ' . $deck->id . ') already exists, updated successfully!');
+        }
+        else {
+            Deck::create([
+                'name' => $request->deckName,
+                'image' => $request->deckImage,
+                'teaser' => $request->deckTeaser,
+                'description' => $request->deckDescription,
+                'strengths' => $request->deckStrengths,
+                'weaknesses' => $request->deckWeaknesses,
+                'strategy' => $request->deckStrategy,
+                'counterStrategy' => $request->deckCounterStrategy,
+                'deckType' => $request->deckType,
+                'synergy' => $request->deckSynergy,
+                'antiSynergy' => $request->deckAntiSynergy,
+                'tips' => $request->deckTips
+            ]);
 
-            foreach ($decks as $deck) {
-                if ($deck->name == $deckName) {
-                    $deckExists = TRUE;
-                }
-            }
-
-            if (!$deckExists) {
-                DB::table('decks')->insert([
-                    'name' => $deckName
-                ]);
-            }
+            session()->flash('success', 'Created faction (' . $deck->name . ', ID: ' . $deck->id . ') successfully!');
         }
 
         return redirect()->route('decks-manager');
@@ -49,12 +85,16 @@ class DeckController extends Controller
 
     /**
      * Delete action to delete a selected faction
-     * @param string $name Name of the faction
+     * @param id $id ID of the faction
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function delete(string $name): \Illuminate\Http\RedirectResponse
+    public function delete(int $id): \Illuminate\Http\RedirectResponse
     {
-        $deleted = DB::table('decks')->where('name', '=', $name)->delete();
+        $deck = Deck::where('id', $id)->first();
+
+        Deck::where('id', $id)->delete();
+
+        session()->flash('success', 'Deleted faction (' . $deck->name . ', ID: ' . $deck->id . ') successfully!');
 
         return redirect()->route('decks-manager');
     }
@@ -67,7 +107,7 @@ class DeckController extends Controller
     {
         $numberOfPlayers = $_GET['numberOfPlayers'];
 
-        $decks = DB::table('decks')->get();
+        $decks = Deck::all();
         $selectedDecks = [];
         $playerPointer = 1;
 
@@ -112,7 +152,7 @@ class DeckController extends Controller
             if ($factionArray[1] != '') {
                 $deckName = $factionArray[1];
 
-                $decks = DB::table('decks')->get();
+                $decks = Deck::all();
 
                 foreach ($decks as $deck) {
                     if ($deck->name == $deckName) {
@@ -121,29 +161,47 @@ class DeckController extends Controller
                 }
 
                 if (!$deckExists) {
-                    DB::table('decks')->insert([
-                        'name' => $deckName
-                    ]);
+                    $deck = new Deck();
+                    $deck->name = $deckName;
+                    $deck->save();
                 }
             }
         }
+
+        session()->flash('success', 'Imported factions via CSV successfully!');
 
         return redirect()->route('decks-manager');
     }
 
     /**
      * Edit action to edit selected faction
-     * @param string $name Name of the faction
+     * @param Request $request Request object
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function edit(string $name): \Illuminate\Http\RedirectResponse
+    public function edit(Request $request): \Illuminate\Http\RedirectResponse
     {
-        $deckName = $_GET['deckName'];
-        
-        $affected = DB::update(
-            'update decks set name = "' . $deckName . '" where name = ?',
-            [$name]
-        );
+        $deck = Deck::where('name', $request->name)->first();
+
+        Deck::where('name', $request->name)->update([
+            'teaser' => $request->teaser,
+            'description' => $request->description,
+            'cardsTeaser' => $request->cardsTeaser,
+            'actionTeaser' => $request->actionTeaser,
+            'actionList' => $request->actionList,
+            'actions' => $request->actions,
+            'characters' => $request->characters,
+            'bases' => $request->bases,
+            'clarifications' => $request->clarifications,
+            'suggestionTeaser' => $request->suggestionTeaser,
+            'synergy' => $request->synergy,
+            'tips' => $request->tips,
+            'mechanics' => $request->mechanics,
+            'expansion' => $request->expansion,
+            'effects' => $request->effects,
+            'playstyle' => $request->playstyle
+        ]);
+
+        session()->flash('success', 'Updated faction (' . $deck->name . ', ID: ' . $deck->id . ') successfully!');
 
         return redirect()->route('decks-manager');
     }

@@ -22,6 +22,14 @@
                         {{ __('frontend.privacyPolicy_header') }}
                     </a>
                 </li>
+                <li class="list-inline-item">
+                    |
+                </li>
+                <li class="list-inline-item">
+                    <a class="nav-link footer-nav" href="{{ route('contact') }}">
+                        Contact
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

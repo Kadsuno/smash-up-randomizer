@@ -14,10 +14,10 @@
     <link rel="manifest" href="{{ asset('images/favicons/site.webmanifest') }}">  
 </head>
 
-<body>
+<body class="bg-black">
     <nav x-data="{ open: false }" class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ route('dashboard') }}">Backend</a>
+            <a class="navbar-brand" href="{{ route('dashboard') }}"><img src="{{ asset('images/favicons/favicon.ico') }}" class="img-fluid" alt="Logo"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
