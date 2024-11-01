@@ -12,6 +12,7 @@ export default defineConfig({
             'resources/js/form.js',
             'resources/js/hero.js',
             'resources/js/nav.js',
+            'resources/js/backend.js',
         ]),
         // react(),
         // vue({

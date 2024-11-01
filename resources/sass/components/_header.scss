@@ -1,0 +1,7 @@
+.hero-height {
+    height: 30rem;
+
+    @include media-breakpoint-down(lg) {
+        height: 40rem;
+    }
+}

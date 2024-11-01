@@ -2,7 +2,9 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
-@import 'variables';
+@import 'base/variables';
+@import 'base/colors';
+@import 'base/basics';
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
@@ -11,4 +13,13 @@
 @import '@fortawesome/fontawesome-free/css/all';
 
 // Custom styles
-@import 'basics';
+@import 'components/navigation';
+@import 'components/flags';
+@import 'components/forms';
+@import 'components/links';
+@import 'components/header';
+@import 'components/navigation';
+@import 'components/modals';
+@import 'components/sidebar';
+@import 'components/buttons';
+@import 'components/general';

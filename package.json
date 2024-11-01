@@ -22,6 +22,7 @@
         "@fortawesome/fontawesome-free": "^6.3.0",
         "bootstrap-icons": "^1.9.1",
         "jquery": "^3.7.1"
+        
     },
     "type": "module"
 }

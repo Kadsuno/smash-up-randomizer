@@ -14,9 +14,22 @@ class CreateDecksTable extends Migration
     public function up()
     {
         Schema::create('decks', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->string('name');
+            $table->string('teaser');
+            $table->text('description');
+            $table->text('cardsTeaser');
+            $table->text('actions');
+            $table->text('characters');
+            $table->text('bases');
+            $table->text('suggestionTeaser');
+            $table->text('synergy');
+            $table->text('tips');
+            $table->text('mechanics');
+            $table->text('expansion');
+            $table->text('effects');
+            $table->text('playstyle');
+            $table->text('actionTeaser');
+            $table->text('actionList');
+            $table->text('clarifications');
         });
     }
 

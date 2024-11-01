@@ -1,122 +1,76 @@
 <x-layouts.backend.backendMain>
-    <div class="container-fluid">
-        <div class="row">
-            <h1>
-                Decks Manager
-            </h1>
-            <hr>
-        </div>
-    </div>
-    <div class="container-fluid mb-5">
-        <div class="row">
-            <h2>
-                {{ __('backend.current_decks') }}
-            </h2>
-            <ol class="list-group list-group-numbered">
-                @foreach ($decks as $deck)
-                    @php
-                        $idName = str_replace(' ', '', $deck->name);
-                    @endphp
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                        <div class="ms-2 me-auto">
-                            <div class="fw-bold">{{ $deck->name }}</div>
-                        </div>
-                        <a class="btn btn-sm btn-primary rounded-pill me-2" href="#" data-bs-toggle="modal"
-                            data-bs-target="#{{ $idName }}-modal">{{ __('backend.edit_deck') }}</a>
-                        <a class="btn btn-sm btn-primary rounded-pill"
-                            href="{{ route('delete-decks', $deck->name) }}">{{ __('backend.delete_decks') }}</a>
-                    </li>
-                    <!-- Modal -->
-                    <div class="modal fade" id="{{ $idName }}-modal" tabindex="-1"
-                        aria-labelledby="{{ $deck->name }}-modal" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">{{ $deck->name }}</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
+    <div class="container animate__animated animate__fadeIn">
+        <h1 class="mb-4 text-white text-center animate__animated animate__slideInDown">Faction Manager</h1>
 
-                                <form class="needs-validation" method="GET" action="{{ route('edit-deck', $deck->name) }}"
-                                    novalidate>
-                                    <div class="modal-body">
-                                        <div class="row mb-2">
-                                            <label for="deckName"
-                                                class="form-label">{{ __('backend.deck_name') }}</label>
-                                            <div class="col">
-                                                <div class="has-validation">
-                                                    <input type="text" class="form-control bg-white" name="deckName"
-                                                        value="{{ $deck->name }}" required>
-                                                    <div class="invalid-feedback">
-                                                        {{ __('backend.deck_name_invalid') }}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary">Save changes</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </ol>
-        </div>
-    </div>
-    <div class="container-fluid">
-        <div class="row">
-            <h2>
-                {{ __('backend.add_decks') }}
-            </h2>
-            <div>
-                <form class="needs-validation" method="GET" action="{{ route('add-deck') }}" novalidate>
-                    <div class="row mb-2">
-                        <label for="deckName" class="form-label">{{ __('backend.deck_name') }}</label>
-                        <div class="col-4">
-                            <div class="has-validation">
-                                <input type="text" class="form-control bg-white" name="deckName" required>
-                                <div class="invalid-feedback">
-                                    {{ __('backend.deck_name_invalid') }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-primary">{{ __('backend.save') }}</button>
-                        </div>
-                    </div>
-                </form>
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <!-- Add Faction Button -->
+                <a href="{{ route('add-deck') }}" class="btn btn-light btn-lg mb-3 animate__animated animate__pulse">
+                    <i class="fas fa-plus"></i> Add Faction
+                </a>
             </div>
-        </div>
-    </div>
-    <div class="container-fluid mt-5">
-        <div class="row">
-            <h2>
-                {{ __('backend.headline_csv') }}
-            </h2>
-            <div>
-                <form class="needs-validation" method="POST" action="{{ route('add-deck-csv') }}"
-                    enctype="multipart/form-data" novalidate>
+            <div class="col-md-6">
+                <!-- CSV Import Form -->
+                <form action="{{ route('add-deck-csv') }}" method="POST" enctype="multipart/form-data" class="mb-3">
                     @csrf
-                    <div class="row mb-2">
-                        <label for="csv" class="form-label">{{ __('backend.deck_csv') }}</label>
-                        <div class="col-4">
-                            <div class="has-validation">
-                                <input type="file" class="form-control bg-white" name="csv" required>
-                                <div class="invalid-feedback">
-                                    {{ __('backend.deck_csv_invalid') }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-primary">{{ __('backend.upload') }}</button>
-                        </div>
+                    <div class="input-group">
+                        <input type="file" class="form-control" name="csv" accept=".csv">
+                        <button class="btn btn-outline-light" type="submit">Import CSV</button>
                     </div>
                 </form>
             </div>
         </div>
+
+        <!-- Factions List -->
+        <div class="card bg-dark text-white animate__animated animate__fadeInUp">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover table-dark">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th class="text-end">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($decks as $deck)
+                                <tr class="animate__animated animate__fadeIn" style="animation-delay: {{ $loop->index * 0.1 }}s">
+                                    <td>{{ $deck->name }}</td>
+                                    <td>
+                                        <div class="d-flex justify-content-end">
+                                            <a href="{{ route('edit-deck', $deck->name) }}" class="btn btn-outline-light btn-sm me-2" data-bs-toggle="tooltip" title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="{{ route('delete-decks', $deck->name) }}" class="btn btn-outline-danger btn-sm" onclick="return confirm('Sind Sie sicher, dass Sie diese Fraktion löschen möchten?')" data-bs-toggle="tooltip" title="Delete">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <style>
+        .animate__animated {
+            animation-duration: 0.5s;
+        }
+        .table-hover tbody tr:hover {
+            background-color: rgba(255,255,255,0.1);
+            transition: background-color 0.3s ease;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+        });
+    </script>
 </x-layouts.backend.backendMain>

@@ -1,0 +1,38 @@
+.nav-link {
+    color: white;
+    border-radius: 5px;
+
+    &:hover {
+        color: black;
+        background-color: white;
+    }
+}
+
+.list-inline-item {
+    .nav-link {
+        padding: 8px;
+    }
+}
+
+.dropdown-menu {
+    padding: 0;
+}
+
+.nav-tabs {
+    .nav-item {
+        .active {
+            background-color: #198754 !important;
+            color: white !important;
+        }
+    }
+    .nav-item {
+        .nav-link {
+            color: white;
+
+            &:hover {
+                background-color: white;
+                color: #198754;
+            }
+        }
+    }
+}

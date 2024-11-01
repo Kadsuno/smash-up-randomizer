@@ -1,0 +1,26 @@
+.sidebar {
+    height: 100vh;
+}
+
+.backend-nav {
+    border-radius: 20px;
+    .sidebar-link {
+        color: black;
+        background-color: white;
+        border-radius: 20px;
+    }
+}
+
+.backend-nav:hover {
+    .sidebar-link {
+        background-color: #c0c0c0;
+        color: black;
+    }
+}
+
+.active {
+    .sidebar-link {
+        background-color: black;
+        color: white;
+    }
+}
