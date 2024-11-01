@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DeckController;
 use App\Http\Controllers\ContactController;
-
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,17 +15,8 @@ use App\Http\Controllers\ContactController;
 |
 */
 
-Route::get('/', function () {
-    return view('start.home');
-})->name('home');
-
-Route::get('/help/smash-up', function () {
-    return view('help.smash_up');
-})->name('smash-up');
-
-Route::get('/help/smash-up-randomizer', function () {
-    return view('help.smash_up_randomizer');
-})->name('smash-up-randomizer');
+Route::get('/', [HomeController::class, 'index'
+])->name('home');
 
 Route::get('/admin/backend', function () {
     return view('backend.dashboard');
@@ -34,8 +25,11 @@ Route::get('/admin/backend', function () {
 Route::get('/admin/backend/decks-manager', [DeckController::class, 'index'
 ])->middleware(['auth'])->name('decks-manager');
 
-Route::post('/admin/backend/decks-manager/add-deck', [DeckController::class, 'add'
+Route::get('/admin/backend/decks-manager/add-deck', [DeckController::class, 'add'
 ])->middleware(['auth'])->name('add-deck');
+
+Route::post('/admin/backend/decks-manager/store-deck', [DeckController::class, 'store'
+])->middleware(['auth'])->name('store-deck');
 
 Route::post('/admin/backend/decks-manager/add-deck-csv', [DeckController::class, 'addCsv'
 ])->middleware(['auth'])->name('add-deck-csv');
@@ -43,30 +37,40 @@ Route::post('/admin/backend/decks-manager/add-deck-csv', [DeckController::class,
 Route::get('/admin/backend/decks-manager/delete/{name}', [DeckController::class, 'delete'
 ])->middleware(['auth'])->name('delete-decks');
 
-Route::post('/admin/backend/decks-manager/decks/{name}/edit', [DeckController::class, 'edit'
+Route::get('/admin/backend/decks-manager/decks/{name}/edit', [DeckController::class, 'edit'
 ])->middleware(['auth'])->name('edit-deck');
+
+Route::post('/admin/backend/decks-manager/decks/{name}/update', [DeckController::class, 'update'
+])->middleware(['auth'])->name('update-deck');
 
 Route::get('/shuffle', function () {
     return view('shuffle.form');
 })->name('shuffle-form');
 
-Route::get('/shuffle/result', [DeckController::class, 'shuffle'
+Route::post('/shuffle/result', [DeckController::class, 'shuffle'
 ])->name('shuffle-result');
 
 Route::get('/imprint', function () {
-    return view('components.layouts.bottom-navigation.imprint');
+    return view('legal.imprint');
 })->name('imprint');
 
 Route::get('/privacy-policy', function () {
-    return view('components.layouts.bottom-navigation.privacyPolicy');
-})->name('privacyPolicy');
+    return view('legal.privacyPolicy');
+})->name('privacy-policy');
 
 Route::get('contact-us', [ContactController::class, 'index'
 ])->name('contact');
 Route::post('contact-us', [ContactController::class, 'store'
 ])->name('contact.us.store');
 
-Route::get('/factions', [DeckController::class, 'index'
+Route::get('/factions', [DeckController::class, 'list'
 ])->name('factionList');
+
+Route::get('/factions/{name}', [DeckController::class, 'detail'
+])->name('factionDetail');
+
+Route::get('/about', function () {
+    return view('legal.about');
+})->name('about');
 
 require __DIR__.'/auth.php';

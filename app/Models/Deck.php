@@ -32,6 +32,6 @@ class Deck extends Model
         'expansion',
         'effects',
         'playstyle',
-        
+        'image',
     ];
 }

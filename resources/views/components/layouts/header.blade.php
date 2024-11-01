@@ -12,7 +12,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ url()->current() }}" />
     <meta property="og:site_name" content="SmashUp Randomizer" />
-    <meta property=“og:description“ content="With the help of the Smash Up Randomizer, factions of the card game Smash Up can be shuffled and assigned to players." />
+    <meta property="og:description" content="With the help of the Smash Up Randomizer, factions of the card game Smash Up can be shuffled and assigned to players." />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Assigning randomized factions" />
     <meta name="twitter:description" content="With the help of the Smash Up Randomizer, factions of the card game Smash Up can be shuffled and assigned to players." />
@@ -29,18 +29,39 @@
 </head>
 
 <body class="text-bg-dark bg-black">
-    <nav class="navbar navbar-fixed navbar-expand-lg px-5 fixed-top bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{{ route('home') }}"><img src="{{ asset('images/favicons/favicon.ico') }}" class="img-fluid" alt="Logo"></a>
-            <button class="navbar-toggler" onclick="bgNav()" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-lg fixed-top px-3 py-2 bg-dark bg-opacity-75 backdrop-filter">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
+                <img src="{{ asset('images/favicons/favicon.ico') }}" class="img-fluid me-2" alt="Logo" width="30" height="30">
+                <span class="font-weight-bold text-white">Smash Up Randomizer</span>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('factionList') }}">Factions</a>
+                        <a class="nav-link text-white hover-effect" href="{{ route('factionList') }}">Factions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white hover-effect" href="{{ route('about') }}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white hover-effect" href="{{ route('contact') }}">Contact</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
+    <style>
+        .backdrop-filter {
+            backdrop-filter: blur(10px);
+        }
+        .hover-effect {
+            transition: all 0.3s ease;
+        }
+        .hover-effect:hover {
+            color: #17a2b8 !important;
+            transform: translateY(-2px);
+        }
+    </style>

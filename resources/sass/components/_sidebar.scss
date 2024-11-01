@@ -5,25 +5,22 @@
 .backend-nav {
     border-radius: 20px;
     .sidebar-link {
-        color: white;
+        color: black;
+        background-color: white;
         border-radius: 20px;
-    }
-}
-
-.backend-nav {
-    &.active {
-        background-color: #198754;
-        color: #198754;
     }
 }
 
 .backend-nav:hover {
     .sidebar-link {
-        background-color: white;
-        color: #198754;
+        background-color: #c0c0c0;
+        color: black;
     }
 }
 
 .active {
-    border: solid 1px !important;
+    .sidebar-link {
+        background-color: black;
+        color: white;
+    }
 }

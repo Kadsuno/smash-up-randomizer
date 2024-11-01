@@ -1,5 +1,3 @@
-console.log(window.location.pathname);
-
 let path = window.location.pathname;
 
 let pathArray = path.split('/');
