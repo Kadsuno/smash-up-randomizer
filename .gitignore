@@ -16,3 +16,8 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+laravel.sql
+package-lock.json
+composer.lock
+/.ddev
+.ddev/commands/host/phpmyadmin

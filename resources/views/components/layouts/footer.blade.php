@@ -17,9 +17,8 @@
             <div class="col-md-4">
                 <h5 class="text-uppercase mb-3">Connect With Us</h5>
                 <div class="d-flex justify-content-start">
-                    <a href="#" class="text-light me-3 hover-effect"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="text-light me-3 hover-effect"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="text-light me-3 hover-effect"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/SmashUpRandomizer/" class="text-light me-3 hover-effect"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/SmashUpRando" class="text-light me-3 hover-effect"><i class="fab fa-x-twitter"></i></a>
                 </div>
             </div>
         </div>
