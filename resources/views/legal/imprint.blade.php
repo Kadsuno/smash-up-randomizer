@@ -37,8 +37,8 @@
                         </p>
                         <p class="card-text">
                             <i class="fas fa-envelope me-2"></i>{{ __('frontend.imprint_email') }}:
-                            <a href='mailto:mike.rauch@proton.me' class="text-primary">
-                                mike.rauch@proton.me
+                            <a href='mailto:info@smash-up-randomizer.com' class="text-primary">
+                                info@smash-up-randomizer.com
                             </a>
                         </p>
                     </div>
