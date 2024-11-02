@@ -44,8 +44,8 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <div class="form-group">
-                                <label for="name" class="form-label">Name:</label>
-                                <input type="text" name="name" id="name" class="form-control" placeholder="Your Name" value="{{ old('name') }}">
+                                <label for="name" class="form-label">Name: <span class="text-danger">*</span></label>
+                                <input type="text" name="name" id="name" class="form-control" placeholder="Your Name" value="{{ old('name') }}" required>
                                 @if ($errors->has('name'))
                                 <span class="text-danger">{{ $errors->first('name') }}</span>
                                 @endif
@@ -53,8 +53,8 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <div class="form-group">
-                                <label for="email" class="form-label">Email:</label>
-                                <input type="email" name="email" id="email" class="form-control" placeholder="Your Email" value="{{ old('email') }}">
+                                <label for="email" class="form-label">Email: <span class="text-danger">*</span></label>
+                                <input type="email" name="email" id="email" class="form-control" placeholder="Your Email" value="{{ old('email') }}" required>
                                 @if ($errors->has('email'))
                                 <span class="text-danger">{{ $errors->first('email') }}</span>
                                 @endif
@@ -64,8 +64,8 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <div class="form-group">
-                                <label for="phone" class="form-label">Phone:</label>
-                                <input type="tel" name="phone" id="phone" class="form-control" placeholder="Your Phone" value="{{ old('phone') }}">
+                                <label for="phone" class="form-label">Phone: <span class="text-danger">*</span></label>
+                                <input type="tel" name="phone" id="phone" class="form-control" placeholder="Your Phone" value="{{ old('phone') }}" required>
                                 @if ($errors->has('phone'))
                                 <span class="text-danger">{{ $errors->first('phone') }}</span>
                                 @endif
@@ -73,8 +73,8 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <div class="form-group">
-                                <label for="subject" class="form-label">Subject:</label>
-                                <input type="text" name="subject" id="subject" class="form-control" placeholder="Message Subject" value="{{ old('subject') }}">
+                                <label for="subject" class="form-label">Subject: <span class="text-danger">*</span></label>
+                                <input type="text" name="subject" id="subject" class="form-control" placeholder="Message Subject" value="{{ old('subject') }}" required>
                                 @if ($errors->has('subject'))
                                 <span class="text-danger">{{ $errors->first('subject') }}</span>
                                 @endif
@@ -84,8 +84,8 @@
                     <div class="row">
                         <div class="col-md-12 mb-3">
                             <div class="form-group">
-                                <label for="message" class="form-label">Message:</label>
-                                <textarea name="message" id="message" rows="5" placeholder="What is on your mind?" class="form-control">{{ old('message') }}</textarea>
+                                <label for="message" class="form-label">Message: <span class="text-danger">*</span></label>
+                                <textarea name="message" id="message" rows="5" placeholder="What is on your mind?" class="form-control" required>{{ old('message') }}</textarea>
                                 @if ($errors->has('message'))
                                 <span class="text-danger">{{ $errors->first('message') }}</span>
                                 @endif
