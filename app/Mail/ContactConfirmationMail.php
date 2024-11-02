@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ContactMail extends Mailable implements ShouldQueue
+class ContactConfirmationMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
    
@@ -30,7 +30,7 @@ class ContactMail extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->subject('New Contact - '. $this->data->subject)
-                    ->view('emails.contact');
+        return $this->subject('Contact Confirmation')
+                    ->view('emails.confirmContact');
     }
 }
