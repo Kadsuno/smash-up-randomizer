@@ -25,29 +25,6 @@
     </div>
 </footer>
 
-<div class="fixed-bottom d-flex justify-content-end p-3" style="width: auto; right: 0; pointer-events: none;">
-    <button class="js-lcc-settings-toggle btn btn-light rounded-pill shadow-lg cookie-button d-inline-flex align-items-center" aria-label="Cookie Settings" style="pointer-events: auto;">
-        <i class="fa-solid fa-cookie-bite me-2"></i>
-        <span>Cookie Settings</span>
-    </button>
-</div>
-
-<style>
-    .cookie-button {
-        transition: all 0.3s ease;
-        font-size: 0.9rem;
-        padding: 0.5rem 1rem;
-        border: 2px solid black;
-    }
-    .cookie-button:hover {
-        background-color: black;
-        color: white;
-        transform: translateY(-2px);
-    }
-    .cookie-button i {
-        font-size: 1.1rem;
-    }
-</style>
 
 <style>
     .hover-effect {

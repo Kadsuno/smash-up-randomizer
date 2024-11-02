@@ -26,6 +26,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicons/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicons/favicon-16x16.png') }}">
     <link rel="manifest" href="{{ asset('images/favicons/site.webmanifest') }}">
+    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="fa5be6e6-ca00-4fe5-8b18-f965aa6731fa" data-blockingmode="auto" type="text/javascript"></script>
 </head>
 
 <body class="text-bg-dark bg-black">
