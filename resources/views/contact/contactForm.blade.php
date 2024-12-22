@@ -100,10 +100,6 @@
 
                     <input type="text" name="context" id="context" style="display: none;">
                     <input type="hidden" name="start_time" value="{{ time() }}">
-
-                    {!! NoCaptcha::renderJs() !!}
-                    {!! NoCaptcha::display() !!}
-
                 
                     <div class="form-group text-center">
                         <button class="btn btn-primary btn-lg btn-submit animate__animated animate__pulse animate__infinite">Submit</button>
