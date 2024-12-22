@@ -85,7 +85,9 @@ Route::get('contact-us', [
 Route::post('contact-us', [
     ContactController::class,
     'store'
-])->name('contact.us.store');
+])
+    ->middleware('throttle:5,1')
+    ->name('contact.us.store');
 
 Route::get('/factions', [
     DeckController::class,
