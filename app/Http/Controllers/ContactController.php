@@ -30,7 +30,6 @@ class ContactController extends Controller
             'phone' => 'required|regex:/^[0-9\s\-()+]+$/',
             'subject' => 'required|string|max:255',
             'message' => 'required|string',
-            'g-recaptcha-response' => 'required|captcha',
         ]);
 
         if (!empty($request->context)) {
