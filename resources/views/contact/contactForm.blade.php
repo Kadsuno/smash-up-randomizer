@@ -98,7 +98,7 @@
                         </div>
                     </div>
 
-                    <input type="text" name="context" id="context" style="">
+                    <input type="text" name="context" id="context" style="display: none;">
                     <input type="hidden" name="start_time" value="{{ time() }}">
 
                     {!! NoCaptcha::renderJs() !!}
