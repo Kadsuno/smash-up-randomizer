@@ -37,6 +37,11 @@
                 {{ Session::get('success') }}
             </div>
             @endif
+            @if (Session::has('error'))
+            <div class="alert alert-danger animate__animated animate__fadeIn">
+                {{ Session::get('error') }}
+            </div>
+            @endif
             <div class="col-md-8">
                 <form method="POST" action="{{ route('contact.us.store') }}" id="contactUSForm" class="bg-dark p-4 rounded-3 shadow-lg animate__animated animate__fadeInUp">
                     {{ csrf_field() }}
@@ -93,6 +98,13 @@
                         </div>
                     </div>
 
+                    <input type="text" name="context" id="context" style="">
+                    <input type="hidden" name="start_time" value="{{ time() }}">
+
+                    {!! NoCaptcha::renderJs() !!}
+                    {!! NoCaptcha::display() !!}
+
+                
                     <div class="form-group text-center">
                         <button class="btn btn-primary btn-lg btn-submit animate__animated animate__pulse animate__infinite">Submit</button>
                     </div>
