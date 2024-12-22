@@ -25,12 +25,22 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|string|max:255',
             'email' => 'required|email',
-            'phone' => 'required|numeric',
-            'subject' => 'required',
-            'message' => 'required'
+            'phone' => 'required|regex:/^[0-9\s\-()+]+$/',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string',
+            'g-recaptcha-response' => 'required|captcha',
         ]);
+
+        if (!empty($request->context)) {
+            return redirect()->back()->with(['error' => 'Spam detected!']);
+        }
+
+        $startTime = $request->input('start_time');
+        if (time() - $startTime < 3) {
+            return redirect()->back()->with(['error' => 'Spam detected!']);
+        }
   
         Contact::create($request->all());
   
