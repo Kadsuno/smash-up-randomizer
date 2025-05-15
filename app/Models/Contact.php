@@ -25,9 +25,6 @@ class Contact extends Model
   
         static::created(function ($item) {
             $adminEmail = "info@smash-up-randomizer.com";
-            Mail::to($adminEmail)->send(new ContactMail($item));
-
-            Mail::to($item->email)->send(new ContactConfirmationMail($item));
         });
     }
 }
