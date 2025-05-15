@@ -22,7 +22,7 @@ class SendGridMailService
             $email->addContent("text/html", $html);
         }
 
-        $sendgrid = new SendGrid(getenv('SENDGRID_API_KEY'));
+        $sendgrid = new SendGrid(config('services.sendgrid.api_key'));
 
         try {
             return $sendgrid->send($email);
