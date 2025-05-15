@@ -18,7 +18,9 @@ class SendgridMailService
         $email->addContent("text/plain", $plainText);
 
         if ($view) {
-            $html = View::make($view, $data)->render();
+            // Convert data array to object for blade template
+            $data = (object) $data;
+            $html = View::make($view, ['data' => $data])->render();
             $email->addContent("text/html", $html);
         }
 
