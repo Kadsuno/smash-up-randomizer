@@ -7,7 +7,7 @@ use SendGrid\Mail\Mail;
 use Exception;
 use Illuminate\Support\Facades\View;
 
-class SendGridMailService
+class SendgridMailService
 {
     public function send($to, $subject, $plainText, $view = null, $data = [])
     {
