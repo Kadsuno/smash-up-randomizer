@@ -51,7 +51,13 @@ class ContactController extends Controller
             'Thank you for contacting Smash Up Randomizer',
             'Thank you for contacting Smash Up Randomizer. We will get back to you shortly.',
             'emails.confirmContact',
-            ['name' => $request->name]
+            [
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'subject' => $request->subject,
+                'message' => $request->message
+            ]
         );
 
         $response = $mailer->send(
@@ -59,7 +65,13 @@ class ContactController extends Controller
             'New contact from Smash Up Randomizer',
             'New contact from Smash Up Randomizer. Name: ' . $request->name . ' Email: ' . $request->email . ' Phone: ' . $request->phone . ' Subject: ' . $request->subject . ' Message: ' . $request->message,
             'emails.contact',
-            ['name' => $request->name]
+            [
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'subject' => $request->subject,
+                'message' => $request->message
+            ]
         );
 
         return redirect()->back()
