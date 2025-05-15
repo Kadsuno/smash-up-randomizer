@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Contact;
-
+use App\Services\SendGridMailService;
 class ContactController extends Controller
 {
     /**
@@ -42,8 +42,19 @@ class ContactController extends Controller
         }
   
         Contact::create($request->all());
+
+        $mailer = new SendGridMailService();
+
+        $response = $mailer->send(
+            $request->email,
+            'Thank you for contacting Smash Up Randomizer',
+            'Thank you for contacting Smash Up Randomizer. We will get back to you shortly.',
+            'emails.sendgrid-test',
+            ['name' => $request->name]
+        );
   
         return redirect()->back()
                          ->with(['success' => 'Thank you for contact us. we will contact you shortly.']);
     }
+    
 }

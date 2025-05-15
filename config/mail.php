@@ -45,11 +45,6 @@ return [
             'auth_mode' => null,
         ],
 
-        'sendgrid' => [
-            'transport' => 'sendgrid',
-            'api_key' => env('SENDGRID_API_KEY'),
-        ],
-
         'ses' => [
             'transport' => 'ses',
         ],
