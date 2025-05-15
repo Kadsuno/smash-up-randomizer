@@ -49,7 +49,15 @@ class ContactController extends Controller
             $request->email,
             'Thank you for contacting Smash Up Randomizer',
             'Thank you for contacting Smash Up Randomizer. We will get back to you shortly.',
-            'emails.sendgrid-test',
+            'emails.confirmContact',
+            ['name' => $request->name]
+        );
+
+        $response = $mailer->send(
+            'info@smash-up-randomizer.com',
+            'New contact from Smash Up Randomizer',
+            'New contact from Smash Up Randomizer. Name: ' . $request->name . ' Email: ' . $request->email . ' Phone: ' . $request->phone . ' Subject: ' . $request->subject . ' Message: ' . $request->message,
+            'emails.contact',
             ['name' => $request->name]
         );
   
