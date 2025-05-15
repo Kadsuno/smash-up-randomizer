@@ -16,7 +16,8 @@
         "spatie/laravel-sitemap": "^7.0",
         "symfony/http-client": "^6.4",
         "symfony/mailgun-mailer": "^6.4",
-        "symfony/postmark-mailer": "^6.4"
+        "symfony/postmark-mailer": "^6.4",
+        "symfony/sendgrid-mailer": "^6.4"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
