@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Contact;
-use App\Services\SendGridMailService;
+use App\Services\SendgridMailService;
+
 class ContactController extends Controller
 {
     /**
@@ -16,7 +17,7 @@ class ContactController extends Controller
     {
         return view('contact.contactForm');
     }
-  
+
     /**
      * Write code on Method
      *
@@ -40,10 +41,10 @@ class ContactController extends Controller
         if (time() - $startTime < 3) {
             return redirect()->back()->with(['error' => 'Spam detected!']);
         }
-  
+
         Contact::create($request->all());
 
-        $mailer = new SendGridMailService();
+        $mailer = new SendgridMailService();
 
         $response = $mailer->send(
             $request->email,
@@ -60,9 +61,8 @@ class ContactController extends Controller
             'emails.contact',
             ['name' => $request->name]
         );
-  
+
         return redirect()->back()
-                         ->with(['success' => 'Thank you for contact us. we will contact you shortly.']);
+            ->with(['success' => 'Thank you for contact us. we will contact you shortly.']);
     }
-    
 }
