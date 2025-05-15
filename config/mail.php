@@ -115,4 +115,19 @@ return [
         ],
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Email Testing Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Here you may configure the email addresses used for testing the email
+    | service. The test_email address is where automated test emails will be
+    | sent. The admin_email address will receive notifications when automated
+    | tests fail.
+    |
+    */
+
+    'test_email' => env('MAIL_TEST_EMAIL', 'info@smash-up-randomizer.com'),
+    'admin_email' => env('MAIL_ADMIN_EMAIL', 'info@smash-up-randomizer.com'),
+
 ];

@@ -15,7 +15,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        // Test email service daily at 9:00 AM
+        $schedule->command('email:test')
+            ->daily()
+            ->at('09:00')
+            ->emailOutputOnFailure(config('mail.admin_email', 'info@smash-up-randomizer.com'));
     }
 
     /**
@@ -25,7 +29,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
