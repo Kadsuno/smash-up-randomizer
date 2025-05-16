@@ -1,64 +1,324 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Smash Up Randomizer
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+[![Laravel](https://img.shields.io/badge/Laravel-10.x-FF2D20?style=flat-square&logo=laravel&logoColor=white)](https://laravel.com)
+[![PHP](https://img.shields.io/badge/PHP-8.0+-777BB4?style=flat-square&logo=php&logoColor=white)](https://php.net)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?style=flat-square&logo=mysql&logoColor=white)](https://www.mysql.com)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.x-7952B3?style=flat-square&logo=bootstrap&logoColor=white)](https://getbootstrap.com)
+[![Vite](https://img.shields.io/badge/Vite-4.x-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
+[![GitHub last commit](https://img.shields.io/github/last-commit/kadsuno/smash-up-randomizer?style=flat-square)](https://github.com/kadsuno/smash-up-randomizer/commits)
+[![GitHub issues](https://img.shields.io/github/issues/kadsuno/smash-up-randomizer?style=flat-square)](https://github.com/kadsuno/smash-up-randomizer/issues)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg?style=flat-square)](https://conventionalcommits.org)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/kadsuno/smash-up-randomizer/laravel.yml?style=flat-square&logo=github-actions&logoColor=white&label=CI)](https://github.com/kadsuno/smash-up-randomizer/actions)
 
-## About Laravel
+A web application to help Smash Up players randomly assign factions and manage their game setup.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## About the Project
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Smash Up Randomizer is a tool designed for players of the popular card game "Smash Up". This web application helps you:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+-   Randomly assign factions to players
+-   Filter factions by expansions you own
+-   Share game setups with friends
+-   Keep track of your favorite faction combinations
 
-## Learning Laravel
+Built with Laravel, Bootstrap, and modern JavaScript, the app provides a smooth, responsive experience across devices.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Features
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+-   **Random Faction Selection**: Automatically assign random factions to each player
+-   **Custom Filters**: Filter by expansions or specific factions to customize your gameplay experience
+-   **Share Results**: Easily share your faction assignments with friends through various social platforms
+-   **Dark Theme**: Enjoy a comfortable dark mode for late-night gaming sessions
+-   **Responsive Design**: Works on desktop, tablets, and mobile devices
+-   **User Accounts**: Register and save your favorite faction combinations
+-   **Faction Database**: Browse detailed information about all Smash Up factions
 
-## Laravel Sponsors
+## Getting Started
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### Prerequisites
 
-### Premium Partners
+-   PHP 8.0 or higher
+-   Composer
+-   Node.js and npm
+-   MySQL or compatible database
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### DDEV Setup
 
-## Contributing
+This project uses DDEV for local development to ensure a consistent environment across all development machines.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1. Install [DDEV](https://ddev.readthedocs.io/en/stable/)
 
-## Code of Conduct
+2. Clone the repository
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    ```
+    git clone https://github.com/yourusername/smash-up-randomizer.git
+    cd smash-up-randomizer
+    ```
 
-## Security Vulnerabilities
+3. Start DDEV
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    ```
+    ddev start
+    ```
+
+4. Install dependencies
+
+    ```
+    ddev composer install
+    ddev npm install
+    ```
+
+5. Copy environment file and generate application key
+
+    ```
+    ddev exec cp .env.example .env
+    ddev exec php artisan key:generate
+    ```
+
+6. Run migrations
+
+    ```
+    ddev exec php artisan migrate
+    ```
+
+7. Compile assets
+
+    ```
+    ddev npm run dev
+    ```
+
+8. Access the site at https://smash-up-randomizer.ddev.site
+
+### Standard Installation
+
+If you're not using DDEV, follow these steps:
+
+1. Clone the repository
+
+    ```
+    git clone https://github.com/yourusername/smash-up-randomizer.git
+    ```
+
+2. Install PHP dependencies
+
+    ```
+    composer install
+    ```
+
+3. Install JavaScript dependencies
+
+    ```
+    npm install
+    ```
+
+4. Copy the environment file and update it with your database credentials
+
+    ```
+    cp .env.example .env
+    ```
+
+5. Generate an application key
+
+    ```
+    php artisan key:generate
+    ```
+
+6. Run database migrations
+
+    ```
+    php artisan migrate
+    ```
+
+7. Compile assets
+
+    ```
+    npm run dev
+    ```
+
+8. Start the development server
+    ```
+    php artisan serve
+    ```
+
+## Database Structure
+
+The application uses MySQL with the following tables:
+
+### User Management
+
+-   **users**: Admin users for the backend
+
+    -   Standard Laravel user fields (id, name, email, password, etc.)
+    -   Created through Laravel authentication scaffolding
+
+-   **frontend_users**: Regular users who use the randomizer
+    -   Extends standard user functionality for frontend application users
+
+### Faction Data
+
+-   **decks**: Stores faction details (primary content)
+    -   name: Name of the faction
+    -   image: Path to faction image
+    -   expansion: Which set the faction belongs to
+    -   description: Full description of the faction
+    -   mechanics, playstyle, effects: Gameplay characteristics
+    -   Various other faction-specific metadata fields
+
+### User Interaction
+
+-   **contacts**: Stores contact form submissions
+    -   Contains name, email, phone, subject, and message fields
+    -   Used for customer support and feedback
+
+### System Tables
+
+-   **jobs**: Background processing queue
+-   **failed_jobs**: Failed background jobs
+-   **password_resets**: Password reset tokens
+-   **personal_access_tokens**: API token management
+-   **oauth\_\*** tables: Laravel Passport authentication
+
+## Application Architecture
+
+### Models
+
+The application uses Eloquent ORM with these models:
+
+-   **User**: Admin user accounts (`app/Models/User.php`)
+-   **FrontendUser**: Regular user accounts (`app/Models/FrontendUser.php`)
+-   **Deck**: Core model for Smash Up factions (`app/Models/Deck.php`)
+-   **Contact**: Form submissions (`app/Models/Contact.php`)
+
+### Controllers
+
+The application follows Laravel's MVC pattern with these controllers:
+
+-   **DeckController**: Core functionality for faction management, display, and shuffling
+-   **ContactController**: Handles contact form processing
+-   **HomeController**: Manages general page routing
+-   **Auth Controllers**: Handle authentication for both admin and frontend users
+
+### Views
+
+Views use Laravel Blade templates organized as follows:
+
+-   **auth/**: Authentication views
+-   **components/**: Reusable UI components
+-   **decks/**: Faction display templates
+-   **emails/**: Email templates
+-   **errors/**: Error pages
+-   **frontend/**: Front-facing user interfaces
+-   **backend/**: Admin interfaces
+-   **start/**: Landing pages
+-   **shuffle/**: Randomizer interface
+-   **legal/**: Imprint, privacy policy, and terms of service
+
+### Routes
+
+The application has the following primary routes:
+
+-   `/`: Homepage with main application features
+-   `/shuffle`: Faction randomizer form
+-   `/shuffle/result`: Generated faction assignments
+-   `/factions`: Browse all available factions
+-   `/factions/{name}`: Detailed view of a specific faction
+-   `/contact-us`: Contact form
+-   `/about`: Information about the project
+-   `/login`, `/register`: Frontend user authentication
+-   `/account`: User account management
+-   `/admin/*`: Backend administration area (protected)
+
+### Services
+
+-   **SendgridMailService**: Handles email delivery using Sendgrid
+
+### Mailing
+
+Email functionality is implemented using Laravel's Mail facade with Sendgrid integration:
+
+-   **ContactMail**: Sends notification emails for contact form submissions
+-   **ContactConfirmationMail**: Confirmation emails to users who submit contact forms
+
+Configuration is stored in `.env` with mail-related settings (MAIL\_\* variables).
+
+## Frontend Architecture
+
+### JavaScript
+
+-   Uses Laravel Vite for asset compilation
+-   Core functionality in resources/js directory
+-   Bootstrap and custom components for UI interactions
+
+### Styling
+
+-   SASS/SCSS preprocessing
+-   Bootstrap 5 framework with custom overrides
+-   Dark/light theme support with localStorage persistence
+
+## Development
+
+### Built With
+
+-   [Laravel](https://laravel.com/) - PHP framework
+-   [Bootstrap 5](https://getbootstrap.com/) - Frontend framework
+-   [Vite](https://vitejs.dev/) - Frontend tooling
+-   [MySQL](https://www.mysql.com/) - Database
+-   [Sendgrid](https://sendgrid.com/) - Email delivery
+
+### Compiling Assets
+
+-   Development: `npm run dev`
+-   Production: `npm run build`
+
+### Version Control Strategy
+
+We follow a simplified Git Flow approach:
+
+#### Branches
+
+-   **main**: Production-ready code
+-   **dev**: Integration branch for feature development
+-   **feature/\***: Individual feature branches
+-   **bugfix/\***: Bug fixes
+-   **release/\***: Release preparation
+
+#### Commit Conventions
+
+We use conventional commits to maintain a clean history:
+
+```
+feat: add new faction filter component
+fix: correct dark mode contrast issues
+docs: update installation instructions
+style: format code according to PSR-12
+refactor: improve randomization algorithm
+test: add tests for faction selection
+```
+
+## Style Guide
+
+### PHP Coding Standards
+
+-   PSR-12 compliant code formatting
+-   DocBlocks for all classes and methods
+-   Type hints for method parameters and return types
+-   Laravel best practices for controllers, models, and services
+
+### JavaScript Standards
+
+-   ES6+ syntax
+-   Consistent naming conventions
+-   Component-based organization
+
+### SASS/CSS Conventions
+
+-   Component-based styling
+-   Consistent naming using kebab-case
+-   Responsive design principles
+-   Dark/light theme compatibility
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is licensed under the MIT License.
