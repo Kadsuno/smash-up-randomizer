@@ -23,6 +23,7 @@ class MatomoTrackingTest extends TestCase
         $response->assertOk();
         $response->assertSee('sur-matomo-config', false);
         $response->assertSee('analytics.kadsuno.com', false);
+        $response->assertSee('sur-cookie-consent-bar', false);
         $response->assertSee('surCookieConsentModal', false);
     }
 
@@ -34,6 +35,7 @@ class MatomoTrackingTest extends TestCase
 
         $response->assertOk();
         $response->assertDontSee('sur-matomo-config');
+        $response->assertDontSee('sur-cookie-consent-bar');
         $response->assertDontSee('surCookieConsentModal');
     }
 }
