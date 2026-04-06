@@ -45,6 +45,21 @@ return [
             'auth_mode' => null,
         ],
 
+        /*
+        | Same as `smtp` but defaults host to Brevo when MAIL_HOST is unset.
+        | Use MAIL_MAILER=brevo with MAIL_USERNAME / MAIL_PASSWORD (SMTP key) from Brevo.
+        */
+        'brevo' => [
+            'transport' => 'smtp',
+            'host' => env('MAIL_HOST', 'smtp-relay.brevo.com'),
+            'port' => env('MAIL_PORT', 587),
+            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+            'username' => env('MAIL_USERNAME'),
+            'password' => env('MAIL_PASSWORD'),
+            'timeout' => null,
+            'auth_mode' => null,
+        ],
+
         'ses' => [
             'transport' => 'ses',
         ],

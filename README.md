@@ -157,8 +157,8 @@ Transactional mail (contact form confirmations, `php artisan email:test`, schedu
 
 **Production (Brevo SMTP):** In the Brevo dashboard, create an SMTP key and verify your sending domain or sender. Example `.env` values:
 
-- `MAIL_MAILER=smtp`
-- `MAIL_HOST=smtp-relay.brevo.com`
+- `MAIL_MAILER=smtp` **or** `MAIL_MAILER=brevo` (alias in `config/mail.php`; same `MAIL_*` keys — if you use `brevo` and omit `MAIL_HOST`, it defaults to `smtp-relay.brevo.com`)
+- `MAIL_HOST=smtp-relay.brevo.com` (optional when using `MAIL_MAILER=brevo`; required for explicit host with `smtp`)
 - `MAIL_PORT=587`
 - `MAIL_ENCRYPTION=tls`
 - `MAIL_USERNAME` — usually your Brevo account email (exact value is shown in Brevo SMTP settings)
