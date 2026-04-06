@@ -15,6 +15,91 @@
  * Design tokens: dark-first, mobile-first. Accent: indigo / violet (SaaS-style).
  */
 
+/*
+ * Global scrollbar (document + opt-in). Firefox: scrollbar-color; WebKit: pseudo-elements.
+ * “SUR” thumb: diagonal indigo→violet gradient, lit edge, soft outer glow — track: deep zinc + indigo hairline.
+ */
+:root {
+    --sur-scrollbar-w: 12px;
+    --sur-scrollbar-fg: rgba(165, 180, 252, 0.95);
+    --sur-scrollbar-bg: rgba(10, 10, 13, 0.98);
+}
+
+html {
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: var(--sur-scrollbar-fg) var(--sur-scrollbar-bg);
+}
+
+html::-webkit-scrollbar,
+.scroll-container::-webkit-scrollbar,
+.sur-scrollbar::-webkit-scrollbar {
+    width: var(--sur-scrollbar-w);
+    height: var(--sur-scrollbar-w);
+}
+
+html::-webkit-scrollbar-track,
+.scroll-container::-webkit-scrollbar-track,
+.sur-scrollbar::-webkit-scrollbar-track {
+    background: linear-gradient(
+        180deg,
+        rgba(24, 24, 27, 0.99) 0%,
+        rgba(9, 9, 11, 1) 45%,
+        rgba(18, 18, 22, 0.98) 100%
+    );
+    border-left: 1px solid rgba(99, 102, 241, 0.14);
+    box-shadow: inset 3px 0 12px rgba(0, 0, 0, 0.4);
+}
+
+html::-webkit-scrollbar-thumb,
+.scroll-container::-webkit-scrollbar-thumb,
+.sur-scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 9999px;
+    border: 2px solid rgba(8, 8, 10, 0.95);
+    background: linear-gradient(
+        165deg,
+        rgba(224, 231, 255, 0.55) 0%,
+        rgba(129, 140, 248, 0.98) 28%,
+        rgba(99, 102, 241, 1) 55%,
+        rgba(124, 58, 237, 0.96) 100%
+    );
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.22),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.25),
+        0 0 0 1px rgba(99, 102, 241, 0.28),
+        0 2px 18px rgba(99, 102, 241, 0.28);
+}
+
+html::-webkit-scrollbar-thumb:hover,
+.scroll-container::-webkit-scrollbar-thumb:hover,
+.sur-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(
+        165deg,
+        rgba(238, 242, 255, 0.75) 0%,
+        rgba(165, 180, 252, 1) 30%,
+        rgba(129, 140, 248, 1) 60%,
+        rgba(167, 139, 250, 0.98) 100%
+    );
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        0 0 0 1px rgba(165, 180, 252, 0.45),
+        0 4px 22px rgba(99, 102, 241, 0.4);
+}
+
+html::-webkit-scrollbar-thumb:active,
+.scroll-container::-webkit-scrollbar-thumb:active,
+.sur-scrollbar::-webkit-scrollbar-thumb:active {
+    background: linear-gradient(180deg, rgba(67, 56, 202, 1) 0%, rgba(109, 40, 217, 0.98) 100%);
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.scroll-container,
+.sur-scrollbar {
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: var(--sur-scrollbar-fg) var(--sur-scrollbar-bg);
+}
+
 @layer base {
     html {
         @apply scroll-smooth;
@@ -391,42 +476,13 @@
 }
 
 /*
- * Faction detail — full-height scroll container (scroll-snap + themed scrollbar).
+ * Faction detail — full-height scroll container (scroll-snap). Thumb/track match global SUR scrollbar above.
  */
 .scroll-container {
     height: 100vh;
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
-    scrollbar-gutter: stable;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(129, 140, 248, 0.7) rgba(24, 24, 27, 0.92);
-}
-
-.scroll-container::-webkit-scrollbar {
-    width: 11px;
-}
-
-.scroll-container::-webkit-scrollbar-track {
-    background: linear-gradient(180deg, rgba(24, 24, 27, 0.96), rgba(9, 9, 11, 0.99));
-    border-left: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.scroll-container::-webkit-scrollbar-thumb {
-    border-radius: 9999px;
-    border: 2px solid rgba(9, 9, 11, 0.92);
-    background: linear-gradient(180deg, rgba(99, 102, 241, 0.92), rgba(124, 58, 237, 0.88));
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.14),
-        0 0 14px rgba(99, 102, 241, 0.2);
-}
-
-.scroll-container::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, rgba(129, 140, 248, 0.98), rgba(139, 92, 246, 0.92));
-}
-
-.scroll-container::-webkit-scrollbar-thumb:active {
-    background: linear-gradient(180deg, rgba(99, 102, 241, 1), rgba(109, 40, 217, 0.95));
 }
 
 @media (prefers-reduced-motion: reduce) {
