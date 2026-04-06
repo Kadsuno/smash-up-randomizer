@@ -1,12 +1,16 @@
-# Landing page photography
+# Landing page imagery
 
-The home page hero carousel uses stock photos downloaded from **Pexels** under the [Pexels License](https://www.pexels.com/license/) (free to use; attribution not required but documented here).
+## Hero carousel (home `/`)
 
-| Local file | Pexels page | Photographer |
-| ---------- | ----------- | ------------ |
-| `public/images/landing/slide-01-board-game-night.jpg` | [People playing board game](https://www.pexels.com/photo/people-playing-board-game-5234255/) | Anna Tarazevich |
-| `public/images/landing/slide-02-cards-on-table.jpg` | [Casual card game setup on wooden table](https://www.pexels.com/photo/casual-card-game-setup-on-wooden-table-28461353/) | Yuni P |
-| `public/images/landing/slide-03-group-card-game.jpg` | [Intense group card game around table](https://www.pexels.com/photo/intense-group-card-game-around-table-35538611/) | Alexander Mass |
-| `public/images/landing/slide-04-friends-smartphone.jpg` | [Diverse cheerful friends with smartphone](https://www.pexels.com/photo/diverse-cheerful-friends-with-smartphone-laughing-near-door-of-building-6147175/) | Keira Burton |
+The four slides under `public/images/landing/slide-0*-ai-*.png` are **AI-generated artwork** created with **Cursor’s image generation** (prompted for generic board-game / card-night / smartphone themes). They are **not** official *Smash Up* product art and intentionally avoid logos, readable text, and franchise-specific depictions.
 
-Images were fetched at **max width 1920px** (`auto=compress&cs=tinysrgb&w=1920`) and stored as JPEG for predictable delivery from `public/`.
+| File | Theme (prompt intent) |
+| ---- | --------------------- |
+| `slide-01-ai-game-night.png` | Cozy evening table, generic game pieces and cards, moody lighting |
+| `slide-02-ai-cards-table.png` | Top-down cards on wood, warm light |
+| `slide-03-ai-friends-cards.png` | Friends around a table, casual card game |
+| `slide-04-ai-smartphone.png` | Phone glow suggesting an app; background out of focus |
+
+**Regeneration:** Replace the PNGs in `public/images/landing/` and keep filenames in sync with `app/Http/Controllers/HomeController.php` and `tests/Feature/HomeLandingTest.php`.
+
+**Note:** Files are full-resolution PNGs; consider WebP or stronger compression in a follow-up if LCP budgets require it.

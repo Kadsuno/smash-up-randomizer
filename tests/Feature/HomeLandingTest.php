@@ -18,6 +18,6 @@ class HomeLandingTest extends TestCase
         $response->assertOk();
         $response->assertSee(__('frontend.landing_hero_title'), false);
         $response->assertSee(__('frontend.landing_slide_1_title'), false);
-        $response->assertSee('slide-01-board-game-night.jpg', false);
+        $response->assertSee('slide-01-ai-game-night.png', false);
     }
 }
