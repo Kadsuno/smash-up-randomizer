@@ -1,11 +1,11 @@
-<footer class="border-t border-white/10 bg-black py-10 text-zinc-300">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+<footer class="mt-auto border-t border-white/10 bg-black py-10 text-zinc-300">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="grid gap-10 md:grid-cols-3">
-            <div>
+            <div class="sur-footer-col">
                 <h2 class="mb-3 text-xs font-semibold uppercase tracking-widest text-zinc-500">Smash Up Randomizer</h2>
                 <p class="text-sm leading-relaxed text-zinc-400">Shuffle and assign factions for your next Smash Up game with ease.</p>
             </div>
-            <div>
+            <div class="sur-footer-col">
                 <h2 class="mb-3 text-xs font-semibold uppercase tracking-widest text-zinc-500">{{ __('frontend.footer_quick_links') }}</h2>
                 <ul class="space-y-2 text-sm">
                     <li>
@@ -16,7 +16,7 @@
                     </li>
                 </ul>
             </div>
-            <div>
+            <div class="sur-footer-col">
                 <h2 class="mb-3 text-xs font-semibold uppercase tracking-widest text-zinc-500">{{ __('frontend.footer_connect') }}</h2>
                 <div class="flex gap-4">
                     <a href="https://www.facebook.com/SmashUpRandomizer/" class="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 text-zinc-200 transition hover:border-indigo-500/40 hover:text-indigo-400" aria-label="Facebook" rel="noopener noreferrer">

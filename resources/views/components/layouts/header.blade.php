@@ -29,7 +29,8 @@
 
 </head>
 
-<body class="min-h-screen bg-zinc-950 text-zinc-100 antialiased">
+<body class="flex min-h-screen flex-col bg-zinc-950 text-zinc-100 antialiased">
+    <a href="#main-content" class="sur-skip-link">{{ __('frontend.skip_to_content') }}</a>
     <nav
         x-data="{ open: false }"
         @keydown.window.escape="open = false"

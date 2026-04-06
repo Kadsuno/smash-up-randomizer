@@ -1,10 +1,10 @@
 <x-layouts.main>
-    <section class="mx-auto mt-8 max-w-6xl px-4 py-8 sm:mt-12 sm:px-6">
+    <x-sur.section :padded="true">
         <div class="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-center">
-            <div class="flex justify-center lg:w-2/5">
+            <x-sur.reveal class="flex justify-center lg:w-2/5">
                 <img src="{{ asset('images/login.svg') }}" class="max-h-72 w-full max-w-md object-contain" alt="" width="400" height="300">
-            </div>
-            <div class="mx-auto w-full max-w-md flex-1">
+            </x-sur.reveal>
+            <x-sur.reveal :delay="80" class="mx-auto w-full max-w-md flex-1">
                 <x-auth-session-status class="mb-4" :status="session('status')" />
                 <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
@@ -39,7 +39,7 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </x-sur.reveal>
         </div>
-    </section>
+    </x-sur.section>
 </x-layouts.main>
