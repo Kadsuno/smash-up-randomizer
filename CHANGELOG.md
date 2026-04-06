@@ -7,7 +7,7 @@ All notable changes to this project are documented in this file.
 ### Added
 
 - **SMTP / Brevo API transactional mail:** contact form and `php artisan email:test` use Laravel’s configured mailer via `App\Services\TransactionalMailService`. **`MAIL_MAILER=brevo`** uses `getbrevo/brevo-php` and `App\Mail\Transport\BrevoApiTransport` (same pattern as Issue Forge; `BREVO_API_KEY`). **`MAIL_MAILER=smtp`** uses `MAIL_*` for any SMTP relay. See README and `.env.example`. Removed `sendgrid/sendgrid` and `symfony/sendgrid-mailer`.
-- **Cookie consent:** first-party UI (dark-themed bottom strip + preference modal with categories, Cookiebot-style actions) stores analytics preference in the browser and loads Matomo only after opt-in. Footer link reopens settings. Cookiebot dependency removed.
+- **Cookie consent:** first-party UI (dark-themed bottom strip + preference modal with categories, Cookiebot-style actions) stores analytics preference in the browser and loads Matomo only after opt-in. A floating cookie icon reopens settings; Cookiebot dependency removed.
 - **Sentry** (`sentry/sentry-laravel`): unhandled exceptions can be reported to Sentry when `SENTRY_LARAVEL_DSN` is set in `.env`. Configuration in `config/sentry.php`; exception handling wired in `bootstrap/app.php`. Use `php artisan sentry:test` to verify after configuring the DSN.
 
 ### Changed
