@@ -69,14 +69,6 @@
                 });
             }
 
-            sidebarLinks.forEach(function (link) {
-                link.addEventListener('mouseenter', function () {
-                    this.classList.add('animate__animated', 'animate__pulse');
-                });
-                link.addEventListener('mouseleave', function () {
-                    this.classList.remove('animate__animated', 'animate__pulse');
-                });
-            });
         });
     </script>
     <style>
