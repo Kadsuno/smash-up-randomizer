@@ -1,0 +1,74 @@
+// Cookie consent strip + modal — aligned with dark layout (bg-black, accent #17a2b8)
+
+$sur-cookie-accent: #17a2b8;
+$sur-cookie-accent-hover: #3fc9dc;
+$sur-cookie-bar-z: 1040;
+
+.sur-cookie-bar {
+    z-index: $sur-cookie-bar-z;
+    border-top: 1px solid rgba($sur-cookie-accent, 0.35);
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(10px);
+}
+
+.sur-cookie-bar__actions {
+    flex-shrink: 0;
+}
+
+.btn-sur-cookie-primary {
+    color: #0b0b0b;
+    background-color: $sur-cookie-accent;
+    border-color: $sur-cookie-accent;
+
+    &:hover,
+    &:focus {
+        color: #0b0b0b;
+        background-color: $sur-cookie-accent-hover;
+        border-color: $sur-cookie-accent-hover;
+    }
+}
+
+.btn-sur-cookie-outline {
+    color: $sur-cookie-accent;
+    border-color: rgba($sur-cookie-accent, 0.65);
+
+    &:hover {
+        color: #fff;
+        background-color: rgba($sur-cookie-accent, 0.2);
+        border-color: $sur-cookie-accent;
+    }
+}
+
+body.sur-cookie-bar-visible {
+    padding-bottom: 8rem;
+
+    @media (min-width: 992px) {
+        padding-bottom: 5.5rem;
+    }
+}
+
+.sur-cookie-modal {
+    .modal-content {
+        border-radius: 0.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.55);
+    }
+
+    .modal-header {
+        border-bottom-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .sur-cookie-category {
+        padding: 0.75rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+        &:last-of-type {
+            border-bottom: none;
+        }
+    }
+
+    .form-check-input:checked {
+        background-color: $sur-cookie-accent;
+        border-color: $sur-cookie-accent;
+    }
+}
