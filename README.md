@@ -19,7 +19,7 @@ Smash Up Randomizer supports:
 
 - Random assignment of factions to players (player count, include/exclude factions via the **home** page shuffle modal → `POST /shuffle/result`)
 - Browsing all factions and per-faction detail pages
-- Contact form with email delivery (Laravel SMTP, e.g. Brevo)
+- Contact form with email delivery (Laravel mail: SMTP or Brevo API)
 - Admin area for managing deck data (authenticated users)
 - XML sitemap (`/sitemap`) via `spatie/laravel-sitemap`
 - Dark-themed, responsive frontend (Bootstrap 5, Vite, Blade)
@@ -86,7 +86,7 @@ Local stack is defined in `.ddev/config.yaml` (PHP 8.3, MariaDB 10.4, Node 18, n
     ddev exec php artisan key:generate
     ```
 
-6. Configure `.env` (database credentials are usually pre-filled for DDEV; set `MAIL_*` for outbound mail — local dev often uses Mailpit on `127.0.0.1:1025`; production can use **Brevo SMTP** — see **Email** below). Optional **Matomo** (public site analytics): `MATOMO_ENABLED` (default `true`), `MATOMO_TRACKER_URL` (default `https://analytics.kadsuno.com`), `MATOMO_SITE_ID` (default `1`) — see `config/matomo.php`. Set `MATOMO_ENABLED=false` locally if you do not want the tracker script loaded. Optional **Sentry** (error monitoring): set `SENTRY_LARAVEL_DSN` from your Sentry project (leave empty to disable). See `config/sentry.php` and run `php artisan sentry:test` after configuring. For full stack trace *argument* values in PHP error reports, set `zend.exception_ignore_args=Off` in `php.ini` (server-level).
+6. Configure `.env` (database credentials are usually pre-filled for DDEV; set mail for outbound email — local dev often uses Mailpit on `127.0.0.1:1025`; production can use **`MAIL_MAILER=brevo`** + `BREVO_API_KEY` (Issue Forge–style) or **SMTP** — see **Email** below). Optional **Matomo** (public site analytics): `MATOMO_ENABLED` (default `true`), `MATOMO_TRACKER_URL` (default `https://analytics.kadsuno.com`), `MATOMO_SITE_ID` (default `1`) — see `config/matomo.php`. Set `MATOMO_ENABLED=false` locally if you do not want the tracker script loaded. Optional **Sentry** (error monitoring): set `SENTRY_LARAVEL_DSN` from your Sentry project (leave empty to disable). See `config/sentry.php` and run `php artisan sentry:test` after configuring. For full stack trace *argument* values in PHP error reports, set `zend.exception_ignore_args=Off` in `php.ini` (server-level).
 
 7. Migrations:
 
@@ -153,19 +153,22 @@ Blade under `resources/views/`: `start/`, `shuffle/`, `decks/`, `frontend/`, `ba
 
 ### Email
 
-Transactional mail (contact form confirmations, `php artisan email:test`, scheduled daily test) uses Laravel’s default mailer via `App\Services\TransactionalMailService` and `config/mail.php` (`MAIL_*`).
+Transactional mail (contact form confirmations, `php artisan email:test`, scheduled daily test) uses Laravel’s default mailer via `App\Services\TransactionalMailService` and `config/mail.php`.
 
-**Production (Brevo SMTP):** In the Brevo dashboard, create an SMTP key and verify your sending domain or sender. Example `.env` values:
+**Production — Brevo via HTTP API (same as [Issue Forge](https://github.com/Kadsuno/issue-forge)):** Uses `getbrevo/brevo-php` and `App\Mail\Transport\BrevoApiTransport` when `MAIL_MAILER=brevo`. Create an **API key** in Brevo (transactional). Example:
 
-- `MAIL_MAILER=smtp` **or** `MAIL_MAILER=brevo` (alias in `config/mail.php`; same `MAIL_*` keys — if you use `brevo` and omit `MAIL_HOST`, it defaults to `smtp-relay.brevo.com`)
-- `MAIL_HOST=smtp-relay.brevo.com` (optional when using `MAIL_MAILER=brevo`; required for explicit host with `smtp`)
-- `MAIL_PORT=587`
-- `MAIL_ENCRYPTION=tls`
-- `MAIL_USERNAME` — usually your Brevo account email (exact value is shown in Brevo SMTP settings)
-- `MAIL_PASSWORD` — SMTP key from Brevo (not your login password)
+- `MAIL_MAILER=brevo`
+- `BREVO_API_KEY=xkeysib-...` (or your Brevo v3 API key)
 - `MAIL_FROM_ADDRESS` / `MAIL_FROM_NAME` — must match a verified sender in Brevo
 
-**Local:** Point `MAIL_HOST` / `MAIL_PORT` at your mail catcher (e.g. Mailpit on `127.0.0.1:1025` with `MAIL_ENCRYPTION=null`).
+This uses **HTTPS** to Brevo’s API (no outbound SMTP ports), which avoids many host firewalls that block port 587.
+
+**Production — classic SMTP:** Use any provider (including Brevo SMTP relay) with:
+
+- `MAIL_MAILER=smtp`
+- `MAIL_HOST`, `MAIL_PORT`, `MAIL_ENCRYPTION`, `MAIL_USERNAME`, `MAIL_PASSWORD`, plus `MAIL_FROM_*` as required by your provider.
+
+**Local:** Use `MAIL_MAILER=smtp` and point `MAIL_HOST` / `MAIL_PORT` at a mail catcher (e.g. Mailpit on `127.0.0.1:1025` with `MAIL_ENCRYPTION=null`). For `brevo` + real API key, emails send via Brevo (use a test recipient or a separate Brevo sandbox if available).
 
 Other Symfony mail transports remain available in `composer.json` if you switch `MAIL_MAILER` (Mailgun, Postmark, etc.).
 
