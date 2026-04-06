@@ -1,22 +1,30 @@
-<footer class="footer container-fluid bg-black text-light py-4">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 mb-3 mb-md-0">
-                <h5 class="text-uppercase mb-3">Smash Up Randomizer</h5>
-                <p class="small">Shuffle and assign factions for your next Smash Up game with ease.</p>
+<footer class="border-t border-white/10 bg-black py-10 text-zinc-300">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+        <div class="grid gap-10 md:grid-cols-3">
+            <div>
+                <h2 class="mb-3 text-xs font-semibold uppercase tracking-widest text-zinc-500">Smash Up Randomizer</h2>
+                <p class="text-sm leading-relaxed text-zinc-400">Shuffle and assign factions for your next Smash Up game with ease.</p>
             </div>
-            <div class="col-md-4 mb-3 mb-md-0">
-                <h5 class="text-uppercase mb-3">Quick Links</h5>
-                <ul class="list-unstyled">
-                    <li><a class="text-light text-decoration-none hover-effect" href="{{ route('imprint') }}">{{ __('frontend.imprint_header') }}</a></li>
-                    <li><a class="text-light text-decoration-none hover-effect" href="{{ route('privacy-policy') }}">{{ __('frontend.privacyPolicy_header') }}</a></li>
+            <div>
+                <h2 class="mb-3 text-xs font-semibold uppercase tracking-widest text-zinc-500">{{ __('frontend.footer_quick_links') }}</h2>
+                <ul class="space-y-2 text-sm">
+                    <li>
+                        <a class="text-zinc-300 transition hover:text-cyan-400" href="{{ route('imprint') }}">{{ __('frontend.imprint_header') }}</a>
+                    </li>
+                    <li>
+                        <a class="text-zinc-300 transition hover:text-cyan-400" href="{{ route('privacy-policy') }}">{{ __('frontend.privacyPolicy_header') }}</a>
+                    </li>
                 </ul>
             </div>
-            <div class="col-md-4">
-                <h5 class="text-uppercase mb-3">Connect With Us</h5>
-                <div class="d-flex justify-content-start">
-                    <a href="https://www.facebook.com/SmashUpRandomizer/" class="text-light me-3 hover-effect"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://x.com/SmashUpRando" class="text-light me-3 hover-effect"><i class="fab fa-x-twitter"></i></a>
+            <div>
+                <h2 class="mb-3 text-xs font-semibold uppercase tracking-widest text-zinc-500">{{ __('frontend.footer_connect') }}</h2>
+                <div class="flex gap-4">
+                    <a href="https://www.facebook.com/SmashUpRandomizer/" class="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 text-zinc-200 transition hover:border-cyan-500/40 hover:text-cyan-400" aria-label="Facebook" rel="noopener noreferrer">
+                        <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://x.com/SmashUpRando" class="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 text-zinc-200 transition hover:border-cyan-500/40 hover:text-cyan-400" aria-label="X" rel="noopener noreferrer">
+                        <i class="fab fa-x-twitter" aria-hidden="true"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -27,14 +35,4 @@
     <x-cookie-banner />
 @endif
 
-@vite(['resources/js/app.js', 'resources/js/bootstrap.js', 'resources/js/form.js', 'resources/js/hero.js', 'resources/js/nav.js'])
-
-<style>
-    .hover-effect {
-        transition: all 0.3s ease;
-    }
-    .hover-effect:hover {
-        color: #17a2b8 !important;
-        transform: translateY(-2px);
-    }
-</style>
+@vite(['resources/js/app.js', 'resources/js/form.js', 'resources/js/hero.js', 'resources/js/backend.js'])

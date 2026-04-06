@@ -59,4 +59,6 @@ return [
     'cookie_banner_cancel' => 'Abbrechen',
     'cookie_banner_save' => 'Einstellungen speichern',
     'cookie_footer_cookie_settings' => 'Cookie-Einstellungen',
+    'footer_quick_links' => 'Schnellzugriff',
+    'footer_connect' => 'Community',
 ];

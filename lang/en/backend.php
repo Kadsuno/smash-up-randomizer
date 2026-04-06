@@ -14,4 +14,7 @@ return [
     'save' => 'Save',
     'upload' => 'Upload',
     'logout' => 'Logout',
+    'nav_dashboard' => 'Dashboard',
+    'nav_faction_manager' => 'Faction Manager',
+    'table_actions' => 'Actions',
 ];
