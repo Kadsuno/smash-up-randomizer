@@ -12,7 +12,7 @@ High-level product and engineering priorities. Update this file in the same PR w
 | Area     | Notes                                                                        |
 | -------- | ---------------------------------------------------------------------------- |
 | Core app | Laravel 13, Blade, Vite, Bootstrap 5, bilingual frontend strings               |
-| Privacy  | Technically necessary cookies only; no third-party analytics (see CHANGELOG) |
+| Privacy  | Cookie consent (Cookiebot); web analytics via **self-hosted Matomo** (`analytics.kadsuno.com`), configurable (see `config/matomo.php`, CHANGELOG) |
 
 
 *Add rows or subsections here as major capabilities ship.*
