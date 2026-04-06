@@ -33,24 +33,44 @@
 <body class="flex min-h-screen flex-col bg-zinc-950 text-zinc-100 antialiased">
     <a href="#main-content" class="sur-skip-link">{{ __('frontend.skip_to_content') }}</a>
     <nav
-        x-data="{ open: false }"
+        x-data="{ open: false, scrolled: false }"
         @keydown.window.escape="open = false"
-        class="fixed top-0 z-50 w-full border-b border-white/10 bg-zinc-950/80 backdrop-blur-xl transition-colors duration-300"
+        @scroll.window="scrolled = (window.pageYOffset || document.documentElement.scrollTop) > 12"
+        :class="{ 'sur-site-header--scrolled': scrolled }"
+        class="sur-site-header relative"
+        aria-label="Primary"
     >
-        <div class="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
-            <a class="flex min-h-11 items-center gap-2 rounded-lg pr-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60" href="{{ route('home') }}">
-                <img src="{{ asset('images/brand/logo-mark.svg') }}" class="h-8 w-8 shrink-0" alt="{{ __('frontend.logo_alt') }}" width="32" height="32" decoding="async">
-                <span class="font-bold tracking-tight text-white">Smash Up Randomizer</span>
+        <div class="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8 lg:h-[4.25rem]">
+            <a class="group flex min-h-11 min-w-0 flex-1 items-center gap-3 rounded-xl py-1 pr-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60 lg:flex-none" href="{{ route('home') }}" aria-label="{{ __('frontend.logo_alt') }}">
+                <span class="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-indigo-500/20 to-violet-600/20 ring-1 ring-white/10 transition duration-300 group-hover:ring-indigo-500/35">
+                    <img src="{{ asset('images/brand/logo-mark.svg') }}" class="h-7 w-7" alt="" width="28" height="28" decoding="async" aria-hidden="true">
+                </span>
+                <span class="min-w-0 truncate text-left text-sm font-bold tracking-tight text-white sm:text-base">{{ __('frontend.logo_alt') }}</span>
             </a>
+
+            <div class="hidden items-center gap-3 lg:flex">
+                <div class="flex items-center rounded-full border border-white/10 bg-white/[0.04] p-1 shadow-inner shadow-black/20 backdrop-blur-md">
+                    <x-site-nav-link routeName="factionList" :routes="['factionList', 'factionDetail']" :label="__('frontend.nav_factions')" />
+                    <x-site-nav-link routeName="about" :label="__('frontend.nav_about')" />
+                    <x-site-nav-link routeName="contact" :label="__('frontend.nav_contact')" />
+                </div>
+                <a
+                    href="{{ route('home') }}"
+                    class="{{ request()->routeIs('home') ? 'ring-2 ring-indigo-400/40 ring-offset-2 ring-offset-zinc-950' : '' }} sur-btn-primary min-h-10 rounded-full px-5 text-sm shadow-indigo-500/20"
+                >
+                    <i class="fa-solid fa-shuffle me-2 opacity-90" aria-hidden="true"></i>{{ __('frontend.nav_shuffle') }}
+                </a>
+            </div>
+
             <button
                 type="button"
-                class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-zinc-100 transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60 lg:hidden"
+                class="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.06] text-zinc-100 transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60 lg:hidden"
                 @click="open = !open"
                 :aria-expanded="open.toString()"
                 aria-controls="primary-nav-panel"
-                aria-label="Toggle navigation"
+                aria-label="{{ __('frontend.nav_toggle') }}"
             >
-                <span class="sr-only">Toggle navigation</span>
+                <span class="sr-only">{{ __('frontend.nav_toggle') }}</span>
                 <svg x-show="!open" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                 </svg>
@@ -58,29 +78,28 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                 </svg>
             </button>
-            <div class="hidden items-center gap-1 lg:flex" id="desktop-nav">
-                <a class="sur-link-nav" href="{{ route('factionList') }}">Factions</a>
-                <a class="sur-link-nav" href="{{ route('about') }}">About</a>
-                <a class="sur-link-nav" href="{{ route('contact') }}">Contact</a>
-            </div>
         </div>
+
         <div
             x-cloak
             x-show="open"
             x-transition:enter="transition ease-out duration-200"
-            x-transition:enter-start="opacity-0 -translate-y-1"
+            x-transition:enter-start="opacity-0 -translate-y-2"
             x-transition:enter-end="opacity-100 translate-y-0"
             x-transition:leave="transition ease-in duration-150"
             x-transition:leave-start="opacity-100 translate-y-0"
-            x-transition:leave-end="opacity-0 -translate-y-1"
+            x-transition:leave-end="opacity-0 -translate-y-2"
             id="primary-nav-panel"
-            class="border-t border-white/10 bg-zinc-950/95 px-4 py-4 lg:hidden"
+            class="absolute inset-x-0 top-full z-40 border-b border-white/10 bg-zinc-950/95 shadow-2xl shadow-black/50 backdrop-blur-xl lg:hidden"
             style="display: none;"
         >
-            <div class="flex flex-col gap-1">
-                <a class="sur-link-nav" href="{{ route('factionList') }}">Factions</a>
-                <a class="sur-link-nav" href="{{ route('about') }}">About</a>
-                <a class="sur-link-nav" href="{{ route('contact') }}">Contact</a>
+            <div class="mx-auto max-w-7xl space-y-1 px-4 py-4">
+                <x-site-nav-link routeName="factionList" :routes="['factionList', 'factionDetail']" :label="__('frontend.nav_factions')" :mobile="true" />
+                <x-site-nav-link routeName="about" :label="__('frontend.nav_about')" :mobile="true" />
+                <x-site-nav-link routeName="contact" :label="__('frontend.nav_contact')" :mobile="true" />
+                <a href="{{ route('home') }}" class="sur-btn-primary mt-3 flex w-full min-h-12 justify-center gap-2 rounded-xl">
+                    <i class="fa-solid fa-shuffle" aria-hidden="true"></i>{{ __('frontend.nav_shuffle') }}
+                </a>
             </div>
         </div>
     </nav>
