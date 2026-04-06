@@ -18,7 +18,7 @@
         <section class="scroll-section flex min-h-screen items-center px-4 py-16 sm:px-6" id="description">
             <div class="mx-auto w-full max-w-5xl">
                 <div class="sur-card border-white/10">
-                    <h2 class="mb-6 text-center text-3xl font-bold text-cyan-300 sm:text-4xl">
+                    <h2 class="mb-6 text-center text-3xl font-bold text-indigo-300 sm:text-4xl">
                         <i class="fas fa-info-circle me-3" aria-hidden="true"></i>Description
                     </h2>
                     <div class="deck-html text-zinc-300 leading-relaxed">{!! $deck->description !!}</div>
@@ -29,12 +29,12 @@
         <section class="scroll-section flex min-h-screen items-center px-4 py-16 sm:px-6" id="cards">
             <div class="mx-auto w-full max-w-5xl">
                 <div class="sur-card border-white/10">
-                    <h2 class="mb-6 text-center text-3xl font-bold text-cyan-300 sm:text-4xl">
+                    <h2 class="mb-6 text-center text-3xl font-bold text-indigo-300 sm:text-4xl">
                         <i class="fas fa-layer-group me-3" aria-hidden="true"></i>Cards
                     </h2>
                     <div class="deck-html text-zinc-300 leading-relaxed">{!! $deck->cardsTeaser !!}</div>
                     <h3 class="mb-3 mt-8 text-center text-xl font-semibold text-white">
-                        <i class="fas fa-bolt me-2 text-amber-400" aria-hidden="true"></i>Actions
+                        <i class="fas fa-bolt me-2 text-violet-400" aria-hidden="true"></i>Actions
                     </h3>
                     <div class="deck-html text-zinc-300 leading-relaxed">{!! $deck->actionTeaser !!}</div>
                     <div class="deck-html mt-4 text-zinc-300 leading-relaxed">
@@ -47,19 +47,19 @@
         <section class="scroll-section flex min-h-screen items-center px-4 py-16 sm:px-6" id="gameplay">
             <div class="mx-auto w-full max-w-5xl">
                 <div class="sur-card border-white/10">
-                    <h2 class="mb-8 text-center text-3xl font-bold text-cyan-300 sm:text-4xl">
+                    <h2 class="mb-8 text-center text-3xl font-bold text-indigo-300 sm:text-4xl">
                         <i class="fas fa-gamepad me-3" aria-hidden="true"></i>Gameplay
                     </h2>
                     <div class="grid gap-8 md:grid-cols-2">
                         <div>
                             <h3 class="mb-3 text-center text-lg font-semibold text-white">
-                                <i class="fas fa-bolt me-2 text-amber-400" aria-hidden="true"></i>Actions
+                                <i class="fas fa-bolt me-2 text-violet-400" aria-hidden="true"></i>Actions
                             </h3>
                             <div class="deck-html text-zinc-300 leading-relaxed">{!! $deck->actions !!}</div>
                         </div>
                         <div>
                             <h3 class="mb-3 text-center text-lg font-semibold text-white">
-                                <i class="fas fa-user me-2 text-cyan-400" aria-hidden="true"></i>Characters
+                                <i class="fas fa-user me-2 text-indigo-400" aria-hidden="true"></i>Characters
                             </h3>
                             <div class="deck-html text-zinc-300 leading-relaxed">{!! $deck->characters !!}</div>
                         </div>
@@ -71,20 +71,20 @@
         <section class="scroll-section flex min-h-screen items-center px-4 py-16 sm:px-6" id="strategy">
             <div class="mx-auto w-full max-w-5xl">
                 <div class="sur-card border-white/10">
-                    <h2 class="mb-6 text-center text-3xl font-bold text-cyan-300 sm:text-4xl">
+                    <h2 class="mb-6 text-center text-3xl font-bold text-indigo-300 sm:text-4xl">
                         <i class="fas fa-chess me-3" aria-hidden="true"></i>Strategy
                     </h2>
                     <div class="deck-html mb-8 text-center text-zinc-300 leading-relaxed">{!! $deck->suggestionTeaser !!}</div>
                     <div class="mt-4 grid gap-8 md:grid-cols-2">
                         <div>
                             <h3 class="mb-3 text-center text-lg font-semibold text-white">
-                                <i class="fas fa-link me-2 text-cyan-400" aria-hidden="true"></i>Synergy
+                                <i class="fas fa-link me-2 text-indigo-400" aria-hidden="true"></i>Synergy
                             </h3>
                             <div class="deck-html text-zinc-300 leading-relaxed">{!! $deck->synergy !!}</div>
                         </div>
                         <div>
                             <h3 class="mb-3 text-center text-lg font-semibold text-white">
-                                <i class="fas fa-lightbulb me-2 text-amber-400" aria-hidden="true"></i>Tips
+                                <i class="fas fa-lightbulb me-2 text-violet-400" aria-hidden="true"></i>Tips
                             </h3>
                             <div class="deck-html text-zinc-300 leading-relaxed">{!! $deck->tips !!}</div>
                         </div>
@@ -96,7 +96,7 @@
         <section class="scroll-section flex min-h-screen items-center px-4 py-16 sm:px-6" id="additional-info">
             <div class="mx-auto w-full max-w-5xl">
                 <div class="sur-card border-white/10">
-                    <h2 class="mb-8 text-center text-3xl font-bold text-cyan-300 sm:text-4xl">
+                    <h2 class="mb-8 text-center text-3xl font-bold text-indigo-300 sm:text-4xl">
                         <i class="fas fa-info-circle me-3" aria-hidden="true"></i>Additional Info
                     </h2>
                     <div class="grid gap-8 md:grid-cols-3">
@@ -190,7 +190,7 @@
         margin-bottom: 0.75rem;
     }
     .deck-html a {
-        color: #22d3ee;
+        color: #818cf8;
         text-decoration: underline;
         text-underline-offset: 2px;
     }

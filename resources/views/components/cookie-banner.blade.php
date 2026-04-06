@@ -17,7 +17,7 @@
                 <strong class="mb-1 block text-[0.7rem] font-semibold uppercase tracking-wider text-zinc-400"
                     style="letter-spacing: 0.06em;">{{ __('frontend.cookie_banner_title') }}</strong>
                 <span>{{ __('frontend.cookie_banner_bar_lead') }}</span>
-                <a href="{{ route('privacy-policy') }}" class="ms-1 text-cyan-400 underline decoration-cyan-500/50 underline-offset-2 transition hover:text-cyan-300"
+                <a href="{{ route('privacy-policy') }}" class="ms-1 text-indigo-400 underline decoration-indigo-500/50 underline-offset-2 transition hover:text-indigo-300"
                     target="_blank" rel="noopener noreferrer">{{ __('frontend.cookie_banner_privacy_link') }}</a>
             </div>
             <div class="flex flex-shrink-0 flex-col gap-2 sm:flex-row sm:flex-wrap">
@@ -55,7 +55,7 @@
                     <h2 class="text-lg font-semibold leading-tight" id="surCookieConsentTitle">{{ __('frontend.cookie_banner_modal_title') }}</h2>
                     <p class="mt-1 text-sm text-zinc-400">{{ __('frontend.cookie_banner_modal_subtitle') }}</p>
                 </div>
-                <button type="button" class="flex h-11 min-w-11 shrink-0 items-center justify-center rounded-lg text-zinc-400 transition hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60"
+                <button type="button" class="flex h-11 min-w-11 shrink-0 items-center justify-center rounded-lg text-zinc-400 transition hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60"
                     data-sur-action="modal-close" aria-label="{{ __('frontend.cookie_banner_close') }}">
                     <span class="text-xl leading-none" aria-hidden="true">&times;</span>
                 </button>
@@ -69,7 +69,7 @@
                             <span class="font-semibold">{{ __('frontend.cookie_banner_essential_label') }}</span>
                             <span class="ms-2 inline-flex rounded-md bg-zinc-700 px-2 py-0.5 text-xs text-zinc-300">{{ __('frontend.cookie_banner_always_active') }}</span>
                         </div>
-                        <input type="checkbox" class="h-5 w-9 shrink-0 cursor-not-allowed rounded-full accent-cyan-500 opacity-70" checked disabled id="surEssentialSwitch" aria-disabled="true">
+                        <input type="checkbox" class="h-5 w-9 shrink-0 cursor-not-allowed rounded-full accent-indigo-500 opacity-70" checked disabled id="surEssentialSwitch" aria-disabled="true">
                     </div>
                     <p class="mt-2 text-sm text-zinc-400">{{ __('frontend.cookie_banner_essential_help') }}</p>
                 </div>
@@ -77,7 +77,7 @@
                 <div class="sur-cookie-category">
                     <div class="flex flex-wrap items-start justify-between gap-3">
                         <label class="font-semibold" for="surAnalyticsCheckbox">{{ __('frontend.cookie_banner_analytics_label') }}</label>
-                        <input class="h-5 w-9 cursor-pointer rounded-full accent-cyan-500" type="checkbox" id="surAnalyticsCheckbox"
+                        <input class="h-5 w-9 cursor-pointer rounded-full accent-indigo-500" type="checkbox" id="surAnalyticsCheckbox"
                             data-sur-analytics-checkbox>
                     </div>
                     <p class="mt-2 text-sm text-zinc-400">{{ __('frontend.cookie_banner_analytics_help') }}</p>
@@ -89,7 +89,7 @@
                             <span class="font-semibold">{{ __('frontend.cookie_banner_marketing_label') }}</span>
                             <span class="ms-2 inline-flex rounded-md bg-zinc-700 px-2 py-0.5 text-xs text-zinc-300">{{ __('frontend.cookie_banner_not_used') }}</span>
                         </div>
-                        <input type="checkbox" class="h-5 w-9 shrink-0 cursor-not-allowed rounded-full accent-cyan-500 opacity-70" disabled id="surMarketingSwitch"
+                        <input type="checkbox" class="h-5 w-9 shrink-0 cursor-not-allowed rounded-full accent-indigo-500 opacity-70" disabled id="surMarketingSwitch"
                             aria-disabled="true">
                     </div>
                     <p class="mt-2 text-sm text-zinc-400">{{ __('frontend.cookie_banner_marketing_disabled') }}</p>
