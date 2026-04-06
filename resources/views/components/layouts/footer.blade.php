@@ -1,32 +1,72 @@
-<footer class="mt-auto border-t border-white/10 bg-black py-10 text-zinc-300">
+<footer class="sur-site-footer pt-14 pb-10 text-zinc-300 sm:pt-16">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-10 md:grid-cols-3">
-            <div class="sur-footer-col">
-                <h2 class="mb-3 text-xs font-semibold uppercase tracking-widest text-zinc-500">Smash Up Randomizer</h2>
-                <p class="text-sm leading-relaxed text-zinc-400">Shuffle and assign factions for your next Smash Up game with ease.</p>
+        <div class="grid gap-12 lg:grid-cols-12 lg:gap-10">
+            <div class="sur-footer-col lg:col-span-4">
+                <div class="mb-4 flex items-center gap-3">
+                    <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-indigo-500/15 to-violet-600/15 ring-1 ring-white/10">
+                        <img src="{{ asset('images/brand/logo-mark.svg') }}" class="h-8 w-8" alt="" width="32" height="32" decoding="async" aria-hidden="true">
+                    </span>
+                    <span class="text-lg font-bold tracking-tight text-white">{{ __('frontend.footer_brand_heading') }}</span>
+                </div>
+                <p class="max-w-sm text-sm leading-relaxed text-zinc-400">
+                    {{ __('frontend.footer_tagline') }}
+                </p>
             </div>
-            <div class="sur-footer-col">
-                <h2 class="mb-3 text-xs font-semibold uppercase tracking-widest text-zinc-500">{{ __('frontend.footer_quick_links') }}</h2>
-                <ul class="space-y-2 text-sm">
+
+            <div class="sur-footer-col lg:col-span-2">
+                <h2 class="sur-footer-heading">{{ __('frontend.footer_explore') }}</h2>
+                <ul class="space-y-3">
                     <li>
-                        <a class="text-zinc-300 transition hover:text-indigo-400" href="{{ route('imprint') }}">{{ __('frontend.imprint_header') }}</a>
+                        <a class="sur-footer-link" href="{{ route('factionList') }}">{{ __('frontend.nav_factions') }}</a>
                     </li>
                     <li>
-                        <a class="text-zinc-300 transition hover:text-indigo-400" href="{{ route('privacy-policy') }}">{{ __('frontend.privacyPolicy_header') }}</a>
+                        <a class="sur-footer-link" href="{{ route('about') }}">{{ __('frontend.nav_about') }}</a>
+                    </li>
+                    <li>
+                        <a class="sur-footer-link" href="{{ route('contact') }}">{{ __('frontend.nav_contact') }}</a>
+                    </li>
+                    <li>
+                        <a class="sur-footer-link inline-flex items-center gap-1.5 font-medium text-indigo-300/90 hover:text-indigo-200" href="{{ route('home') }}">
+                            <i class="fa-solid fa-shuffle text-xs opacity-80" aria-hidden="true"></i>{{ __('frontend.nav_shuffle') }}
+                        </a>
                     </li>
                 </ul>
             </div>
-            <div class="sur-footer-col">
-                <h2 class="mb-3 text-xs font-semibold uppercase tracking-widest text-zinc-500">{{ __('frontend.footer_connect') }}</h2>
-                <div class="flex gap-4">
-                    <a href="https://www.facebook.com/SmashUpRandomizer/" class="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 text-zinc-200 transition hover:border-indigo-500/40 hover:text-indigo-400" aria-label="Facebook" rel="noopener noreferrer">
-                        <i class="fab fa-facebook-f" aria-hidden="true"></i>
+
+            <div class="sur-footer-col lg:col-span-3">
+                <h2 class="sur-footer-heading">{{ __('frontend.footer_legal') }}</h2>
+                <ul class="space-y-3">
+                    <li>
+                        <a class="sur-footer-link" href="{{ route('imprint') }}">{{ __('frontend.imprint_header') }}</a>
+                    </li>
+                    <li>
+                        <a class="sur-footer-link" href="{{ route('privacy-policy') }}">{{ __('frontend.privacyPolicy_header') }}</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sur-footer-col lg:col-span-3">
+                <h2 class="sur-footer-heading">{{ __('frontend.footer_connect') }}</h2>
+                <div class="flex flex-wrap gap-3">
+                    <a href="https://www.facebook.com/SmashUpRandomizer/" class="sur-social-btn" aria-label="Facebook" rel="noopener noreferrer">
+                        <i class="fab fa-facebook-f text-lg" aria-hidden="true"></i>
                     </a>
-                    <a href="https://x.com/SmashUpRando" class="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 text-zinc-200 transition hover:border-indigo-500/40 hover:text-indigo-400" aria-label="X" rel="noopener noreferrer">
-                        <i class="fab fa-x-twitter" aria-hidden="true"></i>
+                    <a href="https://x.com/SmashUpRando" class="sur-social-btn" aria-label="X" rel="noopener noreferrer">
+                        <i class="fab fa-x-twitter text-lg" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
+        </div>
+
+        <div class="mt-12 flex flex-col gap-4 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
+            <p class="text-xs text-zinc-500">
+                {{ __('frontend.footer_copyright', ['year' => (int) date('Y')]) }}
+            </p>
+            @if (config('matomo.enabled'))
+                <button type="button" class="text-left text-xs text-zinc-500 underline decoration-zinc-600 underline-offset-2 transition hover:text-indigo-400 sm:text-right" data-sur-open-cookie-settings>
+                    {{ __('frontend.cookie_footer_cookie_settings') }}
+                </button>
+            @endif
         </div>
     </div>
 </footer>

@@ -45,6 +45,59 @@
         @apply rounded-lg px-3 py-2 text-sm font-medium text-zinc-200 transition duration-200 ease-out hover:bg-white/5 hover:text-indigo-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60;
     }
 
+    .sur-site-header {
+        @apply fixed top-0 z-50 w-full border-b border-white/10 bg-zinc-950/75 backdrop-blur-2xl transition-[box-shadow,border-color,background-color] duration-300;
+    }
+
+    .sur-site-header.sur-site-header--scrolled {
+        @apply border-white/[0.08] bg-zinc-950/90 shadow-lg shadow-black/50;
+    }
+
+    .sur-nav-pill {
+        @apply whitespace-nowrap rounded-full px-3.5 py-2 text-sm font-medium transition duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60;
+    }
+
+    .sur-nav-pill-active {
+        @apply bg-white/10 text-white shadow-sm ring-1 ring-white/10;
+    }
+
+    .sur-nav-pill-idle {
+        @apply text-zinc-400 hover:bg-white/5 hover:text-white;
+    }
+
+    .sur-nav-mobile-link {
+        @apply flex min-h-12 w-full items-center rounded-xl border px-4 text-base font-medium transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60;
+    }
+
+    .sur-nav-mobile-link-active {
+        @apply border-indigo-500/35 bg-indigo-500/10 text-white;
+    }
+
+    .sur-nav-mobile-link-idle {
+        @apply border-transparent text-zinc-300 hover:border-white/10 hover:bg-white/5 hover:text-white;
+    }
+
+    .sur-footer-heading {
+        @apply mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500;
+    }
+
+    .sur-footer-link {
+        @apply text-sm text-zinc-400 transition duration-200 hover:text-indigo-300;
+    }
+
+    .sur-social-btn {
+        @apply flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-zinc-200 transition duration-200 hover:border-indigo-500/40 hover:bg-indigo-500/10 hover:text-indigo-200;
+    }
+
+    .sur-site-footer {
+        @apply relative mt-auto border-t border-white/10 bg-linear-to-b from-zinc-950 via-zinc-950 to-black text-zinc-300;
+    }
+
+    .sur-site-footer::before {
+        content: '';
+        @apply pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-indigo-500/35 to-transparent;
+    }
+
     .sur-btn-primary {
         @apply inline-flex min-h-11 items-center justify-center rounded-xl bg-indigo-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition duration-200 ease-out hover:bg-indigo-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 active:scale-[0.98];
     }
@@ -264,6 +317,10 @@
 
     .sur-footer-col:nth-child(3) {
         animation-delay: 0.16s;
+    }
+
+    .sur-footer-col:nth-child(4) {
+        animation-delay: 0.24s;
     }
 }
 
