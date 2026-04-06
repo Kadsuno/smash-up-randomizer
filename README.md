@@ -3,7 +3,7 @@
 [![Laravel](https://img.shields.io/badge/Laravel-13.x-FF2D20?style=flat-square&logo=laravel&logoColor=white)](https://laravel.com)
 [![PHP](https://img.shields.io/badge/PHP-8.3+-777BB4?style=flat-square&logo=php&logoColor=white)](https://php.net)
 [![MariaDB](https://img.shields.io/badge/MariaDB-10.4-003545?style=flat-square&logo=mariadb&logoColor=white)](https://mariadb.org)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.x-38bdf8?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.x-38bdf8?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
 [![GitHub last commit](https://img.shields.io/github/last-commit/kadsuno/smash-up-randomizer?style=flat-square)](https://github.com/kadsuno/smash-up-randomizer/commits)
@@ -22,7 +22,7 @@ Smash Up Randomizer supports:
 - Contact form with email delivery (Laravel mail: SMTP or Brevo API)
 - Admin area for managing deck data (authenticated users)
 - XML sitemap (`/sitemap`) via `spatie/laravel-sitemap`
-- Dark-themed, mobile-first frontend (Tailwind CSS 3, Vite, Blade, Alpine.js)
+- Dark-themed, mobile-first frontend (Tailwind CSS 4, Vite + `@tailwindcss/vite`, Blade, Alpine.js)
 
 ## Repository layout & workflow
 
@@ -51,12 +51,12 @@ Default branch for integration work is **dev** (see `.cursor/rules/smash-up-full
 
 - PHP **8.3+** (see `composer.json`)
 - Composer 2.x
-- Node.js **18+** recommended (matches DDEV `nodejs_version`)
+- Node.js **20+** required for Tailwind CSS v4 (`@tailwindcss/oxide`); DDEV uses `nodejs_version: "22"` in `.ddev/config.yaml`
 - MariaDB or MySQL compatible with Laravel’s requirements
 
 ### DDEV (recommended)
 
-Local stack is defined in `.ddev/config.yaml` (PHP 8.3, MariaDB 10.4, Node 18, nginx-fpm).
+Local stack is defined in `.ddev/config.yaml` (PHP 8.3, MariaDB 10.4, Node 22, nginx-fpm).
 
 1. Install [DDEV](https://ddev.readthedocs.io/en/stable/)
 2. Clone the repository:
@@ -148,8 +148,8 @@ Blade under `resources/views/`: `start/`, `shuffle/`, `decks/`, `frontend/`, `ba
 
 ### Frontend assets
 
-- **Vite** (`vite.config.js`): entries under `resources/js/`, global styles in `resources/css/app.css` (Tailwind + PostCSS)
-- **Stack**: Tailwind CSS 3, Alpine.js, jQuery (legacy where present), Font Awesome, animate.css (see `package.json`)
+- **Vite** (`vite.config.js`): `@tailwindcss/vite` plugin + `laravel-vite-plugin`; global styles in `resources/css/app.css` (`@import "tailwindcss"`, design tokens in `@theme`, PostCSS for Autoprefixer only)
+- **Stack**: Tailwind CSS 4, Alpine.js, jQuery (legacy where present), Font Awesome, animate.css (see `package.json`)
 
 ### Email
 

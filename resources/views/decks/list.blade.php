@@ -12,7 +12,7 @@
                         @if($deck->image)
                             <img src="{{ asset($deck->image) }}" class="h-48 w-full object-cover transition duration-300 group-hover:scale-[1.02]" alt="{{ $deck->name }}">
                         @else
-                            <div class="flex h-48 items-center justify-center bg-gradient-to-br from-zinc-800 to-zinc-900 text-zinc-500">
+                            <div class="flex h-48 items-center justify-center bg-linear-to-br from-zinc-800 to-zinc-900 text-zinc-500">
                                 <span>No Image Available</span>
                             </div>
                         @endif
