@@ -4,9 +4,12 @@
 
 @import '@fortawesome/fontawesome-free/css/all.css';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@theme {
+    --font-sans: 'Nunito', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
+}
 
 /*
  * Design tokens: dark-first, mobile-first.
@@ -192,6 +195,6 @@
     }
 
     .sur-progress-fill {
-        @apply h-full rounded-full bg-gradient-to-r from-cyan-600 to-cyan-400 transition-all duration-300 ease-out;
+        @apply h-full rounded-full bg-linear-to-r from-cyan-600 to-cyan-400 transition-all duration-300 ease-out;
     }
 }

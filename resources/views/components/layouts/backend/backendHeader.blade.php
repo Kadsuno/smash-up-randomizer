@@ -15,7 +15,7 @@
 </head>
 
 <body class="min-h-screen bg-zinc-950 text-zinc-100 antialiased">
-    <nav x-data="{ menuOpen: false, userOpen: false }" @keydown.escape.window="menuOpen = false; userOpen = false" class="fixed top-0 z-50 w-full border-b border-cyan-500/20 bg-gradient-to-r from-zinc-900 via-zinc-950 to-zinc-900 shadow-lg shadow-black/40">
+    <nav x-data="{ menuOpen: false, userOpen: false }" @keydown.escape.window="menuOpen = false; userOpen = false" class="fixed top-0 z-50 w-full border-b border-cyan-500/20 bg-linear-to-r from-zinc-900 via-zinc-950 to-zinc-900 shadow-lg shadow-black/40">
         <div class="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
             <a class="flex min-h-11 items-center gap-2 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60" href="{{ route('dashboard') }}">
                 <img src="{{ asset('images/favicons/favicon.ico') }}" class="h-8 w-8" alt="Logo" width="32" height="32">

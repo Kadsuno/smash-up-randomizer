@@ -111,7 +111,7 @@ If `dev` is missing, **ask** whether to use `main` or another base.
 ## Phase 6 — Implement
 
 - **Laravel:** thin controllers, Form Requests, policies/middleware as needed, Eloquent, strict types, PSR-12, DocBlocks per README Style Guide / team PHP conventions.
-- **Frontend:** Blade + Vite; **vanilla JS** (and Alpine/Bootstrap as already used); avoid duplicating API logic — keep scripts in `resources/js/` with clear modules.
+- **Frontend:** Blade + Vite; **vanilla JS** (and Alpine as already used); avoid duplicating API logic — keep scripts in `resources/js/` with clear modules.
 - **No** mock/fake data in dev or prod paths (tests only).
 - After migrations in dev: `php artisan migrate` (via DDEV as appropriate).
 - Keep files roughly under 200–300 lines; extract services when justified.
@@ -236,6 +236,6 @@ Analyze (roadmap + public-copy check) → ticket → plan (if required) → bran
 
 ## Project-specific stack (reminder)
 
-- Laravel 13, **PHP 8.3+** (`composer.json`), **MariaDB 10.4 in DDEV** (MySQL-compatible in prod is fine), Blade, Sanctum & Passport (OAuth tables), **Vite 5**, Bootstrap 5, jQuery/Alpine as in `package.json`, SASS.
+- Laravel 13, **PHP 8.3+** (`composer.json`), **MariaDB 10.4 in DDEV** (MySQL-compatible in prod is fine), Blade, Sanctum & Passport (OAuth tables), **Vite 5**, **Tailwind CSS 4** (`@tailwindcss/vite`), jQuery/Alpine as in `package.json` (Node **20+** for frontend builds).
 - Bilingual: maintain **EN and DE** when changing user-facing strings (`resources/lang/`, `lang/`).
 - **Canonical onboarding:** `README.md` (DDEV hostname: `name` in `.ddev/config.yaml`, currently `smash-up-randomizer.ddev.site`).
