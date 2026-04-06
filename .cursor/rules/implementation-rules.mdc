@@ -1,0 +1,8 @@
+---
+alwaysApply: false
+description: Legacy pointer — use smash-up-full-workflow
+---
+
+Superseded by **`smash-up-full-workflow.mdc`** (branching from `dev`, DDEV, tests, CHANGELOG, PR, merge).
+
+Use that rule for implementation order; keep **`README.md`** as the source for DDEV commands.

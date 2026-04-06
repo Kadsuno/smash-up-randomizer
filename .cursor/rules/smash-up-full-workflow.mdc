@@ -1,0 +1,240 @@
+---
+description: Full dev workflow for this repo — analyze → ticket → plan → branch → DDEV → implement → tests → lint → browser → docs → commit → push → PR → merge → cleanup. Default for code/feature work unless the user opts out.
+alwaysApply: true
+---
+
+## Scope
+
+- Applies to **every user request related to code or features** in this repository **by default**.
+- **Opt-out** examples: "nur Erklärung, kein Code", "skip workflow", "kein Workflow jetzt", "nicht automatisch committen/pushen", "nur quick fix ohne workflow", "kein Merge / PR offen lassen".
+- If intent is ambiguous, ask **one concise message** with all open questions before deviating from the sequence.
+
+### First response (when starting work on a change)
+
+State that the **Smash Up full workflow** is being followed, for example:
+
+> Ich folge dem vollständigen Projekt-Workflow. Phasen: Analyse (inkl. **`docs/roadmap.md`**-Scan und bei Bedarf **öffentliche Copy**/Lang-Dateien) → Ticket → Plan → Branch → DDEV → Implementierung → Tests → Lint → Browser → Docs (Roadmap + CHANGELOG + ggf. **EN/DE Lang**) → Commit → Push → PR → Merge.
+
+(English is fine if the session is English-only.)
+
+---
+
+## Hard stop — before ANY code change
+
+**Do not** call `StrReplace`, `Write`, `Delete`, or implementation `Shell` (install/build/migrate that changes project artifacts) before completing:
+
+```
+[ ] Phase 1 — Analyze: codebase explored, affected files/patterns identified
+[ ] Phase 2 — Ticket: `docs/tickets/YYYY-MM-DD-short-slug.md` written (see `ticket-authoring.mdc`) + optional IssueForge POST if configured (see Phase 2)
+[ ] Phase 3 — Plan: for non-trivial work — `SwitchMode(plan)` + `CreatePlan` tool; user confirmed when required
+[ ] Phase 4 — Branch: feature/fix branch created from latest `dev` (or user-approved base)
+```
+
+If any box is unchecked, complete that phase first. **Inline markdown plans are not a substitute** for Cursor Plan mode + `CreatePlan` where this rule requires it.
+
+---
+
+## Recovery protocol (phases were skipped)
+
+1. **Stop** further code changes until recovery is in order.
+2. **Backfill** in order: ticket file (+ optional IssueForge) → plan (Plan mode + `CreatePlan` if applicable) → branch (`git stash` → checkout `dev` → pull → branch → `git stash pop` if needed).
+3. **Acknowledge** which phase was skipped and that it is being remediated.
+4. Continue with tests, lint, docs, commit, push, PR, **merge**, **cleanup** — unless the user opted out of merge.
+
+---
+
+## Clarification first
+
+Before Phase 1, if material details are missing, ask **in a single message**:
+
+- Scope / boundaries
+- Expected behavior and edge cases (bugs)
+- Which area owns the change if multiple modules apply
+- UX or API choices with different trade-offs
+- Required env/config (never invent secrets; use `.env.example` patterns)
+
+Do not implement while blocking questions are unanswered.
+
+---
+
+## Phase 1 — Analyze
+
+1. Classify: feature / bug / chore.
+2. Use `SemanticSearch`, `Grep`, `Glob`, `Read` for Laravel (`app/`, `routes/`, `config/`), Blade (`resources/views/`), assets (`resources/js`, `resources/sass`), Lang (`resources/lang/`, `lang/`), tests (`tests/`).
+3. Reuse existing patterns: thin controllers, Form Requests where appropriate, Eloquent, Blade components, Vite entrypoints, bilingual `__('frontend.key')` / `__('backend.key')`.
+4. **Output:** mental model of affected files, risks, test surfaces.
+
+5. **Roadmap scan (mandatory):** Read **`docs/roadmap.md`** (at least Vision, Shipped, Now, Next, First release readiness if present). If this change **implements, completes, or materially advances** any bullet, table row, or checklist line, plan a **`docs/roadmap.md` edit in the same PR** (Phase 6c), unless the ticket **explicitly** defers roadmap updates **and** the user agreed.
+
+6. **Public-facing copy / “what visitors notice” (when applicable):** This project does **not** use `whatsNew.ts`. When a change materially affects **guest-visible** UI, landing/legal trust, or headline flows, plan updates in the **same PR** to:
+   - **`CHANGELOG.md`** `[Unreleased]` (user-visible notes), and
+   - relevant **`resources/lang/en/`** and **`resources/lang/de/`** (and `lang/` if used) for new/changed strings.
+   If the change is **internal-only** or **invisible to users**, state **Public copy: N/A** with one line.
+
+---
+
+## Phase 2 — Ticket (Markdown + optional IssueForge)
+
+Follow **`ticket-authoring.mdc`**.
+
+- `Write` the ticket to `docs/tickets/YYYY-MM-DD-short-slug.md` (content matches chat).
+- **IssueForge (optional):** Only if `.env` defines `ISSUE_FORGE_BASE_URL`, `ISSUE_FORGE_PROJECT_ID`, and `API_ADMIN_TOKEN` (or the variables your integration expects). Then `POST` to `$ISSUE_FORGE_BASE_URL/tickets` with JSON including `project_id`, `title`, `description`, `status: "open"`, `priority`. On **201**, report id. On missing env or failure: note **IssueForge: skipped**; do not block the rest.
+
+---
+
+## Phase 3 — Plan
+
+- **Non-trivial** changes (new features, multi-file, refactors with trade-offs): use Cursor **Plan mode**: `SwitchMode(plan)`, then **`CreatePlan`** — not a substitute plan pasted in chat.
+- Wait for **explicit user confirmation** when Plan mode requires it, then return to Agent mode.
+
+---
+
+## Phase 4 — Branch (GitHub; base `dev`)
+
+```bash
+git checkout dev && git pull origin dev
+git checkout -b feat/short-description   # or fix/chore/test/...
+```
+
+If `dev` is missing, **ask** whether to use `main` or another base.
+
+---
+
+## Phase 5 — DDEV
+
+- This project uses **DDEV** (see `README.md`). Prefer `ddev start` before `php artisan` / Composer / npm inside the stack.
+- Typical patterns: `ddev exec php artisan …`, `ddev composer …`, `ddev npm run …`.
+- If DDEV cannot be run in the environment, list exact commands for the user’s machine.
+
+---
+
+## Phase 6 — Implement
+
+- **Laravel:** thin controllers, Form Requests, policies/middleware as needed, Eloquent, strict types, PSR-12, DocBlocks per `.cursorrules`.
+- **Frontend:** Blade + Vite; **vanilla JS** (and Alpine/Bootstrap as already used); avoid duplicating API logic — keep scripts in `resources/js/` with clear modules.
+- **No** mock/fake data in dev or prod paths (tests only).
+- After migrations in dev: `php artisan migrate` (via DDEV as appropriate).
+- Keep files roughly under 200–300 lines; extract services when justified.
+- **GDPR:** do not add tracking/analytics cookies or third-party trackers without explicit product decision and legal review.
+
+---
+
+## Phase 6b — Tests (author + run)
+
+- **PHPUnit:** `tests/Feature`, `tests/Unit`; factories/mocks; no real external services in tests.
+- **Run** relevant tests via Shell, e.g. `ddev exec php artisan test` or `php artisan test`. Do not only author tests.
+
+---
+
+## Phase 6c — Documentation & changelog
+
+- Update **`README.md`** / **`docs/`** when behavior or onboarding changes.
+- **`CHANGELOG.md`:** add under `[Unreleased]` when the change is user-visible or operationally notable.
+
+### `docs/roadmap.md`
+
+- If Phase 1 matched roadmap scope, **update `docs/roadmap.md` in the same PR**: move completed items toward **Shipped**, adjust **Now** / **Next**, keep sections accurate.
+
+### Roadmap N/A (allowed only when true)
+
+- Internal refactor with **no** roadmap bullet touched; bugfix restoring documented behavior; dependency bump with no product story in roadmap.
+
+**Invalid:** “docs only” / “small chore” if **Now** / **Next** explicitly lists that work.
+
+### Public copy N/A (visitor-notable work)
+
+- If the PR changes public routes, major Blade flows, or legal/privacy copy, prefer **not** to skip Lang + CHANGELOG unless you document **Public copy: N/A** with a valid reason (e.g. typo fix in admin-only view).
+
+---
+
+## Phase 7 — Lint & static analysis
+
+- **PHP:** PSR-12; run project tools if added later (Pint/PHPStan) per `composer.json` / CI.
+- **JS:** sensible formatting consistent with existing files; add ESLint only if the project already uses it.
+- **`ReadLints`** on changed files before commit.
+
+---
+
+## Phase 8 — Browser / manual verification
+
+- **UI changes:** use Cursor browser MCP when available; otherwise concrete steps aligned with ticket **Requirements** (include EN/DE if both are affected).
+- **Backend-only / CLI-only:** state **no browser test required** and rely on automated tests.
+
+---
+
+## Phase 9 — Commit
+
+**Pre-commit gate:**
+
+```
+[ ] Phase 6c satisfied (README/docs/CHANGELOG as needed)
+[ ] Roadmap: `docs/roadmap.md` updated if Phase 1 matched — or valid **Roadmap: N/A**
+[ ] Public copy: Lang + CHANGELOG touched if visitor-notable — or valid **Public copy: N/A**
+```
+
+- Use **`TodoWrite`** for full workflow runs; do not leave stale `in_progress`.
+- Conventional-style subjects: `feat:`, `fix:`, `chore:`, `docs:`.
+- No secrets or IDE junk in commits.
+
+---
+
+## Phase 10 — Push
+
+```bash
+git push -u origin <branch-name>
+```
+
+---
+
+## Phase 11 — Pull request (GitHub)
+
+- Target **`dev`** unless opted out or another base is agreed.
+- PR body should note **Roadmap** (updated vs N/A) and **Public copy** (CHANGELOG/Lang vs N/A).
+
+Prefer **`gh pr create`** when available; otherwise web UI.
+
+---
+
+## Phase 12 — Merge (GitHub)
+
+- After PR creation, **attempt merge in the same workflow** when GitHub allows and checks pass, unless the user opted out of merge.
+- Prefer: `gh pr merge <number> --squash --delete-branch`
+- Do **not** merge if required checks failed unless the user explicitly overrides.
+
+---
+
+## Phase 13 — Post-merge cleanup
+
+- `git checkout dev && git pull origin dev`
+- Delete local feature branch; remote often removed by `--delete-branch`.
+
+---
+
+## Violations — NEVER
+
+- Substitute `CreatePlan` with a long inline plan when Plan mode is required.
+- Skip the ticket file on disk for work that warrants a ticket.
+- Commit without running relevant tests + `ReadLints` where applicable.
+- Finish full workflow after push + PR **without attempting merge** when mergeable (unless opted out).
+- Ship roadmap-tracked work **without** updating **`docs/roadmap.md`** (unless deferred in ticket + user agreed).
+- Skip Phase 1 roadmap scan or use a fake **Roadmap: N/A**.
+
+---
+
+## Ordering (strict)
+
+Analyze (roadmap + public-copy check) → ticket → plan (if required) → branch → DDEV → implement → tests → lint → browser → docs/changelog/roadmap/lang → gates → commit → push → PR → merge → cleanup.
+
+---
+
+## Opting out
+
+- Examples: no commit/push; suggestion-only; ticket only; **kein Merge**.
+- State clearly which steps were skipped.
+
+---
+
+## Project-specific stack (reminder)
+
+- Laravel 10, PHP 8.2+, MySQL, Blade, Sanctum/Passport, Vite 5, Bootstrap 5, vanilla JS, SASS.
+- Bilingual: maintain **EN and DE** when changing user-facing strings.
