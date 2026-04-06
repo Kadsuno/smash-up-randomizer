@@ -6,17 +6,17 @@ All notable changes to this project are documented in this file.
 
 ### Added
 
-- **SMTP transactional mail:** contact form and `php artisan email:test` use Laravel’s configured mailer (`MAIL_*`) via `App\Services\TransactionalMailService` instead of the SendGrid HTTP API. Operators can use **Brevo** (or any SMTP provider); see README and `.env.example`. Removed `sendgrid/sendgrid` and `symfony/sendgrid-mailer`.
+- **SMTP / Brevo API transactional mail:** contact form and `php artisan email:test` use Laravel’s configured mailer via `App\Services\TransactionalMailService`. **`MAIL_MAILER=brevo`** uses `getbrevo/brevo-php` and `App\Mail\Transport\BrevoApiTransport` (same pattern as Issue Forge; `BREVO_API_KEY`). **`MAIL_MAILER=smtp`** uses `MAIL_*` for any SMTP relay. See README and `.env.example`. Removed `sendgrid/sendgrid` and `symfony/sendgrid-mailer`.
 - **Cookie consent:** first-party UI (dark-themed bottom strip + preference modal with categories, Cookiebot-style actions) stores analytics preference in the browser and loads Matomo only after opt-in. Footer link reopens settings. Cookiebot dependency removed.
 - **Sentry** (`sentry/sentry-laravel`): unhandled exceptions can be reported to Sentry when `SENTRY_LARAVEL_DSN` is set in `.env`. Configuration in `config/sentry.php`; exception handling wired in `bootstrap/app.php`. Use `php artisan sentry:test` to verify after configuring the DSN.
 
 ### Changed
 
 - Matomo: frontend tracker now uses the self-hosted instance at `analytics.kadsuno.com` (replaces Matomo Cloud). Toggle with `MATOMO_ENABLED`; tracker URL and site id via `MATOMO_TRACKER_URL` and `MATOMO_SITE_ID` (`config/matomo.php`).
+- **Brevo (`MAIL_MAILER=brevo`):** uses the **Brevo HTTP API** (`getbrevo/brevo-php`, `App\Mail\Transport\BrevoApiTransport`, `Mail::extend` in `AppServiceProvider`) — same approach as [Issue Forge](https://github.com/Kadsuno/issue-forge). Set **`BREVO_API_KEY`** (not SMTP). For classic SMTP to any provider, keep **`MAIL_MAILER=smtp`** and `MAIL_*`.
 
 ### Fixed
 
-- Define `mail.mailers.brevo` in `config/mail.php` so `MAIL_MAILER=brevo` works (Brevo SMTP; same `MAIL_*` as `smtp`, default host `smtp-relay.brevo.com`).
 - Add `sessions` and `cache` / `cache_locks` migrations for apps using `SESSION_DRIVER=database` and database-backed cache (Laravel 13 default-style tables).
 
 ### Changed
