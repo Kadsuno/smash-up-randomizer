@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+
+@import 'animate.css';
+
+@import '@fortawesome/fontawesome-free/css/all.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Design tokens: dark-first, mobile-first.
+ */
+
+@layer base {
+    html {
+        @apply scroll-smooth;
+    }
+
+    body {
+        @apply min-h-screen bg-zinc-950 font-sans text-zinc-100 antialiased;
+    }
+
+    [x-cloak] {
+        display: none !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+@layer components {
+    .sur-link-nav {
+        @apply rounded-lg px-3 py-2 text-sm font-medium text-zinc-200 transition duration-200 ease-out hover:bg-white/5 hover:text-cyan-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60;
+    }
+
+    .sur-btn-primary {
+        @apply inline-flex min-h-11 items-center justify-center rounded-xl bg-cyan-500 px-5 py-2.5 text-sm font-semibold text-zinc-950 shadow-lg shadow-cyan-500/20 transition duration-200 ease-out hover:bg-cyan-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 active:scale-[0.98];
+    }
+
+    .sur-btn-secondary {
+        @apply inline-flex min-h-11 items-center justify-center rounded-xl border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-zinc-100 transition duration-200 hover:border-white/25 hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 active:scale-[0.98];
+    }
+
+    .sur-btn-ghost {
+        @apply inline-flex min-h-11 items-center justify-center rounded-xl border border-white/10 bg-transparent px-4 py-2 text-sm font-medium text-zinc-200 transition hover:border-cyan-500/40 hover:text-cyan-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50;
+    }
+
+    .sur-input {
+        @apply w-full rounded-xl border border-white/10 bg-zinc-900/80 px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-500 shadow-inner transition focus:border-cyan-500/50 focus:outline-none focus:ring-2 focus:ring-cyan-500/30;
+    }
+
+    .sur-card {
+        @apply rounded-2xl border border-white/10 bg-zinc-900/80 p-6 shadow-xl shadow-black/40 backdrop-blur-sm transition duration-300 ease-out;
+    }
+
+    .sur-card-interactive {
+        @apply rounded-2xl border border-white/10 bg-zinc-900/80 p-6 shadow-xl shadow-black/40 backdrop-blur-sm transition duration-300 ease-out hover:-translate-y-1 hover:border-cyan-500/25 hover:shadow-cyan-500/10;
+    }
+
+    .needs-validation.was-validated .sur-input:invalid,
+    .needs-validation.was-validated select:invalid,
+    .needs-validation.was-validated textarea:invalid {
+        @apply border-red-500/80 ring-2 ring-red-500/30;
+    }
+
+    .sur-cookie-bar {
+        z-index: 1040;
+        border-top: 1px solid rgba(34, 211, 238, 0.35);
+        box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.45);
+        backdrop-filter: blur(10px);
+    }
+
+    .btn-sur-cookie-primary {
+        color: #0b0b0b;
+        background-color: #22d3ee;
+        border: 1px solid #22d3ee;
+        @apply inline-flex min-h-9 items-center justify-center rounded-lg px-3 py-1.5 text-sm font-semibold transition duration-200 hover:bg-cyan-300 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300;
+    }
+
+    .btn-sur-cookie-outline {
+        color: #22d3ee;
+        border: 1px solid rgba(34, 211, 238, 0.55);
+        @apply inline-flex min-h-9 items-center justify-center rounded-lg bg-transparent px-3 py-1.5 text-sm font-medium transition duration-200 hover:border-cyan-400 hover:bg-cyan-500/15 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60;
+    }
+
+    body.sur-cookie-bar-visible {
+        padding-bottom: 8rem;
+    }
+
+    @media (min-width: 1024px) {
+        body.sur-cookie-bar-visible {
+            padding-bottom: 5.5rem;
+        }
+    }
+
+    body.sur-cookie-bar-visible .sur-cookie-fab {
+        bottom: max(8.5rem, env(safe-area-inset-bottom));
+    }
+
+    .sur-cookie-fab {
+        position: fixed;
+        right: max(1rem, env(safe-area-inset-right));
+        bottom: max(1rem, env(safe-area-inset-bottom));
+        z-index: 1045;
+        width: 3.25rem;
+        height: 3.25rem;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 9999px;
+        background: rgba(20, 20, 20, 0.94);
+        border: 1px solid rgba(34, 211, 238, 0.55);
+        color: #22d3ee;
+        box-shadow: 0 4px 22px rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease,
+            border-color 0.2s ease,
+            background-color 0.2s ease,
+            color 0.2s ease;
+    }
+
+    .sur-cookie-fab:hover {
+        color: #fff;
+        background-color: rgba(34, 211, 238, 0.28);
+        border-color: #22d3ee;
+        box-shadow: 0 6px 28px rgba(0, 0, 0, 0.55);
+        transform: translateY(-3px);
+    }
+
+    .sur-cookie-fab:focus-visible {
+        outline: 2px solid #22d3ee;
+        outline-offset: 3px;
+    }
+
+    #surCookieConsentModal {
+        margin: auto;
+        width: min(100vw - 2rem, 42rem);
+        max-height: min(90vh, 48rem);
+        border: none;
+        border-radius: 0.75rem;
+        padding: 0;
+        background: #18181b;
+        color: #fafafa;
+        box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.55);
+    }
+
+    #surCookieConsentModal::backdrop {
+        background: rgba(0, 0, 0, 0.72);
+        backdrop-filter: blur(6px);
+    }
+
+    .sur-cookie-category {
+        padding: 0.75rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .sur-cookie-category:last-of-type {
+        border-bottom: none;
+    }
+
+    #shuffle-modal {
+        margin: auto;
+        width: min(100vw - 1.5rem, 56rem);
+        max-height: 90vh;
+        overflow: hidden;
+        border: none;
+        border-radius: 1rem;
+        padding: 0;
+        background: #18181b;
+        color: #fafafa;
+    }
+
+    #shuffle-modal::backdrop {
+        background: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(8px);
+    }
+
+    .sur-progress-track {
+        @apply h-2 overflow-hidden rounded-full bg-zinc-700;
+    }
+
+    .sur-progress-fill {
+        @apply h-full rounded-full bg-gradient-to-r from-cyan-600 to-cyan-400 transition-all duration-300 ease-out;
+    }
+}

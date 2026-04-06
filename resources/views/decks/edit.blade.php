@@ -1,118 +1,118 @@
 <x-layouts.backend.backendMain>
-    <div class="container">
-        <h1 class="mb-4">Edit Deck</h1>
+    <div class="mx-auto max-w-4xl px-4 py-4 text-zinc-100">
+        <h1 class="mb-6 text-2xl font-bold text-white">Edit Deck</h1>
         <form id="deckForm" action="{{ route('update-deck', $deck->name) }}" method="POST">
             @csrf
             <div id="step1" class="step">
                 <h2>Step 1: Basic Information</h2>
                 <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $deck->name) }}" required>
+                    <label for="name" class="mb-2 block text-sm font-medium text-zinc-300">Name</label>
+                    <input type="text" class="sur-input" id="name" name="name" value="{{ old('name', $deck->name) }}" required>
                 </div>
                 <div class="mb-3">
-                    <label for="teaser" class="form-label">Teaser</label>
+                    <label for="teaser" class="mb-2 block text-sm font-medium text-zinc-300">Teaser</label>
                     <div id="teaser"></div>
                     <input type="hidden" name="teaser" value="{{ old('teaser', $deck->teaser) }}">
                 </div>
                 <div class="mb-3">
-                    <label for="description" class="form-label">Description</label>
+                    <label for="description" class="mb-2 block text-sm font-medium text-zinc-300">Description</label>
                     <div id="description"></div>
                     <input type="hidden" name="description" value="{{ old('description', $deck->description) }}">
                 </div>
-                <button type="button" class="btn btn-primary next-step">Next</button>
+                <button type="button" class="sur-btn-primary next-step">Next</button>
             </div>
 
             <div id="step2" class="step">
                 <h2>Step 2: Card Information</h2>
                 <div class="mb-3">
-                    <label for="cardsTeaser" class="form-label">Cards Teaser</label>
+                    <label for="cardsTeaser" class="mb-2 block text-sm font-medium text-zinc-300">Cards Teaser</label>
                     <div id="cardsTeaser"></div>
                     <input type="hidden" name="cardsTeaser" value="{{ old('cardsTeaser', $deck->cardsTeaser) }}">
                 </div>
                 <div class="mb-3">
-                    <label for="actionTeaser" class="form-label">Action Teaser</label>
+                    <label for="actionTeaser" class="mb-2 block text-sm font-medium text-zinc-300">Action Teaser</label>
                     <div id="actionTeaser"></div>
                     <input type="hidden" name="actionTeaser" value="{{ old('actionTeaser', $deck->actionTeaser) }}">
                 </div>
                 <div class="mb-3">
-                    <label for="actionList" class="form-label">Action List</label>
+                    <label for="actionList" class="mb-2 block text-sm font-medium text-zinc-300">Action List</label>
                     <div id="actionList"></div>
                     <input type="hidden" name="actionList" value="{{ old('actionList', $deck->actionList) }}">
                 </div>
-                <button type="button" class="btn btn-secondary prev-step">Previous</button>
-                <button type="button" class="btn btn-primary next-step">Next</button>
+                <button type="button" class="sur-btn-secondary prev-step">Previous</button>
+                <button type="button" class="sur-btn-primary next-step">Next</button>
             </div>
 
             <div id="step3" class="step">
                 <h2>Step 3: Gameplay Elements</h2>
                 <div class="mb-3">
-                    <label for="actions" class="form-label">Actions</label>
+                    <label for="actions" class="mb-2 block text-sm font-medium text-zinc-300">Actions</label>
                     <div id="actions"></div>
                     <input type="hidden" name="actions" value="{{ old('actions', $deck->actions) }}">
                 </div>
                 <div class="mb-3">
-                    <label for="characters" class="form-label">Characters</label>
+                    <label for="characters" class="mb-2 block text-sm font-medium text-zinc-300">Characters</label>
                     <div id="characters"></div>
                     <input type="hidden" name="characters" value="{{ old('characters', $deck->characters) }}">
                 </div>
                 <div class="mb-3">
-                    <label for="bases" class="form-label">Bases</label>
+                    <label for="bases" class="mb-2 block text-sm font-medium text-zinc-300">Bases</label>
                     <div id="bases"></div>
                     <input type="hidden" name="bases" value="{{ old('bases', $deck->bases) }}">
                 </div>
-                <button type="button" class="btn btn-secondary prev-step">Previous</button>
-                <button type="button" class="btn btn-primary next-step">Next</button>
+                <button type="button" class="sur-btn-secondary prev-step">Previous</button>
+                <button type="button" class="sur-btn-primary next-step">Next</button>
             </div>
 
             <div id="step4" class="step">
                 <h2>Step 4: Additional Information</h2>
                 <div class="mb-3">
-                    <label for="clarifications" class="form-label">Clarifications</label>
+                    <label for="clarifications" class="mb-2 block text-sm font-medium text-zinc-300">Clarifications</label>
                     <div id="clarifications"></div>
                     <input type="hidden" name="clarifications" value="{{ old('clarifications', $deck->clarifications) }}">
                 </div>
                 <div class="mb-3">
-                    <label for="suggestionTeaser" class="form-label">Suggestion Teaser</label>
+                    <label for="suggestionTeaser" class="mb-2 block text-sm font-medium text-zinc-300">Suggestion Teaser</label>
                     <div id="suggestionTeaser"></div>
                     <input type="hidden" name="suggestionTeaser" value="{{ old('suggestionTeaser', $deck->suggestionTeaser) }}">
                 </div>
                 <div class="mb-3">
-                    <label for="synergy" class="form-label">Synergy</label>
+                    <label for="synergy" class="mb-2 block text-sm font-medium text-zinc-300">Synergy</label>
                     <div id="synergy"></div>
                     <input type="hidden" name="synergy" value="{{ old('synergy', $deck->synergy) }}">
                 </div>
-                <button type="button" class="btn btn-secondary prev-step">Previous</button>
-                <button type="button" class="btn btn-primary next-step">Next</button>
+                <button type="button" class="sur-btn-secondary prev-step">Previous</button>
+                <button type="button" class="sur-btn-primary next-step">Next</button>
             </div>
 
             <div id="step5" class="step">
                 <h2>Step 5: Final Details</h2>
                 <div class="mb-3">
-                    <label for="tips" class="form-label">Tips</label>
+                    <label for="tips" class="mb-2 block text-sm font-medium text-zinc-300">Tips</label>
                     <div id="tips"></div>
                     <input type="hidden" name="tips" value="{{ old('tips', $deck->tips) }}">
                 </div>
                 <div class="mb-3">
-                    <label for="mechanics" class="form-label">Mechanics</label>
+                    <label for="mechanics" class="mb-2 block text-sm font-medium text-zinc-300">Mechanics</label>
                     <div id="mechanics"></div>
                     <input type="hidden" name="mechanics" value="{{ old('mechanics', $deck->mechanics) }}">
                 </div>
                 <div class="mb-3">
-                    <label for="expansion" class="form-label">Expansion</label>
-                    <input type="text" class="form-control" id="expansion" name="expansion" value="{{ old('expansion', $deck->expansion) }}">
+                    <label for="expansion" class="mb-2 block text-sm font-medium text-zinc-300">Expansion</label>
+                    <input type="text" class="sur-input" id="expansion" name="expansion" value="{{ old('expansion', $deck->expansion) }}">
                 </div>
                 <div class="mb-3">
-                    <label for="effects" class="form-label">Effects</label>
+                    <label for="effects" class="mb-2 block text-sm font-medium text-zinc-300">Effects</label>
                     <div id="effects"></div>
                     <input type="hidden" name="effects" value="{{ old('effects', $deck->effects) }}">
                 </div>
                 <div class="mb-3">
-                    <label for="playstyle" class="form-label">Playstyle</label>
+                    <label for="playstyle" class="mb-2 block text-sm font-medium text-zinc-300">Playstyle</label>
                     <div id="playstyle"></div>
                     <input type="hidden" name="playstyle" value="{{ old('playstyle', $deck->playstyle) }}">
                 </div>
-                <button type="button" class="btn btn-secondary prev-step">Previous</button>
-                <button type="submit" class="btn btn-primary">Update Deck</button>
+                <button type="button" class="sur-btn-secondary prev-step">Previous</button>
+                <button type="submit" class="sur-btn-primary">Update Deck</button>
             </div>
         </form>
     </div>

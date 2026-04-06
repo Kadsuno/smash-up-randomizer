@@ -3,7 +3,7 @@
 [![Laravel](https://img.shields.io/badge/Laravel-13.x-FF2D20?style=flat-square&logo=laravel&logoColor=white)](https://laravel.com)
 [![PHP](https://img.shields.io/badge/PHP-8.3+-777BB4?style=flat-square&logo=php&logoColor=white)](https://php.net)
 [![MariaDB](https://img.shields.io/badge/MariaDB-10.4-003545?style=flat-square&logo=mariadb&logoColor=white)](https://mariadb.org)
-[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.x-7952B3?style=flat-square&logo=bootstrap&logoColor=white)](https://getbootstrap.com)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.x-38bdf8?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
 [![GitHub last commit](https://img.shields.io/github/last-commit/kadsuno/smash-up-randomizer?style=flat-square)](https://github.com/kadsuno/smash-up-randomizer/commits)
@@ -22,7 +22,7 @@ Smash Up Randomizer supports:
 - Contact form with email delivery (Laravel mail: SMTP or Brevo API)
 - Admin area for managing deck data (authenticated users)
 - XML sitemap (`/sitemap`) via `spatie/laravel-sitemap`
-- Dark-themed, responsive frontend (Bootstrap 5, Vite, Blade)
+- Dark-themed, mobile-first frontend (Tailwind CSS 3, Vite, Blade, Alpine.js)
 
 ## Repository layout & workflow
 
@@ -148,8 +148,8 @@ Blade under `resources/views/`: `start/`, `shuffle/`, `decks/`, `frontend/`, `ba
 
 ### Frontend assets
 
-- **Vite** (`vite.config.js`): entries under `resources/js/`, styles under `resources/sass/`
-- **Stack**: Bootstrap 5, jQuery, Alpine.js (see `package.json`), Font Awesome / Bootstrap Icons
+- **Vite** (`vite.config.js`): entries under `resources/js/`, global styles in `resources/css/app.css` (Tailwind + PostCSS)
+- **Stack**: Tailwind CSS 3, Alpine.js, jQuery (legacy where present), Font Awesome, animate.css (see `package.json`)
 
 ### Email
 

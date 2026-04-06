@@ -7,55 +7,45 @@
 
     <title>Smash Up Randomizer Backend</title>
 
-    @vite(['resources/sass/app.scss'])
+    @vite(['resources/css/app.css'])
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/favicons/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicons/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicons/favicon-16x16.png') }}">
-    <link rel="manifest" href="{{ asset('images/favicons/site.webmanifest') }}">  
+    <link rel="manifest" href="{{ asset('images/favicons/site.webmanifest') }}">
 </head>
 
-<body class="bg-black text-white">
-    <nav x-data="{ open: false }" class="navbar navbar-expand-lg navbar-dark fixed-top bg-primary shadow-sm">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="{{ route('dashboard') }}">
-                <img src="{{ asset('images/favicons/favicon.ico') }}" class="img-fluid me-2" alt="Logo" width="30" height="30">
-                <span class="font-weight-bold">Smash Up Randomizer</span>
+<body class="min-h-screen bg-zinc-950 text-zinc-100 antialiased">
+    <nav x-data="{ menuOpen: false, userOpen: false }" @keydown.escape.window="menuOpen = false; userOpen = false" class="fixed top-0 z-50 w-full border-b border-cyan-500/20 bg-gradient-to-r from-zinc-900 via-zinc-950 to-zinc-900 shadow-lg shadow-black/40">
+        <div class="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
+            <a class="flex min-h-11 items-center gap-2 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60" href="{{ route('dashboard') }}">
+                <img src="{{ asset('images/favicons/favicon.ico') }}" class="h-8 w-8" alt="Logo" width="32" height="32">
+                <span class="font-bold text-white">Smash Up Randomizer</span>
             </a>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-regular fa-user me-2"></i>
-                            <span>{{ Auth::user()->name }}</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end shadow logout-btn" aria-labelledby="navbarDropdown">
-                            <li>
-                              <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-            
-                                <button type="submit" class="dropdown-item d-flex align-items-center btn text-black w-100 text-start logout-btn"
-                                        onclick="event.preventDefault();
-                                                    this.closest('form').submit();">
-                                    <i class="fa-solid fa-arrow-right-from-bracket me-2"></i>
-                                    <span>{{ __('backend.logout') }}</span>
-                                </button>
-                            </form>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+            <div class="flex items-center gap-2">
+                <div class="relative" @click.outside="userOpen = false">
+                    <button type="button"
+                        class="inline-flex min-h-11 items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm font-medium text-zinc-100 transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60"
+                        @click="userOpen = !userOpen"
+                        :aria-expanded="userOpen.toString()"
+                        aria-haspopup="true"
+                    >
+                        <i class="fa-regular fa-user text-cyan-400" aria-hidden="true"></i>
+                        <span class="max-w-[10rem] truncate">{{ Auth::user()->name }}</span>
+                        <i class="fa-solid fa-chevron-down text-xs text-zinc-500" aria-hidden="true"></i>
+                    </button>
+                    <div x-cloak x-show="userOpen" x-transition
+                        class="absolute right-0 z-50 mt-2 w-56 origin-top-right rounded-xl border border-white/10 bg-zinc-900 py-1 shadow-xl shadow-black/50"
+                        style="display: none;"
+                    >
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="flex w-full items-center gap-2 px-4 py-3 text-left text-sm text-zinc-200 transition hover:bg-white/5 hover:text-cyan-300">
+                                <i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i>
+                                <span>{{ __('backend.logout') }}</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
-    <style>
-        .logout-btn:hover {
-            background-color: #6c757d;
-            color: white !important;
-        }
-    </style>

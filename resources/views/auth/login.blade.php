@@ -1,56 +1,44 @@
 <x-layouts.main>
-    <section class="w-100 px-5 py-5 mt-5">
-        <div class="row d-flex justify-content-center">
-            <div class="col-md-8 col-lg-7 col-xl-6">
-                <img src="{{ asset('images/login.svg') }}" class="img-fluid" alt="Phone image">
+    <section class="mx-auto mt-8 max-w-6xl px-4 py-8 sm:mt-12 sm:px-6">
+        <div class="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-center">
+            <div class="flex justify-center lg:w-2/5">
+                <img src="{{ asset('images/login.svg') }}" class="max-h-72 w-full max-w-md object-contain" alt="" width="400" height="300">
             </div>
-            <!-- Session Status -->
-            <x-auth-session-status class="mb-4" :status="session('status')" />
+            <div class="mx-auto w-full max-w-md flex-1">
+                <x-auth-session-status class="mb-4" :status="session('status')" />
+                <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-            <!-- Validation Errors -->
-            <x-auth-validation-errors class="mb-4" :errors="$errors" />
-            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-                <form method="POST" action="{{ route('login') }}">
-                    @csrf
+                <div class="sur-card border-cyan-500/20 p-6 sm:p-8">
+                    <h1 class="mb-6 text-center text-xl font-bold text-white sm:text-2xl">{{ __('frontend.login') }}</h1>
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
 
-                    <!-- Email Address -->
-                    <div class="form-outline mb-4">
-                        <label class="mb-2" for="email">{{ __('frontend.email') }}</label>
-                        <x-input id="email" class="form-control form-control-lg" type="email" placeholder="name@example.com" name="email" :value="old('email')"
-                        required autofocus />
-                    </div>
+                        <div class="mb-4">
+                            <label class="mb-2 block text-sm font-medium text-zinc-300" for="email">{{ __('frontend.email') }}</label>
+                            <x-input id="email" type="email" placeholder="name@example.com" name="email" :value="old('email')"
+                                required autofocus />
+                        </div>
 
-                    <!-- Password -->
-                    <div class="form-outline mb-4">
-                        <label for="password" class="mb-2">{{ __('frontend.password') }}</label>
-                        <x-input id="password" class="form-control form-control-lg" type="password" name="password" required
-                        autocomplete="current-password" />
-                    </div>
+                        <div class="mb-4">
+                            <label class="mb-2 block text-sm font-medium text-zinc-300" for="password">{{ __('frontend.password') }}</label>
+                            <x-input id="password" type="password" name="password" required
+                                autocomplete="current-password" />
+                        </div>
 
-                    <!-- Remember Me -->
-                    <div class="d-flex mb-4">
-                        <label for="remember_me" class="form-check-label">
+                        <div class="mb-6 flex items-center gap-2">
                             <input id="remember_me" type="checkbox"
-                                class="form-check-input"
+                                class="h-4 w-4 rounded border-white/20 bg-zinc-800 text-cyan-500 focus:ring-cyan-500/50"
                                 name="remember">
-                            <span class="ml-2 text-sm text-gray-600">{{ __('frontend.remember_me') }}</span>
-                        </label>
-{{--                         @if (Route::has('password.request'))
-                        <a class="text-decoration-none"
-                            href="{{ route('password.request') }}">
-                            {{ __('frontend.password_forget') }}
-                        </a>
-                        @endif
- --}}                    </div>
+                            <label for="remember_me" class="text-sm text-zinc-400">{{ __('frontend.remember_me') }}</label>
+                        </div>
 
-                    <div class="d-flex justify-content-center">
-                        
-
-                        <x-button class="btn btn-primary btn-lg btn-block">
-                            {{ __('frontend.login') }}
-                        </x-button>
-                    </div>
-                </form>
+                        <div class="flex justify-center">
+                            <x-button class="w-full min-h-12 sm:w-auto">
+                                {{ __('frontend.login') }}
+                            </x-button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </section>

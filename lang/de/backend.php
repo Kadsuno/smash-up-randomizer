@@ -9,4 +9,7 @@ return [
     'deck_name_invalid' => 'Bitte geben Sie einen gültigen Namen ein. Das Eingabefeld darf nicht leer sein.',
     'save' => 'Speichern',
     'logout' => 'Logout',
+    'nav_dashboard' => 'Dashboard',
+    'nav_faction_manager' => 'Fraktions-Manager',
+    'table_actions' => 'Aktionen',
 ];

@@ -73,4 +73,6 @@ return [
     'cookie_banner_cancel' => 'Cancel',
     'cookie_banner_save' => 'Save preferences',
     'cookie_footer_cookie_settings' => 'Cookie settings',
+    'footer_quick_links' => 'Quick links',
+    'footer_connect' => 'Connect with us',
 ];

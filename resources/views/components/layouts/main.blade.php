@@ -1,5 +1,5 @@
 <x-layouts.header />
-    <main>
+    <main class="pt-16">
         {{ $slot }}
     </main>
 <x-layouts.footer />
