@@ -1,324 +1,207 @@
 # Smash Up Randomizer
 
 [![Laravel](https://img.shields.io/badge/Laravel-10.x-FF2D20?style=flat-square&logo=laravel&logoColor=white)](https://laravel.com)
-[![PHP](https://img.shields.io/badge/PHP-8.0+-777BB4?style=flat-square&logo=php&logoColor=white)](https://php.net)
-[![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?style=flat-square&logo=mysql&logoColor=white)](https://www.mysql.com)
+[![PHP](https://img.shields.io/badge/PHP-8.1+-777BB4?style=flat-square&logo=php&logoColor=white)](https://php.net)
+[![MariaDB](https://img.shields.io/badge/MariaDB-10.4-003545?style=flat-square&logo=mariadb&logoColor=white)](https://mariadb.org)
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-5.x-7952B3?style=flat-square&logo=bootstrap&logoColor=white)](https://getbootstrap.com)
-[![Vite](https://img.shields.io/badge/Vite-4.x-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev)
+[![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
 [![GitHub last commit](https://img.shields.io/github/last-commit/kadsuno/smash-up-randomizer?style=flat-square)](https://github.com/kadsuno/smash-up-randomizer/commits)
 [![GitHub issues](https://img.shields.io/github/issues/kadsuno/smash-up-randomizer?style=flat-square)](https://github.com/kadsuno/smash-up-randomizer/issues)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg?style=flat-square)](https://conventionalcommits.org)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/kadsuno/smash-up-randomizer/laravel.yml?style=flat-square&logo=github-actions&logoColor=white&label=CI)](https://github.com/kadsuno/smash-up-randomizer/actions)
 
-A web application to help Smash Up players randomly assign factions and manage their game setup.
+A web application to help Smash Up players randomly assign factions (decks) and browse faction details. UI copy is maintained in **English and German** where applicable.
 
 ## About the Project
 
-Smash Up Randomizer is a tool designed for players of the popular card game "Smash Up". This web application helps you:
+Smash Up Randomizer supports:
 
--   Randomly assign factions to players
--   Filter factions by expansions you own
--   Share game setups with friends
--   Keep track of your favorite faction combinations
+- Random assignment of factions to players (player count, include/exclude factions via the **home** page shuffle modal → `POST /shuffle/result`)
+- Browsing all factions and per-faction detail pages
+- Contact form with email delivery (SendGrid)
+- Admin area for managing deck data (authenticated users)
+- XML sitemap (`/sitemap`) via `spatie/laravel-sitemap`
+- Dark-themed, responsive frontend (Bootstrap 5, Vite, Blade)
 
-Built with Laravel, Bootstrap, and modern JavaScript, the app provides a smooth, responsive experience across devices.
+## Repository layout & workflow
+
+
+| Path              | Purpose                                                                             |
+| ----------------- | ----------------------------------------------------------------------------------- |
+| `docs/roadmap.md` | Product/engineering priorities — update when work matches listed items              |
+| `docs/tickets/`   | Ticket specs (`YYYY-MM-DD-short-slug.md`), see `.cursor/rules/ticket-authoring.mdc` |
+| `.cursor/rules/`  | Cursor project rules (full workflow, ticket format, etc.)                           |
+
+
+Default branch for integration work is **dev** (see `.cursor/rules/smash-up-full-workflow.mdc`).
 
 ## Features
 
--   **Random Faction Selection**: Automatically assign random factions to each player
--   **Custom Filters**: Filter by expansions or specific factions to customize your gameplay experience
--   **Share Results**: Easily share your faction assignments with friends through various social platforms
--   **Dark Theme**: Enjoy a comfortable dark mode for late-night gaming sessions
--   **Responsive Design**: Works on desktop, tablets, and mobile devices
--   **User Accounts**: Register and save your favorite faction combinations
--   **Faction Database**: Browse detailed information about all Smash Up factions
+- **Random faction selection**: `POST /shuffle/result` (shuffle UI on the **home** page)
+- **Filters**: Number of players and owned expansions on the shuffle form
+- **Faction browser**: `/factions` and `/factions/{name}`
+- **Legal & info**: `/imprint`, `/privacy-policy`, `/about`
+- **Contact**: `/contact-us` (throttled)
+- **Admin**: `/admin` (login), `/admin/register`, `/admin/backend/*` (deck manager — auth required)
 
 ## Getting Started
 
 ### Prerequisites
 
--   PHP 8.0 or higher
--   Composer
--   Node.js and npm
--   MySQL or compatible database
+- PHP **8.1+** (see `composer.json`)
+- Composer 2.x
+- Node.js **18+** recommended (matches DDEV `nodejs_version`)
+- MariaDB or MySQL compatible with Laravel’s requirements
 
-### DDEV Setup
+### DDEV (recommended)
 
-This project uses DDEV for local development to ensure a consistent environment across all development machines.
+Local stack is defined in `.ddev/config.yaml` (PHP 8.1, MariaDB 10.4, Node 18, nginx-fpm).
 
 1. Install [DDEV](https://ddev.readthedocs.io/en/stable/)
+2. Clone the repository:
 
-2. Clone the repository
-
-    ```
-    git clone https://github.com/yourusername/smash-up-randomizer.git
+    ```bash
+    git clone https://github.com/kadsuno/smash-up-randomizer.git
     cd smash-up-randomizer
     ```
 
-3. Start DDEV
+3. Start DDEV:
 
-    ```
+    ```bash
     ddev start
     ```
 
-4. Install dependencies
+4. Install dependencies:
 
-    ```
+    ```bash
     ddev composer install
     ddev npm install
     ```
 
-5. Copy environment file and generate application key
+5. Environment and app key:
 
-    ```
+    ```bash
     ddev exec cp .env.example .env
     ddev exec php artisan key:generate
     ```
 
-6. Run migrations
+6. Configure `.env` (database credentials are usually pre-filled for DDEV; adjust `MAIL_*` / SendGrid for email).
 
-    ```
+7. Migrations:
+
+    ```bash
     ddev exec php artisan migrate
     ```
 
-7. Compile assets
+8. Frontend assets:
 
-    ```
+    ```bash
     ddev npm run dev
     ```
 
-8. Access the site at https://smash-up-randomizer.ddev.site
+9. Open **https://smash-up-randomizer.ddev.site** (hostname follows `name:` in `.ddev/config.yaml`).
 
-### Standard Installation
+### Standard installation (without DDEV)
 
-If you're not using DDEV, follow these steps:
+1. `git clone https://github.com/kadsuno/smash-up-randomizer.git && cd smash-up-randomizer`
+2. `composer install`
+3. `npm install`
+4. `cp .env.example .env` — set `DB_*` and mail settings
+5. `php artisan key:generate`
+6. `php artisan migrate`
+7. `npm run dev` (or `npm run build` for production assets)
+8. `php artisan serve` (or your web server of choice pointing at `public/`)
 
-1. Clone the repository
+## Database (overview)
 
-    ```
-    git clone https://github.com/yourusername/smash-up-randomizer.git
-    ```
+Typical tables after migrations:
 
-2. Install PHP dependencies
+- **users** — admin/backend accounts (Laravel UI auth under `/admin`)
+- **decks** — faction/deck content (name, expansion, text fields, image path, etc.)
+- **contacts** — contact form submissions
+- **jobs**, **failed_jobs** — queue
+- **password_resets** — legacy reset tokens if enabled
+- **personal_access_tokens** — Sanctum/API-style tokens if used
+- **`oauth_*`** — Laravel Passport OAuth tables
 
-    ```
-    composer install
-    ```
+DDEV uses **MariaDB** by default; production may use MySQL — both work with Laravel’s database layer.
 
-3. Install JavaScript dependencies
+## Application structure (short)
 
-    ```
-    npm install
-    ```
+### Models (`app/Models/`)
 
-4. Copy the environment file and update it with your database credentials
+- **User** — admin users
+- **Deck** — factions / decks
+- **Contact** — contact messages
 
-    ```
-    cp .env.example .env
-    ```
+### HTTP
 
-5. Generate an application key
-
-    ```
-    php artisan key:generate
-    ```
-
-6. Run database migrations
-
-    ```
-    php artisan migrate
-    ```
-
-7. Compile assets
-
-    ```
-    npm run dev
-    ```
-
-8. Start the development server
-    ```
-    php artisan serve
-    ```
-
-## Database Structure
-
-The application uses MySQL with the following tables:
-
-### User Management
-
--   **users**: Admin users for the backend
-
-    -   Standard Laravel user fields (id, name, email, password, etc.)
-    -   Created through Laravel authentication scaffolding
-
--   **frontend_users**: Regular users who use the randomizer
-    -   Extends standard user functionality for frontend application users
-
-### Faction Data
-
--   **decks**: Stores faction details (primary content)
-    -   name: Name of the faction
-    -   image: Path to faction image
-    -   expansion: Which set the faction belongs to
-    -   description: Full description of the faction
-    -   mechanics, playstyle, effects: Gameplay characteristics
-    -   Various other faction-specific metadata fields
-
-### User Interaction
-
--   **contacts**: Stores contact form submissions
-    -   Contains name, email, phone, subject, and message fields
-    -   Used for customer support and feedback
-
-### System Tables
-
--   **jobs**: Background processing queue
--   **failed_jobs**: Failed background jobs
--   **password_resets**: Password reset tokens
--   **personal_access_tokens**: API token management
--   **oauth\_\*** tables: Laravel Passport authentication
-
-## Application Architecture
-
-### Models
-
-The application uses Eloquent ORM with these models:
-
--   **User**: Admin user accounts (`app/Models/User.php`)
--   **FrontendUser**: Regular user accounts (`app/Models/FrontendUser.php`)
--   **Deck**: Core model for Smash Up factions (`app/Models/Deck.php`)
--   **Contact**: Form submissions (`app/Models/Contact.php`)
-
-### Controllers
-
-The application follows Laravel's MVC pattern with these controllers:
-
--   **DeckController**: Core functionality for faction management, display, and shuffling
--   **ContactController**: Handles contact form processing
--   **HomeController**: Manages general page routing
--   **Auth Controllers**: Handle authentication for both admin and frontend users
+- **HomeController** — home
+- **DeckController** — shuffle, list, detail, admin CRUD/CSV
+- **ContactController** — contact form
+- **Auth controllers** (`App\Http\Controllers\Auth\`) — login/register/logout for admin area (`routes/auth.php`)
 
 ### Views
 
-Views use Laravel Blade templates organized as follows:
+Blade under `resources/views/`: `start/`, `shuffle/`, `decks/`, `frontend/`, `backend/`, `legal/`, `contact/`, `components/`, `errors/`, `emails/`.
 
--   **auth/**: Authentication views
--   **components/**: Reusable UI components
--   **decks/**: Faction display templates
--   **emails/**: Email templates
--   **errors/**: Error pages
--   **frontend/**: Front-facing user interfaces
--   **backend/**: Admin interfaces
--   **start/**: Landing pages
--   **shuffle/**: Randomizer interface
--   **legal/**: Imprint, privacy policy, and terms of service
+### Frontend assets
 
-### Routes
+- **Vite** (`vite.config.js`): entries under `resources/js/`, styles under `resources/sass/`
+- **Stack**: Bootstrap 5, jQuery, Alpine.js (see `package.json`), Font Awesome / Bootstrap Icons
 
-The application has the following primary routes:
+### Email
 
--   `/`: Homepage with main application features
--   `/shuffle`: Faction randomizer form
--   `/shuffle/result`: Generated faction assignments
--   `/factions`: Browse all available factions
--   `/factions/{name}`: Detailed view of a specific faction
--   `/contact-us`: Contact form
--   `/about`: Information about the project
--   `/login`, `/register`: Frontend user authentication
--   `/account`: User account management
--   `/admin/*`: Backend administration area (protected)
+`App\Services\SendgridMailService` uses the SendGrid API (`services.sendgrid.api_key` / env). Symfony mailer transports are also available in `composer.json` for alternative mail configuration.
 
-### Services
+### Routes (high level)
 
--   **SendgridMailService**: Handles email delivery using Sendgrid
 
-### Mailing
+| Path                                               | Notes                                                                          |
+| -------------------------------------------------- | ------------------------------------------------------------------------------ |
+| `/`                                                | Home (shuffle modal → `POST /shuffle/result`)                                  |
+| `POST /shuffle/result`                             | Shuffle results (`DeckController@shuffle`)                                   |
+| `/factions`, `/factions/{name}`                    | Faction list & detail                                                          |
+| `/contact-us`                                      | GET/POST contact                                                               |
+| `/about`                                           | About                                                                          |
+| `/imprint`, `/privacy-policy`                      | Legal                                                                          |
+| `/sitemap`                                         | Dynamic XML sitemap                                                            |
+| `/admin`, `POST /admin`                            | Login                                                                          |
+| `/admin/register`                                  | Registration (guest)                                                           |
+| `/admin/backend`, `/admin/backend/decks-manager/*` | Admin UI (auth)                                                                |
 
-Email functionality is implemented using Laravel's Mail facade with Sendgrid integration:
-
--   **ContactMail**: Sends notification emails for contact form submissions
--   **ContactConfirmationMail**: Confirmation emails to users who submit contact forms
-
-Configuration is stored in `.env` with mail-related settings (MAIL\_\* variables).
-
-## Frontend Architecture
-
-### JavaScript
-
--   Uses Laravel Vite for asset compilation
--   Core functionality in resources/js directory
--   Bootstrap and custom components for UI interactions
-
-### Styling
-
--   SASS/SCSS preprocessing
--   Bootstrap 5 framework with custom overrides
--   Dark/light theme support with localStorage persistence
 
 ## Development
 
-### Built With
+### Commands
 
--   [Laravel](https://laravel.com/) - PHP framework
--   [Bootstrap 5](https://getbootstrap.com/) - Frontend framework
--   [Vite](https://vitejs.dev/) - Frontend tooling
--   [MySQL](https://www.mysql.com/) - Database
--   [Sendgrid](https://sendgrid.com/) - Email delivery
+- Assets (dev): `npm run dev`
+- Assets (prod): `npm run build`
+- Tests: `php artisan test` (or `ddev exec php artisan test`)
 
-### Compiling Assets
+### Git branches
 
--   Development: `npm run dev`
--   Production: `npm run build`
+- **main** — production-ready
+- **dev** — integration branch for features/fixes
+- Feature branches: `feat/…`, `fix/…`, `chore/…` as needed
 
-### Version Control Strategy
+### Commits
 
-We follow a simplified Git Flow approach:
-
-#### Branches
-
--   **main**: Production-ready code
--   **dev**: Integration branch for feature development
--   **feature/\***: Individual feature branches
--   **bugfix/\***: Bug fixes
--   **release/\***: Release preparation
-
-#### Commit Conventions
-
-We use conventional commits to maintain a clean history:
+[Conventional Commits](https://www.conventionalcommits.org/) style, for example:
 
 ```
-feat: add new faction filter component
-fix: correct dark mode contrast issues
-docs: update installation instructions
-style: format code according to PSR-12
-refactor: improve randomization algorithm
-test: add tests for faction selection
+feat: add expansion filter to shuffle form
+fix: correct deck image path on detail view
+docs: update README prerequisites
 ```
 
-## Style Guide
+## Style guide
 
-### PHP Coding Standards
-
--   PSR-12 compliant code formatting
--   DocBlocks for all classes and methods
--   Type hints for method parameters and return types
--   Laravel best practices for controllers, models, and services
-
-### JavaScript Standards
-
--   ES6+ syntax
--   Consistent naming conventions
--   Component-based organization
-
-### SASS/CSS Conventions
-
--   Component-based styling
--   Consistent naming using kebab-case
--   Responsive design principles
--   Dark/light theme compatibility
+- **PHP**: PSR-12, typed properties/parameters where appropriate, DocBlocks for public API per project conventions
+- **JS**: ES modules, match existing file style in `resources/js/`
+- **Blade / i18n**: User-visible strings via `__('frontend.*')` etc.; maintain **EN** (`resources/lang/en/`, `lang/en/`) and **DE** (`resources/lang/de/`, `lang/de/`) when changing copy
 
 ## License
 
-This project is licensed under the MIT License.
+MIT — see [LICENSE](LICENSE).
