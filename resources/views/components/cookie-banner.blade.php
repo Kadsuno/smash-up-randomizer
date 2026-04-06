@@ -119,4 +119,9 @@
             </div>
         </div>
     </div>
+
+    <button type="button" id="sur-cookie-fab" class="sur-cookie-fab" data-sur-open-cookie-settings
+        aria-label="{{ __('frontend.cookie_footer_cookie_settings') }}">
+        <i class="fas fa-cookie-bite fa-lg" aria-hidden="true"></i>
+    </button>
 @endif
