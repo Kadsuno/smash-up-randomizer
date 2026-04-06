@@ -17,5 +17,6 @@ yarn-error.log
 /.idea
 /.vscode
 laravel.sql
+db.sql
 /.ddev
 .ddev/commands/host/phpmyadmin
