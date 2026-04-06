@@ -7,7 +7,7 @@
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             @foreach($decks as $deck)
                 @if($deck->teaser)
-                <a href="{{ route('factionDetail', ['name' => $deck->name]) }}" class="group block rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">
+                <a href="{{ route('factionDetail', ['name' => $deck->name]) }}" class="group block rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60">
                     <div class="sur-card-interactive h-full overflow-hidden p-0 animate__animated animate__fadeIn">
                         @if($deck->image)
                             <img src="{{ asset($deck->image) }}" class="h-48 w-full object-cover transition duration-300 group-hover:scale-[1.02]" alt="{{ $deck->name }}">
@@ -17,7 +17,7 @@
                             </div>
                         @endif
                         <div class="p-5">
-                            <h2 class="mb-2 text-lg font-bold text-white group-hover:text-cyan-300">{{ $deck->name }}</h2>
+                            <h2 class="mb-2 text-lg font-bold text-white group-hover:text-indigo-300">{{ $deck->name }}</h2>
                             @if($deck->teaser)
                                 <p class="line-clamp-4 text-sm leading-relaxed text-zinc-400">{!! $deck->teaser !!}</p>
                             @else

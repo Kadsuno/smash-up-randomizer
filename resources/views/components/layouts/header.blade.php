@@ -36,13 +36,13 @@
         class="fixed top-0 z-50 w-full border-b border-white/10 bg-zinc-950/80 backdrop-blur-xl transition-colors duration-300"
     >
         <div class="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
-            <a class="flex min-h-11 items-center gap-2 rounded-lg pr-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60" href="{{ route('home') }}">
+            <a class="flex min-h-11 items-center gap-2 rounded-lg pr-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60" href="{{ route('home') }}">
                 <img src="{{ asset('images/favicons/favicon.ico') }}" class="h-8 w-8" alt="Logo" width="32" height="32">
                 <span class="font-bold tracking-tight text-white">Smash Up Randomizer</span>
             </a>
             <button
                 type="button"
-                class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-zinc-100 transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 lg:hidden"
+                class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-zinc-100 transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60 lg:hidden"
                 @click="open = !open"
                 :aria-expanded="open.toString()"
                 aria-controls="primary-nav-panel"

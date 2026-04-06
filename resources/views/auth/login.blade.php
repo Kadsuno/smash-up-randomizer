@@ -8,7 +8,7 @@
                 <x-auth-session-status class="mb-4" :status="session('status')" />
                 <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-                <div class="sur-card border-cyan-500/20 p-6 sm:p-8">
+                <div class="sur-card border-indigo-500/20 p-6 sm:p-8">
                     <h1 class="mb-6 text-center text-xl font-bold text-white sm:text-2xl">{{ __('frontend.login') }}</h1>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
@@ -27,7 +27,7 @@
 
                         <div class="mb-6 flex items-center gap-2">
                             <input id="remember_me" type="checkbox"
-                                class="h-4 w-4 rounded border-white/20 bg-zinc-800 text-cyan-500 focus:ring-cyan-500/50"
+                                class="h-4 w-4 rounded border-white/20 bg-zinc-800 text-indigo-500 focus:ring-indigo-500/50"
                                 name="remember">
                             <label for="remember_me" class="text-sm text-zinc-400">{{ __('frontend.remember_me') }}</label>
                         </div>

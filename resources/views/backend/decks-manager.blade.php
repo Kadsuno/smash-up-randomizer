@@ -10,7 +10,7 @@
                 @csrf
                 <label class="sr-only" for="csv-import">{{ __('backend.headline_csv') }}</label>
                 <input type="file" id="csv-import" name="csv" accept=".csv" required
-                    class="block w-full cursor-pointer rounded-xl border border-white/10 bg-zinc-900/80 px-3 py-2 text-sm text-zinc-200 file:mr-3 file:rounded-lg file:border-0 file:bg-cyan-600 file:px-3 file:py-1.5 file:text-sm file:font-semibold file:text-zinc-950 hover:file:bg-cyan-500">
+                    class="block w-full cursor-pointer rounded-xl border border-white/10 bg-zinc-900/80 px-3 py-2 text-sm text-zinc-200 file:mr-3 file:rounded-lg file:border-0 file:bg-indigo-600 file:px-3 file:py-1.5 file:text-sm file:font-semibold file:text-zinc-950 hover:file:bg-indigo-500">
                 <button class="sur-btn-secondary min-h-11 shrink-0" type="submit">{{ __('backend.upload') }}</button>
             </form>
         </div>
@@ -30,7 +30,7 @@
                                 <td class="px-4 py-3 font-medium text-zinc-100">{{ $deck->name }}</td>
                                 <td class="px-4 py-3">
                                     <div class="flex justify-end gap-2">
-                                        <a href="{{ route('edit-deck', $deck->name) }}" class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 text-zinc-200 transition hover:border-cyan-500/40 hover:text-cyan-300" title="{{ __('backend.edit_deck') }}">
+                                        <a href="{{ route('edit-deck', $deck->name) }}" class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 text-zinc-200 transition hover:border-indigo-500/40 hover:text-indigo-300" title="{{ __('backend.edit_deck') }}">
                                             <i class="fas fa-edit" aria-hidden="true"></i>
                                         </a>
                                         <a href="{{ route('delete-decks', $deck->name) }}" class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-red-500/30 text-red-300 transition hover:bg-red-500/10" title="{{ __('backend.delete_decks') }}" onclick="return confirm('{{ __('backend.confirm_delete') }}')">

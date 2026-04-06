@@ -2,19 +2,19 @@
     <div class="flex min-h-screen pt-14">
         <aside id="sidebar" class="sidebar relative min-h-[calc(100vh-3.5rem)] w-[250px] shrink-0 border-r border-white/10 bg-zinc-900 transition-[width] duration-300">
             <div class="flex items-center justify-end border-b border-white/10 p-3">
-                <button id="sidebarCollapse" type="button" class="absolute right-[-1.25rem] top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-zinc-800 text-zinc-200 shadow-lg transition hover:border-cyan-500/40 hover:text-cyan-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60" aria-label="Toggle sidebar">
+                <button id="sidebarCollapse" type="button" class="absolute right-[-1.25rem] top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-zinc-800 text-zinc-200 shadow-lg transition hover:border-indigo-500/40 hover:text-indigo-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60" aria-label="Toggle sidebar">
                     <i class="fas fa-chevron-left" aria-hidden="true"></i>
                 </button>
             </div>
             <ul class="flex flex-col gap-2 p-3">
                 <li>
-                    <a id="dashboard" href="{{ route('dashboard') }}" class="sidebar-link flex min-h-11 items-center justify-start rounded-full border border-transparent px-4 py-2 text-sm font-medium transition duration-200 {{ request()->routeIs('dashboard') ? 'border-cyan-500/40 bg-cyan-500/15 text-cyan-200' : 'bg-zinc-800/80 text-zinc-200 hover:border-white/10 hover:bg-white/5' }}">
+                    <a id="dashboard" href="{{ route('dashboard') }}" class="sidebar-link flex min-h-11 items-center justify-start rounded-full border border-transparent px-4 py-2 text-sm font-medium transition duration-200 {{ request()->routeIs('dashboard') ? 'border-indigo-500/40 bg-indigo-500/15 text-indigo-200' : 'bg-zinc-800/80 text-zinc-200 hover:border-white/10 hover:bg-white/5' }}">
                         <i class="fa-solid fa-house icon-margin min-w-[1.25rem] text-center" aria-hidden="true"></i>
                         <span class="menu-text">{{ __('backend.nav_dashboard') }}</span>
                     </a>
                 </li>
                 <li>
-                    <a id="decks-manager" href="{{ route('decks-manager') }}" class="sidebar-link flex min-h-11 items-center justify-start rounded-full border border-transparent px-4 py-2 text-sm font-medium transition duration-200 {{ request()->routeIs('decks-manager') ? 'border-cyan-500/40 bg-cyan-500/15 text-cyan-200' : 'bg-zinc-800/80 text-zinc-200 hover:border-white/10 hover:bg-white/5' }}">
+                    <a id="decks-manager" href="{{ route('decks-manager') }}" class="sidebar-link flex min-h-11 items-center justify-start rounded-full border border-transparent px-4 py-2 text-sm font-medium transition duration-200 {{ request()->routeIs('decks-manager') ? 'border-indigo-500/40 bg-indigo-500/15 text-indigo-200' : 'bg-zinc-800/80 text-zinc-200 hover:border-white/10 hover:bg-white/5' }}">
                         <i class="fa-solid fa-wrench icon-margin min-w-[1.25rem] text-center" aria-hidden="true"></i>
                         <span class="menu-text">{{ __('backend.nav_faction_manager') }}</span>
                     </a>
