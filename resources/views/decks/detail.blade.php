@@ -130,20 +130,6 @@
         overflow-x: hidden;
     }
 
-    .scroll-container {
-        height: 100vh;
-        overflow-y: scroll;
-        scroll-snap-type: y mandatory;
-        scroll-behavior: smooth;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-    }
-
-    .scroll-container::-webkit-scrollbar {
-        width: 0;
-        height: 0;
-    }
-
     .scroll-section {
         scroll-snap-align: start;
         position: relative;
