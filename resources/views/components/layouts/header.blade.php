@@ -20,7 +20,6 @@
     <meta name="robots" content="index,follow" />
     <meta name="googlebot" content="index,follow" />
     <title>Smash Up Randomizer</title>
-    <link rel="stylesheet" type="text/css" href="{{asset('vendor/cookie-consent/css/cookie-consent.css')}}">
     @vite(['resources/sass/app.scss'])
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/favicons/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicons/favicon-32x32.png') }}">
@@ -28,24 +27,6 @@
     <link rel="manifest" href="{{ asset('images/favicons/site.webmanifest') }}">
     <link rel="canonical" href="https://www.smash-up-randomizer.com">
 
-    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="fa5be6e6-ca00-4fe5-8b18-f965aa6731fa" data-blockingmode="auto" type="text/javascript"></script>
-    @if (config('matomo.enabled'))
-        <!-- Matomo -->
-        <script>
-            var _paq = window._paq = window._paq || [];
-            /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-            _paq.push(['trackPageView']);
-            _paq.push(['enableLinkTracking']);
-            (function() {
-                var u = @json(config('matomo.tracker_url'));
-                _paq.push(['setTrackerUrl', u + 'matomo.php']);
-                _paq.push(['setSiteId', @json(config('matomo.site_id'))]);
-                var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-                g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
-            })();
-        </script>
-        <!-- End Matomo Code -->
-    @endif
 </head>
 
 <body class="text-bg-dark bg-black">
