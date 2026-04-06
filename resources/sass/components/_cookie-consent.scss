@@ -3,6 +3,7 @@
 $sur-cookie-accent: #17a2b8;
 $sur-cookie-accent-hover: #3fc9dc;
 $sur-cookie-bar-z: 1040;
+$sur-cookie-fab-z: 1045;
 
 .sur-cookie-bar {
     z-index: $sur-cookie-bar-z;
@@ -44,6 +45,48 @@ body.sur-cookie-bar-visible {
 
     @media (min-width: 992px) {
         padding-bottom: 5.5rem;
+    }
+
+    .sur-cookie-fab {
+        bottom: max(8.5rem, env(safe-area-inset-bottom));
+    }
+}
+
+.sur-cookie-fab {
+    position: fixed;
+    right: max(1rem, env(safe-area-inset-right));
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    z-index: $sur-cookie-fab-z;
+    width: 3.25rem;
+    height: 3.25rem;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(20, 20, 20, 0.94);
+    border: 1px solid rgba($sur-cookie-accent, 0.55);
+    color: $sur-cookie-accent;
+    box-shadow: 0 4px 22px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        color 0.2s ease;
+
+    &:hover {
+        color: #fff;
+        background-color: rgba($sur-cookie-accent, 0.28);
+        border-color: $sur-cookie-accent;
+        box-shadow: 0 6px 28px rgba(0, 0, 0, 0.55);
+        transform: translateY(-3px);
+    }
+
+    &:focus-visible {
+        outline: 2px solid $sur-cookie-accent;
+        outline-offset: 3px;
     }
 }
 
