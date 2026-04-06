@@ -16,6 +16,7 @@ All notable changes to this project are documented in this file.
 
 ### Fixed
 
+- Define `mail.mailers.brevo` in `config/mail.php` so `MAIL_MAILER=brevo` works (Brevo SMTP; same `MAIL_*` as `smtp`, default host `smtp-relay.brevo.com`).
 - Add `sessions` and `cache` / `cache_locks` migrations for apps using `SESSION_DRIVER=database` and database-backed cache (Laravel 13 default-style tables).
 
 ### Changed
