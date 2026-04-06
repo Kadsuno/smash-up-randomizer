@@ -15,6 +15,7 @@ All notable changes to this project are documented in this file.
 ### Added
 
 - **Marketing landing home:** Rebuilt `/` as a campaign-style page — hero with dual CTAs (shuffle, factions, contact), autoplay image carousel (pause on hover, dots, prev/next), three-column feature grid, rotating quote carousel, gradient CTA band, and compact legacy “What is Smash Up?” cards; shuffle dialog unchanged. New Alpine registrars in `resources/js/landing-home.js`. Feature test `HomeLandingTest`.
+- **Landing carousel imagery:** Hero slider images are local JPEGs from **Pexels** (free license); filenames under `public/images/landing/`, attribution in `docs/image-credits.md`. Alt text describes the stock photos (no implied official game artwork).
 
 ### Changed
 
