@@ -1,6 +1,7 @@
 <?php
 return [
     'skip_to_content' => 'Zum Hauptinhalt springen',
+    'logo_alt' => 'Smash Up Randomizer',
     'start_header' => 'Willkommen zum Smash Up Randomizer',
     'start_teaser' => 'Mithilfe des Smash Up Randomizers können Fraktionen des Kartenspiels Smash Up gemischt und Spielern zugewiesen werden.',
     'number_players' => 'Anzahl der Spieler',

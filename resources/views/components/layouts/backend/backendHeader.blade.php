@@ -8,6 +8,7 @@
     <title>Smash Up Randomizer Backend</title>
 
     @vite(['resources/css/app.css'])
+    <link rel="icon" type="image/svg+xml" href="{{ asset('images/brand/logo-mark.svg') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/favicons/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicons/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicons/favicon-16x16.png') }}">
@@ -18,7 +19,7 @@
     <nav x-data="{ menuOpen: false, userOpen: false }" @keydown.escape.window="menuOpen = false; userOpen = false" class="fixed top-0 z-50 w-full border-b border-indigo-500/20 bg-linear-to-r from-zinc-900 via-zinc-950 to-zinc-900 shadow-lg shadow-black/40">
         <div class="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
             <a class="flex min-h-11 items-center gap-2 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60" href="{{ route('dashboard') }}">
-                <img src="{{ asset('images/favicons/favicon.ico') }}" class="h-8 w-8" alt="Logo" width="32" height="32">
+                <img src="{{ asset('images/brand/logo-mark.svg') }}" class="h-8 w-8 shrink-0" alt="{{ __('frontend.logo_alt') }}" width="32" height="32" decoding="async">
                 <span class="font-bold text-white">Smash Up Randomizer</span>
             </a>
             <div class="flex items-center gap-2">

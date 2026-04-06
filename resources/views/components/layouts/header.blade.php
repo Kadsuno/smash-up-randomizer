@@ -8,7 +8,7 @@
     <meta name="description" content="With the help of the Smash Up Randomizer, factions of the card game Smash Up can be shuffled and assigned to players.">
     <meta name="keywords" content="SmashUp, Card game, Card, Game, Randomizer">
     <meta property="og:title" content="Assigning randomized factions" />
-    <meta property="og:image" content="{{ asset('images/favicons/favicon.ico') }}" />
+    <meta property="og:image" content="{{ asset('images/favicons/android-chrome-512x512.png') }}" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ url()->current() }}" />
     <meta property="og:site_name" content="SmashUp Randomizer" />
@@ -16,11 +16,12 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Assigning randomized factions" />
     <meta name="twitter:description" content="With the help of the Smash Up Randomizer, factions of the card game Smash Up can be shuffled and assigned to players." />
-    <meta name="twitter:image" content="{{ asset('images/favicons/favicon.ico') }}" />
+    <meta name="twitter:image" content="{{ asset('images/favicons/android-chrome-512x512.png') }}" />
     <meta name="robots" content="index,follow" />
     <meta name="googlebot" content="index,follow" />
     <title>Smash Up Randomizer</title>
     @vite(['resources/css/app.css'])
+    <link rel="icon" type="image/svg+xml" href="{{ asset('images/brand/logo-mark.svg') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/favicons/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicons/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicons/favicon-16x16.png') }}">
@@ -38,7 +39,7 @@
     >
         <div class="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
             <a class="flex min-h-11 items-center gap-2 rounded-lg pr-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60" href="{{ route('home') }}">
-                <img src="{{ asset('images/favicons/favicon.ico') }}" class="h-8 w-8" alt="Logo" width="32" height="32">
+                <img src="{{ asset('images/brand/logo-mark.svg') }}" class="h-8 w-8 shrink-0" alt="{{ __('frontend.logo_alt') }}" width="32" height="32" decoding="async">
                 <span class="font-bold tracking-tight text-white">Smash Up Randomizer</span>
             </a>
             <button
