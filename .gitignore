@@ -17,6 +17,6 @@ yarn-error.log
 /.idea
 /.vscode
 laravel.sql
-package-lock.json
 /.ddev
 .ddev/commands/host/phpmyadmin
+db.sql
