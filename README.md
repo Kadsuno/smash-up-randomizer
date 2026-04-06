@@ -19,7 +19,7 @@ Smash Up Randomizer supports:
 
 - Random assignment of factions to players (player count, include/exclude factions via the **home** page shuffle modal → `POST /shuffle/result`)
 - Browsing all factions and per-faction detail pages
-- Contact form with email delivery (SendGrid)
+- Contact form with email delivery (Laravel SMTP, e.g. Brevo)
 - Admin area for managing deck data (authenticated users)
 - XML sitemap (`/sitemap`) via `spatie/laravel-sitemap`
 - Dark-themed, responsive frontend (Bootstrap 5, Vite, Blade)
@@ -86,7 +86,7 @@ Local stack is defined in `.ddev/config.yaml` (PHP 8.3, MariaDB 10.4, Node 18, n
     ddev exec php artisan key:generate
     ```
 
-6. Configure `.env` (database credentials are usually pre-filled for DDEV; adjust `MAIL_*` / SendGrid for email). Optional **Matomo** (public site analytics): `MATOMO_ENABLED` (default `true`), `MATOMO_TRACKER_URL` (default `https://analytics.kadsuno.com`), `MATOMO_SITE_ID` (default `1`) — see `config/matomo.php`. Set `MATOMO_ENABLED=false` locally if you do not want the tracker script loaded. Optional **Sentry** (error monitoring): set `SENTRY_LARAVEL_DSN` from your Sentry project (leave empty to disable). See `config/sentry.php` and run `php artisan sentry:test` after configuring. For full stack trace *argument* values in PHP error reports, set `zend.exception_ignore_args=Off` in `php.ini` (server-level).
+6. Configure `.env` (database credentials are usually pre-filled for DDEV; set `MAIL_*` for outbound mail — local dev often uses Mailpit on `127.0.0.1:1025`; production can use **Brevo SMTP** — see **Email** below). Optional **Matomo** (public site analytics): `MATOMO_ENABLED` (default `true`), `MATOMO_TRACKER_URL` (default `https://analytics.kadsuno.com`), `MATOMO_SITE_ID` (default `1`) — see `config/matomo.php`. Set `MATOMO_ENABLED=false` locally if you do not want the tracker script loaded. Optional **Sentry** (error monitoring): set `SENTRY_LARAVEL_DSN` from your Sentry project (leave empty to disable). See `config/sentry.php` and run `php artisan sentry:test` after configuring. For full stack trace *argument* values in PHP error reports, set `zend.exception_ignore_args=Off` in `php.ini` (server-level).
 
 7. Migrations:
 
@@ -153,7 +153,21 @@ Blade under `resources/views/`: `start/`, `shuffle/`, `decks/`, `frontend/`, `ba
 
 ### Email
 
-`App\Services\SendgridMailService` uses the SendGrid API (`services.sendgrid.api_key` / env). Symfony mailer transports are also available in `composer.json` for alternative mail configuration.
+Transactional mail (contact form confirmations, `php artisan email:test`, scheduled daily test) uses Laravel’s default mailer via `App\Services\TransactionalMailService` and `config/mail.php` (`MAIL_*`).
+
+**Production (Brevo SMTP):** In the Brevo dashboard, create an SMTP key and verify your sending domain or sender. Example `.env` values:
+
+- `MAIL_MAILER=smtp`
+- `MAIL_HOST=smtp-relay.brevo.com`
+- `MAIL_PORT=587`
+- `MAIL_ENCRYPTION=tls`
+- `MAIL_USERNAME` — usually your Brevo account email (exact value is shown in Brevo SMTP settings)
+- `MAIL_PASSWORD` — SMTP key from Brevo (not your login password)
+- `MAIL_FROM_ADDRESS` / `MAIL_FROM_NAME` — must match a verified sender in Brevo
+
+**Local:** Point `MAIL_HOST` / `MAIL_PORT` at your mail catcher (e.g. Mailpit on `127.0.0.1:1025` with `MAIL_ENCRYPTION=null`).
+
+Other Symfony mail transports remain available in `composer.json` if you switch `MAIL_MAILER` (Mailgun, Postmark, etc.).
 
 ### Routes (high level)
 

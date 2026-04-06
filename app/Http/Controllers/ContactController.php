@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Contact;
-use App\Services\SendgridMailService;
+use App\Services\TransactionalMailService;
 
 class ContactController extends Controller
 {
@@ -44,9 +44,9 @@ class ContactController extends Controller
 
         Contact::create($request->all());
 
-        $mailer = new SendgridMailService();
+        $mailer = new TransactionalMailService();
 
-        $response = $mailer->send(
+        $mailer->send(
             $request->email,
             'Thank you for contacting Smash Up Randomizer',
             'Thank you for contacting Smash Up Randomizer. We will get back to you shortly.',
@@ -60,8 +60,8 @@ class ContactController extends Controller
             ]
         );
 
-        $response = $mailer->send(
-            'info@smash-up-randomizer.com',
+        $mailer->send(
+            (string) config('mail.admin_email', 'info@smash-up-randomizer.com'),
             'New contact from Smash Up Randomizer',
             'New contact from Smash Up Randomizer. Name: ' . $request->name . ' Email: ' . $request->email . ' Phone: ' . $request->phone . ' Subject: ' . $request->subject . ' Message: ' . $request->message,
             'emails.contact',
