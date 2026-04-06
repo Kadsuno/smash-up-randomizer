@@ -8,11 +8,11 @@ use Tests\TestCase;
 
 class MailConfigTest extends TestCase
 {
-    public function test_brevo_mailer_is_defined_as_smtp(): void
+    public function test_brevo_mailer_uses_api_transport(): void
     {
         $brevo = config('mail.mailers.brevo');
         $this->assertIsArray($brevo);
-        $this->assertSame('smtp', $brevo['transport']);
-        $this->assertArrayHasKey('host', $brevo);
+        $this->assertSame('brevo', $brevo['transport']);
+        $this->assertArrayHasKey('api_key', $brevo);
     }
 }
