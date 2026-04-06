@@ -86,7 +86,7 @@ Local stack is defined in `.ddev/config.yaml` (PHP 8.3, MariaDB 10.4, Node 18, n
     ddev exec php artisan key:generate
     ```
 
-6. Configure `.env` (database credentials are usually pre-filled for DDEV; adjust `MAIL_*` / SendGrid for email).
+6. Configure `.env` (database credentials are usually pre-filled for DDEV; adjust `MAIL_*` / SendGrid for email). Optional **Matomo** (public site analytics): `MATOMO_ENABLED` (default `true`), `MATOMO_TRACKER_URL` (default `https://analytics.kadsuno.com`), `MATOMO_SITE_ID` (default `1`) — see `config/matomo.php`. Set `MATOMO_ENABLED=false` locally if you do not want the tracker script loaded.
 
 7. Migrations:
 
