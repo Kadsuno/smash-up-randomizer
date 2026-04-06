@@ -11,15 +11,23 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('decks', function (Blueprint $table) {
-            $table->dropColumn([
-                'strengths',
-                'weaknesses',
-                'strategy',
-                'counterStrategy',
-                'antiSynergy',
-                'deckType',
-            ]);
+        $columns = [
+            'strengths',
+            'weaknesses',
+            'strategy',
+            'counterStrategy',
+            'antiSynergy',
+            'deckType',
+        ];
+
+        $toDrop = array_values(array_filter($columns, fn (string $col) => Schema::hasColumn('decks', $col)));
+
+        if ($toDrop === []) {
+            return;
+        }
+
+        Schema::table('decks', function (Blueprint $table) use ($toDrop) {
+            $table->dropColumn($toDrop);
         });
     }
 

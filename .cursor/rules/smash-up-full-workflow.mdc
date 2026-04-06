@@ -236,6 +236,6 @@ Analyze (roadmap + public-copy check) → ticket → plan (if required) → bran
 
 ## Project-specific stack (reminder)
 
-- Laravel 10, **PHP 8.1+** (`composer.json`), **MariaDB 10.4 in DDEV** (MySQL-compatible in prod is fine), Blade, Sanctum & Passport (OAuth tables), **Vite 5**, Bootstrap 5, jQuery/Alpine as in `package.json`, SASS.
+- Laravel 13, **PHP 8.3+** (`composer.json`), **MariaDB 10.4 in DDEV** (MySQL-compatible in prod is fine), Blade, Sanctum & Passport (OAuth tables), **Vite 5**, Bootstrap 5, jQuery/Alpine as in `package.json`, SASS.
 - Bilingual: maintain **EN and DE** when changing user-facing strings (`resources/lang/`, `lang/`).
 - **Canonical onboarding:** `README.md` (DDEV hostname: `name` in `.ddev/config.yaml`, currently `smash-up-randomizer.ddev.site`).
