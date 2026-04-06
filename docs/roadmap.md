@@ -13,6 +13,7 @@ High-level product and engineering priorities. Update this file in the same PR w
 | -------- | ---------------------------------------------------------------------------- |
 | Core app | Laravel 13, Blade, Vite, Bootstrap 5, bilingual frontend strings               |
 | Privacy  | Cookie consent (Cookiebot); web analytics via **self-hosted Matomo** (`analytics.kadsuno.com`), configurable (see `config/matomo.php`, CHANGELOG) |
+| Ops      | Optional **Sentry** error reporting (`sentry/sentry-laravel`, `SENTRY_LARAVEL_DSN`, `config/sentry.php`) |
 
 
 *Add rows or subsections here as major capabilities ship.*
