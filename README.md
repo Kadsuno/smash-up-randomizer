@@ -86,7 +86,7 @@ Local stack is defined in `.ddev/config.yaml` (PHP 8.3, MariaDB 10.4, Node 18, n
     ddev exec php artisan key:generate
     ```
 
-6. Configure `.env` (database credentials are usually pre-filled for DDEV; adjust `MAIL_*` / SendGrid for email). Optional **Matomo** (public site analytics): `MATOMO_ENABLED` (default `true`), `MATOMO_TRACKER_URL` (default `https://analytics.kadsuno.com`), `MATOMO_SITE_ID` (default `1`) — see `config/matomo.php`. Set `MATOMO_ENABLED=false` locally if you do not want the tracker script loaded.
+6. Configure `.env` (database credentials are usually pre-filled for DDEV; adjust `MAIL_*` / SendGrid for email). Optional **Matomo** (public site analytics): `MATOMO_ENABLED` (default `true`), `MATOMO_TRACKER_URL` (default `https://analytics.kadsuno.com`), `MATOMO_SITE_ID` (default `1`) — see `config/matomo.php`. Set `MATOMO_ENABLED=false` locally if you do not want the tracker script loaded. Optional **Sentry** (error monitoring): set `SENTRY_LARAVEL_DSN` from your Sentry project (leave empty to disable). See `config/sentry.php` and run `php artisan sentry:test` after configuring. For full stack trace *argument* values in PHP error reports, set `zend.exception_ignore_args=Off` in `php.ini` (server-level).
 
 7. Migrations:
 
