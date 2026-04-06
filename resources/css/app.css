@@ -12,7 +12,7 @@
 }
 
 /*
- * Design tokens: dark-first, mobile-first.
+ * Design tokens: dark-first, mobile-first. Accent: indigo / violet (SaaS-style).
  */
 
 @layer base {
@@ -42,23 +42,23 @@
 
 @layer components {
     .sur-link-nav {
-        @apply rounded-lg px-3 py-2 text-sm font-medium text-zinc-200 transition duration-200 ease-out hover:bg-white/5 hover:text-cyan-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60;
+        @apply rounded-lg px-3 py-2 text-sm font-medium text-zinc-200 transition duration-200 ease-out hover:bg-white/5 hover:text-indigo-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60;
     }
 
     .sur-btn-primary {
-        @apply inline-flex min-h-11 items-center justify-center rounded-xl bg-cyan-500 px-5 py-2.5 text-sm font-semibold text-zinc-950 shadow-lg shadow-cyan-500/20 transition duration-200 ease-out hover:bg-cyan-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 active:scale-[0.98];
+        @apply inline-flex min-h-11 items-center justify-center rounded-xl bg-indigo-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition duration-200 ease-out hover:bg-indigo-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 active:scale-[0.98];
     }
 
     .sur-btn-secondary {
-        @apply inline-flex min-h-11 items-center justify-center rounded-xl border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-zinc-100 transition duration-200 hover:border-white/25 hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 active:scale-[0.98];
+        @apply inline-flex min-h-11 items-center justify-center rounded-xl border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-zinc-100 transition duration-200 hover:border-white/25 hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50 active:scale-[0.98];
     }
 
     .sur-btn-ghost {
-        @apply inline-flex min-h-11 items-center justify-center rounded-xl border border-white/10 bg-transparent px-4 py-2 text-sm font-medium text-zinc-200 transition hover:border-cyan-500/40 hover:text-cyan-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50;
+        @apply inline-flex min-h-11 items-center justify-center rounded-xl border border-white/10 bg-transparent px-4 py-2 text-sm font-medium text-zinc-200 transition hover:border-indigo-500/40 hover:text-indigo-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50;
     }
 
     .sur-input {
-        @apply w-full rounded-xl border border-white/10 bg-zinc-900/80 px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-500 shadow-inner transition focus:border-cyan-500/50 focus:outline-none focus:ring-2 focus:ring-cyan-500/30;
+        @apply w-full rounded-xl border border-white/10 bg-zinc-900/80 px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-500 shadow-inner transition focus:border-indigo-500/50 focus:outline-none focus:ring-2 focus:ring-indigo-500/30;
     }
 
     .sur-card {
@@ -66,7 +66,7 @@
     }
 
     .sur-card-interactive {
-        @apply rounded-2xl border border-white/10 bg-zinc-900/80 p-6 shadow-xl shadow-black/40 backdrop-blur-sm transition duration-300 ease-out hover:-translate-y-1 hover:border-cyan-500/25 hover:shadow-cyan-500/10;
+        @apply rounded-2xl border border-white/10 bg-zinc-900/80 p-6 shadow-xl shadow-black/40 backdrop-blur-sm transition duration-300 ease-out hover:-translate-y-1 hover:border-indigo-500/25 hover:shadow-indigo-500/10;
     }
 
     .needs-validation.was-validated .sur-input:invalid,
@@ -77,22 +77,22 @@
 
     .sur-cookie-bar {
         z-index: 1040;
-        border-top: 1px solid rgba(34, 211, 238, 0.35);
+        border-top: 1px solid rgba(99, 102, 241, 0.35);
         box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.45);
         backdrop-filter: blur(10px);
     }
 
     .btn-sur-cookie-primary {
-        color: #0b0b0b;
-        background-color: #22d3ee;
-        border: 1px solid #22d3ee;
-        @apply inline-flex min-h-9 items-center justify-center rounded-lg px-3 py-1.5 text-sm font-semibold transition duration-200 hover:bg-cyan-300 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300;
+        color: #fafafa;
+        background-color: #6366f1;
+        border: 1px solid #6366f1;
+        @apply inline-flex min-h-9 items-center justify-center rounded-lg px-3 py-1.5 text-sm font-semibold transition duration-200 hover:bg-indigo-400 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300;
     }
 
     .btn-sur-cookie-outline {
-        color: #22d3ee;
-        border: 1px solid rgba(34, 211, 238, 0.55);
-        @apply inline-flex min-h-9 items-center justify-center rounded-lg bg-transparent px-3 py-1.5 text-sm font-medium transition duration-200 hover:border-cyan-400 hover:bg-cyan-500/15 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60;
+        color: #a5b4fc;
+        border: 1px solid rgba(129, 140, 248, 0.55);
+        @apply inline-flex min-h-9 items-center justify-center rounded-lg bg-transparent px-3 py-1.5 text-sm font-medium transition duration-200 hover:border-indigo-400 hover:bg-indigo-500/15 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60;
     }
 
     body.sur-cookie-bar-visible {
@@ -122,8 +122,8 @@
         justify-content: center;
         border-radius: 9999px;
         background: rgba(20, 20, 20, 0.94);
-        border: 1px solid rgba(34, 211, 238, 0.55);
-        color: #22d3ee;
+        border: 1px solid rgba(129, 140, 248, 0.55);
+        color: #a5b4fc;
         box-shadow: 0 4px 22px rgba(0, 0, 0, 0.5);
         cursor: pointer;
         transition:
@@ -136,14 +136,14 @@
 
     .sur-cookie-fab:hover {
         color: #fff;
-        background-color: rgba(34, 211, 238, 0.28);
-        border-color: #22d3ee;
+        background-color: rgba(99, 102, 241, 0.28);
+        border-color: #818cf8;
         box-shadow: 0 6px 28px rgba(0, 0, 0, 0.55);
         transform: translateY(-3px);
     }
 
     .sur-cookie-fab:focus-visible {
-        outline: 2px solid #22d3ee;
+        outline: 2px solid #818cf8;
         outline-offset: 3px;
     }
 
@@ -195,6 +195,6 @@
     }
 
     .sur-progress-fill {
-        @apply h-full rounded-full bg-linear-to-r from-cyan-600 to-cyan-400 transition-all duration-300 ease-out;
+        @apply h-full rounded-full bg-linear-to-r from-indigo-600 via-indigo-500 to-violet-500 transition-all duration-300 ease-out;
     }
 }

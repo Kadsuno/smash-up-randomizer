@@ -13,17 +13,17 @@
         </div>
         <div class="grid gap-6 md:grid-cols-3">
             <div class="sur-card border-white/10">
-                <h2 class="mb-2 text-lg font-semibold text-cyan-300">{{ __('backend.dashboard_quick_stats') }}</h2>
+                <h2 class="mb-2 text-lg font-semibold text-indigo-300">{{ __('backend.dashboard_quick_stats') }}</h2>
                 <p class="mb-4 text-sm text-zinc-400">{{ __('backend.dashboard_stats_description') }}</p>
                 <a href="#" class="sur-btn-ghost min-h-10 text-sm">{{ __('backend.view_stats') }}</a>
             </div>
             <div class="sur-card border-white/10">
-                <h2 class="mb-2 text-lg font-semibold text-cyan-300">{{ __('backend.dashboard_recent_activity') }}</h2>
+                <h2 class="mb-2 text-lg font-semibold text-indigo-300">{{ __('backend.dashboard_recent_activity') }}</h2>
                 <p class="mb-4 text-sm text-zinc-400">{{ __('backend.dashboard_activity_description') }}</p>
                 <a href="#" class="sur-btn-ghost min-h-10 text-sm">{{ __('backend.view_activity') }}</a>
             </div>
             <div class="sur-card border-white/10">
-                <h2 class="mb-2 text-lg font-semibold text-cyan-300">{{ __('backend.dashboard_quick_actions') }}</h2>
+                <h2 class="mb-2 text-lg font-semibold text-indigo-300">{{ __('backend.dashboard_quick_actions') }}</h2>
                 <p class="mb-4 text-sm text-zinc-400">{{ __('backend.dashboard_actions_description') }}</p>
                 <a href="#" class="sur-btn-ghost min-h-10 text-sm">{{ __('backend.perform_action') }}</a>
             </div>

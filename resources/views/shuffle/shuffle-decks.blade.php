@@ -7,8 +7,8 @@
                     <div class="grid gap-6 md:grid-cols-2">
                         @foreach ($selectedDecks as $playerDecks)
                         <div class="animate__animated animate__fadeInUp" style="animation-delay: {{ $loop->index * 0.2 }}s;">
-                            <div class="sur-card overflow-hidden border-cyan-500/20 p-0">
-                                <div class="bg-linear-to-r from-cyan-700 to-cyan-600 px-4 py-3 text-center">
+                            <div class="sur-card overflow-hidden border-indigo-500/20 p-0">
+                                <div class="bg-linear-to-r from-indigo-700 via-indigo-600 to-violet-600 px-4 py-3 text-center">
                                     <h2 class="text-lg font-bold text-white">
                                         {{ __('frontend.player') }} {{ $loop->iteration }}
                                     </h2>

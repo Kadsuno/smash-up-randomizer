@@ -5,7 +5,7 @@
         </h1>
 
         <div class="sur-card mb-6 border-white/10">
-            <h2 class="mb-3 text-lg font-semibold text-cyan-300">{{ __('frontend.imprint_tmg') }}</h2>
+            <h2 class="mb-3 text-lg font-semibold text-indigo-300">{{ __('frontend.imprint_tmg') }}</h2>
             <p class="leading-relaxed text-zinc-300">
                 Mike Rauch <br>
                 Im Turmswinkel 12<br>
@@ -14,18 +14,18 @@
         </div>
 
         <div class="sur-card mb-6 border-white/10">
-            <h2 class="mb-3 text-lg font-semibold text-cyan-300">{{ __('frontend.imprint_represent') }}</h2>
+            <h2 class="mb-3 text-lg font-semibold text-indigo-300">{{ __('frontend.imprint_represent') }}</h2>
             <p class="text-zinc-300">Mike Rauch</p>
         </div>
 
         <div class="sur-card mb-10 border-white/10">
-            <h2 class="mb-3 text-lg font-semibold text-cyan-300">{{ __('frontend.imprint_contact') }}</h2>
+            <h2 class="mb-3 text-lg font-semibold text-indigo-300">{{ __('frontend.imprint_contact') }}</h2>
             <p class="mb-2 text-zinc-300">
-                <i class="fas fa-phone-alt me-2 text-cyan-500" aria-hidden="true"></i>{{ __('frontend.imprint_phone') }}: 0531-21939351
+                <i class="fas fa-phone-alt me-2 text-indigo-500" aria-hidden="true"></i>{{ __('frontend.imprint_phone') }}: 0531-21939351
             </p>
             <p class="text-zinc-300">
-                <i class="fas fa-envelope me-2 text-cyan-500" aria-hidden="true"></i>{{ __('frontend.imprint_email') }}:
-                <a href="mailto:info@smash-up-randomizer.com" class="text-cyan-400 underline decoration-cyan-500/40 underline-offset-2 hover:text-cyan-300">
+                <i class="fas fa-envelope me-2 text-indigo-500" aria-hidden="true"></i>{{ __('frontend.imprint_email') }}:
+                <a href="mailto:info@smash-up-randomizer.com" class="text-indigo-400 underline decoration-indigo-500/40 underline-offset-2 hover:text-indigo-300">
                     info@smash-up-randomizer.com
                 </a>
             </p>

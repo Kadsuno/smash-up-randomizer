@@ -11,7 +11,7 @@
     <body class="min-h-screen bg-zinc-950 antialiased">
         <div class="flex min-h-screen items-center justify-center px-4 py-12">
             <div class="max-w-xl text-center">
-                <p class="text-6xl font-black text-cyan-500/90 sm:text-7xl">@yield('code')</p>
+                <p class="text-6xl font-black text-indigo-500/90 sm:text-7xl">@yield('code')</p>
                 <p class="mt-4 text-lg font-medium text-zinc-300">@yield('message')</p>
             </div>
         </div>

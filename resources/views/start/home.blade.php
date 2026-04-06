@@ -45,7 +45,7 @@
         <div class="flex max-h-[90vh] flex-col">
             <div class="flex items-center justify-between gap-4 border-b border-white/10 px-4 py-4 sm:px-6">
                 <h2 class="text-lg font-semibold" id="shuffleModalTitle">{{ __('frontend.shuffle') }}</h2>
-                <button type="button" class="flex h-11 min-w-11 items-center justify-center rounded-lg text-zinc-400 transition hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60" data-close-shuffle-modal aria-label="Close">
+                <button type="button" class="flex h-11 min-w-11 items-center justify-center rounded-lg text-zinc-400 transition hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60" data-close-shuffle-modal aria-label="Close">
                     <span class="text-xl leading-none" aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -58,7 +58,7 @@
                     </div>
 
                     <div class="mb-6 flex justify-between gap-2 text-xs text-zinc-500 sm:text-sm">
-                        <span class="step-label active font-medium text-cyan-400">Number of Players</span>
+                        <span class="step-label active font-medium text-indigo-400">Number of Players</span>
                         <span class="step-label">Include Factions</span>
                         <span class="step-label">Exclude Factions</span>
                     </div>
@@ -88,7 +88,7 @@
                                 @foreach($factions as $faction)
                                     <div class="faction-item">
                                         <input class="peer sr-only include-faction" type="checkbox" name="includeFactions[]" value="{{ $faction->name }}" id="include{{ $faction->id }}">
-                                        <label class="flex w-full min-h-11 cursor-pointer items-center justify-center rounded-xl border border-white/15 bg-zinc-800/80 px-2 py-2 text-center text-xs font-medium text-zinc-200 transition hover:border-cyan-500/40 peer-checked:border-cyan-500 peer-checked:bg-cyan-500/15 peer-checked:text-cyan-200 sm:text-sm" for="include{{ $faction->id }}">
+                                        <label class="flex w-full min-h-11 cursor-pointer items-center justify-center rounded-xl border border-white/15 bg-zinc-800/80 px-2 py-2 text-center text-xs font-medium text-zinc-200 transition hover:border-indigo-500/40 peer-checked:border-indigo-500 peer-checked:bg-indigo-500/15 peer-checked:text-indigo-200 sm:text-sm" for="include{{ $faction->id }}">
                                             {{ $faction->name }}
                                         </label>
                                     </div>
@@ -112,7 +112,7 @@
                                 @foreach($factions as $faction)
                                     <div class="faction-item">
                                         <input class="peer sr-only exclude-faction" type="checkbox" name="excludeFactions[]" value="{{ $faction->name }}" id="exclude{{ $faction->id }}">
-                                        <label class="flex w-full min-h-11 cursor-pointer items-center justify-center rounded-xl border border-white/15 bg-zinc-800/80 px-2 py-2 text-center text-xs font-medium text-zinc-200 transition hover:border-cyan-500/40 peer-checked:border-cyan-500 peer-checked:bg-cyan-500/15 peer-checked:text-cyan-200 sm:text-sm" for="exclude{{ $faction->id }}">
+                                        <label class="flex w-full min-h-11 cursor-pointer items-center justify-center rounded-xl border border-white/15 bg-zinc-800/80 px-2 py-2 text-center text-xs font-medium text-zinc-200 transition hover:border-indigo-500/40 peer-checked:border-indigo-500 peer-checked:bg-indigo-500/15 peer-checked:text-indigo-200 sm:text-sm" for="exclude{{ $faction->id }}">
                                             {{ $faction->name }}
                                         </label>
                                     </div>
@@ -156,7 +156,7 @@
         justify-content: center;
         font-size: 0.75rem;
         font-weight: 600;
-        color: #0c4a6e;
+        color: #eef2ff;
     }
     .step-labels {
         display: flex;
@@ -168,7 +168,7 @@
         color: #71717a;
     }
     .step-label.active {
-        color: #22d3ee;
+        color: #a5b4fc;
         font-weight: 600;
     }
     .faction-grid {
