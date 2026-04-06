@@ -490,3 +490,8 @@ html::-webkit-scrollbar-thumb:active,
         scroll-behavior: auto;
     }
 }
+
+/* Landing home — carousel chrome */
+.sur-landing-carousel-btn {
+    @apply pointer-events-auto flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-zinc-950/70 text-sm text-white shadow-lg shadow-black/40 backdrop-blur-md transition hover:border-indigo-400/45 hover:bg-indigo-500/15 hover:text-indigo-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60 sm:h-11 sm:w-11;
+}

@@ -12,6 +12,10 @@ All notable changes to this project are documented in this file.
 - **Cookie consent:** first-party UI (dark-themed bottom strip + preference modal with categories, Cookiebot-style actions) stores analytics preference in the browser and loads Matomo only after opt-in. A floating cookie icon reopens settings; Cookiebot dependency removed.
 - **Sentry** (`sentry/sentry-laravel`): unhandled exceptions can be reported to Sentry when `SENTRY_LARAVEL_DSN` is set in `.env`. Configuration in `config/sentry.php`; exception handling wired in `bootstrap/app.php`. Use `php artisan sentry:test` to verify after configuring the DSN.
 
+### Added
+
+- **Marketing landing home:** Rebuilt `/` as a campaign-style page — hero with dual CTAs (shuffle, factions, contact), autoplay image carousel (pause on hover, dots, prev/next), three-column feature grid, rotating quote carousel, gradient CTA band, and compact legacy “What is Smash Up?” cards; shuffle dialog unchanged. New Alpine registrars in `resources/js/landing-home.js`. Feature test `HomeLandingTest`.
+
 ### Changed
 
 - **Scrollbars:** Document-wide (`html`) scrollbar uses shared SUR-themed styling (indigo/violet gradient thumb, zinc track with indigo hairline, glow). The same chrome applies to `.scroll-container` (faction detail), and the utility class `.sur-scrollbar` is used on scrollable regions (e.g. shuffle modal body, cookie preference panel).
