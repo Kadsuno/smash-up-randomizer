@@ -1,0 +1,57 @@
+---
+description: Structured Markdown tickets for Smash Up Randomizer (English)
+alwaysApply: true
+---
+
+## Ticket authoring (Markdown)
+
+- **General**
+  - Tickets are written in **English**.
+  - Use clear, concise language; avoid unnecessary fluff.
+  - One ticket = one coherent, shippable change (feature, improvement, bug fix, chore).
+  - Prefer splitting large changes into multiple smaller tickets.
+- **Markdown structure** — use this base structure for **all** tickets:
+
+```md
+## Title
+Short, imperative, and specific (e.g. "Add faction filter to randomizer", "Fix session expiry on deck save").
+
+## Summary
+1–3 sentences describing what should change and why it matters.
+
+## Background / Context
+- Current behavior / state
+- Relevant domain context (user flows, constraints, related modules)
+- Links to designs, discussions, or previous tickets (if available)
+
+## Requirements
+- [ ] Concrete, testable requirements
+- [ ] Each bullet should describe observable behavior or outcome
+- [ ] Include edge cases and error states where relevant
+
+## Technical notes (optional)
+- Affected areas (e.g. `app/Http/Controllers`, `resources/views`, `resources/js`, Lang files)
+- Suggested approach or constraints (reuse existing patterns; no new stack unless necessary)
+- Data model or API considerations
+
+## Testing
+- **PHPUnit** (`tests/Feature`, `tests/Unit`): what to cover
+- **Manual / browser**: UI flows when applicable (DDEV URL, bilingual checks if relevant)
+
+## Impact / Risks
+- Potential side effects (performance, migrations, translations)
+- Rollback / mitigation notes if something goes wrong
+```
+
+- **Bug tickets**
+  - Add under **Background / Context**:
+    - **Steps to Reproduce**
+    - Observed vs expected behavior
+    - Environment (dev / test / prod, browser if relevant)
+
+- **Feature tickets**
+  - Add a short **User story** bullet under **Background / Context** when helpful.
+
+- **Persistence**
+  - Save each ticket as `docs/tickets/YYYY-MM-DD-short-slug.md` (`YYYY-MM-DD` = date in project timezone; `short-slug` = kebab-case from title).
+  - File content must match the Markdown shown in chat when the ticket is created.
