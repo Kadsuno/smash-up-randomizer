@@ -1,11 +1,11 @@
 <div
     style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; background-color: #1a1a1a; color: #f5f5f5; border-radius: 8px; border: 1px solid #333;">
     <h2 style="color: #bfbb00; border-bottom: 2px solid #bfbb00; padding-bottom: 10px; text-align: center;">
-        SendGrid API Test Email
+        Mail configuration test
     </h2>
 
     <p style="margin-top: 20px; font-size: 16px; color: #dcdcdc; text-align: center;">
-        This is a test email to verify that the SendGrid API integration is working correctly.
+        This is a test email to verify that outbound mail (SMTP / mailer) is configured correctly.
     </p>
 
     <div style="margin-top: 20px; padding: 15px; background-color: #292929; border-radius: 8px;">
@@ -23,6 +23,6 @@
     </div>
 
     <p style="margin-top: 20px; font-size: 14px; color: #999; text-align: center;">
-        If you received this email, your SendGrid API integration is working correctly.
+        If you received this email, your mail configuration is working.
     </p>
 </div>
