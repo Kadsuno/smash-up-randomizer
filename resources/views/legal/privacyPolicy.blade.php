@@ -21,7 +21,7 @@
                                 <div id="collapseDataCollection" class="accordion-collapse collapse show" aria-labelledby="headingDataCollection" data-bs-parent="#privacyAccordion">
                                     <div class="accordion-body">
                                         <p>{{ __('frontend.privacyPolicy_dataCollection_body') }}</p>
-                                        <p>{{ __('frontend.privacyPolicy_cookiebot_body') }}</p>
+                                        <p>{{ __('frontend.privacyPolicy_consent_body') }}</p>
                                         <p>{{ __('frontend.privacyPolicy_matomo_body') }}</p>
                                     </div>
                                 </div>
@@ -49,7 +49,7 @@
                                 <div id="collapseCookies" class="accordion-collapse collapse" aria-labelledby="headingCookies" data-bs-parent="#privacyAccordion">
                                     <div class="accordion-body">
                                         <p>{{ __('frontend.privacyPolicy_cookies_body') }}</p>
-                                        <p>{{ __('frontend.privacyPolicy_cookiebot_cookies_body') }}</p>
+                                        <p>{{ __('frontend.privacyPolicy_consent_cookies_body') }}</p>
                                     </div>
                                 </div>
                             </div>

@@ -21,9 +21,10 @@ class MatomoTrackingTest extends TestCase
         $response = $this->get('/');
 
         $response->assertOk();
-        $response->assertSee('_paq', false);
+        $response->assertSee('sur-matomo-config', false);
         $response->assertSee('analytics.kadsuno.com', false);
-        $response->assertSee('matomo.js', false);
+        $response->assertSee('sur-cookie-consent-bar', false);
+        $response->assertSee('surCookieConsentModal', false);
     }
 
     public function test_home_page_excludes_matomo_when_disabled(): void
@@ -33,6 +34,8 @@ class MatomoTrackingTest extends TestCase
         $response = $this->get('/');
 
         $response->assertOk();
-        $response->assertDontSee('_paq');
+        $response->assertDontSee('sur-matomo-config');
+        $response->assertDontSee('sur-cookie-consent-bar');
+        $response->assertDontSee('surCookieConsentModal');
     }
 }

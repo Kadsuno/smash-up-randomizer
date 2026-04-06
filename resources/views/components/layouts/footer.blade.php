@@ -1,5 +1,3 @@
-@vite(['resources/js/app.js', 'resources/js/bootstrap.js', 'resources/js/form.js', 'resources/js/hero.js', 'resources/js/nav.js'])
-
 <footer class="footer container-fluid bg-black text-light py-4">
     <div class="container">
         <div class="row">
@@ -12,6 +10,13 @@
                 <ul class="list-unstyled">
                     <li><a class="text-light text-decoration-none hover-effect" href="{{ route('imprint') }}">{{ __('frontend.imprint_header') }}</a></li>
                     <li><a class="text-light text-decoration-none hover-effect" href="{{ route('privacy-policy') }}">{{ __('frontend.privacyPolicy_header') }}</a></li>
+                    @if (config('matomo.enabled'))
+                        <li>
+                            <a class="text-light text-decoration-none hover-effect" href="#" data-sur-open-cookie-settings>
+                                {{ __('frontend.cookie_footer_cookie_settings') }}
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </div>
             <div class="col-md-4">
@@ -25,6 +30,11 @@
     </div>
 </footer>
 
+@if (config('matomo.enabled'))
+    <x-cookie-banner />
+@endif
+
+@vite(['resources/js/app.js', 'resources/js/bootstrap.js', 'resources/js/form.js', 'resources/js/hero.js', 'resources/js/nav.js'])
 
 <style>
     .hover-effect {
