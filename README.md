@@ -1,7 +1,7 @@
 # Smash Up Randomizer
 
-[![Laravel](https://img.shields.io/badge/Laravel-10.x-FF2D20?style=flat-square&logo=laravel&logoColor=white)](https://laravel.com)
-[![PHP](https://img.shields.io/badge/PHP-8.1+-777BB4?style=flat-square&logo=php&logoColor=white)](https://php.net)
+[![Laravel](https://img.shields.io/badge/Laravel-13.x-FF2D20?style=flat-square&logo=laravel&logoColor=white)](https://laravel.com)
+[![PHP](https://img.shields.io/badge/PHP-8.3+-777BB4?style=flat-square&logo=php&logoColor=white)](https://php.net)
 [![MariaDB](https://img.shields.io/badge/MariaDB-10.4-003545?style=flat-square&logo=mariadb&logoColor=white)](https://mariadb.org)
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-5.x-7952B3?style=flat-square&logo=bootstrap&logoColor=white)](https://getbootstrap.com)
 [![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev)
@@ -49,14 +49,14 @@ Default branch for integration work is **dev** (see `.cursor/rules/smash-up-full
 
 ### Prerequisites
 
-- PHP **8.1+** (see `composer.json`)
+- PHP **8.3+** (see `composer.json`)
 - Composer 2.x
 - Node.js **18+** recommended (matches DDEV `nodejs_version`)
 - MariaDB or MySQL compatible with Laravel’s requirements
 
 ### DDEV (recommended)
 
-Local stack is defined in `.ddev/config.yaml` (PHP 8.1, MariaDB 10.4, Node 18, nginx-fpm).
+Local stack is defined in `.ddev/config.yaml` (PHP 8.3, MariaDB 10.4, Node 18, nginx-fpm).
 
 1. Install [DDEV](https://ddev.readthedocs.io/en/stable/)
 2. Clone the repository:

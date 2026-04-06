@@ -11,7 +11,7 @@ High-level product and engineering priorities. Update this file in the same PR w
 
 | Area     | Notes                                                                        |
 | -------- | ---------------------------------------------------------------------------- |
-| Core app | Laravel 10, Blade, Vite, Bootstrap 5, bilingual frontend strings             |
+| Core app | Laravel 13, Blade, Vite, Bootstrap 5, bilingual frontend strings               |
 | Privacy  | Technically necessary cookies only; no third-party analytics (see CHANGELOG) |
 
 

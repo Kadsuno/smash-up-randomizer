@@ -11,6 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Columns were added in create_decks_table before this migration shipped; keep idempotent for fresh installs.
+        if (Schema::hasColumn('decks', 'actionTeaser')) {
+            return;
+        }
+
         Schema::table('decks', function (Blueprint $table) {
             $table->text('actionTeaser');
             $table->text('actionList');
