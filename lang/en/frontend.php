@@ -1,6 +1,7 @@
 <?php
 return [
     'skip_to_content' => 'Skip to main content',
+    'logo_alt' => 'Smash Up Randomizer',
     'start_header' => 'Welcome to Smash Up Randomizer',
     'start_teaser' => 'With the help of the Smash Up Randomizer, factions of the card game Smash Up can be shuffled and assigned to players.',
     'number_players' => 'Number of Players',

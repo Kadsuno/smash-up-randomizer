@@ -14,6 +14,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- **Branding:** New vector logo (`public/images/brand/logo-mark.svg`, indigo/violet card-stack motif) used in public and backend nav; favicons and touch icons regenerated from the artwork; PWA manifest paths and theme colors aligned with the dark UI; Open Graph / Twitter preview image uses the 512×512 app icon.
 - **Frontend layout:** Blade views use shared `x-sur.*` components (container, section, hero, panel, page heading, scroll reveal) with `@alpinejs/intersect` for in-view motion; main landmark skip link; footer column entrance animation; shuffle wizard styles consolidated in `app.css`. Primary CTAs no longer use infinite pulse animations.
 - Matomo: frontend tracker now uses the self-hosted instance at `analytics.kadsuno.com` (replaces Matomo Cloud). Toggle with `MATOMO_ENABLED`; tracker URL and site id via `MATOMO_TRACKER_URL` and `MATOMO_SITE_ID` (`config/matomo.php`).
 - **Brevo (`MAIL_MAILER=brevo`):** uses the **Brevo HTTP API** (`getbrevo/brevo-php`, `App\Mail\Transport\BrevoApiTransport`, `Mail::extend` in `AppServiceProvider`) — same approach as [Issue Forge](https://github.com/Kadsuno/issue-forge). Set **`BREVO_API_KEY`** (not SMTP). For classic SMTP to any provider, keep **`MAIL_MAILER=smtp`** and `MAIL_*`.
