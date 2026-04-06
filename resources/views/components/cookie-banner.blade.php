@@ -60,7 +60,7 @@
                     <span class="text-xl leading-none" aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="min-h-0 flex-1 overflow-y-auto px-5 py-4">
+            <div class="sur-scrollbar min-h-0 flex-1 overflow-y-auto px-5 py-4">
                 <p class="mb-4 text-sm text-zinc-400">{{ __('frontend.cookie_banner_settings_intro') }}</p>
 
                 <div class="sur-cookie-category">

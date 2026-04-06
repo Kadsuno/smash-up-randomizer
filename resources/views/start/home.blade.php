@@ -53,7 +53,7 @@
 
             <form class="needs-validation flex min-h-0 flex-1 flex-col" method="POST" action="{{ route('shuffle-result') }}" novalidate>
                 @csrf
-                <div class="min-h-0 flex-1 overflow-y-auto px-4 py-4 sm:px-6">
+                <div class="sur-scrollbar min-h-0 flex-1 overflow-y-auto px-4 py-4 sm:px-6">
                     <div class="sur-progress-track mb-4">
                         <div class="sur-progress-fill shuffle-progress-bar progress-bar" style="width: 33%;" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">Step 1 of 3</div>
                     </div>
