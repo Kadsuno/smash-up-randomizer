@@ -248,7 +248,7 @@
                 </div>
             </div>
 
-            <form class="shuffle-wizard-form flex min-h-0 flex-1 flex-col" method="POST" action="{{ route('shuffle-result') }}" novalidate>
+            <form id="shuffle-wizard-form" class="shuffle-wizard-form flex min-h-0 flex-1 flex-col" method="POST" action="{{ route('shuffle-result') }}" novalidate>
                 @csrf
                 <div class="shuffle-modal-scroll sur-scrollbar min-h-0 flex-1 overflow-y-auto overflow-x-hidden px-5 py-6 sm:px-8 sm:py-8">
                     <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
@@ -340,7 +340,7 @@
                         <button type="button" id="shuffle-next" class="sur-btn-primary min-h-12 w-full min-w-[10rem] sm:w-auto">
                             {{ __('frontend.shuffle_wizard_next') }}
                         </button>
-                        <button type="submit" id="shuffle-submit" class="sur-btn-primary inline-flex min-h-12 w-full items-center justify-center gap-2 min-w-[10rem] sm:w-auto" hidden>
+                        <button type="submit" id="shuffle-submit" class="sur-btn-primary inline-flex min-h-12 w-full items-center justify-center gap-2 min-w-[10rem] sm:w-auto" hidden disabled>
                             <i class="fa-solid fa-shuffle" aria-hidden="true"></i>{{ __('frontend.shuffle_wizard_run') }}
                         </button>
                     </div>
@@ -389,7 +389,9 @@
                 nextBtn.hidden = step >= totalSteps;
             }
             if (submitBtn) {
-                submitBtn.hidden = step !== totalSteps;
+                const showSubmit = step === totalSteps;
+                submitBtn.hidden = !showSubmit;
+                submitBtn.disabled = !showSubmit;
             }
         }
 
@@ -481,6 +483,28 @@
             const allChecked = Array.from(checkboxes).every((cb) => cb.checked);
             checkboxes.forEach((cb) => {
                 cb.checked = !allChecked;
+            });
+        });
+
+        const shuffleForm = document.getElementById('shuffle-wizard-form');
+        shuffleForm?.addEventListener('keydown', (e) => {
+            if (e.key !== 'Enter') {
+                return;
+            }
+            const t = e.target;
+            if (t && t.matches && t.matches('input[type="checkbox"]')) {
+                e.preventDefault();
+            }
+        });
+        shuffleForm?.addEventListener('submit', (e) => {
+            if (submitBtn && submitBtn.disabled) {
+                e.preventDefault();
+            }
+        });
+
+        shuffleDialog?.addEventListener('close', () => {
+            window.requestAnimationFrame(() => {
+                document.body.getBoundingClientRect();
             });
         });
 
