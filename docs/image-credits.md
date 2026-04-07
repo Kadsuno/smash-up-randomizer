@@ -2,15 +2,17 @@
 
 ## Hero carousel (home `/`)
 
-The four slides under `public/images/landing/slide-0*-ai-*.png` are **AI-generated artwork** created with **Cursor’s image generation** (prompted for generic board-game / card-night / smartphone themes). They are **not** official *Smash Up* product art and intentionally avoid logos, readable text, and franchise-specific depictions.
+The four slides use **AI-generated PNGs** (Cursor image generation) created as **original artwork**. They are inspired by the *idea* of a shufflebuilding game with **two factions**, **bases**, and **many faction decks** — similar in *theme* to how [Smash Up](https://www.alderac.com/smashup/) is described publicly (combine two factions, fight over bases). **They are not official Alderac Entertainment Group (AEG) product art**, do not depict copyrighted characters from licensed Smash Up sets, and must not be mistaken for AEG assets.
+
+**Trademark:** *Smash Up* is a trademark of its respective owner. This project is a fan tool; carousel art is independent fan-site illustration.
 
 | File | Theme (prompt intent) |
 | ---- | --------------------- |
-| `slide-01-ai-game-night.png` | Cozy evening table, generic game pieces and cards, moody lighting |
-| `slide-02-ai-cards-table.png` | Top-down cards on wood, warm light |
-| `slide-03-ai-friends-cards.png` | Friends around a table, casual card game |
-| `slide-04-ai-smartphone.png` | Phone glow suggesting an app; background out of focus |
+| `slide-01-mashup-bases.png` | Mash-up factions clashing around a central “base” / scoring focal point — pirates vs sci‑fi, original characters |
+| `slide-02-faction-stacks.png` | Many distinct faction deck stacks — collection / “every expansion” vibe |
+| `slide-03-house-rules-table.png` | Dice, rulebook, curated deck piles — house rules and card pool |
+| `slide-04-pairings-clear.png` | Abstract player pairings on a device — instant clear assignments |
 
-**Regeneration:** Replace the PNGs in `public/images/landing/` and keep filenames in sync with `app/Http/Controllers/HomeController.php` and `tests/Feature/HomeLandingTest.php`.
+**Regeneration:** Replace PNGs in `public/images/landing/` and keep filenames in sync with `app/Http/Controllers/HomeController.php` and `tests/Feature/HomeLandingTest.php`.
 
-**Note:** Files are full-resolution PNGs; consider WebP or stronger compression in a follow-up if LCP budgets require it.
+**Note:** PNGs are full resolution; consider WebP or compression if LCP budgets require it.
