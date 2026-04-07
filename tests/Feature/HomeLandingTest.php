@@ -19,5 +19,6 @@ class HomeLandingTest extends TestCase
         $response->assertSee(__('frontend.landing_hero_title'), false);
         $response->assertSee(__('frontend.landing_slide_1_title'), false);
         $response->assertSee('slide-01-faction-pirates.png', false);
+        $response->assertSee(__('frontend.shuffle_modal_subtitle'), false);
     }
 }

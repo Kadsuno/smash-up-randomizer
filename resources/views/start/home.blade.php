@@ -223,90 +223,126 @@
         </div>
     </x-sur.section>
 
-    <dialog id="shuffle-modal" aria-labelledby="shuffleModalTitle" class="shadow-2xl">
-        <div class="flex max-h-[90vh] flex-col">
-            <div class="flex items-center justify-between gap-4 border-b border-white/10 px-4 py-4 sm:px-6">
-                <h2 class="text-lg font-semibold" id="shuffleModalTitle">{{ __('frontend.shuffle') }}</h2>
-                <button type="button" class="flex h-11 min-w-11 items-center justify-center rounded-lg text-zinc-400 transition hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60" data-close-shuffle-modal aria-label="Close">
-                    <span class="text-xl leading-none" aria-hidden="true">&times;</span>
-                </button>
+    <dialog
+        id="shuffle-modal"
+        class="shuffle-modal-dialog shadow-2xl"
+        aria-labelledby="shuffleModalTitle"
+        aria-describedby="shuffleModalSubtitle"
+        data-step-badge-template="{{ e(__('frontend.shuffle_wizard_step_badge_template')) }}"
+    >
+        <div class="flex max-h-[min(90vh,52rem)] flex-col overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/95 shadow-[0_24px_80px_-12px_rgba(0,0,0,0.65)] ring-1 ring-white/5 backdrop-blur-md">
+            <div class="relative border-b border-white/10 bg-linear-to-br from-zinc-900/90 via-zinc-950 to-indigo-950/40 px-5 py-5 sm:px-8 sm:py-6">
+                <div class="flex items-start justify-between gap-4">
+                    <div class="min-w-0">
+                        <h2 class="text-xl font-bold tracking-tight text-white sm:text-2xl" id="shuffleModalTitle">{{ __('frontend.shuffle') }}</h2>
+                        <p class="mt-1 max-w-prose text-sm leading-relaxed text-zinc-400" id="shuffleModalSubtitle">{{ __('frontend.shuffle_modal_subtitle') }}</p>
+                    </div>
+                    <button
+                        type="button"
+                        class="flex h-11 min-w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-zinc-400 transition hover:border-white/20 hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60"
+                        data-close-shuffle-modal
+                        aria-label="{{ __('frontend.shuffle_modal_close') }}"
+                    >
+                        <i class="fa-solid fa-xmark text-lg" aria-hidden="true"></i>
+                    </button>
+                </div>
             </div>
 
             <form class="needs-validation flex min-h-0 flex-1 flex-col" method="POST" action="{{ route('shuffle-result') }}" novalidate>
                 @csrf
-                <div class="sur-scrollbar min-h-0 flex-1 overflow-y-auto px-4 py-4 sm:px-6">
-                    <div class="sur-progress-track mb-4">
-                        <div class="sur-progress-fill shuffle-progress-bar progress-bar" style="width: 33%;" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">Step 1 of 3</div>
+                <div class="sur-scrollbar min-h-0 flex-1 overflow-y-auto px-5 py-6 sm:px-8 sm:py-8">
+                    <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
+                        <p id="shuffle-wizard-badge" class="text-sm font-medium text-zinc-300" aria-live="polite"></p>
                     </div>
 
-                    <div class="mb-6 flex justify-between gap-2 text-xs text-zinc-500 sm:text-sm">
-                        <span class="shuffle-step-label active font-medium text-indigo-400">Number of Players</span>
-                        <span class="shuffle-step-label">Include Factions</span>
-                        <span class="shuffle-step-label">Exclude Factions</span>
-                    </div>
+                    <nav class="shuffle-wizard-stepper mb-8" aria-label="{{ __('frontend.shuffle_wizard_nav_aria') }}">
+                        <ol class="flex items-start gap-2 sm:gap-4" role="list">
+                            <li class="shuffle-wizard-step is-current flex min-w-0 flex-1 flex-col items-center gap-2 text-center" data-shuffle-step="1">
+                                <span class="shuffle-wizard-step__index">1</span>
+                                <span class="shuffle-wizard-step__label">{{ __('frontend.shuffle_wizard_step_players') }}</span>
+                            </li>
+                            <li class="shuffle-wizard-connector hidden sm:block" aria-hidden="true"></li>
+                            <li class="shuffle-wizard-step flex min-w-0 flex-1 flex-col items-center gap-2 text-center" data-shuffle-step="2">
+                                <span class="shuffle-wizard-step__index">2</span>
+                                <span class="shuffle-wizard-step__label">{{ __('frontend.shuffle_wizard_step_include') }}</span>
+                            </li>
+                            <li class="shuffle-wizard-connector hidden sm:block" aria-hidden="true"></li>
+                            <li class="shuffle-wizard-step flex min-w-0 flex-1 flex-col items-center gap-2 text-center" data-shuffle-step="3">
+                                <span class="shuffle-wizard-step__index">3</span>
+                                <span class="shuffle-wizard-step__label">{{ __('frontend.shuffle_wizard_step_exclude') }}</span>
+                            </li>
+                        </ol>
+                    </nav>
 
                     <div class="shuffle-step-content" id="step1-content">
-                        <h3 class="mb-3 text-base font-semibold text-white sm:text-lg">Step 1: Number of Players</h3>
-                        <div class="mb-4">
-                            <label for="numberOfPlayers" class="mb-2 block text-sm text-zinc-300">{{ __('frontend.number_players') }}</label>
-                            <select class="sur-input" name="numberOfPlayers" id="numberOfPlayers" required>
-                                <option value="">Choose...</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <button type="button" class="sur-btn-primary next-step">Next</button>
+                        <h3 class="mb-1 text-lg font-semibold text-white sm:text-xl">{{ __('frontend.shuffle_wizard_heading_players') }}</h3>
+                        <p class="mb-5 text-sm text-zinc-500">{{ __('frontend.shuffle_wizard_players_hint') }}</p>
+                        <fieldset id="shuffle-player-fieldset" class="rounded-2xl border border-white/10 bg-zinc-900/40 p-4 transition-[box-shadow] sm:p-5">
+                            <legend class="sr-only">{{ __('frontend.shuffle_wizard_players_legend') }}</legend>
+                            <div class="grid grid-cols-3 gap-3" role="radiogroup" aria-required="true">
+                                @foreach ([2, 3, 4] as $i => $n)
+                                    <label class="relative flex cursor-pointer flex-col items-center justify-center rounded-2xl border border-white/15 bg-zinc-900/60 px-3 py-5 text-center transition hover:border-indigo-500/45 hover:bg-indigo-500/10 has-[:checked]:border-indigo-500 has-[:checked]:bg-indigo-500/15 has-[:checked]:shadow-lg has-[:checked]:shadow-indigo-500/20 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-indigo-400/50">
+                                        <input class="peer sr-only" type="radio" name="numberOfPlayers" value="{{ $n }}" @if ($i === 0) required @endif>
+                                        <span class="text-3xl font-extrabold tabular-nums text-white sm:text-4xl">{{ $n }}</span>
+                                        <span class="mt-2 text-[0.65rem] font-medium uppercase tracking-wider text-zinc-500 peer-checked:text-indigo-200">{{ __('frontend.shuffle_wizard_players_unit') }}</span>
+                                    </label>
+                                @endforeach
+                            </div>
+                        </fieldset>
                     </div>
 
                     <div class="shuffle-step-content hidden" id="step2-content">
-                        <h3 class="mb-3 text-base font-semibold text-white sm:text-lg">Step 2: Include Factions</h3>
+                        <h3 class="mb-4 text-lg font-semibold text-white sm:text-xl">{{ __('frontend.shuffle_wizard_heading_include') }}</h3>
                         <div class="mb-4">
-                            <div class="mb-2 flex flex-wrap items-center justify-between gap-2">
-                                <label class="text-sm text-zinc-300">Include Factions</label>
-                                <button type="button" class="sur-btn-ghost min-h-9 px-3 py-1 text-xs" id="selectAllInclude">Select All</button>
+                            <div class="mb-3 flex flex-wrap items-center justify-between gap-2">
+                                <span class="text-sm font-medium text-zinc-300">{{ __('frontend.shuffle_wizard_include_label') }}</span>
+                                <button type="button" class="sur-btn-ghost min-h-9 rounded-lg px-3 py-1.5 text-xs font-medium" id="selectAllInclude">{{ __('frontend.shuffle_wizard_select_all') }}</button>
                             </div>
                             <div class="faction-grid">
                                 @foreach($factions as $faction)
                                     <div class="faction-item">
                                         <input class="peer sr-only include-faction" type="checkbox" name="includeFactions[]" value="{{ $faction->name }}" id="include{{ $faction->id }}">
-                                        <label class="flex w-full min-h-11 cursor-pointer items-center justify-center rounded-xl border border-white/15 bg-zinc-800/80 px-2 py-2 text-center text-xs font-medium text-zinc-200 transition hover:border-indigo-500/40 peer-checked:border-indigo-500 peer-checked:bg-indigo-500/15 peer-checked:text-indigo-200 sm:text-sm" for="include{{ $faction->id }}">
+                                        <label class="flex w-full min-h-11 cursor-pointer items-center justify-center rounded-xl border border-white/12 bg-zinc-900/70 px-2 py-2.5 text-center text-xs font-medium text-zinc-200 shadow-sm transition hover:border-indigo-500/40 hover:bg-zinc-800/90 peer-checked:border-indigo-500 peer-checked:bg-indigo-500/15 peer-checked:text-indigo-100 peer-checked:shadow-indigo-500/10 sm:text-sm" for="include{{ $faction->id }}">
                                             {{ $faction->name }}
                                         </label>
                                     </div>
                                 @endforeach
                             </div>
                         </div>
-                        <div class="flex flex-wrap gap-2">
-                            <button type="button" class="sur-btn-secondary prev-step">Previous</button>
-                            <button type="button" class="sur-btn-primary next-step">Next</button>
-                        </div>
                     </div>
 
                     <div class="shuffle-step-content hidden" id="step3-content">
-                        <h3 class="mb-3 text-base font-semibold text-white sm:text-lg">Step 3: Exclude Factions</h3>
+                        <h3 class="mb-4 text-lg font-semibold text-white sm:text-xl">{{ __('frontend.shuffle_wizard_heading_exclude') }}</h3>
                         <div class="mb-4">
-                            <div class="mb-2 flex flex-wrap items-center justify-between gap-2">
-                                <label class="text-sm text-zinc-300">Exclude Factions</label>
-                                <button type="button" class="sur-btn-ghost min-h-9 px-3 py-1 text-xs" id="selectAllExclude">Select All</button>
+                            <div class="mb-3 flex flex-wrap items-center justify-between gap-2">
+                                <span class="text-sm font-medium text-zinc-300">{{ __('frontend.shuffle_wizard_exclude_label') }}</span>
+                                <button type="button" class="sur-btn-ghost min-h-9 rounded-lg px-3 py-1.5 text-xs font-medium" id="selectAllExclude">{{ __('frontend.shuffle_wizard_select_all') }}</button>
                             </div>
                             <div class="faction-grid">
                                 @foreach($factions as $faction)
                                     <div class="faction-item">
                                         <input class="peer sr-only exclude-faction" type="checkbox" name="excludeFactions[]" value="{{ $faction->name }}" id="exclude{{ $faction->id }}">
-                                        <label class="flex w-full min-h-11 cursor-pointer items-center justify-center rounded-xl border border-white/15 bg-zinc-800/80 px-2 py-2 text-center text-xs font-medium text-zinc-200 transition hover:border-indigo-500/40 peer-checked:border-indigo-500 peer-checked:bg-indigo-500/15 peer-checked:text-indigo-200 sm:text-sm" for="exclude{{ $faction->id }}">
+                                        <label class="flex w-full min-h-11 cursor-pointer items-center justify-center rounded-xl border border-white/12 bg-zinc-900/70 px-2 py-2.5 text-center text-xs font-medium text-zinc-200 shadow-sm transition hover:border-indigo-500/40 hover:bg-zinc-800/90 peer-checked:border-indigo-500 peer-checked:bg-indigo-500/15 peer-checked:text-indigo-100 peer-checked:shadow-indigo-500/10 sm:text-sm" for="exclude{{ $faction->id }}">
                                             {{ $faction->name }}
                                         </label>
                                     </div>
                                 @endforeach
                             </div>
                         </div>
-                        <div class="flex flex-wrap gap-2">
-                            <button type="button" class="sur-btn-secondary prev-step">Previous</button>
-                            <button type="submit" class="sur-btn-primary inline-flex items-center gap-2">
-                                <i class="fa-solid fa-shuffle" aria-hidden="true"></i>{{ __('frontend.shuffle') }}
-                            </button>
-                        </div>
+                    </div>
+                </div>
+
+                <div class="flex shrink-0 flex-col gap-3 border-t border-white/10 bg-zinc-950/90 px-5 py-4 backdrop-blur-sm sm:flex-row sm:items-center sm:justify-between sm:px-8">
+                    <button type="button" id="shuffle-prev" class="sur-btn-secondary order-2 min-h-12 w-full sm:order-1 sm:w-auto" hidden>
+                        {{ __('frontend.shuffle_wizard_back') }}
+                    </button>
+                    <div class="order-1 flex w-full flex-col gap-2 sm:order-2 sm:ms-auto sm:w-auto sm:flex-row sm:justify-end">
+                        <button type="button" id="shuffle-next" class="sur-btn-primary min-h-12 w-full min-w-[10rem] sm:w-auto">
+                            {{ __('frontend.shuffle_wizard_next') }}
+                        </button>
+                        <button type="submit" id="shuffle-submit" class="sur-btn-primary inline-flex min-h-12 w-full items-center justify-center gap-2 min-w-[10rem] sm:w-auto" hidden>
+                            <i class="fa-solid fa-shuffle" aria-hidden="true"></i>{{ __('frontend.shuffle_wizard_run') }}
+                        </button>
                     </div>
                 </div>
             </form>
@@ -317,72 +353,119 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const shuffleDialog = document.getElementById('shuffle-modal');
-        document.querySelectorAll('.js-open-shuffle').forEach((btn) => {
-            btn.addEventListener('click', () => {
-                if (shuffleDialog && typeof shuffleDialog.showModal === 'function') {
-                    shuffleDialog.showModal();
-                }
-            });
-        });
-        document.querySelectorAll('[data-close-shuffle-modal]').forEach((btn) => {
-            btn.addEventListener('click', () => shuffleDialog?.close());
-        });
-
         const contents = document.querySelectorAll('.shuffle-step-content');
-        const nextButtons = document.querySelectorAll('.next-step');
-        const prevButtons = document.querySelectorAll('.prev-step');
-        const progressBar = document.querySelector('.progress-bar');
-        const stepLabels = document.querySelectorAll('.shuffle-step-label');
+        const stepEls = document.querySelectorAll('[data-shuffle-step]');
+        const badgeEl = document.getElementById('shuffle-wizard-badge');
+        const prevBtn = document.getElementById('shuffle-prev');
+        const nextBtn = document.getElementById('shuffle-next');
+        const submitBtn = document.getElementById('shuffle-submit');
+        const playerFieldset = document.getElementById('shuffle-player-fieldset');
+        const stepTemplate = shuffleDialog?.dataset.stepBadgeTemplate || 'Step :current of :total';
 
-        function updateProgress(step) {
-            if (!progressBar) return;
-            const width = (step / contents.length) * 100;
-            progressBar.style.width = `${width}%`;
-            progressBar.setAttribute('aria-valuenow', String(width));
-            progressBar.textContent = `Step ${step} of ${contents.length}`;
+        const totalSteps = contents.length;
 
-            stepLabels.forEach((label, index) => {
-                if (index < step) {
-                    label.classList.add('active');
-                } else {
-                    label.classList.remove('active');
-                }
-            });
+        function formatBadge(current, total) {
+            return stepTemplate.replace(':current', String(current)).replace(':total', String(total));
         }
 
-        function animateContentChange(currentStep, nextStep) {
-            currentStep.classList.add('slide-out');
-            setTimeout(() => {
-                currentStep.classList.add('hidden');
-                currentStep.classList.remove('slide-out');
-                nextStep.classList.remove('hidden');
-                nextStep.classList.add('slide-in');
-                setTimeout(() => {
-                    nextStep.classList.remove('slide-in');
+        function updateChrome(step) {
+            if (badgeEl) {
+                badgeEl.textContent = formatBadge(step, totalSteps);
+            }
+            stepEls.forEach((el) => {
+                const n = parseInt(el.dataset.shuffleStep, 10);
+                el.classList.remove('is-current', 'is-complete');
+                if (n < step) {
+                    el.classList.add('is-complete');
+                }
+                if (n === step) {
+                    el.classList.add('is-current');
+                }
+            });
+            if (prevBtn) {
+                prevBtn.hidden = step <= 1;
+            }
+            if (nextBtn) {
+                nextBtn.hidden = step >= totalSteps;
+            }
+            if (submitBtn) {
+                submitBtn.hidden = step !== totalSteps;
+            }
+        }
+
+        function getVisibleStepIndex() {
+            const visible = document.querySelector('.shuffle-step-content:not(.hidden)');
+            return visible ? Array.from(contents).indexOf(visible) : 0;
+        }
+
+        function animateContentChange(currentEl, nextEl, done) {
+            currentEl.classList.add('slide-out');
+            window.setTimeout(() => {
+                currentEl.classList.add('hidden');
+                currentEl.classList.remove('slide-out');
+                nextEl.classList.remove('hidden');
+                nextEl.classList.add('slide-in');
+                window.setTimeout(() => {
+                    nextEl.classList.remove('slide-in');
+                    done?.();
                 }, 300);
             }, 300);
         }
 
-        nextButtons.forEach((button) => {
-            button.addEventListener('click', () => {
-                const currentStep = document.querySelector('.shuffle-step-content:not(.hidden)');
-                const currentIndex = Array.from(contents).indexOf(currentStep);
-                if (currentIndex < contents.length - 1) {
-                    animateContentChange(currentStep, contents[currentIndex + 1]);
-                    updateProgress(currentIndex + 2);
+        function resetShuffleWizard() {
+            document.querySelectorAll('input[name="numberOfPlayers"]').forEach((r) => {
+                r.checked = false;
+            });
+            contents.forEach((el, i) => {
+                el.classList.toggle('hidden', i !== 0);
+                el.classList.remove('slide-out', 'slide-in');
+            });
+            playerFieldset?.classList.remove('shuffle-wizard--error');
+            updateChrome(1);
+        }
+
+        document.querySelectorAll('.js-open-shuffle').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                if (shuffleDialog && typeof shuffleDialog.showModal === 'function') {
+                    resetShuffleWizard();
+                    shuffleDialog.showModal();
                 }
             });
         });
 
-        prevButtons.forEach((button) => {
-            button.addEventListener('click', () => {
-                const currentStep = document.querySelector('.shuffle-step-content:not(.hidden)');
-                const currentIndex = Array.from(contents).indexOf(currentStep);
-                if (currentIndex > 0) {
-                    animateContentChange(currentStep, contents[currentIndex - 1]);
-                    updateProgress(currentIndex);
+        document.querySelectorAll('[data-close-shuffle-modal]').forEach((btn) => {
+            btn.addEventListener('click', () => shuffleDialog?.close());
+        });
+
+        nextBtn?.addEventListener('click', () => {
+            const currentIndex = getVisibleStepIndex();
+            const step = currentIndex + 1;
+
+            if (step === 1) {
+                const checked = document.querySelector('input[name="numberOfPlayers"]:checked');
+                if (!checked) {
+                    playerFieldset?.classList.add('shuffle-wizard--error');
+                    return;
                 }
-            });
+                playerFieldset?.classList.remove('shuffle-wizard--error');
+            }
+
+            if (currentIndex < totalSteps - 1) {
+                updateChrome(currentIndex + 2);
+                animateContentChange(contents[currentIndex], contents[currentIndex + 1]);
+            }
+        });
+
+        prevBtn?.addEventListener('click', () => {
+            const currentIndex = getVisibleStepIndex();
+            if (currentIndex > 0) {
+                updateChrome(currentIndex);
+                animateContentChange(contents[currentIndex], contents[currentIndex - 1]);
+            }
+        });
+
+        document.querySelectorAll('input[name="numberOfPlayers"]').forEach((radio) => {
+            radio.addEventListener('change', () => playerFieldset?.classList.remove('shuffle-wizard--error'));
         });
 
         document.getElementById('selectAllInclude')?.addEventListener('click', () => {
@@ -400,5 +483,7 @@
                 cb.checked = !allChecked;
             });
         });
+
+        resetShuffleWizard();
     });
 </script>
