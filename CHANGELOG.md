@@ -30,6 +30,7 @@ All notable changes to this project are documented in this file.
 
 ### Fixed
 
+- **Shuffle modal:** Toggling include/exclude faction chips could paint the dialog contents **solid black** (GPU compositing with `backdrop-blur` + Tailwind `peer` variants). Removed blur layers on the modal card/footer, switched checked styling to **`:has()`** on `.faction-item`, renamed the form class to `shuffle-wizard-form` (no `needs-validation`), added `overflow-anchor: none` on the scroll region and `isolate` on the card.
 - Add `sessions` and `cache` / `cache_locks` migrations for apps using `SESSION_DRIVER=database` and database-backed cache (Laravel 13 default-style tables).
 
 ### Changed

@@ -230,7 +230,7 @@
         aria-describedby="shuffleModalSubtitle"
         data-step-badge-template="{{ e(__('frontend.shuffle_wizard_step_badge_template')) }}"
     >
-        <div class="flex max-h-[min(90vh,52rem)] flex-col overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/95 shadow-[0_24px_80px_-12px_rgba(0,0,0,0.65)] ring-1 ring-white/5 backdrop-blur-md">
+        <div class="isolate flex max-h-[min(90vh,52rem)] flex-col overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 shadow-[0_24px_80px_-12px_rgba(0,0,0,0.65)] ring-1 ring-white/10">
             <div class="relative border-b border-white/10 bg-linear-to-br from-zinc-900/90 via-zinc-950 to-indigo-950/40 px-5 py-5 sm:px-8 sm:py-6">
                 <div class="flex items-start justify-between gap-4">
                     <div class="min-w-0">
@@ -248,9 +248,9 @@
                 </div>
             </div>
 
-            <form class="needs-validation flex min-h-0 flex-1 flex-col" method="POST" action="{{ route('shuffle-result') }}" novalidate>
+            <form class="shuffle-wizard-form flex min-h-0 flex-1 flex-col" method="POST" action="{{ route('shuffle-result') }}" novalidate>
                 @csrf
-                <div class="sur-scrollbar min-h-0 flex-1 overflow-y-auto px-5 py-6 sm:px-8 sm:py-8">
+                <div class="shuffle-modal-scroll sur-scrollbar min-h-0 flex-1 overflow-y-auto overflow-x-hidden px-5 py-6 sm:px-8 sm:py-8">
                     <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
                         <p id="shuffle-wizard-badge" class="text-sm font-medium text-zinc-300" aria-live="polite"></p>
                     </div>
@@ -301,8 +301,8 @@
                             <div class="faction-grid">
                                 @foreach($factions as $faction)
                                     <div class="faction-item">
-                                        <input class="peer sr-only include-faction" type="checkbox" name="includeFactions[]" value="{{ $faction->name }}" id="include{{ $faction->id }}">
-                                        <label class="flex w-full min-h-11 cursor-pointer items-center justify-center rounded-xl border border-white/12 bg-zinc-900/70 px-2 py-2.5 text-center text-xs font-medium text-zinc-200 shadow-sm transition hover:border-indigo-500/40 hover:bg-zinc-800/90 peer-checked:border-indigo-500 peer-checked:bg-indigo-500/15 peer-checked:text-indigo-100 peer-checked:shadow-indigo-500/10 sm:text-sm" for="include{{ $faction->id }}">
+                                        <input class="sr-only include-faction" type="checkbox" name="includeFactions[]" value="{{ $faction->name }}" id="include{{ $faction->id }}">
+                                        <label class="faction-chip flex w-full min-h-11 cursor-pointer items-center justify-center rounded-xl border border-white/12 bg-zinc-900/70 px-2 py-2.5 text-center text-xs font-medium text-zinc-200 shadow-sm transition hover:border-indigo-500/40 hover:bg-zinc-800/90 sm:text-sm" for="include{{ $faction->id }}">
                                             {{ $faction->name }}
                                         </label>
                                     </div>
@@ -321,8 +321,8 @@
                             <div class="faction-grid">
                                 @foreach($factions as $faction)
                                     <div class="faction-item">
-                                        <input class="peer sr-only exclude-faction" type="checkbox" name="excludeFactions[]" value="{{ $faction->name }}" id="exclude{{ $faction->id }}">
-                                        <label class="flex w-full min-h-11 cursor-pointer items-center justify-center rounded-xl border border-white/12 bg-zinc-900/70 px-2 py-2.5 text-center text-xs font-medium text-zinc-200 shadow-sm transition hover:border-indigo-500/40 hover:bg-zinc-800/90 peer-checked:border-indigo-500 peer-checked:bg-indigo-500/15 peer-checked:text-indigo-100 peer-checked:shadow-indigo-500/10 sm:text-sm" for="exclude{{ $faction->id }}">
+                                        <input class="sr-only exclude-faction" type="checkbox" name="excludeFactions[]" value="{{ $faction->name }}" id="exclude{{ $faction->id }}">
+                                        <label class="faction-chip flex w-full min-h-11 cursor-pointer items-center justify-center rounded-xl border border-white/12 bg-zinc-900/70 px-2 py-2.5 text-center text-xs font-medium text-zinc-200 shadow-sm transition hover:border-indigo-500/40 hover:bg-zinc-800/90 sm:text-sm" for="exclude{{ $faction->id }}">
                                             {{ $faction->name }}
                                         </label>
                                     </div>
@@ -332,7 +332,7 @@
                     </div>
                 </div>
 
-                <div class="flex shrink-0 flex-col gap-3 border-t border-white/10 bg-zinc-950/90 px-5 py-4 backdrop-blur-sm sm:flex-row sm:items-center sm:justify-between sm:px-8">
+                <div class="flex shrink-0 flex-col gap-3 border-t border-white/10 bg-zinc-950 px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-8">
                     <button type="button" id="shuffle-prev" class="sur-btn-secondary order-2 min-h-12 w-full sm:order-1 sm:w-auto" hidden>
                         {{ __('frontend.shuffle_wizard_back') }}
                     </button>
