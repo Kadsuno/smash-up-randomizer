@@ -14,11 +14,12 @@ All notable changes to this project are documented in this file.
 
 ### Added
 
-- **Marketing landing home:** Rebuilt `/` as a campaign-style page — hero with dual CTAs (shuffle, factions, contact), autoplay image carousel (pause on hover, dots, prev/next), three-column feature grid, rotating quote carousel, gradient CTA band, and compact legacy “What is Smash Up?” cards; shuffle dialog unchanged. New Alpine registrars in `resources/js/landing-home.js`. Feature test `HomeLandingTest`.
+- **Marketing landing home:** Rebuilt `/` as a campaign-style page — hero with dual CTAs (shuffle, factions, contact), autoplay image carousel (pause on hover, dots, prev/next), three-column feature grid, rotating quote carousel, gradient CTA band, and compact legacy “What is Smash Up?” cards; shuffle opens a `<dialog>` wizard (see **Shuffle modal** under Changed). New Alpine registrars in `resources/js/landing-home.js`. Feature test `HomeLandingTest`.
 - **Landing carousel imagery:** Hero slider uses **AI-generated PNGs** (Cursor image generation) stored under `public/images/landing/`; **four base-game faction spotlights** (Pirates, Aliens, Dinosaurs, Zombies) with **original** art — not AEG card/box illustrations. Provenance, trademark note, and filenames in `docs/image-credits.md`. Slide titles/taglines name each faction (EN/DE).
 
 ### Changed
 
+- **Shuffle modal (home):** Redesigned wizard — gradient header with subtitle, numbered stepper with done/current states, sticky footer with **Back** (left) and **Continue** / **Shuffle factions** (right), player count as **radio tiles** (2–4), bilingual copy via `frontend.*`; stronger backdrop blur and card chrome. Inline script uses central footer actions and resets the wizard when opened.
 - **Scrollbars:** Document-wide (`html`) scrollbar uses shared SUR-themed styling (indigo/violet gradient thumb, zinc track with indigo hairline, glow). The same chrome applies to `.scroll-container` (faction detail), and the utility class `.sur-scrollbar` is used on scrollable regions (e.g. shuffle modal body, cookie preference panel).
 - **Faction detail:** Full-page scroll container uses the global scrollbar theme (see above) instead of hiding the scrollbar.
 - **Public shell:** Header and footer redesigned (pill navigation with active route states, scroll elevation, full-width mobile panel with primary CTA; footer columns for brand, explore, legal, and community links + copyright bar). Navigation and footer copy use `frontend.*` translations (EN/DE).
