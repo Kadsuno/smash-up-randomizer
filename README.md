@@ -31,7 +31,7 @@ Smash Up Randomizer supports:
 | ----------------- | ----------------------------------------------------------------------------------- |
 | `docs/roadmap.md` | Product/engineering priorities — update when work matches listed items              |
 | `docs/tickets/`   | Ticket specs (`YYYY-MM-DD-short-slug.md`), see `.cursor/rules/ticket-authoring.mdc` |
-| `docs/image-credits.md` | Provenance notes for AI-generated hero carousel images (marketing home)      |
+| `docs/image-credits.md` | AI carousel art: original fan-site illustrations, Smash Up–inspired themes, IP disclaimer |
 | `.cursor/rules/`  | Cursor project rules (full workflow, ticket format, etc.)                           |
 
 
