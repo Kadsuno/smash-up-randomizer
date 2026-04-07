@@ -325,8 +325,8 @@ html::-webkit-scrollbar-thumb:active,
     }
 
     #shuffle-modal::backdrop {
-        background: rgba(9, 9, 11, 0.82);
-        backdrop-filter: blur(10px);
+        /* No backdrop-filter: compositor can leave blur visible after close(); solid dim only */
+        background: rgba(9, 9, 11, 0.88);
     }
 
     .sur-progress-track {
@@ -450,6 +450,8 @@ html::-webkit-scrollbar-thumb:active,
 
 .shuffle-modal-scroll {
     overflow-anchor: none;
+    overscroll-behavior: contain;
+    padding-bottom: max(1.5rem, env(safe-area-inset-bottom, 0px));
 }
 
 .shuffle-wizard-stepper ol {
