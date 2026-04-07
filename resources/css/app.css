@@ -440,6 +440,18 @@ html::-webkit-scrollbar-thumb:active,
     text-align: center;
 }
 
+/* Checked state via :has() — avoids Tailwind `peer` compositing glitches in the shuffle dialog */
+.faction-item:has(input:checked) .faction-chip {
+    border-color: rgba(99, 102, 241, 0.85);
+    background-color: rgba(99, 102, 241, 0.15);
+    color: #e0e7ff;
+    box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.12);
+}
+
+.shuffle-modal-scroll {
+    overflow-anchor: none;
+}
+
 .shuffle-wizard-stepper ol {
     list-style: none;
     padding: 0;
