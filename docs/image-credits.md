@@ -1,18 +1,20 @@
 # Landing page imagery
 
-## Hero carousel (home `/`)
+## Hero carousel — faction spotlights
 
-The four slides use **AI-generated PNGs** (Cursor image generation) created as **original artwork**. They are inspired by the *idea* of a shufflebuilding game with **two factions**, **bases**, and **many faction decks** — similar in *theme* to how [Smash Up](https://www.alderac.com/smashup/) is described publicly (combine two factions, fight over bases). **They are not official Alderac Entertainment Group (AEG) product art**, do not depict copyrighted characters from licensed Smash Up sets, and must not be mistaken for AEG assets.
+The home page hero carousel highlights **four factions from the Smash Up base game** (public faction names: **Pirates**, **Aliens**, **Dinosaurs**, **Zombies** — see [AEG’s Smash Up overview](https://www.alderac.com/smashup/)).
 
-**Trademark:** *Smash Up* is a trademark of its respective owner. This project is a fan tool; carousel art is independent fan-site illustration.
+Each slide uses **original AI-generated illustration** (Cursor image generation) themed on that faction’s **concept** (sailing action, alien invasion, prehistoric beasts, undead horde). **These are not Alderac Entertainment Group (AEG) card or box illustrations** and must not be mistaken for official product art. No copyrighted characters from licensed expansions appear by design.
 
-| File | Theme (prompt intent) |
-| ---- | --------------------- |
-| `slide-01-mashup-bases.png` | Mash-up factions clashing around a central “base” / scoring focal point — pirates vs sci‑fi, original characters |
-| `slide-02-faction-stacks.png` | Many distinct faction deck stacks — collection / “every expansion” vibe |
-| `slide-03-house-rules-table.png` | Dice, rulebook, curated deck piles — house rules and card pool |
-| `slide-04-pairings-clear.png` | Abstract player pairings on a device — instant clear assignments |
+**Trademark:** *Smash Up* and faction themes are trademarks or property of their respective owners. This site is an independent fan randomizer.
+
+| File | Faction (base game) | Prompt theme |
+| ---- | -------------------- | ------------ |
+| `slide-01-faction-pirates.png` | Pirates | Galleon, sea battle, Age of Sail adventure |
+| `slide-02-faction-aliens.png` | Aliens | Flying saucer, tractor beam, invasion sci‑fi |
+| `slide-03-faction-dinosaurs.png` | Dinosaurs | T. rex, prehistoric jungle |
+| `slide-04-faction-zombies.png` | Zombies | Suburban zombie horde, horror-comedy tone |
 
 **Regeneration:** Replace PNGs in `public/images/landing/` and keep filenames in sync with `app/Http/Controllers/HomeController.php` and `tests/Feature/HomeLandingTest.php`.
 
-**Note:** PNGs are full resolution; consider WebP or compression if LCP budgets require it.
+**Note:** Full-size PNGs; consider WebP or compression if performance budgets require it.
