@@ -105,4 +105,32 @@ class HomeLandingTest extends TestCase
         $response->assertSee('2', false);
         $response->assertSee(__('frontend.landing_stats_factions'), false);
     }
+
+    public function test_home_page_renders_faq_section(): void
+    {
+        $response = $this->get('/');
+
+        $response->assertOk();
+        $response->assertSee(__('frontend.landing_faq_title'), false);
+        $response->assertSee(__('frontend.landing_faq_q1'), false);
+        $response->assertSee(__('frontend.landing_faq_q4'), false);
+    }
+
+    public function test_home_page_renders_result_preview_section(): void
+    {
+        $response = $this->get('/');
+
+        $response->assertOk();
+        $response->assertSee(__('frontend.landing_result_title'), false);
+        $response->assertSee('images/landing/result-preview.jpg', false);
+    }
+
+    public function test_og_meta_tags_use_updated_copy(): void
+    {
+        $response = $this->get('/');
+
+        $response->assertOk();
+        $response->assertSee(__('frontend.meta_og_title'), false);
+        $response->assertSee('images/result.png', false);
+    }
 }

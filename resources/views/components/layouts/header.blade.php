@@ -4,19 +4,20 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="title" content="SmashUp Randomizer">
-    <meta name="description" content="With the help of the Smash Up Randomizer, factions of the card game Smash Up can be shuffled and assigned to players.">
-    <meta name="keywords" content="SmashUp, Card game, Card, Game, Randomizer">
-    <meta property="og:title" content="Assigning randomized factions" />
-    <meta property="og:image" content="{{ asset('images/favicons/android-chrome-512x512.png') }}" />
+    <meta name="description" content="{{ __('frontend.meta_description') }}">
+    <meta name="keywords" content="Smash Up, card game, randomizer, faction picker, board game tool">
+    <meta property="og:title" content="{{ __('frontend.meta_og_title') }}" />
+    <meta property="og:image" content="{{ asset('images/result.png') }}" />
+    <meta property="og:image:width" content="1792" />
+    <meta property="og:image:height" content="1024" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ url()->current() }}" />
-    <meta property="og:site_name" content="SmashUp Randomizer" />
-    <meta property="og:description" content="With the help of the Smash Up Randomizer, factions of the card game Smash Up can be shuffled and assigned to players." />
+    <meta property="og:site_name" content="Smash Up Randomizer" />
+    <meta property="og:description" content="{{ __('frontend.meta_description') }}" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Assigning randomized factions" />
-    <meta name="twitter:description" content="With the help of the Smash Up Randomizer, factions of the card game Smash Up can be shuffled and assigned to players." />
-    <meta name="twitter:image" content="{{ asset('images/favicons/android-chrome-512x512.png') }}" />
+    <meta name="twitter:title" content="{{ __('frontend.meta_og_title') }}" />
+    <meta name="twitter:description" content="{{ __('frontend.meta_description') }}" />
+    <meta name="twitter:image" content="{{ asset('images/result.png') }}" />
     <meta name="robots" content="index,follow" />
     <meta name="googlebot" content="index,follow" />
     <title>Smash Up Randomizer</title>
@@ -26,7 +27,27 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicons/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicons/favicon-16x16.png') }}">
     <link rel="manifest" href="{{ asset('images/favicons/site.webmanifest') }}">
-    <link rel="canonical" href="https://www.smash-up-randomizer.com">
+    <link rel="canonical" href="{{ url()->current() }}">
+    @stack('head')
+    @env('production')
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@type": "WebApplication",
+        "name": "Smash Up Randomizer",
+        "url": "{{ config('app.url') }}",
+        "description": "{{ __('frontend.meta_description') }}",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@@type": "Offer",
+            "price": "0",
+            "priceCurrency": "EUR"
+        },
+        "inLanguage": ["en", "de"]
+    }
+    </script>
+    @endenv
 
 </head>
 
