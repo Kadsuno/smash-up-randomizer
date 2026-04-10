@@ -63,7 +63,7 @@
     >
         <div class="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8 lg:h-[4.25rem]">
             <a class="group flex min-h-11 min-w-0 flex-1 items-center gap-3 rounded-xl py-1 pr-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60 lg:flex-none" href="{{ route('home') }}" aria-label="{{ __('frontend.logo_alt') }}">
-                <span class="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-indigo-500/20 to-violet-600/20 ring-1 ring-white/10 transition duration-300 group-hover:ring-indigo-500/35">
+                <span class="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ring-1 ring-white/[0.08] transition duration-300 group-hover:ring-indigo-400/30">
                     <img src="{{ asset('images/brand/logo-mark.svg') }}" class="h-7 w-7" alt="" width="28" height="28" decoding="async" aria-hidden="true">
                 </span>
                 <span class="min-w-0 truncate text-left text-sm font-bold tracking-tight text-white sm:text-base">{{ __('frontend.logo_alt') }}</span>
@@ -76,7 +76,7 @@
                     <x-site-nav-link routeName="contact" :label="__('frontend.nav_contact')" />
                 </div>
                 <a
-                    href="{{ route('home') }}"
+                    href="{{ route('home') }}#wizard"
                     class="{{ request()->routeIs('home') ? 'ring-2 ring-indigo-400/40 ring-offset-2 ring-offset-zinc-950' : '' }} sur-btn-primary min-h-10 rounded-full px-5 text-sm shadow-indigo-500/20"
                 >
                     <i class="fa-solid fa-shuffle me-2 opacity-90" aria-hidden="true"></i>{{ __('frontend.nav_shuffle') }}
@@ -118,7 +118,7 @@
                 <x-site-nav-link routeName="factionList" :routes="['factionList', 'factionDetail']" :label="__('frontend.nav_factions')" :mobile="true" />
                 <x-site-nav-link routeName="about" :label="__('frontend.nav_about')" :mobile="true" />
                 <x-site-nav-link routeName="contact" :label="__('frontend.nav_contact')" :mobile="true" />
-                <a href="{{ route('home') }}" class="sur-btn-primary mt-3 flex w-full min-h-12 justify-center gap-2 rounded-xl">
+                <a href="{{ route('home') }}#wizard" class="sur-btn-primary mt-3 flex w-full min-h-12 justify-center gap-2 rounded-xl">
                     <i class="fa-solid fa-shuffle" aria-hidden="true"></i>{{ __('frontend.nav_shuffle') }}
                 </a>
             </div>

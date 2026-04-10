@@ -1,6 +1,6 @@
 <x-layouts.main>
     {{-- Marketing hero --}}
-    <section class="relative overflow-hidden border-b border-white/10">
+    <section id="wizard" class="relative overflow-hidden border-b border-white/10">
         <div class="pointer-events-none absolute inset-0 bg-linear-to-b from-indigo-950/50 via-zinc-950 to-zinc-950"></div>
         <div class="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
             <p class="mb-4 text-center text-xs font-semibold uppercase tracking-[0.22em] text-indigo-300/95 lg:text-left">

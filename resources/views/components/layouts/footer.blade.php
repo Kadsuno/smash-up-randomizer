@@ -1,19 +1,26 @@
 <footer class="sur-site-footer pt-14 pb-10 text-zinc-300 sm:pt-16">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="grid gap-12 lg:grid-cols-12 lg:gap-10">
-            <div class="sur-footer-col lg:col-span-4">
-                <div class="mb-4 flex items-center gap-3">
-                    <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-indigo-500/15 to-violet-600/15 ring-1 ring-white/10">
+
+            {{-- Brand col --}}
+            <div class="sur-footer-col lg:col-span-5">
+                <a href="{{ route('home') }}" class="mb-4 inline-flex items-center gap-3 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60" aria-label="{{ __('frontend.logo_alt') }}">
+                    <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ring-1 ring-white/[0.08]">
                         <img src="{{ asset('images/brand/logo-mark.svg') }}" class="h-8 w-8" alt="" width="32" height="32" decoding="async" aria-hidden="true">
                     </span>
-                    <span class="text-lg font-bold tracking-tight text-white">{{ __('frontend.footer_brand_heading') }}</span>
-                </div>
-                <p class="max-w-sm text-sm leading-relaxed text-zinc-400">
+                    <span class="text-base font-bold tracking-tight text-white">{{ __('frontend.footer_brand_heading') }}</span>
+                </a>
+                <p class="mb-5 max-w-xs text-sm leading-relaxed text-zinc-400">
                     {{ __('frontend.footer_tagline') }}
                 </p>
+                <a href="{{ route('contact') }}" class="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.03] px-3.5 py-2 text-xs font-medium text-zinc-400 transition duration-200 hover:border-indigo-500/30 hover:bg-indigo-500/8 hover:text-indigo-300">
+                    <i class="fa-regular fa-envelope text-indigo-400" aria-hidden="true"></i>
+                    Missing a faction or found a bug? Get in touch
+                </a>
             </div>
 
-            <div class="sur-footer-col lg:col-span-2">
+            {{-- Explore col --}}
+            <div class="sur-footer-col lg:col-span-3">
                 <h2 class="sur-footer-heading">{{ __('frontend.footer_explore') }}</h2>
                 <ul class="space-y-3">
                     <li>
@@ -26,16 +33,17 @@
                         <a class="sur-footer-link" href="{{ route('contact') }}">{{ __('frontend.nav_contact') }}</a>
                     </li>
                     <li>
-                        <a class="sur-footer-link inline-flex items-center gap-1.5 font-medium text-indigo-300/90 hover:text-indigo-200" href="{{ route('home') }}">
+                        <a class="sur-footer-link inline-flex items-center gap-1.5 font-medium text-indigo-300/90 hover:text-indigo-200" href="{{ route('home') }}#wizard">
                             <i class="fa-solid fa-shuffle text-xs opacity-80" aria-hidden="true"></i>{{ __('frontend.nav_shuffle') }}
                         </a>
                     </li>
                 </ul>
             </div>
 
-            <div class="sur-footer-col lg:col-span-3">
+            {{-- Legal + Social col --}}
+            <div class="sur-footer-col lg:col-span-4">
                 <h2 class="sur-footer-heading">{{ __('frontend.footer_legal') }}</h2>
-                <ul class="space-y-3">
+                <ul class="mb-6 space-y-3">
                     <li>
                         <a class="sur-footer-link" href="{{ route('imprint') }}">{{ __('frontend.imprint_header') }}</a>
                     </li>
@@ -43,9 +51,7 @@
                         <a class="sur-footer-link" href="{{ route('privacy-policy') }}">{{ __('frontend.privacyPolicy_header') }}</a>
                     </li>
                 </ul>
-            </div>
 
-            <div class="sur-footer-col lg:col-span-3">
                 <h2 class="sur-footer-heading">{{ __('frontend.footer_connect') }}</h2>
                 <div class="flex flex-wrap gap-3">
                     <a href="https://www.facebook.com/SmashUpRandomizer/" class="sur-social-btn" aria-label="Facebook" rel="noopener noreferrer">
@@ -56,6 +62,7 @@
                     </a>
                 </div>
             </div>
+
         </div>
 
         <div class="mt-12 flex flex-col gap-4 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
