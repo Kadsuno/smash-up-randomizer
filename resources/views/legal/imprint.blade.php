@@ -10,7 +10,7 @@
                     {{ __('frontend.imprint_header') }}
                 </h1>
                 <p class="mt-3 text-sm text-zinc-500">
-                    Legal information pursuant to § 5 TMG (German Telemedia Act)
+                    Legal information pursuant to § 5 DDG (Digitale-Dienste-Gesetz)
                 </p>
             </x-sur.reveal>
         </x-sur.container>
@@ -22,7 +22,7 @@
         {{-- Provider block --}}
         <x-sur.reveal>
             <div class="sur-card mb-8 border-white/8 p-6 sm:p-8">
-                <div class="grid gap-8 sm:grid-cols-3">
+                <div class="grid gap-8 sm:grid-cols-2">
 
                     {{-- Address --}}
                     <div>
@@ -34,14 +34,6 @@
                             Im Turmswinkel 12<br>
                             38122 Braunschweig
                         </address>
-                    </div>
-
-                    {{-- Represented by --}}
-                    <div>
-                        <p class="mb-3 text-xs font-bold uppercase tracking-widest text-indigo-400">
-                            {{ __('frontend.imprint_represent') }}
-                        </p>
-                        <p class="text-sm text-zinc-300">Mike Rauch</p>
                     </div>
 
                     {{-- Contact --}}
