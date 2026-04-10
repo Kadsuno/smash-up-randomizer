@@ -1,28 +1,51 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
     <title>Smash Up Randomizer</title>
     <defs>
-        <linearGradient id="surMark" x1="8" y1="10" x2="56" y2="54" gradientUnits="userSpaceOnUse">
+        <linearGradient id="gA" x1="0" y1="0" x2="1" y2="1">
+            <stop stop-color="#fcd34d"/>
+            <stop offset="1" stop-color="#b45309"/>
+        </linearGradient>
+        <linearGradient id="gB" x1="0" y1="0" x2="1" y2="1">
             <stop stop-color="#818cf8"/>
-            <stop offset="0.45" stop-color="#6366f1"/>
             <stop offset="1" stop-color="#7c3aed"/>
         </linearGradient>
-        <linearGradient id="surMarkStroke" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+        <linearGradient id="gBorder" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
             <stop stop-color="#6366f1" stop-opacity="0.55"/>
             <stop offset="1" stop-color="#8b5cf6" stop-opacity="0.35"/>
         </linearGradient>
-        <filter id="surMarkShadow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="1" stdDeviation="1.2" flood-color="#000000" flood-opacity="0.45"/>
+        <filter id="fA" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#000" flood-opacity="0.5"/>
+        </filter>
+        <filter id="fB" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#000" flood-opacity="0.65"/>
         </filter>
     </defs>
-    <!-- App chip -->
+
+    <!-- Background chip -->
     <rect width="64" height="64" rx="16" fill="#0c0c0f"/>
-    <rect x="1" y="1" width="62" height="62" rx="15" stroke="url(#surMarkStroke)" stroke-width="1.25"/>
-    <!-- Back card -->
-    <rect x="11" y="19" width="28" height="36" rx="5" fill="#27272a" transform="rotate(-12 25 37)"/>
-    <!-- Front card -->
-    <rect x="25" y="13" width="28" height="36" rx="5" fill="url(#surMark)" filter="url(#surMarkShadow)" transform="rotate(10 39 31)"/>
-    <!-- Random / shuffle dots -->
-    <circle cx="46" cy="21" r="3.25" fill="#ddd6fe"/>
-    <circle cx="17" cy="44" r="2.25" fill="#a5b4fc" opacity="0.9"/>
-    <circle cx="24" cy="50" r="1.5" fill="#818cf8" opacity="0.75"/>
+    <rect x="1" y="1" width="62" height="62" rx="15" stroke="url(#gBorder)" stroke-width="1.25"/>
+
+    <!-- Amber card (back, left, tilted counter-clockwise) -->
+    <rect x="6" y="12" width="24" height="32" rx="5"
+          fill="url(#gA)" filter="url(#fA)"
+          transform="rotate(-16 18 28)"/>
+
+    <!-- Indigo card (front, right, tilted clockwise) -->
+    <rect x="34" y="10" width="24" height="32" rx="5"
+          fill="url(#gB)" filter="url(#fB)"
+          transform="rotate(14 46 26)"/>
+
+    <!-- Shuffle arrows — dark outline pass first for contrast on amber, then white on top -->
+    <g transform="translate(32,35)" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <!-- Shadow layer -->
+        <polyline points="-7,5 5,-4"    stroke="#000" stroke-width="4.5" opacity="0.25"/>
+        <polyline points="1,-6 5,-4 2,-1" stroke="#000" stroke-width="4.5" opacity="0.25"/>
+        <polyline points="-7,-4 5,5"    stroke="#000" stroke-width="4.5" opacity="0.25"/>
+        <polyline points="1,3 5,5 2,8"  stroke="#000" stroke-width="4.5" opacity="0.25"/>
+        <!-- White arrows -->
+        <polyline points="-7,5 5,-4"    stroke="white" stroke-width="2.4"/>
+        <polyline points="1,-6 5,-4 2,-1" stroke="white" stroke-width="2.4"/>
+        <polyline points="-7,-4 5,5"    stroke="white" stroke-width="2.4"/>
+        <polyline points="1,3 5,5 2,8"  stroke="white" stroke-width="2.4"/>
+    </g>
 </svg>
