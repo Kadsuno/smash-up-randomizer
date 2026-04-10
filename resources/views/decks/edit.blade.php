@@ -222,7 +222,27 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 <style>
-.ck-editor__editable { color: #000 !important; background: #fff !important; min-height: 80px; }
+/* CKEditor dark theme */
+.ck.ck-editor__main > .ck-editor__editable,
+.ck.ck-editor__editable {
+    background: #18181b !important;
+    color: #e4e4e7 !important;
+    border-color: rgba(255,255,255,0.08) !important;
+    min-height: 100px;
+}
+.ck.ck-toolbar {
+    background: #27272a !important;
+    border-color: rgba(255,255,255,0.08) !important;
+}
+.ck.ck-toolbar .ck-toolbar__separator { background: rgba(255,255,255,0.1) !important; }
+.ck.ck-button, .ck.ck-button.ck-on { color: #a1a1aa !important; background: transparent !important; }
+.ck.ck-button:hover, .ck.ck-button.ck-on:hover { background: rgba(255,255,255,0.06) !important; color: #fff !important; }
+.ck.ck-button.ck-on { color: #818cf8 !important; }
+.ck.ck-editor__editable.ck-focused { border-color: rgba(99,102,241,0.4) !important; box-shadow: 0 0 0 2px rgba(99,102,241,0.15) !important; }
+.ck-dropdown__panel, .ck.ck-list { background: #27272a !important; border-color: rgba(255,255,255,0.08) !important; }
+.ck.ck-list__item .ck-button { color: #d4d4d8 !important; }
+.ck.ck-list__item .ck-button:hover { background: rgba(255,255,255,0.06) !important; }
+.ck.ck-list__item .ck-button.ck-on { background: rgba(99,102,241,0.2) !important; color: #818cf8 !important; }
 </style>
 
 </x-layouts.backend.backendMain>
