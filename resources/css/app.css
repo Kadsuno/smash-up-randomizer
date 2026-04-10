@@ -459,6 +459,7 @@ html::-webkit-scrollbar-thumb:active,
 }
 
 .faction-item {
+    position: relative;
     text-align: center;
 }
 
@@ -585,6 +586,15 @@ html::-webkit-scrollbar-thumb:active,
     .scroll-container {
         scroll-behavior: auto;
     }
+}
+
+/* Landing home — faction teaser strip */
+.sur-faction-strip {
+    scrollbar-width: none;
+}
+
+.sur-faction-strip::-webkit-scrollbar {
+    display: none;
 }
 
 /* Landing home — carousel chrome */
