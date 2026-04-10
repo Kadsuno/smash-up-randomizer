@@ -242,12 +242,18 @@
                 ['icon' => 'fa-shuffle', 'color' => 'indigo', 'step' => 3],
             ] as $i => $item)
                 {{-- Step --}}
+                @php
+                    $isViolet = $item['color'] === 'violet';
+                    $iconBg    = $isViolet ? 'bg-violet-500/15 ring-violet-500/35 hover:bg-violet-500/25' : 'bg-indigo-500/15 ring-indigo-500/35 hover:bg-indigo-500/25';
+                    $iconText  = $isViolet ? 'text-violet-300' : 'text-indigo-300';
+                    $badgeCls  = $isViolet ? 'bg-violet-500 shadow-violet-500/50' : 'bg-indigo-500 shadow-indigo-500/50';
+                @endphp
                 <x-sur.reveal :delay="$i * 80" class="flex flex-1 flex-col items-center text-center">
                     <div class="relative">
-                        <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-{{ $item['color'] }}-500/15 ring-2 ring-{{ $item['color'] }}-500/35 transition duration-300 hover:bg-{{ $item['color'] }}-500/25">
-                            <i class="fa-solid {{ $item['icon'] }} text-2xl text-{{ $item['color'] }}-300" aria-hidden="true"></i>
+                        <div class="flex h-16 w-16 items-center justify-center rounded-2xl ring-2 transition duration-300 {{ $iconBg }}">
+                            <i class="fa-solid {{ $item['icon'] }} text-2xl {{ $iconText }}" aria-hidden="true"></i>
                         </div>
-                        <span class="absolute -right-1 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-{{ $item['color'] }}-500 text-[0.65rem] font-bold text-white shadow-lg shadow-{{ $item['color'] }}-500/40">{{ $item['step'] }}</span>
+                        <span class="absolute -right-2 -top-2 flex h-7 w-7 items-center justify-center rounded-full text-sm font-extrabold text-white shadow-lg ring-2 ring-zinc-950 {{ $badgeCls }}">{{ $item['step'] }}</span>
                     </div>
                     <h3 class="mt-4 text-lg font-semibold text-white">{{ __('frontend.landing_howto_step'.$item['step'].'_title') }}</h3>
                     <p class="mt-2 max-w-[16rem] text-sm leading-relaxed text-zinc-400">{{ __('frontend.landing_howto_step'.$item['step'].'_body') }}</p>
