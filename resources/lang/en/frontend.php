@@ -1,5 +1,7 @@
 <?php
 return [
+    'meta_description' => 'The free Smash Up faction randomizer — pick your players, filter your sets, and get fair combos in seconds. No account needed.',
+    'meta_og_title' => 'Smash Up Randomizer — Fair factions, zero drama',
     'skip_to_content' => 'Skip to main content',
     'logo_alt' => 'Smash Up Randomizer',
     'start_header' => 'Welcome to Smash Up Randomizer',
@@ -205,4 +207,21 @@ return [
     'landing_whatis_fact_age' => 'Ages 12+',
     'landing_whatis_fact_author' => 'Paul Peterson',
     'landing_whatis_fact_year' => 'Since 2012',
+
+    'landing_result_eyebrow' => 'See it in action',
+    'landing_result_title' => 'Your combos, delivered in seconds',
+    'landing_result_sub' => 'Three steps. One click. Every player gets a unique, randomly assigned pair of factions — no spreadsheets, no arguments.',
+    'landing_result_img_alt' => 'Screenshot of the Smash Up Randomizer result screen showing faction assignments for two players',
+    'landing_result_cta' => 'Try it now — it\'s free',
+
+    'landing_faq_eyebrow' => 'Questions',
+    'landing_faq_title' => 'Frequently asked questions',
+    'landing_faq_q1' => 'Is this an official Smash Up product?',
+    'landing_faq_a1' => 'No. Smash Up Randomizer is a free, fan-made tool and is not affiliated with or endorsed by Alderac Entertainment Group (AEG). "Smash Up" is a trademark of AEG.',
+    'landing_faq_q2' => 'Do I need an account to use it?',
+    'landing_faq_a2' => 'Not at all. Open the site, choose your players, and shuffle. No login, no email, no subscription required.',
+    'landing_faq_q3' => 'Does it support all Smash Up expansions?',
+    'landing_faq_a3' => 'Yes — all officially released sets are included. You can include only the expansions you own tonight and exclude anything still in the box.',
+    'landing_faq_q4' => 'Is my data collected or tracked?',
+    'landing_faq_a4' => 'Optional analytics via self-hosted Matomo are enabled only after you explicitly opt in. No advertising cookies, no third-party trackers — ever.',
 ];

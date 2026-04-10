@@ -409,6 +409,84 @@
         </x-sur.section>
     @endif
 
+    {{-- Result preview --}}
+    <x-sur.section>
+        <div class="flex flex-col items-center gap-12 lg:flex-row lg:gap-16">
+            <x-sur.reveal class="flex-1 text-center lg:text-left">
+                <p class="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400/90">{{ __('frontend.landing_result_eyebrow') }}</p>
+                <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">{{ __('frontend.landing_result_title') }}</h2>
+                <p class="mt-4 text-sm leading-relaxed text-zinc-400 sm:text-base">{{ __('frontend.landing_result_sub') }}</p>
+                <div class="mt-8">
+                    <button type="button" class="js-open-shuffle sur-btn-primary min-h-12 px-8 text-base shadow-lg shadow-indigo-500/25">
+                        <i class="fa-solid fa-shuffle me-2" aria-hidden="true"></i>{{ __('frontend.landing_result_cta') }}
+                    </button>
+                </div>
+            </x-sur.reveal>
+            <x-sur.reveal :delay="80" class="w-full flex-1 lg:max-w-lg">
+                <div class="relative rounded-2xl border border-white/10 bg-zinc-900/50 p-1 shadow-2xl shadow-black/60 ring-1 ring-white/5">
+                    <img
+                        src="{{ asset('images/landing/result-preview.jpg') }}"
+                        alt="{{ __('frontend.landing_result_img_alt') }}"
+                        class="w-full rounded-xl"
+                        loading="lazy"
+                        width="800"
+                        height="805"
+                    >
+                </div>
+            </x-sur.reveal>
+        </div>
+    </x-sur.section>
+
+    {{-- FAQ --}}
+    <x-sur.section>
+        <div class="mx-auto max-w-3xl">
+            <div class="mb-10 text-center">
+                <p class="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400/90">{{ __('frontend.landing_faq_eyebrow') }}</p>
+                <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">{{ __('frontend.landing_faq_title') }}</h2>
+            </div>
+            <div
+                x-data="{ open: null }"
+                class="divide-y divide-white/8 rounded-2xl border border-white/10 bg-zinc-900/40"
+            >
+                @foreach(range(1, 4) as $n)
+                    <div>
+                        <button
+                            type="button"
+                            class="flex w-full items-start justify-between gap-4 px-6 py-5 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60 focus-visible:ring-inset"
+                            @click="open = open === {{ $n }} ? null : {{ $n }}"
+                            :aria-expanded="open === {{ $n }} ? 'true' : 'false'"
+                        >
+                            <span class="text-sm font-semibold text-white sm:text-base">{{ __('frontend.landing_faq_q' . $n) }}</span>
+                            <svg
+                                class="mt-0.5 h-5 w-5 shrink-0 text-indigo-400 transition-transform duration-300"
+                                :class="{ 'rotate-180': open === {{ $n }} }"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                aria-hidden="true"
+                            >
+                                <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <div
+                            x-show="open === {{ $n }}"
+                            x-transition:enter="transition ease-out duration-200"
+                            x-transition:enter-start="opacity-0 -translate-y-1"
+                            x-transition:enter-end="opacity-100 translate-y-0"
+                            x-transition:leave="transition ease-in duration-150"
+                            x-transition:leave-start="opacity-100 translate-y-0"
+                            x-transition:leave-end="opacity-0 -translate-y-1"
+                            class="px-6 pb-5"
+                            x-cloak
+                        >
+                            <p class="text-sm leading-relaxed text-zinc-400">{{ __('frontend.landing_faq_a' . $n) }}</p>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </x-sur.section>
+
     <dialog
         id="shuffle-modal"
         class="shuffle-modal-dialog shadow-2xl"

@@ -1,5 +1,7 @@
 <?php
 return [
+    'meta_description' => 'Der kostenlose Smash Up Fraktions-Randomizer – Spieler wählen, Sets filtern, faire Kombos in Sekunden. Kein Account nötig.',
+    'meta_og_title' => 'Smash Up Randomizer — Faire Fraktionen, kein Streit',
     'skip_to_content' => 'Zum Hauptinhalt springen',
     'logo_alt' => 'Smash Up Randomizer',
     'start_header' => 'Willkommen zum Smash Up Randomizer',
@@ -176,4 +178,21 @@ return [
     'landing_whatis_fact_age' => 'Ab 12 Jahren',
     'landing_whatis_fact_author' => 'Paul Peterson',
     'landing_whatis_fact_year' => 'Seit 2012',
+
+    'landing_result_eyebrow' => 'In Aktion',
+    'landing_result_title' => 'Deine Kombos, in Sekunden bereit',
+    'landing_result_sub' => 'Drei Schritte. Ein Klick. Jeder Spieler bekommt ein einzigartiges, zufällig zugewiesenes Fraktionspaar — keine Tabellen, kein Streit.',
+    'landing_result_img_alt' => 'Screenshot des Smash Up Randomizer Ergebnisbildschirms mit Fraktionszuweisungen für zwei Spieler',
+    'landing_result_cta' => 'Jetzt ausprobieren — kostenlos',
+
+    'landing_faq_eyebrow' => 'Fragen',
+    'landing_faq_title' => 'Häufig gestellte Fragen',
+    'landing_faq_q1' => 'Ist das ein offizielles Smash Up-Produkt?',
+    'landing_faq_a1' => 'Nein. Smash Up Randomizer ist ein kostenloses Fan-Tool und steht in keiner Verbindung zu Alderac Entertainment Group (AEG). „Smash Up" ist eine Marke von AEG.',
+    'landing_faq_q2' => 'Brauche ich einen Account?',
+    'landing_faq_a2' => 'Überhaupt nicht. Seite öffnen, Spieler wählen, mischen. Kein Login, keine E-Mail, kein Abo.',
+    'landing_faq_q3' => 'Unterstützt der Randomizer alle Erweiterungen?',
+    'landing_faq_a3' => 'Ja — alle offiziell erschienenen Sets sind enthalten. Du kannst nur die Erweiterungen einbeziehen, die heute Abend auf dem Tisch liegen, und den Rest ausschließen.',
+    'landing_faq_q4' => 'Werden meine Daten gesammelt oder getrackt?',
+    'landing_faq_a4' => 'Optionale Analysen via selbst-gehostetem Matomo werden nur nach expliziter Zustimmung aktiviert. Keine Werbe-Cookies, keine Drittanbieter-Tracker — niemals.',
 ];
