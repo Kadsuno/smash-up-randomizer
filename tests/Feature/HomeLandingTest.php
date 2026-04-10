@@ -55,6 +55,16 @@ class HomeLandingTest extends TestCase
         $response->assertSee(__('frontend.landing_combo_3_name'), false);
     }
 
+    public function test_home_page_renders_smashup_explainer(): void
+    {
+        $response = $this->get('/');
+
+        $response->assertOk();
+        $response->assertSee(__('frontend.landing_whatis_title'), false);
+        $response->assertSee(__('frontend.landing_whatis_fact_players'), false);
+        $response->assertSee(__('frontend.landing_whatis_fact_year'), false);
+    }
+
     public function test_home_page_renders_faction_teaser_strip(): void
     {
         DB::table('decks')->insert([['name' => 'Ninjas'], ['name' => 'Zombies'], ['name' => 'Aliens']]);

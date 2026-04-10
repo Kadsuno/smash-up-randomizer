@@ -274,6 +274,31 @@
         </div>
     </x-sur.section>
 
+    {{-- What is Smash Up? explainer --}}
+    <x-sur.section>
+        <x-sur.reveal>
+            <div class="sur-card border-white/10 p-6 sm:p-10">
+                <div class="grid gap-8 md:grid-cols-2 md:gap-12">
+                    <div>
+                        <p class="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400/90">{{ __('frontend.landing_whatis_eyebrow') }}</p>
+                        <h2 class="mb-4 text-2xl font-bold tracking-tight text-white sm:text-3xl">{{ __('frontend.landing_whatis_title') }}</h2>
+                        <p class="text-sm leading-relaxed text-zinc-400 sm:text-base">{{ __('frontend.landing_whatis_body') }}</p>
+                    </div>
+                    <div class="flex flex-col justify-center">
+                        <p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">{{ __('frontend.landing_whatis_facts_label') }}</p>
+                        <div class="flex flex-wrap gap-2">
+                            @foreach(['players', 'duration', 'age', 'author', 'year'] as $fact)
+                                <span class="rounded-xl border border-white/10 bg-zinc-800/60 px-3 py-2 text-sm font-medium text-zinc-200">
+                                    {{ __('frontend.landing_whatis_fact_'.$fact) }}
+                                </span>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </x-sur.reveal>
+    </x-sur.section>
+
     {{-- Faction teaser strip --}}
     @if($factions->isNotEmpty())
         <x-sur.section :padded="true">

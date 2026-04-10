@@ -171,4 +171,14 @@ return [
     'landing_factions_eyebrow' => 'Volle Fraktionsunterstützung',
     'landing_factions_title' => 'Jede Fraktion, bereit zum Mischen',
     'landing_factions_view_all' => 'Alle Fraktionen ansehen',
+
+    'landing_whatis_eyebrow' => 'Neu bei Smash Up?',
+    'landing_whatis_facts_label' => 'Auf einen Blick',
+    'landing_whatis_title' => 'Was ist Smash Up?',
+    'landing_whatis_body' => 'Smash Up ist ein Kartenspiel von Paul Peterson (AEG, 2012) für 2–4 Spieler. Jede Person kombiniert zwei Fraktionsdecks — Piraten, Aliens, Ninjas, Zombies und viele mehr — zu einem und kämpft damit um Basen auf dem Tisch. Wer dort die meiste Stärke hat, erhält Siegpunkte; wer zuerst 15 Punkte sammelt, gewinnt.',
+    'landing_whatis_fact_players' => '2–4 Spieler',
+    'landing_whatis_fact_duration' => 'ca. 45 Min.',
+    'landing_whatis_fact_age' => 'Ab 12 Jahren',
+    'landing_whatis_fact_author' => 'Paul Peterson',
+    'landing_whatis_fact_year' => 'Seit 2012',
 ];
