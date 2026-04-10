@@ -311,8 +311,8 @@ html::-webkit-scrollbar-thumb:active,
         border-bottom: none;
     }
 
-    #shuffle-modal.shuffle-modal-dialog,
-    #shuffle-modal {
+    /* Only when open (showModal): `display: flex` must not apply to a closed <dialog> or it overrides UA `display: none` and the modal is visible on load. */
+    #shuffle-modal:open {
         margin: auto;
         width: min(100vw - 1.25rem, 42rem);
         /* dvh + inset keeps the dialog inside the visible viewport (vh alone can clip when UA centers a tall modal). */

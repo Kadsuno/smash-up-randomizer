@@ -31,6 +31,7 @@ All notable changes to this project are documented in this file.
 
 ### Fixed
 
+- **Shuffle modal:** **`display: flex`** on `#shuffle-modal` (without **`:open`**) overrode the user-agent **`dialog:not(:open) { display: none }`**, so the wizard appeared **on every page load**. Layout rules are now scoped to **`#shuffle-modal:open`**.
 - **Shuffle modal:** Toggling include/exclude faction chips could paint the dialog contents **solid black** (GPU compositing with `backdrop-blur` + Tailwind `peer` variants). Removed blur layers on the modal card/footer, switched checked styling to **`:has()`** on `.faction-item`, renamed the form class to `shuffle-wizard-form` (no `needs-validation`), added `overflow-anchor: none` on the scroll region and `isolate` on the card.
 - **Shuffle modal:** **Light dismiss** — close when clicking the dimmed **backdrop** outside the card (`closedby="any"` + JS fallback for engines that ignore it).
 - **Shuffle modal:** Long **include/exclude** lists with **sr-only** inputs could **shift the dialog off-screen** (focus `scrollInto-view` + scroll position). The dialog node is **moved to `document.body`**, and **pointerdown** / **focusin** handlers **restore page scroll** and **`focus({ preventScroll: true })`** for wizard radios/checkboxes (Chromium especially). **`pointerdown` also stores `.shuffle-modal-scroll` `scrollTop`** and it is **re-applied after 2× and 3× `requestAnimationFrame`** so Chromium cannot leave the list scrolled to the focused control in a later frame.
