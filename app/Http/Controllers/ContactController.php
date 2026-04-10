@@ -26,9 +26,9 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email',
-            'phone' => 'required|regex:/^[0-9\s\-()+]+$/',
+            'name'    => 'required|string|max:255',
+            'email'   => 'required|email',
+            'phone'   => 'nullable|regex:/^[0-9\s\-()+]+$/',
             'subject' => 'required|string|max:255',
             'message' => 'required|string',
         ]);
@@ -75,6 +75,6 @@ class ContactController extends Controller
         );
 
         return redirect()->back()
-            ->with(['success' => 'Thank you for contact us. we will contact you shortly.']);
+            ->with(['success' => 'Thanks for reaching out! We\'ll get back to you within 1–2 business days.']);
     }
 }

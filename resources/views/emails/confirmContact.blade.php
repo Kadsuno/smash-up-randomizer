@@ -21,10 +21,12 @@
                 <td style="padding: 10px; font-weight: bold; color: #bfbb00;">Email:</td>
                 <td style="padding: 10px; color: #f5f5f5;">{{ $data->email }}</td>
             </tr>
+            @if(!empty($data->phone))
             <tr>
                 <td style="padding: 10px; font-weight: bold; color: #bfbb00;">Phone:</td>
                 <td style="padding: 10px; color: #f5f5f5;">{{ $data->phone }}</td>
             </tr>
+            @endif
             <tr>
                 <td style="padding: 10px; font-weight: bold; color: #bfbb00;">Subject:</td>
                 <td style="padding: 10px; color: #f5f5f5;">{{ $data->subject }}</td>
