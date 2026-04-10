@@ -41,7 +41,7 @@
                         <div
                             x-show="i === 0"
                             x-transition.opacity.duration.500ms
-                            class="absolute inset-0 flex flex-col bg-zinc-900"
+                            class="absolute inset-0 flex flex-col bg-linear-to-br from-indigo-950/70 via-zinc-900 to-zinc-900"
                             x-cloak
                             role="group"
                             aria-roledescription="slide"
@@ -69,7 +69,7 @@
                         <div
                             x-show="i === 1"
                             x-transition.opacity.duration.500ms
-                            class="absolute inset-0 flex flex-col bg-zinc-900"
+                            class="absolute inset-0 flex flex-col bg-linear-to-br from-violet-950/60 via-zinc-900 to-zinc-900"
                             x-cloak
                             role="group"
                             aria-roledescription="slide"
@@ -100,7 +100,7 @@
                         <div
                             x-show="i === 2"
                             x-transition.opacity.duration.500ms
-                            class="absolute inset-0 flex flex-col bg-zinc-900"
+                            class="absolute inset-0 flex flex-col bg-linear-to-br from-indigo-950/50 via-violet-950/30 to-zinc-900"
                             x-cloak
                             role="group"
                             aria-roledescription="slide"
@@ -193,34 +193,34 @@
     </div>
 
     {{-- Feature grid --}}
-    <x-sur.section>
+    <x-sur.section class="border-y border-white/6 bg-zinc-900/30">
         <div class="text-center">
             <p class="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400/90">{{ __('frontend.landing_features_eyebrow') }}</p>
             <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">{{ __('frontend.landing_features_title') }}</h2>
         </div>
         <div class="mt-12 grid gap-6 md:grid-cols-3">
             <x-sur.reveal :delay="0">
-                <div class="sur-card group h-full border-white/10 p-6 transition duration-300 hover:border-indigo-500/30 sm:p-8">
-                    <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-500/15 text-indigo-300 ring-1 ring-indigo-500/25">
-                        <i class="fa-solid fa-scale-balanced text-xl" aria-hidden="true"></i>
+                <div class="sur-card group h-full overflow-hidden border-white/10 p-6 transition duration-300 hover:border-indigo-500/40 sm:p-8" style="border-top: 2px solid rgb(99 102 241 / 0.55);">
+                    <div class="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-500/15 text-indigo-300 ring-1 ring-indigo-500/30 transition duration-300 group-hover:bg-indigo-500/25">
+                        <i class="fa-solid fa-scale-balanced text-2xl" aria-hidden="true"></i>
                     </div>
                     <h3 class="mb-3 text-lg font-semibold text-white">{{ __('frontend.landing_feature_1_title') }}</h3>
                     <p class="text-sm leading-relaxed text-zinc-400">{{ __('frontend.landing_feature_1_body') }}</p>
                 </div>
             </x-sur.reveal>
             <x-sur.reveal :delay="70">
-                <div class="sur-card group h-full border-white/10 p-6 transition duration-300 hover:border-indigo-500/30 sm:p-8">
-                    <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-500/15 text-violet-300 ring-1 ring-violet-500/25">
-                        <i class="fa-solid fa-layer-group text-xl" aria-hidden="true"></i>
+                <div class="sur-card group h-full overflow-hidden border-white/10 p-6 transition duration-300 hover:border-violet-500/40 sm:p-8" style="border-top: 2px solid rgb(139 92 246 / 0.55);">
+                    <div class="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-violet-500/15 text-violet-300 ring-1 ring-violet-500/30 transition duration-300 group-hover:bg-violet-500/25">
+                        <i class="fa-solid fa-layer-group text-2xl" aria-hidden="true"></i>
                     </div>
                     <h3 class="mb-3 text-lg font-semibold text-white">{{ __('frontend.landing_feature_2_title') }}</h3>
                     <p class="text-sm leading-relaxed text-zinc-400">{{ __('frontend.landing_feature_2_body') }}</p>
                 </div>
             </x-sur.reveal>
             <x-sur.reveal :delay="140">
-                <div class="sur-card group h-full border-white/10 p-6 transition duration-300 hover:border-indigo-500/30 sm:p-8">
-                    <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-500/15 text-indigo-300 ring-1 ring-indigo-500/25">
-                        <i class="fa-solid fa-bolt text-xl" aria-hidden="true"></i>
+                <div class="sur-card group h-full overflow-hidden border-white/10 p-6 transition duration-300 hover:border-indigo-500/40 sm:p-8" style="border-top: 2px solid rgb(99 102 241 / 0.55);">
+                    <div class="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-500/15 text-indigo-300 ring-1 ring-indigo-500/30 transition duration-300 group-hover:bg-indigo-500/25">
+                        <i class="fa-solid fa-bolt text-2xl" aria-hidden="true"></i>
                     </div>
                     <h3 class="mb-3 text-lg font-semibold text-white">{{ __('frontend.landing_feature_3_title') }}</h3>
                     <p class="text-sm leading-relaxed text-zinc-400">{{ __('frontend.landing_feature_3_body') }}</p>
@@ -235,22 +235,30 @@
             <p class="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400/90">{{ __('frontend.landing_howto_eyebrow') }}</p>
             <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">{{ __('frontend.landing_howto_title') }}</h2>
         </div>
-        <div class="mt-12 grid gap-6 md:grid-cols-3">
+        <div class="mt-14 flex flex-col gap-8 md:flex-row md:items-start md:gap-0">
             @foreach([
                 ['icon' => 'fa-users', 'color' => 'indigo', 'step' => 1],
                 ['icon' => 'fa-filter', 'color' => 'violet', 'step' => 2],
                 ['icon' => 'fa-shuffle', 'color' => 'indigo', 'step' => 3],
             ] as $i => $item)
-                <x-sur.reveal :delay="$i * 70">
-                    <div class="sur-card group relative h-full border-white/10 p-6 transition duration-300 hover:border-indigo-500/30 sm:p-8">
-                        <div class="absolute right-5 top-5 text-5xl font-extrabold tabular-nums text-white/5 sm:right-7 sm:top-6 sm:text-6xl">{{ $item['step'] }}</div>
-                        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-{{ $item['color'] }}-500/15 text-{{ $item['color'] }}-300 ring-1 ring-{{ $item['color'] }}-500/25">
-                            <i class="fa-solid {{ $item['icon'] }} text-xl" aria-hidden="true"></i>
+                {{-- Step --}}
+                <x-sur.reveal :delay="$i * 80" class="flex flex-1 flex-col items-center text-center">
+                    <div class="relative">
+                        <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-{{ $item['color'] }}-500/15 ring-2 ring-{{ $item['color'] }}-500/35 transition duration-300 hover:bg-{{ $item['color'] }}-500/25">
+                            <i class="fa-solid {{ $item['icon'] }} text-2xl text-{{ $item['color'] }}-300" aria-hidden="true"></i>
                         </div>
-                        <h3 class="mb-3 text-lg font-semibold text-white">{{ __('frontend.landing_howto_step'.$item['step'].'_title') }}</h3>
-                        <p class="text-sm leading-relaxed text-zinc-400">{{ __('frontend.landing_howto_step'.$item['step'].'_body') }}</p>
+                        <span class="absolute -right-1 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-{{ $item['color'] }}-500 text-[0.65rem] font-bold text-white shadow-lg shadow-{{ $item['color'] }}-500/40">{{ $item['step'] }}</span>
                     </div>
+                    <h3 class="mt-4 text-lg font-semibold text-white">{{ __('frontend.landing_howto_step'.$item['step'].'_title') }}</h3>
+                    <p class="mt-2 max-w-[16rem] text-sm leading-relaxed text-zinc-400">{{ __('frontend.landing_howto_step'.$item['step'].'_body') }}</p>
                 </x-sur.reveal>
+
+                {{-- Connector arrow (between steps, desktop only) --}}
+                @if($i < 2)
+                    <div class="hidden shrink-0 items-center justify-center px-4 pt-7 md:flex">
+                        <i class="fa-solid fa-arrow-right text-xl text-zinc-600" aria-hidden="true"></i>
+                    </div>
+                @endif
             @endforeach
         </div>
     </x-sur.section>
@@ -348,13 +356,17 @@
             @foreach([1, 2, 3] as $i => $ci)
                 <x-sur.reveal :delay="$i * 70">
                     <div class="sur-card group h-full border-white/10 p-6 text-center transition duration-300 hover:border-indigo-500/30 sm:p-8">
-                        <div class="mb-4 flex flex-wrap items-center justify-center gap-2">
-                            <span class="rounded-xl border border-indigo-500/35 bg-indigo-500/10 px-3 py-1.5 text-sm font-semibold text-indigo-200">{{ __('frontend.landing_combo_'.$ci.'_a') }}</span>
-                            <span class="text-base font-bold text-zinc-500">+</span>
-                            <span class="rounded-xl border border-violet-500/35 bg-violet-500/10 px-3 py-1.5 text-sm font-semibold text-violet-200">{{ __('frontend.landing_combo_'.$ci.'_b') }}</span>
+                        <div class="mb-5 flex flex-wrap items-center justify-center gap-2">
+                            <span class="rounded-xl border border-indigo-500/40 bg-indigo-500/12 px-4 py-2 text-sm font-bold text-indigo-200 shadow-sm shadow-indigo-500/10">{{ __('frontend.landing_combo_'.$ci.'_a') }}</span>
+                            <span class="text-lg font-bold text-zinc-500">+</span>
+                            <span class="rounded-xl border border-violet-500/40 bg-violet-500/12 px-4 py-2 text-sm font-bold text-violet-200 shadow-sm shadow-violet-500/10">{{ __('frontend.landing_combo_'.$ci.'_b') }}</span>
                         </div>
-                        <p class="mb-1 text-xs font-semibold uppercase tracking-wider text-zinc-500">=</p>
-                        <h3 class="mb-3 text-lg font-bold text-white">{{ __('frontend.landing_combo_'.$ci.'_name') }}</h3>
+                        <div class="mb-3 flex items-center justify-center gap-2">
+                            <span class="h-px flex-1 bg-white/8"></span>
+                            <span class="text-xs font-bold uppercase tracking-widest text-zinc-500">=</span>
+                            <span class="h-px flex-1 bg-white/8"></span>
+                        </div>
+                        <h3 class="mb-2 text-lg font-bold text-white">{{ __('frontend.landing_combo_'.$ci.'_name') }}</h3>
                         <p class="text-sm leading-relaxed text-zinc-400">{{ __('frontend.landing_combo_'.$ci.'_tagline') }}</p>
                     </div>
                 </x-sur.reveal>
@@ -410,7 +422,7 @@
     @endif
 
     {{-- Result preview --}}
-    <x-sur.section>
+    <x-sur.section class="border-y border-white/6 bg-indigo-950/20">
         <div class="flex flex-col items-center gap-12 lg:flex-row lg:gap-16">
             <x-sur.reveal class="flex-1 text-center lg:text-left">
                 <p class="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400/90">{{ __('frontend.landing_result_eyebrow') }}</p>
