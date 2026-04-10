@@ -352,7 +352,7 @@
     </section>
 
     {{-- Faction combo examples --}}
-    <x-sur.section>
+    <x-sur.section class="border-y border-white/6 bg-zinc-900/25">
         <div class="text-center">
             <p class="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400/90">{{ __('frontend.landing_combos_eyebrow') }}</p>
             <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">{{ __('frontend.landing_combos_title') }}</h2>

@@ -4,6 +4,10 @@ All notable changes to this project are documented in this file.
 
 ## [Unreleased]
 
+### Changed
+
+- **Landing visual rhythm pass:** Hero carousel slides get individual gradient backgrounds (indigo / violet / indigo+violet) instead of flat zinc-900. Feature-grid section adds a subtle `bg-zinc-900/30` tint with `border-y` and colored 2 px top-border accents per card (indigo / violet). "How it works" redesigned from a card grid to a centred step-flow with arrow connectors on desktop and numbered badges (h-7 solid fill) on the icons. Combo-card section gets a matching section tint. Result-preview section tinted `indigo-950/20`. Logo simplified to two overlapping cards without the shuffle-symbol overlay.
+
 ### Added
 
 - **Frontend:** Tailwind CSS v4 with `@tailwindcss/vite` (mobile-first utilities), dark-first layout, and component tokens (`sur-*` classes) replace Bootstrap 5 across Blade views. Vite builds `resources/css/app.css` (`@import "tailwindcss"`, tokens in `@theme`; Font Awesome + animate.css retained). **Requires Node.js 20+** (DDEV `nodejs_version` set to 22). Cookie preferences use the native `<dialog>` API instead of Bootstrap modals; navigation uses Alpine.js for mobile menus and backend user dropdown. Default Laravel pagination views set to Tailwind (`AppServiceProvider`).
