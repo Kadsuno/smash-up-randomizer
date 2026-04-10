@@ -97,6 +97,31 @@
         </div>
     </section>
 
+    {{-- Stats bar --}}
+    <div class="border-b border-white/8 bg-zinc-950/80">
+        <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-8 gap-y-3 px-4 py-4 sm:px-6 lg:px-8">
+            <span class="flex items-center gap-2 text-sm text-zinc-300">
+                <i class="fa-solid fa-layer-group text-indigo-400" aria-hidden="true"></i>
+                <strong class="text-white">{{ count($factions) }}</strong>&nbsp;{{ __('frontend.landing_stats_factions') }}
+            </span>
+            <span class="hidden h-3 w-px bg-white/15 sm:block" aria-hidden="true"></span>
+            <span class="flex items-center gap-2 text-sm text-zinc-300">
+                <i class="fa-solid fa-circle-check text-indigo-400" aria-hidden="true"></i>
+                {{ __('frontend.landing_stats_free') }}
+            </span>
+            <span class="hidden h-3 w-px bg-white/15 sm:block" aria-hidden="true"></span>
+            <span class="flex items-center gap-2 text-sm text-zinc-300">
+                <i class="fa-solid fa-user-slash text-indigo-400" aria-hidden="true"></i>
+                {{ __('frontend.landing_stats_no_account') }}
+            </span>
+            <span class="hidden h-3 w-px bg-white/15 sm:block" aria-hidden="true"></span>
+            <span class="flex items-center gap-2 text-sm text-zinc-300">
+                <i class="fa-solid fa-boxes-stacked text-indigo-400" aria-hidden="true"></i>
+                {{ __('frontend.landing_stats_expansions') }}
+            </span>
+        </div>
+    </div>
+
     {{-- Feature grid --}}
     <x-sur.section>
         <div class="text-center">
@@ -131,6 +156,32 @@
                     <p class="text-sm leading-relaxed text-zinc-400">{{ __('frontend.landing_feature_3_body') }}</p>
                 </div>
             </x-sur.reveal>
+        </div>
+    </x-sur.section>
+
+    {{-- How it works --}}
+    <x-sur.section>
+        <div class="text-center">
+            <p class="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400/90">{{ __('frontend.landing_howto_eyebrow') }}</p>
+            <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">{{ __('frontend.landing_howto_title') }}</h2>
+        </div>
+        <div class="mt-12 grid gap-6 md:grid-cols-3">
+            @foreach([
+                ['icon' => 'fa-users', 'color' => 'indigo', 'step' => 1],
+                ['icon' => 'fa-filter', 'color' => 'violet', 'step' => 2],
+                ['icon' => 'fa-shuffle', 'color' => 'indigo', 'step' => 3],
+            ] as $i => $item)
+                <x-sur.reveal :delay="$i * 70">
+                    <div class="sur-card group relative h-full border-white/10 p-6 transition duration-300 hover:border-indigo-500/30 sm:p-8">
+                        <div class="absolute right-5 top-5 text-5xl font-extrabold tabular-nums text-white/5 sm:right-7 sm:top-6 sm:text-6xl">{{ $item['step'] }}</div>
+                        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-{{ $item['color'] }}-500/15 text-{{ $item['color'] }}-300 ring-1 ring-{{ $item['color'] }}-500/25">
+                            <i class="fa-solid {{ $item['icon'] }} text-xl" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="mb-3 text-lg font-semibold text-white">{{ __('frontend.landing_howto_step'.$item['step'].'_title') }}</h3>
+                        <p class="text-sm leading-relaxed text-zinc-400">{{ __('frontend.landing_howto_step'.$item['step'].'_body') }}</p>
+                    </div>
+                </x-sur.reveal>
+            @endforeach
         </div>
     </x-sur.section>
 
@@ -198,30 +249,52 @@
         </div>
     </section>
 
-    {{-- Legacy help cards (SEO + returning users): compact --}}
-    <x-sur.section :padded="true">
-        <div class="grid gap-6 md:grid-cols-2">
-            <x-sur.reveal>
-                <div class="sur-card-interactive h-full p-6 sm:p-8">
-                    <h2 class="mb-4 text-xl font-bold text-white sm:text-2xl">{{ __('frontend.help_smashup_header') }}</h2>
-                    <p class="mb-3 text-sm leading-relaxed text-zinc-400">{{ __('frontend.help_smashup_body') }}</p>
-                    <p class="text-sm leading-relaxed text-zinc-500">{{ __('frontend.help_smashup_function') }}</p>
-                </div>
-            </x-sur.reveal>
-            <x-sur.reveal :delay="80">
-                <div class="sur-card-interactive flex h-full flex-col p-6 sm:p-8">
-                    <h2 class="mb-4 text-xl font-bold text-white sm:text-2xl">{{ __('frontend.help_howto_header') }}</h2>
-                    <p class="mb-3 text-sm leading-relaxed text-zinc-400">{{ __('frontend.help_howto_body') }}</p>
-                    <p class="mb-6 text-sm leading-relaxed text-zinc-500">{{ __('frontend.help_howto_fun') }}</p>
-                    <div class="mt-auto text-center">
-                        <button type="button" class="js-open-shuffle sur-btn-primary w-full min-h-12 sm:w-auto">
-                            {{ __('frontend.shuffle_button') }}
-                        </button>
+    {{-- Faction combo examples --}}
+    <x-sur.section>
+        <div class="text-center">
+            <p class="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400/90">{{ __('frontend.landing_combos_eyebrow') }}</p>
+            <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">{{ __('frontend.landing_combos_title') }}</h2>
+            <p class="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-zinc-400 sm:text-base">{{ __('frontend.landing_combos_sub') }}</p>
+        </div>
+        <div class="mt-12 grid gap-6 md:grid-cols-3">
+            @foreach([1, 2, 3] as $i => $ci)
+                <x-sur.reveal :delay="$i * 70">
+                    <div class="sur-card group h-full border-white/10 p-6 text-center transition duration-300 hover:border-indigo-500/30 sm:p-8">
+                        <div class="mb-4 flex flex-wrap items-center justify-center gap-2">
+                            <span class="rounded-xl border border-indigo-500/35 bg-indigo-500/10 px-3 py-1.5 text-sm font-semibold text-indigo-200">{{ __('frontend.landing_combo_'.$ci.'_a') }}</span>
+                            <span class="text-base font-bold text-zinc-500">+</span>
+                            <span class="rounded-xl border border-violet-500/35 bg-violet-500/10 px-3 py-1.5 text-sm font-semibold text-violet-200">{{ __('frontend.landing_combo_'.$ci.'_b') }}</span>
+                        </div>
+                        <p class="mb-1 text-xs font-semibold uppercase tracking-wider text-zinc-500">=</p>
+                        <h3 class="mb-3 text-lg font-bold text-white">{{ __('frontend.landing_combo_'.$ci.'_name') }}</h3>
+                        <p class="text-sm leading-relaxed text-zinc-400">{{ __('frontend.landing_combo_'.$ci.'_tagline') }}</p>
                     </div>
-                </div>
-            </x-sur.reveal>
+                </x-sur.reveal>
+            @endforeach
         </div>
     </x-sur.section>
+
+    {{-- Faction teaser strip --}}
+    @if($factions->isNotEmpty())
+        <x-sur.section :padded="true">
+            <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                    <p class="mb-1 text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400/90">{{ __('frontend.landing_factions_eyebrow') }}</p>
+                    <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">{{ __('frontend.landing_factions_title') }}</h2>
+                </div>
+                <a href="{{ route('factionList') }}" class="sur-btn-secondary shrink-0 self-start sm:self-auto">
+                    {{ __('frontend.landing_factions_view_all') }} <i class="fa-solid fa-arrow-right ms-1.5 text-xs" aria-hidden="true"></i>
+                </a>
+            </div>
+            <div class="sur-faction-strip mt-6 flex gap-2 overflow-x-auto pb-2">
+                @foreach($factions as $faction)
+                    <span class="faction-chip flex shrink-0 cursor-default items-center justify-center rounded-xl border border-white/12 bg-zinc-900/70 px-3 py-2 text-xs font-medium text-zinc-200 shadow-sm">
+                        {{ $faction->name }}
+                    </span>
+                @endforeach
+            </div>
+        </x-sur.section>
+    @endif
 
     <dialog
         id="shuffle-modal"
@@ -471,70 +544,21 @@
         });
 
         /**
-         * Sr-only wizard inputs trigger scroll-into-view; with a long scrolled faction list, Chromium can
-         * move the list scroll offset in a later frame. pointerdown captures window scroll + inner scrollTop;
-         * focusin re-applies both after rAF (and again on a third frame for late layout).
+         * Ensure sr-only faction inputs never trigger an unwanted scrollIntoView.
+         * (position:relative on .faction-item anchors each input to its own item, so
+         * Chromium's implicit scrollIntoView lands on the clicked item — already visible.)
          */
-        let pageScrollBeforeModalControl = { x: 0, y: 0 };
-        let innerScrollBeforeModalControl = 0;
-        let pageScrollLockTs = 0;
-        shuffleDialog?.addEventListener(
-            'pointerdown',
-            () => {
-                pageScrollBeforeModalControl.x = window.scrollX;
-                pageScrollBeforeModalControl.y = window.scrollY;
-                const innerEl = shuffleDialog?.querySelector('.shuffle-modal-scroll');
-                innerScrollBeforeModalControl = innerEl ? innerEl.scrollTop : 0;
-                pageScrollLockTs = Date.now();
-            },
-            true,
-        );
         shuffleDialog?.addEventListener(
             'focusin',
             (e) => {
                 const t = e.target;
                 if (
-                    !t ||
-                    !t.matches ||
-                    !t.matches(
-                        'input.include-faction, input.exclude-faction, input[name="numberOfPlayers"]',
-                    )
+                    t &&
+                    t.matches &&
+                    t.matches('input.include-faction, input.exclude-faction, input[name="numberOfPlayers"]')
                 ) {
-                    return;
-                }
-                const recentPointer = Date.now() - pageScrollLockTs < 600;
-                if (document.activeElement === t) {
                     t.focus({ preventScroll: true });
                 }
-                window.requestAnimationFrame(() => {
-                    window.requestAnimationFrame(() => {
-                        if (recentPointer) {
-                            window.scrollTo(
-                                pageScrollBeforeModalControl.x,
-                                pageScrollBeforeModalControl.y,
-                            );
-                        }
-                        if (document.activeElement === t) {
-                            t.focus({ preventScroll: true });
-                        }
-                        const modalScrollEl = shuffleDialog?.querySelector('.shuffle-modal-scroll');
-                        if (recentPointer && modalScrollEl) {
-                            modalScrollEl.scrollTop = innerScrollBeforeModalControl;
-                        }
-                        window.requestAnimationFrame(() => {
-                            const inner = shuffleDialog?.querySelector('.shuffle-modal-scroll');
-                            if (recentPointer && inner) {
-                                inner.scrollTop = innerScrollBeforeModalControl;
-                            }
-                            window.requestAnimationFrame(() => {
-                                const inner2 = shuffleDialog?.querySelector('.shuffle-modal-scroll');
-                                if (recentPointer && inner2) {
-                                    inner2.scrollTop = innerScrollBeforeModalControl;
-                                }
-                            });
-                        });
-                    });
-                });
             },
             true,
         );
