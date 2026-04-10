@@ -185,4 +185,14 @@ return [
     'landing_factions_eyebrow' => 'Full faction support',
     'landing_factions_title' => 'Every faction, ready to shuffle',
     'landing_factions_view_all' => 'View all factions',
+
+    'landing_whatis_eyebrow' => 'New to Smash Up?',
+    'landing_whatis_facts_label' => 'Key facts',
+    'landing_whatis_title' => 'What is Smash Up?',
+    'landing_whatis_body' => 'Smash Up is a card game by Paul Peterson (AEG, 2012) for 2–4 players. Each player combines two faction decks — Pirates, Aliens, Ninjas, Zombies, and many more — into one and uses them to conquer bases on the table. The faction with the most power at a base claims victory points; the player with the most points wins.',
+    'landing_whatis_fact_players' => '2–4 players',
+    'landing_whatis_fact_duration' => '~45 min',
+    'landing_whatis_fact_age' => 'Ages 12+',
+    'landing_whatis_fact_author' => 'Paul Peterson',
+    'landing_whatis_fact_year' => 'Since 2012',
 ];

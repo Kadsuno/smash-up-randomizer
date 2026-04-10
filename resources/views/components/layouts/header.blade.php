@@ -37,7 +37,7 @@
         @keydown.window.escape="open = false"
         @scroll.window="scrolled = (window.pageYOffset || document.documentElement.scrollTop) > 12"
         :class="{ 'sur-site-header--scrolled': scrolled }"
-        class="sur-site-header relative"
+        class="sur-site-header"
         aria-label="Primary"
     >
         <div class="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8 lg:h-[4.25rem]">
