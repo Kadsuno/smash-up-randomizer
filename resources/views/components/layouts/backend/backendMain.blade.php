@@ -1,95 +1,101 @@
 <x-layouts.backend.backendHeader />
+
     <div class="flex min-h-screen pt-14">
-        <aside id="sidebar" class="sidebar relative min-h-[calc(100vh-3.5rem)] w-[250px] shrink-0 border-r border-white/10 bg-zinc-900 transition-[width] duration-300">
-            <div class="flex items-center justify-end border-b border-white/10 p-3">
-                <button id="sidebarCollapse" type="button" class="absolute right-[-1.25rem] top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-zinc-800 text-zinc-200 shadow-lg transition hover:border-indigo-500/40 hover:text-indigo-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60" aria-label="Toggle sidebar">
-                    <i class="fas fa-chevron-left" aria-hidden="true"></i>
+
+        {{-- Sidebar --}}
+        <aside id="sidebar" class="sidebar fixed top-14 bottom-0 z-40 flex flex-col border-r border-white/6 bg-zinc-950 transition-[width] duration-200 ease-in-out" style="width: 220px;">
+
+            {{-- Collapse toggle --}}
+            <div class="flex items-center justify-between border-b border-white/6 px-3 py-2.5">
+                <span id="sidebar-label" class="text-[0.6rem] font-bold uppercase tracking-widest text-zinc-600">Navigation</span>
+                <button
+                    id="sidebarCollapse"
+                    type="button"
+                    class="flex h-7 w-7 items-center justify-center rounded-lg text-zinc-600 transition hover:bg-white/5 hover:text-zinc-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60"
+                    aria-label="Toggle sidebar"
+                >
+                    <i id="collapseIcon" class="fas fa-chevron-left text-xs" aria-hidden="true"></i>
                 </button>
             </div>
-            <ul class="flex flex-col gap-2 p-3">
-                <li>
-                    <a id="dashboard" href="{{ route('dashboard') }}" class="sidebar-link flex min-h-11 items-center justify-start rounded-full border border-transparent px-4 py-2 text-sm font-medium transition duration-200 {{ request()->routeIs('dashboard') ? 'border-indigo-500/40 bg-indigo-500/15 text-indigo-200' : 'bg-zinc-800/80 text-zinc-200 hover:border-white/10 hover:bg-white/5' }}">
-                        <i class="fa-solid fa-house icon-margin min-w-[1.25rem] text-center" aria-hidden="true"></i>
-                        <span class="menu-text">{{ __('backend.nav_dashboard') }}</span>
-                    </a>
-                </li>
-                <li>
-                    <a id="decks-manager" href="{{ route('decks-manager') }}" class="sidebar-link flex min-h-11 items-center justify-start rounded-full border border-transparent px-4 py-2 text-sm font-medium transition duration-200 {{ request()->routeIs('decks-manager') ? 'border-indigo-500/40 bg-indigo-500/15 text-indigo-200' : 'bg-zinc-800/80 text-zinc-200 hover:border-white/10 hover:bg-white/5' }}">
-                        <i class="fa-solid fa-wrench icon-margin min-w-[1.25rem] text-center" aria-hidden="true"></i>
-                        <span class="menu-text">{{ __('backend.nav_faction_manager') }}</span>
-                    </a>
-                </li>
-            </ul>
+
+            {{-- Nav links --}}
+            <nav class="flex flex-col gap-1 p-2 pt-3">
+                @php
+                    $links = [
+                        ['route' => 'dashboard',     'icon' => 'fa-house',  'label' => __('backend.nav_dashboard')],
+                        ['route' => 'decks-manager', 'icon' => 'fa-layer-group', 'label' => __('backend.nav_faction_manager')],
+                    ];
+                @endphp
+                @foreach($links as $link)
+                @php $active = request()->routeIs($link['route']); @endphp
+                <a href="{{ route($link['route']) }}"
+                    class="sidebar-link group flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition duration-150 {{ $active ? 'bg-indigo-500/10 text-indigo-300' : 'text-zinc-500 hover:bg-white/5 hover:text-zinc-200' }}"
+                >
+                    <i class="fa-solid {{ $link['icon'] }} w-4 shrink-0 text-center text-sm {{ $active ? 'text-indigo-400' : 'text-zinc-600 group-hover:text-zinc-400' }}" aria-hidden="true"></i>
+                    <span class="sidebar-text truncate">{{ $link['label'] }}</span>
+                </a>
+                @endforeach
+            </nav>
+
         </aside>
-        <div id="content" class="content min-w-0 flex-1 p-4 pt-6 transition-all duration-300">
-            <main class="mx-auto w-full max-w-7xl">
+
+        {{-- Main content — offset by sidebar width --}}
+        <div id="content" class="min-w-0 flex-1 p-6 pt-8 transition-[margin] duration-200 ease-in-out" style="margin-left: 220px;">
+            <main class="mx-auto w-full max-w-5xl">
                 {{ $slot }}
             </main>
         </div>
+
     </div>
+
     <x-layouts.backend.backendFooter />
+
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var sidebarCollapse = document.getElementById('sidebarCollapse');
-            var sidebar = document.getElementById('sidebar');
-            var menuTexts = document.querySelectorAll('.menu-text');
-            var sidebarLinks = document.querySelectorAll('.sidebar-link');
-            var icons = document.querySelectorAll('.icon-margin');
+    (function () {
+        var sidebar   = document.getElementById('sidebar');
+        var content   = document.getElementById('content');
+        var btn       = document.getElementById('sidebarCollapse');
+        var icon      = document.getElementById('collapseIcon');
+        var label     = document.getElementById('sidebar-label');
+        var texts     = document.querySelectorAll('.sidebar-text');
+        var collapsed = localStorage.getItem('sidebar') === 'collapsed';
 
-            function toggleSidebar() {
-                sidebar.classList.toggle('active');
-                menuTexts.forEach(function (text) {
-                    text.classList.toggle('hidden');
-                });
-                sidebarLinks.forEach(function (link) {
-                    link.classList.toggle('justify-center');
-                    link.classList.toggle('justify-start');
-                });
-                icons.forEach(function (icon) {
-                    icon.classList.toggle('mr-0');
-                });
-
-                localStorage.setItem('sidebarState', sidebar.classList.contains('active') ? 'collapsed' : 'expanded');
-
-                var arrow = sidebarCollapse.querySelector('i');
-                arrow.classList.toggle('fa-chevron-left');
-                arrow.classList.toggle('fa-chevron-right');
+        function apply(instant) {
+            if (instant) {
+                sidebar.style.transition = 'none';
+                content.style.transition = 'none';
             }
-
-            if (sidebarCollapse) {
-                sidebarCollapse.addEventListener('click', toggleSidebar);
-            }
-
-            var sidebarState = localStorage.getItem('sidebarState');
-            if (sidebarState === 'collapsed') {
-                toggleSidebar();
+            if (collapsed) {
+                sidebar.style.width = '64px';
+                content.style.marginLeft = '64px';
+                icon.classList.replace('fa-chevron-left', 'fa-chevron-right');
+                label.classList.add('hidden');
+                texts.forEach(function (t) { t.classList.add('hidden'); });
             } else {
-                sidebarLinks.forEach(function (link) {
-                    link.classList.add('justify-start');
+                sidebar.style.width = '220px';
+                content.style.marginLeft = '220px';
+                icon.classList.replace('fa-chevron-right', 'fa-chevron-left');
+                label.classList.remove('hidden');
+                texts.forEach(function (t) { t.classList.remove('hidden'); });
+            }
+            if (instant) {
+                // Re-enable transitions after paint
+                requestAnimationFrame(function () {
+                    sidebar.style.transition = '';
+                    content.style.transition = '';
                 });
             }
+        }
 
+        apply(true);
+
+        btn.addEventListener('click', function () {
+            collapsed = !collapsed;
+            localStorage.setItem('sidebar', collapsed ? 'collapsed' : 'expanded');
+            apply(false);
         });
+    })();
     </script>
-    <style>
-        .sidebar {
-            min-width: 250px;
-            max-width: 250px;
-        }
-        .sidebar.active {
-            min-width: 80px;
-            max-width: 80px;
-        }
-        .sidebar-link i {
-            min-width: 20px;
-            text-align: center;
-        }
-        .icon-margin {
-            margin-right: 0.5rem;
-        }
-        .sidebar.active .icon-margin {
-            margin-right: 0;
-        }
-    </style>
+
 </body>
 </html>
