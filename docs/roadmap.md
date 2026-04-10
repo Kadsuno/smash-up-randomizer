@@ -35,3 +35,4 @@ High-level product and engineering priorities. Update this file in the same PR w
 
 - `CHANGELOG.md` — user-visible changes
 - `resources/lang/en/`, `resources/lang/de/` — copy and UI strings
+- `docs/tickets/2026-04-07-shuffle-modal-reconceive-option-a.md` — shuffle wizard modal option A (native `<dialog>`, fixed chrome + scrolling body)
