@@ -138,7 +138,7 @@
             {{-- Info sidebar --}}
             <div class="lg:col-span-5">
                 <x-sur.reveal :delay="60">
-                    <div class="space-y-6">
+                    <div class="flex flex-col gap-6">
 
                         {{-- Direct email --}}
                         <div class="sur-card border-white/8 p-5">
