@@ -312,10 +312,14 @@ html::-webkit-scrollbar-thumb:active,
     }
 
     /* Only when open (showModal): `display: flex` must not apply to a closed <dialog> or it overrides UA `display: none` and the modal is visible on load. */
+    /* Top-anchored (not vertically centered): avoids Chromium re-centering the dialog when focus/:has() shifts intrinsic height — which jumped the modal upward off-screen when picking factions at the bottom of a scrolled list. */
     #shuffle-modal:open {
-        margin: auto;
+        position: fixed;
+        left: 50%;
+        top: max(0.75rem, env(safe-area-inset-top, 0px));
+        transform: translateX(-50%);
+        margin: 0;
         width: min(100vw - 1.25rem, 42rem);
-        /* dvh + inset keeps the dialog inside the visible viewport (vh alone can clip when UA centers a tall modal). */
         max-height: min(calc(100dvh - 1.5rem), 52rem);
         overflow: hidden;
         border: none;

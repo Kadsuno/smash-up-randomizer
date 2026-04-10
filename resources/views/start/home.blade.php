@@ -526,6 +526,12 @@
                             if (recentPointer && inner) {
                                 inner.scrollTop = innerScrollBeforeModalControl;
                             }
+                            window.requestAnimationFrame(() => {
+                                const inner2 = shuffleDialog?.querySelector('.shuffle-modal-scroll');
+                                if (recentPointer && inner2) {
+                                    inner2.scrollTop = innerScrollBeforeModalControl;
+                                }
+                            });
                         });
                     });
                 });

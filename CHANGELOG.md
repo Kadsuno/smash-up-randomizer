@@ -31,6 +31,7 @@ All notable changes to this project are documented in this file.
 
 ### Fixed
 
+- **Shuffle modal:** Scrolling the faction list and toggling **lower rows** could **shift the dialog upward off-screen** (Chromium re-centered when focus / **`:has(:checked)`** nudged layout). The open dialog is now **top-anchored** (`position: fixed`, `top` + `translateX(-50%)` only) instead of **`margin: auto`** vertical centering; an extra **`requestAnimationFrame`** pass re-applies **`.shuffle-modal-scroll` `scrollTop`** after focus.
 - **Shuffle modal:** **`display: flex`** on `#shuffle-modal` (without **`:open`**) overrode the user-agent **`dialog:not(:open) { display: none }`**, so the wizard appeared **on every page load**. Layout rules are now scoped to **`#shuffle-modal:open`**.
 - **Shuffle modal:** Toggling include/exclude faction chips could paint the dialog contents **solid black** (GPU compositing with `backdrop-blur` + Tailwind `peer` variants). Removed blur layers on the modal card/footer, switched checked styling to **`:has()`** on `.faction-item`, renamed the form class to `shuffle-wizard-form` (no `needs-validation`), added `overflow-anchor: none` on the scroll region and `isolate` on the card.
 - **Shuffle modal:** **Light dismiss** — close when clicking the dimmed **backdrop** outside the card (`closedby="any"` + JS fallback for engines that ignore it).
