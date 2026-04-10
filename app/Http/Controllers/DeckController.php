@@ -30,11 +30,13 @@ class DeckController extends Controller
      */
     public function list(): \Illuminate\Contracts\View\View
     {
-        $decks = Deck::all();
+        $decks = Deck::all()->sortBy('name');
 
-        $decks = $decks->sortBy('name');
-
-        return view('decks.list', ['decks' => $decks]);
+        return view('decks.list', [
+            'decks'       => $decks,
+            'total'       => $decks->count(),
+            'withDetails' => $decks->filter(fn ($d) => !empty($d->teaser))->count(),
+        ]);
     }
 
     /**
