@@ -35,17 +35,18 @@
           fill="url(#gB)" filter="url(#fB)"
           transform="rotate(14 46 26)"/>
 
-    <!-- Shuffle arrows — dark outline pass first for contrast on amber, then white on top -->
-    <g transform="translate(32,35)" stroke-linecap="round" stroke-linejoin="round" fill="none">
-        <!-- Shadow layer -->
-        <polyline points="-7,5 5,-4"    stroke="#000" stroke-width="4.5" opacity="0.25"/>
-        <polyline points="1,-6 5,-4 2,-1" stroke="#000" stroke-width="4.5" opacity="0.25"/>
-        <polyline points="-7,-4 5,5"    stroke="#000" stroke-width="4.5" opacity="0.25"/>
-        <polyline points="1,3 5,5 2,8"  stroke="#000" stroke-width="4.5" opacity="0.25"/>
-        <!-- White arrows -->
-        <polyline points="-7,5 5,-4"    stroke="white" stroke-width="2.4"/>
-        <polyline points="1,-6 5,-4 2,-1" stroke="white" stroke-width="2.4"/>
-        <polyline points="-7,-4 5,5"    stroke="white" stroke-width="2.4"/>
-        <polyline points="1,3 5,5 2,8"  stroke="white" stroke-width="2.4"/>
+    <!-- Shuffle icon — FA fa-shuffle style: cubic S-curves crossing, triangular heads -->
+    <g transform="translate(32,37)">
+        <!-- Shadow pass for contrast on bright amber card -->
+        <path d="M-10,6 C-5,6 5,-4 6,-4"  fill="none" stroke="#000" stroke-width="4.5" stroke-linecap="round" opacity="0.72"/>
+        <path d="M-10,-6 C-5,-6 5,4 6,4"  fill="none" stroke="#000" stroke-width="4.5" stroke-linecap="round" opacity="0.72"/>
+        <polygon points="10,-6 7,-2 5.5,-7" fill="#000" opacity="0.72"/>
+        <polygon points="10,6 5.5,7 7,2"   fill="#000" opacity="0.72"/>
+        <!-- White crossing arrows -->
+        <path d="M-10,6 C-5,6 5,-4 6,-4"  fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M-10,-6 C-5,-6 5,4 6,4"  fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+        <!-- Triangular arrowheads: upper-right and lower-right -->
+        <polygon points="10,-6 7,-2 5.5,-7" fill="white"/>
+        <polygon points="10,6 5.5,7 7,2"   fill="white"/>
     </g>
 </svg>
