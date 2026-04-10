@@ -315,18 +315,36 @@ html::-webkit-scrollbar-thumb:active,
     #shuffle-modal {
         margin: auto;
         width: min(100vw - 1.25rem, 42rem);
-        max-height: min(90vh, 52rem);
+        /* dvh + inset keeps the dialog inside the visible viewport (vh alone can clip when UA centers a tall modal). */
+        max-height: min(calc(100dvh - 1.5rem), 52rem);
         overflow: hidden;
         border: none;
         border-radius: 1rem;
         padding: 0;
         background: transparent;
         color: #fafafa;
+        /* Flex column so max-height caps the used height and inner flex-1/min-h-0 regions can scroll. */
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+    }
+
+    #shuffle-modal .shuffle-modal-card {
+        flex: 1 1 auto;
+        min-height: 0;
+        max-height: 100%;
+    }
+
+    /* Badge + stepper stay outside `.shuffle-modal-scroll` so only step bodies scroll. */
+    #shuffle-modal .shuffle-modal-chrome {
+        flex-shrink: 0;
     }
 
     #shuffle-modal::backdrop {
         /* No backdrop-filter: compositor can leave blur visible after close(); solid dim only */
         background: rgba(9, 9, 11, 0.88);
+        /* Chromium: avoid transition/inheritance quirks on the top-layer backdrop */
+        transition: none;
     }
 
     .sur-progress-track {

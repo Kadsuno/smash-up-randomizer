@@ -226,11 +226,12 @@
     <dialog
         id="shuffle-modal"
         class="shuffle-modal-dialog shadow-2xl"
+        closedby="any"
         aria-labelledby="shuffleModalTitle"
         aria-describedby="shuffleModalSubtitle"
         data-step-badge-template="{{ e(__('frontend.shuffle_wizard_step_badge_template')) }}"
     >
-        <div class="isolate flex max-h-[min(90vh,52rem)] flex-col overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 shadow-[0_24px_80px_-12px_rgba(0,0,0,0.65)] ring-1 ring-white/10">
+        <div class="shuffle-modal-card isolate flex min-h-0 flex-col overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 shadow-[0_24px_80px_-12px_rgba(0,0,0,0.65)] ring-1 ring-white/10">
             <div class="relative border-b border-white/10 bg-linear-to-br from-zinc-900/90 via-zinc-950 to-indigo-950/40 px-5 py-5 sm:px-8 sm:py-6">
                 <div class="flex items-start justify-between gap-4">
                     <div class="min-w-0">
@@ -250,12 +251,11 @@
 
             <form id="shuffle-wizard-form" class="shuffle-wizard-form flex min-h-0 flex-1 flex-col" method="POST" action="{{ route('shuffle-result') }}" novalidate>
                 @csrf
-                <div class="shuffle-modal-scroll sur-scrollbar min-h-0 flex-1 overflow-y-auto overflow-x-hidden px-5 py-6 sm:px-8 sm:py-8">
-                    <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
+                <div class="shuffle-modal-chrome shrink-0 border-b border-white/10 px-5 pb-4 pt-1 sm:px-8">
+                    <div class="mb-3 flex flex-wrap items-center justify-between gap-3">
                         <p id="shuffle-wizard-badge" class="text-sm font-medium text-zinc-300" aria-live="polite"></p>
                     </div>
-
-                    <nav class="shuffle-wizard-stepper mb-8" aria-label="{{ __('frontend.shuffle_wizard_nav_aria') }}">
+                    <nav class="shuffle-wizard-stepper" aria-label="{{ __('frontend.shuffle_wizard_nav_aria') }}">
                         <ol class="flex items-start gap-2 sm:gap-4" role="list">
                             <li class="shuffle-wizard-step is-current flex min-w-0 flex-1 flex-col items-center gap-2 text-center" data-shuffle-step="1">
                                 <span class="shuffle-wizard-step__index">1</span>
@@ -273,7 +273,9 @@
                             </li>
                         </ol>
                     </nav>
+                </div>
 
+                <div class="shuffle-modal-scroll sur-scrollbar min-h-0 flex-1 overflow-y-auto overflow-x-hidden px-5 py-5 sm:px-8 sm:py-6">
                     <div class="shuffle-step-content" id="step1-content">
                         <h3 class="mb-1 text-lg font-semibold text-white sm:text-xl">{{ __('frontend.shuffle_wizard_heading_players') }}</h3>
                         <p class="mb-5 text-sm text-zinc-500">{{ __('frontend.shuffle_wizard_players_hint') }}</p>
@@ -353,6 +355,14 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const shuffleDialog = document.getElementById('shuffle-modal');
+        /**
+         * Keep the modal under document.body so it is not affected by scroll/layout in <main>
+         * (native dialog top layer + sr-only focus can still interact badly when the node sits deep in the page).
+         */
+        if (shuffleDialog && shuffleDialog.parentElement !== document.body) {
+            document.body.appendChild(shuffleDialog);
+        }
+
         const contents = document.querySelectorAll('.shuffle-step-content');
         const stepEls = document.querySelectorAll('[data-shuffle-step]');
         const badgeEl = document.getElementById('shuffle-wizard-badge');
@@ -363,6 +373,16 @@
         const stepTemplate = shuffleDialog?.dataset.stepBadgeTemplate || 'Step :current of :total';
 
         const totalSteps = contents.length;
+        const modalBodyScroll = shuffleDialog?.querySelector('.shuffle-modal-scroll');
+
+        /**
+         * Scroll only the step body region (badge + stepper stay fixed above).
+         */
+        function scrollModalBodyToTop() {
+            if (modalBodyScroll) {
+                modalBodyScroll.scrollTop = 0;
+            }
+        }
 
         function formatBadge(current, total) {
             return stepTemplate.replace(':current', String(current)).replace(':total', String(total));
@@ -401,6 +421,7 @@
         }
 
         function animateContentChange(currentEl, nextEl, done) {
+            scrollModalBodyToTop();
             currentEl.classList.add('slide-out');
             window.setTimeout(() => {
                 currentEl.classList.add('hidden');
@@ -424,6 +445,7 @@
             });
             playerFieldset?.classList.remove('shuffle-wizard--error');
             updateChrome(1);
+            scrollModalBodyToTop();
         }
 
         document.querySelectorAll('.js-open-shuffle').forEach((btn) => {
@@ -436,8 +458,80 @@
         });
 
         document.querySelectorAll('[data-close-shuffle-modal]').forEach((btn) => {
-            btn.addEventListener('click', () => shuffleDialog?.close());
+            btn.addEventListener('click', () => {
+                shuffleDialog?.close();
+            });
         });
+
+        // Backdrop / light dismiss: `closedby="any"` enables this in supporting browsers; older engines need the target check.
+        shuffleDialog?.addEventListener('click', (e) => {
+            if (e.target === shuffleDialog) {
+                shuffleDialog.close();
+            }
+        });
+
+        /**
+         * Sr-only wizard inputs trigger scroll-into-view; with a long scrolled faction list, Chromium can
+         * move the list scroll offset in a later frame. pointerdown captures window scroll + inner scrollTop;
+         * focusin re-applies both after rAF (and again on a third frame for late layout).
+         */
+        let pageScrollBeforeModalControl = { x: 0, y: 0 };
+        let innerScrollBeforeModalControl = 0;
+        let pageScrollLockTs = 0;
+        shuffleDialog?.addEventListener(
+            'pointerdown',
+            () => {
+                pageScrollBeforeModalControl.x = window.scrollX;
+                pageScrollBeforeModalControl.y = window.scrollY;
+                const innerEl = shuffleDialog?.querySelector('.shuffle-modal-scroll');
+                innerScrollBeforeModalControl = innerEl ? innerEl.scrollTop : 0;
+                pageScrollLockTs = Date.now();
+            },
+            true,
+        );
+        shuffleDialog?.addEventListener(
+            'focusin',
+            (e) => {
+                const t = e.target;
+                if (
+                    !t ||
+                    !t.matches ||
+                    !t.matches(
+                        'input.include-faction, input.exclude-faction, input[name="numberOfPlayers"]',
+                    )
+                ) {
+                    return;
+                }
+                const recentPointer = Date.now() - pageScrollLockTs < 600;
+                if (document.activeElement === t) {
+                    t.focus({ preventScroll: true });
+                }
+                window.requestAnimationFrame(() => {
+                    window.requestAnimationFrame(() => {
+                        if (recentPointer) {
+                            window.scrollTo(
+                                pageScrollBeforeModalControl.x,
+                                pageScrollBeforeModalControl.y,
+                            );
+                        }
+                        if (document.activeElement === t) {
+                            t.focus({ preventScroll: true });
+                        }
+                        const modalScrollEl = shuffleDialog?.querySelector('.shuffle-modal-scroll');
+                        if (recentPointer && modalScrollEl) {
+                            modalScrollEl.scrollTop = innerScrollBeforeModalControl;
+                        }
+                        window.requestAnimationFrame(() => {
+                            const inner = shuffleDialog?.querySelector('.shuffle-modal-scroll');
+                            if (recentPointer && inner) {
+                                inner.scrollTop = innerScrollBeforeModalControl;
+                            }
+                        });
+                    });
+                });
+            },
+            true,
+        );
 
         nextBtn?.addEventListener('click', () => {
             const currentIndex = getVisibleStepIndex();
@@ -502,11 +596,23 @@
             }
         });
 
-        shuffleDialog?.addEventListener('close', () => {
+        /**
+         * Chromium (Chrome, Brave, Edge) can leave the viewport in a bad compositor state after
+         * native <dialog> close() — dim or “blur” appears stuck though the dialog is gone.
+         * Double rAF + forced layout + scroll nudge triggers a full repaint (Firefox is unaffected).
+         */
+        function nudgeViewportAfterShuffleDialogClose() {
             window.requestAnimationFrame(() => {
-                document.body.getBoundingClientRect();
+                window.requestAnimationFrame(() => {
+                    document.documentElement.getBoundingClientRect();
+                    document.body.getBoundingClientRect();
+                    const y = window.scrollY;
+                    window.scrollTo(0, y);
+                });
             });
-        });
+        }
+
+        shuffleDialog?.addEventListener('close', nudgeViewportAfterShuffleDialogClose);
 
         resetShuffleWizard();
     });
