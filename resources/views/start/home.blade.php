@@ -256,7 +256,16 @@
     </x-sur.section>
 
     {{-- Quotes carousel --}}
-    <section class="border-y border-white/10 bg-linear-to-b from-zinc-950 via-zinc-900/40 to-zinc-950 py-16 sm:py-20">
+    <section class="relative overflow-hidden border-y border-white/10 bg-linear-to-b from-zinc-950 via-zinc-900/40 to-zinc-950 py-16 sm:py-20">
+        <img
+            src="{{ asset('images/landing/game-night-social.jpg') }}"
+            alt=""
+            aria-hidden="true"
+            class="absolute inset-0 h-full w-full object-cover opacity-[0.07] mix-blend-luminosity"
+            loading="lazy"
+            width="1400"
+            height="1051"
+        >
         <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
             <p class="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400/90">{{ __('frontend.landing_showcase_eyebrow') }}</p>
             <h2 class="mt-2 text-3xl font-bold text-white sm:text-4xl">{{ __('frontend.landing_showcase_title') }}</h2>
@@ -305,6 +314,15 @@
 
     {{-- CTA band --}}
     <section class="relative overflow-hidden py-16 sm:py-20">
+        <img
+            src="{{ asset('images/landing/cards-dark-surface.jpg') }}"
+            alt=""
+            aria-hidden="true"
+            class="absolute inset-0 h-full w-full object-cover opacity-20 mix-blend-luminosity"
+            loading="lazy"
+            width="1600"
+            height="1043"
+        >
         <div class="pointer-events-none absolute inset-0 bg-linear-to-r from-indigo-600/25 via-violet-600/20 to-indigo-700/25"></div>
         <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(99,102,241,0.2),_transparent_55%)]"></div>
         <div class="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
