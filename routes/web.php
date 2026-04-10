@@ -21,7 +21,13 @@ Route::get('/', [
 ])->name('home');
 
 Route::get('/admin/backend', function () {
-    return view('backend.dashboard');
+    $decks = \App\Models\Deck::all();
+    return view('backend.dashboard', [
+        'total'          => $decks->count(),
+        'withTeaser'     => $decks->filter(fn ($d) => !empty($d->teaser))->count(),
+        'withDesc'       => $decks->filter(fn ($d) => !empty($d->description))->count(),
+        'withoutDetails' => $decks->filter(fn ($d) => empty($d->teaser) && empty($d->description))->count(),
+    ]);
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/admin/backend/decks-manager', [
@@ -98,7 +104,9 @@ Route::get('/factions/{name}', [
 ])->name('factionDetail');
 
 Route::get('/about', function () {
-    return view('legal.about');
+    $factionCount = \App\Models\Deck::count();
+
+    return view('legal.about', compact('factionCount'));
 })->name('about');
 
 Route::get('/sitemap', function () {
