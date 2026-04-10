@@ -28,7 +28,7 @@
 
                 <div
                     class="order-1 lg:order-2 lg:col-span-7"
-                    x-data="landingHero({{ count($landingSlides) }})"
+                    x-data="landingHero(3)"
                     @mouseenter="stop()"
                     @mouseleave="start()"
                     role="region"
@@ -36,34 +36,104 @@
                     aria-label="{{ __('frontend.logo_alt') }}"
                 >
                     <div class="sur-landing-carousel relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-white/10 shadow-2xl shadow-black/50 sm:aspect-[16/10] lg:min-h-[22rem]">
-                        @foreach($landingSlides as $idx => $slide)
-                            <div
-                                x-show="i === {{ $idx }}"
-                                x-transition.opacity.duration.500ms
-                                class="absolute inset-0"
-                                x-cloak
-                                role="group"
-                                aria-roledescription="slide"
-                                aria-label="{{ __('frontend.landing_slide_'.$slide['id'].'_title') }}"
-                            >
-                                <img
-                                    src="{{ $slide['src'] }}"
-                                    alt="{{ __('frontend.landing_slide_'.$slide['id'].'_alt') }}"
-                                    class="h-full w-full object-cover"
-                                    loading="{{ $idx === 0 ? 'eager' : 'lazy' }}"
-                                    width="1200"
-                                    height="750"
-                                >
-                                <div class="absolute inset-0 bg-linear-to-t from-black/88 via-black/25 to-transparent"></div>
-                                <div class="absolute inset-x-0 bottom-0 p-5 sm:p-7">
-                                    <h2 class="text-lg font-bold text-white sm:text-2xl">{{ __('frontend.landing_slide_'.$slide['id'].'_title') }}</h2>
-                                    <p class="mt-2 max-w-xl text-sm leading-relaxed text-zinc-200 sm:text-base">{{ __('frontend.landing_slide_'.$slide['id'].'_tagline') }}</p>
+
+                        {{-- Slide 1: Choose your players --}}
+                        <div
+                            x-show="i === 0"
+                            x-transition.opacity.duration.500ms
+                            class="absolute inset-0 flex flex-col bg-zinc-900"
+                            x-cloak
+                            role="group"
+                            aria-roledescription="slide"
+                            aria-label="{{ __('frontend.landing_slide_1_title') }}"
+                        >
+                            <div class="flex flex-1 flex-col items-center justify-center gap-4 px-6 sm:px-10">
+                                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400/90">Step 1</p>
+                                <div class="grid w-full max-w-xs grid-cols-3 gap-3">
+                                    @foreach([2, 3, 4] as $n)
+                                        <div class="flex flex-col items-center justify-center rounded-2xl border px-2 py-4 text-center
+                                            {{ $n === 2 ? 'border-indigo-500 bg-indigo-500/15 shadow-lg shadow-indigo-500/20' : 'border-white/15 bg-zinc-900/60' }}">
+                                            <span class="text-3xl font-extrabold tabular-nums {{ $n === 2 ? 'text-white' : 'text-zinc-400' }} sm:text-4xl">{{ $n }}</span>
+                                            <span class="mt-1 text-[0.65rem] font-medium uppercase tracking-wider {{ $n === 2 ? 'text-indigo-200' : 'text-zinc-600' }}">{{ __('frontend.shuffle_wizard_players_unit') }}</span>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
-                        @endforeach
+                            <div class="border-t border-white/8 bg-black/40 px-5 py-4 sm:px-7">
+                                <h2 class="text-base font-bold text-white sm:text-xl">{{ __('frontend.landing_slide_1_title') }}</h2>
+                                <p class="mt-1 text-xs leading-relaxed text-zinc-300 sm:text-sm">{{ __('frontend.landing_slide_1_tagline') }}</p>
+                            </div>
+                        </div>
+
+                        {{-- Slide 2: Filter your sets --}}
+                        <div
+                            x-show="i === 1"
+                            x-transition.opacity.duration.500ms
+                            class="absolute inset-0 flex flex-col bg-zinc-900"
+                            x-cloak
+                            role="group"
+                            aria-roledescription="slide"
+                            aria-label="{{ __('frontend.landing_slide_2_title') }}"
+                        >
+                            <div class="flex flex-1 flex-col justify-center px-6 sm:px-10">
+                                <p class="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400/90">Step 2</p>
+                                @if($factions->isNotEmpty())
+                                    <div class="flex flex-wrap gap-1.5">
+                                        @foreach($factions->take(10) as $idx => $faction)
+                                            <span class="rounded-lg border px-2.5 py-1.5 text-xs font-medium transition
+                                                {{ $idx < 6 ? 'border-indigo-500/40 bg-indigo-500/12 text-indigo-200' : 'border-white/10 bg-zinc-800/60 text-zinc-500 line-through' }}">
+                                                {{ $faction->name }}
+                                            </span>
+                                        @endforeach
+                                    </div>
+                                @else
+                                    <p class="text-sm text-zinc-500">{{ __('frontend.landing_slide_2_tagline') }}</p>
+                                @endif
+                            </div>
+                            <div class="border-t border-white/8 bg-black/40 px-5 py-4 sm:px-7">
+                                <h2 class="text-base font-bold text-white sm:text-xl">{{ __('frontend.landing_slide_2_title') }}</h2>
+                                <p class="mt-1 text-xs leading-relaxed text-zinc-300 sm:text-sm">{{ __('frontend.landing_slide_2_tagline') }}</p>
+                            </div>
+                        </div>
+
+                        {{-- Slide 3: Your combos --}}
+                        <div
+                            x-show="i === 2"
+                            x-transition.opacity.duration.500ms
+                            class="absolute inset-0 flex flex-col bg-zinc-900"
+                            x-cloak
+                            role="group"
+                            aria-roledescription="slide"
+                            aria-label="{{ __('frontend.landing_slide_3_title') }}"
+                        >
+                            @php $demoFactions = $factions->take(4); @endphp
+                            <div class="flex flex-1 flex-col justify-center gap-3 px-6 sm:px-10">
+                                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400/90">Step 3</p>
+                                @if($demoFactions->count() >= 4)
+                                    @foreach([[0,1],[2,3]] as $pi => $pair)
+                                        <div class="rounded-2xl border border-white/10 bg-zinc-800/50 px-4 py-3">
+                                            <p class="mb-2 text-[0.65rem] font-semibold uppercase tracking-wider text-zinc-500">
+                                                {{ str_replace(':n', $pi + 1, __('frontend.landing_slide_player_label')) }}
+                                            </p>
+                                            <div class="flex flex-wrap items-center gap-2">
+                                                <span class="rounded-xl border border-indigo-500/35 bg-indigo-500/12 px-3 py-1.5 text-xs font-semibold text-indigo-200">{{ $demoFactions[$pair[0]]->name }}</span>
+                                                <span class="text-sm font-bold text-zinc-500">+</span>
+                                                <span class="rounded-xl border border-violet-500/35 bg-violet-500/12 px-3 py-1.5 text-xs font-semibold text-violet-200">{{ $demoFactions[$pair[1]]->name }}</span>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <p class="text-sm text-zinc-500">{{ __('frontend.landing_slide_3_tagline') }}</p>
+                                @endif
+                            </div>
+                            <div class="border-t border-white/8 bg-black/40 px-5 py-4 sm:px-7">
+                                <h2 class="text-base font-bold text-white sm:text-xl">{{ __('frontend.landing_slide_3_title') }}</h2>
+                                <p class="mt-1 text-xs leading-relaxed text-zinc-300 sm:text-sm">{{ __('frontend.landing_slide_3_tagline') }}</p>
+                            </div>
+                        </div>
 
                         <div class="pointer-events-none absolute inset-x-0 top-4 flex justify-center gap-1.5 sm:justify-end sm:px-5">
-                            @foreach($landingSlides as $idx => $_)
+                            @foreach([0, 1, 2] as $idx)
                                 <button
                                     type="button"
                                     class="pointer-events-auto h-2.5 w-2.5 rounded-full transition sm:h-2 sm:w-2"

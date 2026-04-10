@@ -15,13 +15,6 @@ class HomeController extends Controller
     {
         $factions = Deck::all();
 
-        $landingSlides = [
-            ['id' => 1, 'src' => asset('images/landing/slide-01-faction-pirates.png')],
-            ['id' => 2, 'src' => asset('images/landing/slide-02-faction-aliens.png')],
-            ['id' => 3, 'src' => asset('images/landing/slide-03-faction-dinosaurs.png')],
-            ['id' => 4, 'src' => asset('images/landing/slide-04-faction-zombies.png')],
-        ];
-
-        return view('start.home', compact('factions', 'landingSlides'));
+        return view('start.home', compact('factions'));
     }
 }

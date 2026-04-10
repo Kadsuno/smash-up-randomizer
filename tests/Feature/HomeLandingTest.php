@@ -19,7 +19,7 @@ class HomeLandingTest extends TestCase
         $response->assertOk();
         $response->assertSee(__('frontend.landing_hero_title'), false);
         $response->assertSee(__('frontend.landing_slide_1_title'), false);
-        $response->assertSee('slide-01-faction-pirates.png', false);
+        $response->assertSee(__('frontend.landing_slide_3_title'), false);
         $response->assertSee(__('frontend.shuffle_modal_subtitle'), false);
     }
 
@@ -53,6 +53,23 @@ class HomeLandingTest extends TestCase
         $response->assertSee(__('frontend.landing_combo_1_name'), false);
         $response->assertSee(__('frontend.landing_combo_2_name'), false);
         $response->assertSee(__('frontend.landing_combo_3_name'), false);
+    }
+
+    public function test_hero_slide_3_shows_faction_combos_when_factions_exist(): void
+    {
+        DB::table('decks')->insert([
+            ['name' => 'Ninjas'],
+            ['name' => 'Zombies'],
+            ['name' => 'Aliens'],
+            ['name' => 'Pirates'],
+        ]);
+
+        $response = $this->get('/');
+
+        $response->assertOk();
+        $response->assertSee('Ninjas', false);
+        $response->assertSee('Zombies', false);
+        $response->assertSee(__('frontend.landing_slide_3_title'), false);
     }
 
     public function test_home_page_renders_smashup_explainer(): void
