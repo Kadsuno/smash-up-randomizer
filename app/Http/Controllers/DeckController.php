@@ -46,7 +46,7 @@ class DeckController extends Controller
      */
     public function detail(string $name): \Illuminate\Contracts\View\View
     {
-        $deck = Deck::where('name', $name)->first();
+        $deck = Deck::where('name', $name)->firstOrFail();
         return view('decks.detail', ['deck' => $deck]);
     }
 
