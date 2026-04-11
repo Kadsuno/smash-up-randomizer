@@ -1,0 +1,104 @@
+[[File:Invader.jpg|thumb|300px| ''Aliens'' '' change the very nature of the battle, moving enemies about, and manipulating the Base cards you fight for.'' - AEG]]
+
+{{Q|Aliens love to mess with people, and they love to mess with other players even more. From bouncing minions back to players' hands, to replacing bases in play, aliens are out to have a great time, at any planet's expense.|[[Core Set]] rulebook}}
+
+The '''Aliens''' are one of the 8 [[factions]] from the [[Core Set]].
+
+Aliens abduct your friends and foes. You might see them again. Who knows?
+
+Their complexity rating is: Low-Medium.
+
+''Other factions from the same set: ''[[Dinosaurs]], [[Ninjas]], [[Pirates]], [[Robots]], [[Tricksters]], [[Wizards]], [[Zombies]].
+
+== '''Cards''' ==
+
+[[File:Aliens.jpg|thumb|300px|right]]
+
+The Aliens have the usual 10 minions and 10 actions. The total minion base power (not counting any abilities) is slightly lower than usual at only 28 or an average of 2.8 per minion compared to the usual 30 and 3.
+
+Among their actions, there are:
+* 0 play-on-minion actions,
+* 1 play-on-base action: Jammed Signal,
+* 9 standard actions.
+
+=== Minions ===
+
+1x '''Supreme Overlord''' - power 5 - You may return a minion to its owner's hand. [[#Questions on Supreme Overlord|FAQ]]
+
+2x '''Invader''' - power 3 - Gain 1 VP. [[#Questions on Invader|FAQ]]
+
+3x '''Scout''' - power 3 - Special: After this base is scored, you may return this minion to your hand. [[#Questions on Scout|FAQ]]
+
+4x '''Collector''' - power 2 - You may return a minion of power 3 or less on this base to its owner's hand. [[#Questions on Collector|FAQ]]
+
+=== Actions ===
+
+The Aliens' actions focus on returning minions and manipulating bases.
+
+1x '''Abduction''' - Return a minion to its owner's hand. Play an extra minion. [[#Questions on Abduction|FAQ]]
+
+2x '''Beam Up''' - Return a minion to its owner's hand. [[#Questions on Beam Up|FAQ]]
+
+1x '''Crop Circles''' - Choose a base. Return each minion on that base to its owner's hand. [[#Questions on Crop Circles|FAQ]]
+
+2x '''Disintegrator''' - Place a minion of power 3 or less on the bottom of its owner's deck. [[#Questions on Disintegrator|FAQ]]
+
+1x '''Invasion''' - Move a minion to another base. [[#Questions on Invasion|FAQ]]
+
+1x '''Jammed Signal''' - Play on a base. Ongoing: This base's abilities are cancelled. [[#Questions on Jammed Signal|FAQ]]
+
+1x '''Probe''' - Look at another player's hand and choose a minion in it. That player discards that minion. [[#Questions on Probe|FAQ]]
+
+1x '''Terraforming''' - Search the base deck for a base and swap it with a base in play. You may play an extra minion there. [[#Questions on Terraforming|FAQ]]
+
+=== Bases ===
+
+* [[The Homeworld]]
+* [[The Mothership]]
+
+== Clarifications ==
+
+The Aliens have several important rulings regarding their return-to-hand abilities.
+
+When a minion is returned to a player's hand, it is no longer considered to be "on" a base and loses any play-on-base actions attached to it.
+
+== '''Mechanics ''' ==
+
+Like those in our stories, the elusive and mysterious Aliens of Smash Up take people for who knows what reasons. Aliens are experts at returning anyone's minions back to their hand.
+
+====Returning Minions to Hands====
+
+In isolation, returning minions to their owners' hands is not that significant of an ability, but Aliens leverage their expertise to enable a number of unique strategies.
+
+===Strategy===
+
+Aliens' overall power is quite low, so they're not too great at breaking bases. Their Scout minions, however, are specialized at maintaining presence on the bases. You may return them to your hand after the base they are on scores, so you can reuse them.
+
+Invaders probably have the most powerful on-play ability in the whole game. By playing, returning, replaying, and rereturning them in an "Invader Dance", you can theoretically win the game without breaking any bases.
+
+===Synergy===
+
+Aliens work best alongside factions that are also good at returning minions to hands. The next best have and/or support on-play abilities and help slow down the game for your opponents.
+*[[Ninjas]]: Master Ninja and Tiger Assassin are even more formidable if you can return them to hand and re-use their minion-destroying on-play abilities.
+*[[Robots]]: Zapbot, Hoverbot, Microbot Fixer, and Microbot Reclaimer all have useful on-play abilities that provide extra minion plays.
+*[[Time Travelers]]: Directly replay Invaders with Do Over! and take control of the bases.
+
+===External Strategy Guides===
+
+*[https://www.smashupdata.com/post/aliens SmashUpData.com Faction Guide - Aliens]
+
+== FAQ ==
+
+=== Questions on Supreme Overlord ===
+
+Q: Can I return my own minion?
+A: Yes. The ability says "a minion", not "an opponent's minion".
+
+== Trivia ==
+
+The Aliens faction was inspired by classic 1950s science fiction films.
+
+== In other languages ==
+
+* French: Extraterrestres
+* German: Außerirdische
