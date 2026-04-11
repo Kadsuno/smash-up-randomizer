@@ -4,6 +4,11 @@ All notable changes to this project are documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- **Faction data pipeline:** All 106 Smash Up factions are now seeded from versioned JSON files in `database/data/factions/` (one file per expansion). `DeckSeeder` and the new `php artisan factions:import` Artisan command both run idempotently via `updateOrCreate` on faction name — safe to re-run at any time without creating duplicates. Each faction is pre-populated with `name`, `expansion`, `teaser`, `mechanics`, and `playstyle` from the Smash Up Wiki. Run `php artisan db:seed` or `php artisan factions:import` on a fresh environment to import all factions immediately. Includes `--dry-run` flag for preview without writes.
+- **Migration fix:** `create_decks_table` migration now correctly includes `$table->id()` and `$table->timestamps()`. A companion migration (`2026_04_11_000000_add_id_and_timestamps_to_decks_table`) adds these columns idempotently on existing databases that were set up before this fix.
+
 ### Changed
 
 - **Landing visual rhythm pass:** Hero carousel slides get individual gradient backgrounds (indigo / violet / indigo+violet) instead of flat zinc-900. Feature-grid section adds a subtle `bg-zinc-900/30` tint with `border-y` and colored 2 px top-border accents per card (indigo / violet). "How it works" redesigned from a card grid to a centred step-flow with arrow connectors on desktop and numbered badges (h-7 solid fill) on the icons. Combo-card section gets a matching section tint. Result-preview section tinted `indigo-950/20`. Logo simplified to two overlapping cards without the shuffle-symbol overlay.
