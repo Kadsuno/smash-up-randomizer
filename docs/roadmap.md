@@ -21,7 +21,7 @@ High-level product and engineering priorities. Update this file in the same PR w
 
 ## Now
 
-- *(Add current focus bullets.)*
+- **Faction data pipeline** ✅ — All 106 factions seeded via versioned JSON files + `DeckSeeder` + `factions:import` Artisan command (idempotent). Foundation for full faction pages, filtering, and randomizer enrichment.
 
 ## Next
 
