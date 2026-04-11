@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Console\Concerns\ManagesFactionJsonFiles;
 use App\Services\WikitextParser;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 
 class EnrichFactions extends Command
 {
+    use ManagesFactionJsonFiles;
     /**
      * The name and signature of the console command.
      *
@@ -95,7 +97,7 @@ class EnrichFactions extends Command
                 continue;
             }
 
-            if ($this->updateJsonFile($faction, $parsed)) {
+            if ($this->updateJsonFile($faction, $parsed, (bool) $this->option('force'))) {
                 $this->line("  → <fg=green>Updated</>");
                 $enriched++;
             }
@@ -192,74 +194,4 @@ class EnrichFactions extends Command
     }
 
 
-    /**
-     * Load all factions from all JSON files in database/data/factions/.
-     * Each faction entry retains the '__file__' key pointing to its source file.
-     *
-     * @return array<int, array<string, mixed>>
-     */
-    private function loadAllFactions(): array
-    {
-        $dataPath = database_path('data/factions');
-        $files = glob("{$dataPath}/*.json");
-        $result = [];
-
-        foreach ($files as $file) {
-            $factions = json_decode(file_get_contents($file), true);
-            if (!is_array($factions)) {
-                continue;
-            }
-            foreach ($factions as $faction) {
-                $faction['__file__'] = $file;
-                $result[] = $faction;
-            }
-        }
-
-        return $result;
-    }
-
-    /**
-     * Merge parsed wiki fields into the faction's JSON file entry.
-     * Only non-empty parsed values are written; existing non-empty fields are preserved.
-     *
-     * @param  array<string, mixed>   $faction  Original faction data (includes __file__)
-     * @param  array<string, string>  $parsed   Fields extracted by WikitextParser
-     */
-    private function updateJsonFile(array $faction, array $parsed): bool
-    {
-        $file = $faction['__file__'];
-        $factions = json_decode(file_get_contents($file), true);
-
-        if (!is_array($factions)) {
-            return false;
-        }
-
-        $updated = false;
-
-        foreach ($factions as &$entry) {
-            if ($entry['name'] !== $faction['name']) {
-                continue;
-            }
-
-            $force = (bool) $this->option('force');
-
-            foreach ($parsed as $field => $value) {
-                // Overwrite if the existing value is empty, or --force is set
-                if (empty($entry[$field]) || $force) {
-                    $entry[$field] = $value;
-                    $updated = true;
-                }
-            }
-        }
-        unset($entry);
-
-        if ($updated) {
-            file_put_contents(
-                $file,
-                json_encode($factions, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . "\n"
-            );
-        }
-
-        return $updated;
-    }
 }

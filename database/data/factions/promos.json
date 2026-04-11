@@ -17,7 +17,7 @@
         "synergy": "",
         "tips": "",
         "effects": "Penguins make use of the new \"Play off the top of the deck\" to play a lot of extra minions, although with very little control over which minion you'll get.\n\nTo play a minion off the top of the deck, you reveal cards from the top of your deck until you find a minion, which you'll play. Revealed actions (if any) get shuffled into your deck after that. More details here.\n\nPenguins have very little way to set up the top of your deck to control which minion you'll get, and most of their abilities can end with you shuffling your deck, therefore undoing any setup you may have done. (\"Play off the top of a deck\" abilities only end with you shuffling your deck if you revealed any actions.)\n\nA few of their abilities (Baby Penguins, Snazzy Penguin and Pebble Gift) give you benefits for playing a minion off the top of the deck, but please note that for a minion to be considered as \"played off the top of a deck\", it does not have to be played with a \"Play off the top of a deck\" ability. If an ability or rule makes you reveal one or more cards from the top of a deck and have you play a minion from among those cards, then the played minion is considered as having been played off the top of that deck. So cards, such as Hoverbot, Moon Dumpster, or even the Penguins' very own Under the Ice card all trigger Baby Penguins, Snazzy Penguin and Pebble Gift. More details here.",
-        "image": ""
+        "image": "/images/factions/penguins.jpg"
     },
     {
         "name": "Goblins",
@@ -37,7 +37,7 @@
         "synergy": "",
         "tips": "",
         "effects": "Goblins have a lot of cards that have you play heads or tails in order to determine their outcome, making this a seemingly very random faction to play with. Overall, both heads and tails results can be desirable. Heads tend to give you the better outcomes, most often +1 power counters. On the other hand, tails give you good or bad outcomes depending on the card--bad most often being the card doing nothing at all.\n\nTo mitigate that randomness, Goblins provide you with Diviners and Make Your Own Luck, a total of four cards you can use to change the result of a coin you're flipping if you don't get what you want.\n\nFinally, Chaos Lord and Goblin Recruiters are two cards that trigger on you flipping coins, giving you additional effects on both heads and tails results, making good outcomes even better or balancing a bad outcome.",
-        "image": ""
+        "image": "/images/factions/goblins.png"
     },
     {
         "name": "Knights of the Round Table",
@@ -57,7 +57,7 @@
         "synergy": "",
         "tips": "",
         "effects": "The Knights of the Round Table have an unusual cast of minions, having only seven unique minions, each with a power of 4 and one with a power of 5. They revolve around actions on bases, representing quests, and moving your minions around, especially to to bases with your actions on it in order to gain various benefits, such as +1 power counters, card draws and extra VPs.",
-        "image": ""
+        "image": "/images/factions/knights-of-the-round-table.png"
     },
     {
         "name": "Teens",
@@ -77,7 +77,7 @@
         "synergy": "* Aliens: Prep and New Kid make it easy to fetch Invader. Brain, Jock, Prep, Rebel, Slacker, and Booty Trap all trigger off your Invader plays. Principal's Office adds to the suite of minion-bouncing and extra play effects. If an Invader ends up in discard, Explosion at School can shuffle it into your deck, and Strange Science lets you play it right out of your discard.\n* Ninjas: Shinobi are deceptively powerful with Teens thanks to the sheer number of power 3 support cards. Prep can give the Shinobi +2 power after you play it, further increasing the amount by which it can swing a base, Brain and Booty Trap can draw you cards for playing Shinobi, and Slacker can put Shinobi back into your deck from your discard pile.\n* Grimms’ Fairy Tales: Abe Froman and Grimms' Blessing enable the names-matter effects in both factions. The power 3 fetching can help you find Frog Prince, Red Riding Hood, and Rumpelstiltzkin.\n* Big Hero 6: The characters (minions) are all power 3, making them work perfectly with Teens' triggers and support.",
         "tips": "",
         "effects": "",
-        "image": ""
+        "image": "/images/factions/teens.png"
     },
     {
         "name": "Slashers",
@@ -97,7 +97,7 @@
         "synergy": "",
         "tips": "",
         "effects": "",
-        "image": ""
+        "image": "/images/factions/slashers.jpg"
     },
     {
         "name": "Clowns",
@@ -117,6 +117,6 @@
         "synergy": "",
         "tips": "",
         "effects": "",
-        "image": ""
+        "image": "/images/factions/clowns.png"
     }
 ]
