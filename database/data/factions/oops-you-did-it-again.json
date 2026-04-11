@@ -17,7 +17,7 @@
         "synergy": "* Dinosaurs: Dinosaurs like any faction that gives them extra plays. King Rex and Rampage are a great 1-2 punch for uncovering with Seal the Tomb.\n* Ghosts: Burying cards from your hand reduces the number of cards in your hand, making it easier to hit the \"two or less\" threshold.\n* Mythic Greeks: Mythic Greeks like extra action plays. Jason and Blessing of Anubis are a powerful combo even with just one or two other minions on Jason's base.\n* Skeletons: Another faction focused on burying, minions in particular. Returned One and Pyramid Engineer are great for uncover chains.",
         "tips": "",
         "effects": "Ancient Egyptians have abilities that allow them to bury cards and abilities that allow them to uncover them outside the Start Turn phase. Buried cards are unique in that very few cards can target them, so you can effectively keep them buried until just the right time. They also get advantages from having buried cards and from uncovering them. Most notably, some of their cards are only advantageous when first buried and then uncovered. Mummies are also unique among their cards as they act like First Mates, remaining in play after their base scores, except they always start at power 2 when uncovered.",
-        "image": ""
+        "image": "/images/factions/ancient-egyptians.png"
     },
     {
         "name": "Cowboys",
@@ -37,7 +37,7 @@
         "synergy": "",
         "tips": "",
         "effects": "Cowboys are able to start duels with other players' minions that usually end with the destruction of one or both dueling minions. To help them win duels, they have an assortment of cards that can greatly boost their minions' power.",
-        "image": ""
+        "image": "/images/factions/cowboys.png"
     },
     {
         "name": "Samurai",
@@ -57,7 +57,7 @@
         "synergy": "",
         "tips": "",
         "effects": "Samurai's mechanic revolves around getting benefits after one of their minions goes to the discard pile from play. This can happen for example when the minion is destroyed, or when it's discarded from a base either because it scored or because it's removed. The benefits are quite varied, including card draws, power boosts, VPs or extra card plays.",
-        "image": ""
+        "image": "/images/factions/samurai.png"
     },
     {
         "name": "Vikings",
@@ -77,6 +77,6 @@
         "synergy": "",
         "tips": "",
         "effects": "Vikings pillage, rob, steal, etc. cards from other players. Overall, they mainly steal cards from the top of their deck, and usually actions and minions of power 3 or less, although some of their cards can target cards in their hand (Pillage), in their discard pile (Valkyrie), or under their control (Ransack), and even minions of power 4 or higher.\n\nThey also have the secondary mechanic of gaining power boosts at the cost of placing cards from your hand on top of your deck, therefore giving you less options to play with and tampering with your next card draws.",
-        "image": ""
+        "image": "/images/factions/vikings.png"
     }
 ]

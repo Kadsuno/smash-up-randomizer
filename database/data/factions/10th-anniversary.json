@@ -17,7 +17,7 @@
         "synergy": "* Pirates: The original movement faction can help Mermaids gather minions right where they want them. Shipwreck Cove is great for increasing the power of First Mates, as its transfer special mirrors their movement specials. The Pirates' destruction effects aren't quite as useful to the Mermaids, though Becalmed Shores can pull power 3 minions into Cannon or Broadside Range if desired.\n* Dragons: Dragons get effects like Hatchling and Imperial Dragon that trigger after another player's minion moves to their base, making Mermaids great for luring said minions right into the Dragons' ambush.\n* Sharks: Mermaid movement can lure minions right into a Shark feeding frenzy. Becalmed Shores belie the danger of Great Whites and Megalodon lurking for prey.\n* Tornados: The most movement-happy faction by far. Like Pirates, Tornados can help mermaids get minions right where they want them, and Mermaids' power adjusting effects in turn can help Tornados.\n* Ignobles: Mermaids love a Captive Audience, and what easier way to build one up than with minions that you give to other players?\n* Sheep: Sheep like to follow minions that move, and Mermaids are good at moving other players' minions.",
         "tips": "",
         "effects": "",
-        "image": ""
+        "image": "/images/factions/mermaids.png"
     },
     {
         "name": "Sheep",
@@ -37,7 +37,7 @@
         "synergy": "",
         "tips": "",
         "effects": "Sheep are focused primarily on movement, particularly in response to other minions being played or moved. They have many cards that move under the same criteria allowing them to all come running to the same base at the same time, giving this deck the ability to abruptly burst a base with a lot of power. The drawback is that sheep respond to opponents minions as well, which is why Little Bo Peep is important.\n\nSheep also have a couple cards that deal with mimicking their opponents (another form of \"following the crowd\") and taking random cards from them to supplement the limits of being so heavily focused on movement.",
-        "image": ""
+        "image": "/images/factions/sheep.jpg"
     },
     {
         "name": "Skeletons",
@@ -57,7 +57,7 @@
         "synergy": "",
         "tips": "",
         "effects": "Skeletons have abilities that allow them to bury cards, with a focus on minions and especially minions from your discard pile, abilities that allow them to uncover them outside the Start Turn phase and abilities that add +1 power counters on uncovered minions. Buried cards are unique in that very few cards can target them, so you can effectively keep them buried until just the right time.",
-        "image": ""
+        "image": "/images/factions/skeletons.jpg"
     },
     {
         "name": "World Champs",
@@ -77,6 +77,6 @@
         "synergy": "",
         "tips": "",
         "effects": "",
-        "image": ""
+        "image": "/images/factions/world-champs.png"
     }
 ]
