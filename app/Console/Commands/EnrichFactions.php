@@ -18,7 +18,8 @@ class EnrichFactions extends Command
     protected $signature = 'factions:enrich
                             {--faction= : Enrich only a single faction by name}
                             {--skip-import : Update JSON files only; do not trigger factions:import}
-                            {--dry-run : Print parsed fields without writing files or importing}';
+                            {--dry-run : Print parsed fields without writing files or importing}
+                            {--force : Overwrite existing non-empty fields (useful after parser fixes)}';
 
     /**
      * The console command description.
@@ -116,10 +117,34 @@ class EnrichFactions extends Command
     /**
      * Fetch the raw wikitext for a faction page from the MediaWiki API.
      * Retries up to MAX_RETRIES times with exponential backoff on 429 or timeout.
+     * If the exact name returns a missing-page error, retries with Unicode apostrophe variant.
      *
      * @return string|null  Null if the page is missing or all retries failed.
      */
     private function fetchWikitext(string $factionName): ?string
+    {
+        // Some wiki pages use the Unicode right single quotation mark (U+2019) instead of ASCII apostrophe
+        $namesToTry = array_unique([
+            $factionName,
+            str_replace("'", "\u{2019}", $factionName),
+        ]);
+
+        foreach ($namesToTry as $name) {
+            $result = $this->fetchWikitextByName($name);
+            if ($result !== null) {
+                return $result;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Perform the actual HTTP fetch for a given page name.
+     *
+     * @return string|null  Null on missing page or repeated failure.
+     */
+    private function fetchWikitextByName(string $factionName): ?string
     {
         $attempt = 0;
         $delay = self::DELAY_MS;
@@ -165,6 +190,7 @@ class EnrichFactions extends Command
 
         return null;
     }
+
 
     /**
      * Load all factions from all JSON files in database/data/factions/.
@@ -215,9 +241,11 @@ class EnrichFactions extends Command
                 continue;
             }
 
+            $force = (bool) $this->option('force');
+
             foreach ($parsed as $field => $value) {
-                // Only overwrite if the existing value is empty
-                if (empty($entry[$field])) {
+                // Overwrite if the existing value is empty, or --force is set
+                if (empty($entry[$field]) || $force) {
                     $entry[$field] = $value;
                     $updated = true;
                 }

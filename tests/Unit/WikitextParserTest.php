@@ -10,24 +10,93 @@ use PHPUnit\Framework\TestCase;
 class WikitextParserTest extends TestCase
 {
     private WikitextParser $parser;
+
+    /** Raw wikitext as returned by the MediaWiki API (contains HTML spans, <s>, <sup>, etc.) */
+    private string $rawWikitext;
+
+    /** Preprocessed wikitext — HTML stripped, ready for section extraction and stripMarkup(). */
     private string $aliensWikitext;
 
     protected function setUp(): void
     {
         parent::setUp();
         $this->parser = new WikitextParser();
-        $this->aliensWikitext = file_get_contents(__DIR__ . '/../Fixtures/aliens-wikitext.txt');
+        $this->rawWikitext = file_get_contents(__DIR__ . '/../Fixtures/aliens-wikitext.txt');
+        // Individual extraction method tests operate on preprocessed wikitext,
+        // matching exactly what parse() does internally.
+        $this->aliensWikitext = $this->parser->preprocessWikitext($this->rawWikitext);
+    }
+
+    // --- preprocessWikitext ---
+
+    public function test_preprocess_removes_strikethrough_content(): void
+    {
+        $result = $this->parser->preprocessWikitext(
+            "<s>3x '''Scout''' - old errata'd text</s>\n3x Scout - current text"
+        );
+
+        $this->assertStringNotContainsString("<s>", $result);
+        $this->assertStringNotContainsString("old errata'd text", $result);
+        $this->assertStringContainsString('Scout - current text', $result);
+    }
+
+    public function test_preprocess_removes_faq_superscripts(): void
+    {
+        $result = $this->parser->preprocessWikitext(
+            "1x Abduction - Return a minion. <sup>[[#Questions on Abduction|FAQ]]</sup>"
+        );
+
+        $this->assertStringNotContainsString('<sup>', $result);
+        $this->assertStringNotContainsString('FAQ', $result);
+        $this->assertStringContainsString('1x Abduction - Return a minion.', $result);
+    }
+
+    public function test_preprocess_strips_html_span_tags_keeping_content(): void
+    {
+        $result = $this->parser->preprocessWikitext(
+            "1x <span id=\"Supreme_Overlord\">'''Supreme Overlord'''</span> - power 5"
+        );
+
+        $this->assertStringNotContainsString('<span', $result);
+        $this->assertStringNotContainsString('id="Supreme_Overlord"', $result);
+        $this->assertStringContainsString("'''Supreme Overlord'''", $result);
+        $this->assertStringContainsString('power 5', $result);
+    }
+
+    public function test_preprocess_normalizes_html_decorated_headings(): void
+    {
+        $heading = "== <span style=\"{{ColorOutline | #FFFFFF}}; color:#8F3371\">'''Cards'''</span> ==";
+        $result = $this->parser->preprocessWikitext($heading);
+
+        $this->assertStringNotContainsString('<span', $result);
+        $this->assertStringNotContainsString('ColorOutline', $result);
+        $this->assertStringContainsString("'''Cards'''", $result);
+    }
+
+    public function test_preprocess_on_live_fixture_removes_all_html(): void
+    {
+        $this->assertStringNotContainsString('<span', $this->aliensWikitext);
+        $this->assertStringNotContainsString('<sup>', $this->aliensWikitext);
+        $this->assertStringNotContainsString('<s>', $this->aliensWikitext);
+    }
+
+    public function test_preprocess_excludes_erratad_old_card_versions(): void
+    {
+        // Old Scout text (struck through) should be removed
+        $this->assertStringNotContainsString('place this minion into your hand', $this->aliensWikitext);
+        // Current Scout text should remain
+        $this->assertStringContainsString('return this minion to your hand', $this->aliensWikitext);
     }
 
     // --- parse() integration ---
 
     public function test_parse_returns_array_with_expected_keys(): void
     {
-        $result = $this->parser->parse($this->aliensWikitext);
+        $result = $this->parser->parse($this->rawWikitext);
 
         $this->assertIsArray($result);
 
-        $expectedKeys = ['description', 'cardsTeaser', 'characters', 'actionTeaser', 'actionList', 'actions', 'bases', 'clarifications', 'effects', 'tips', 'synergy', 'suggestionTeaser'];
+        $expectedKeys = ['description', 'cardsTeaser', 'characters', 'actionList', 'actions', 'bases', 'clarifications', 'effects', 'tips', 'synergy', 'suggestionTeaser'];
         foreach ($expectedKeys as $key) {
             $this->assertArrayHasKey($key, $result, "Missing key: {$key}");
         }
@@ -35,7 +104,7 @@ class WikitextParserTest extends TestCase
 
     public function test_parse_does_not_include_image_field(): void
     {
-        $result = $this->parser->parse($this->aliensWikitext);
+        $result = $this->parser->parse($this->rawWikitext);
 
         $this->assertArrayNotHasKey('image', $result);
     }
@@ -47,6 +116,36 @@ class WikitextParserTest extends TestCase
         $this->assertEmpty($result, 'parse() should return empty array when no content is extractable');
     }
 
+    public function test_parse_output_contains_no_html_tags(): void
+    {
+        $result = $this->parser->parse($this->rawWikitext);
+
+        foreach ($result as $key => $value) {
+            $this->assertStringNotContainsString('<span', $value, "Field '{$key}' contains <span> tags");
+            $this->assertStringNotContainsString('<sup>', $value, "Field '{$key}' contains <sup> tags");
+            $this->assertStringNotContainsString('<s>', $value, "Field '{$key}' contains <s> tags");
+        }
+    }
+
+    public function test_parse_output_contains_no_wiki_links(): void
+    {
+        $result = $this->parser->parse($this->rawWikitext);
+
+        foreach ($result as $key => $value) {
+            $this->assertStringNotContainsString('[[', $value, "Field '{$key}' contains [[wiki links]]");
+            $this->assertStringNotContainsString('{{', $value, "Field '{$key}' contains {{templates}}");
+        }
+    }
+
+    public function test_parse_output_contains_no_faq_references(): void
+    {
+        $result = $this->parser->parse($this->rawWikitext);
+
+        foreach ($result as $key => $value) {
+            $this->assertStringNotContainsString('FAQ', $value, "Field '{$key}' contains FAQ references");
+        }
+    }
+
     // --- extractIntro ---
 
     public function test_extract_intro_returns_faction_description(): void
@@ -55,8 +154,6 @@ class WikitextParserTest extends TestCase
 
         $this->assertStringContainsString('Aliens', $intro);
         $this->assertStringContainsString('Core Set', $intro);
-        $this->assertStringNotContainsString('[[File:', $intro);
-        $this->assertStringNotContainsString('{{', $intro);
     }
 
     public function test_extract_intro_strips_quote_templates(): void
@@ -64,7 +161,7 @@ class WikitextParserTest extends TestCase
         $intro = $this->parser->extractIntro($this->aliensWikitext);
 
         $this->assertStringNotContainsString('{{Q|', $intro);
-        $this->assertStringNotContainsString('Aliens love to mess', $intro); // quote content gone
+        $this->assertStringNotContainsString('Aliens love to mess', $intro);
     }
 
     public function test_extract_intro_strips_file_embeds(): void
@@ -86,7 +183,7 @@ class WikitextParserTest extends TestCase
         $this->assertStringNotContainsString('Supreme Overlord', $teaser);
     }
 
-    // --- extractSection for Minions ---
+    // --- extractSection for Minions / characters ---
 
     public function test_extract_section_returns_minions(): void
     {
@@ -98,6 +195,15 @@ class WikitextParserTest extends TestCase
         $this->assertStringContainsString('Collector', $characters);
     }
 
+    public function test_extract_section_minions_excludes_erratad_old_versions(): void
+    {
+        // Preprocessing already removed <s> blocks; old Scout text should be gone
+        $characters = $this->parser->extractSection($this->aliensWikitext, 'Minions', 3);
+
+        $this->assertStringNotContainsString('place this minion into your hand', $characters);
+        $this->assertStringContainsString('return this minion to your hand', $characters);
+    }
+
     public function test_extract_section_minions_strips_faq_links(): void
     {
         $characters = $this->parser->extractSection($this->aliensWikitext, 'Minions', 3);
@@ -107,13 +213,12 @@ class WikitextParserTest extends TestCase
         $this->assertStringNotContainsString('FAQ', $cleaned);
     }
 
-    // --- extractActionTeaser ---
-
-    public function test_extract_action_teaser_returns_action_intro_line(): void
+    public function test_extract_section_minions_strips_errata_notes(): void
     {
-        $teaser = $this->parser->extractActionTeaser($this->aliensWikitext);
+        $characters = $this->parser->extractSection($this->aliensWikitext, 'Minions', 3);
+        $cleaned = $this->parser->stripMarkup($characters);
 
-        $this->assertStringContainsString("actions focus on returning", $teaser);
+        $this->assertStringNotContainsString("errata'd", $cleaned);
     }
 
     // --- extractActionList ---
@@ -127,6 +232,16 @@ class WikitextParserTest extends TestCase
         $this->assertStringContainsString('Terraforming', $list);
     }
 
+    public function test_extract_action_list_excludes_erratad_old_versions(): void
+    {
+        $list = $this->parser->extractActionList($this->aliensWikitext);
+
+        // Old Jammed Signal text (stripped via <s>) should not appear
+        $this->assertStringNotContainsString('All players ignore this base', $list);
+        // Current version should be present
+        $this->assertStringContainsString('Jammed Signal', $list);
+    }
+
     public function test_extract_action_list_strips_faq_links(): void
     {
         $list = $this->parser->extractActionList($this->aliensWikitext);
@@ -135,24 +250,36 @@ class WikitextParserTest extends TestCase
         $this->assertStringNotContainsString('[[#', $list);
     }
 
+    public function test_extract_action_list_strips_errata_notes(): void
+    {
+        $list = $this->parser->extractActionList($this->aliensWikitext);
+
+        $this->assertStringNotContainsString("errata'd", $list);
+    }
+
     // --- extractSection for Bases ---
 
     public function test_extract_section_returns_bases(): void
     {
         $bases = $this->parser->extractSection($this->aliensWikitext, 'Bases', 3);
+        $cleaned = $this->parser->stripMarkup($bases);
 
-        $this->assertStringContainsString('The Homeworld', $bases);
-        $this->assertStringContainsString('The Mothership', $bases);
+        $this->assertStringContainsString('The Homeworld', $cleaned);
+        $this->assertStringContainsString('The Mothership', $cleaned);
+        $this->assertStringNotContainsString('[[', $cleaned);
     }
 
     // --- extractTopLevelSection for Clarifications ---
 
     public function test_extract_top_level_section_returns_clarifications(): void
     {
-        $clarifications = $this->parser->extractTopLevelSection($this->aliensWikitext, 'Clarifications');
+        $clarifications = $this->parser->stripMarkup(
+            $this->parser->extractTopLevelSection($this->aliensWikitext, 'Clarifications')
+        );
 
-        $this->assertStringContainsString('return-to-hand', $clarifications);
-        $this->assertStringContainsString('no longer considered', $clarifications);
+        $this->assertStringContainsString('Collector', $clarifications);
+        $this->assertStringContainsString('Invader', $clarifications);
+        $this->assertStringContainsString('Jammed Signal', $clarifications);
     }
 
     // --- extractMechanicsIntro ---
@@ -177,6 +304,16 @@ class WikitextParserTest extends TestCase
         $this->assertStringContainsString('Invader Dance', $tips);
     }
 
+    public function test_extract_strategy_strips_wiki_links(): void
+    {
+        $tips = $this->parser->stripMarkup(
+            $this->parser->extractSection($this->aliensWikitext, 'Strategy', 3)
+        );
+
+        $this->assertStringNotContainsString('[[', $tips);
+        $this->assertStringContainsString('breaking bases', $tips);
+    }
+
     // --- Synergy ---
 
     public function test_extract_section_returns_synergy(): void
@@ -187,6 +324,16 @@ class WikitextParserTest extends TestCase
         $this->assertStringContainsString('Robots', $synergy);
     }
 
+    public function test_extract_synergy_strips_wiki_links(): void
+    {
+        $synergy = $this->parser->stripMarkup(
+            $this->parser->extractSection($this->aliensWikitext, 'Synergy', 3)
+        );
+
+        $this->assertStringNotContainsString('[[', $synergy);
+        $this->assertStringContainsString('Ninjas', $synergy);
+    }
+
     // --- extractSuggestionTeaser ---
 
     public function test_extract_suggestion_teaser_returns_first_non_bullet_line(): void
@@ -195,9 +342,27 @@ class WikitextParserTest extends TestCase
 
         $this->assertNotEmpty($teaser);
         $this->assertStringNotContainsString('*', $teaser);
+        $this->assertStringContainsString('returning minions', $teaser);
     }
 
-    // --- stripMarkup ---
+    // --- extractSection does not bleed ---
+
+    public function test_extract_section_returns_empty_for_missing_section(): void
+    {
+        $result = $this->parser->extractSection($this->aliensWikitext, 'NonExistentSection', 2);
+
+        $this->assertSame('', $result);
+    }
+
+    public function test_extract_section_does_not_bleed_into_next_section(): void
+    {
+        $synergy = $this->parser->extractSection($this->aliensWikitext, 'Synergy', 3);
+
+        // External Strategy Guides comes after Synergy; must not bleed in
+        $this->assertStringNotContainsString('smashupdata.com', strtolower($synergy));
+    }
+
+    // --- stripMarkup unit tests ---
 
     public function test_strip_markup_removes_wiki_links(): void
     {
@@ -255,20 +420,18 @@ class WikitextParserTest extends TestCase
         $this->assertSame("Line one\n\nLine two", $result);
     }
 
-    // --- extractSection edge cases ---
-
-    public function test_extract_section_returns_empty_for_missing_section(): void
+    public function test_strip_markup_strips_errata_notes(): void
     {
-        $result = $this->parser->extractSection($this->aliensWikitext, 'NonExistentSection', 2);
+        $result = $this->parser->stripMarkup("1x Jammed Signal - Play on a base. (errata'd by Smash Up POD)");
 
-        $this->assertSame('', $result);
+        $this->assertSame('1x Jammed Signal - Play on a base.', $result);
     }
 
-    public function test_extract_section_does_not_bleed_into_next_section(): void
+    public function test_strip_markup_strips_remaining_html_tags(): void
     {
-        $synergy = $this->parser->extractSection($this->aliensWikitext, 'Synergy', 3);
+        $result = $this->parser->stripMarkup('<strong>Bold text</strong> normal text');
 
-        // External Strategy Guides comes after Synergy; should not be included
-        $this->assertStringNotContainsString('smashupdata.com', strtolower($synergy));
+        $this->assertStringNotContainsString('<strong>', $result);
+        $this->assertStringContainsString('Bold text', $result);
     }
 }

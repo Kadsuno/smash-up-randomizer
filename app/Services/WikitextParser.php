@@ -9,6 +9,12 @@ namespace App\Services;
  *
  * Intentionally free of Laravel dependencies so it can be unit-tested
  * without booting the application container.
+ *
+ * Pipeline per field:
+ *   raw wikitext → preprocessWikitext() → extractSection() → stripMarkup()
+ *
+ * preprocessWikitext() handles HTML-level noise (spans, superscripts, strikethrough).
+ * stripMarkup() handles wikitext-level noise ([[links]], {{templates}}, bold/italic).
  */
 class WikitextParser
 {
@@ -23,22 +29,54 @@ class WikitextParser
      */
     public function parse(string $wikitext): array
     {
+        // HTML-level cleanup must happen first so heading detection works correctly
+        $wikitext = $this->preprocessWikitext($wikitext);
+
         $fields = [];
 
         $this->setIfNotEmpty($fields, 'description', $this->extractIntro($wikitext));
         $this->setIfNotEmpty($fields, 'cardsTeaser', $this->extractCardsTeaser($wikitext));
-        $this->setIfNotEmpty($fields, 'characters', $this->extractSection($wikitext, 'Minions', 3));
+        $this->setIfNotEmpty($fields, 'characters', $this->stripMarkup($this->extractSection($wikitext, 'Minions', 3)));
         $this->setIfNotEmpty($fields, 'actionTeaser', $this->extractActionTeaser($wikitext));
         $this->setIfNotEmpty($fields, 'actionList', $this->extractActionList($wikitext));
-        $this->setIfNotEmpty($fields, 'actions', $this->extractSection($wikitext, 'Actions', 3));
-        $this->setIfNotEmpty($fields, 'bases', $this->extractSection($wikitext, 'Bases', 3));
-        $this->setIfNotEmpty($fields, 'clarifications', $this->extractTopLevelSection($wikitext, 'Clarifications'));
+        $this->setIfNotEmpty($fields, 'actions', $this->stripMarkup($this->extractSection($wikitext, 'Actions', 3)));
+        $this->setIfNotEmpty($fields, 'bases', $this->stripMarkup($this->extractSection($wikitext, 'Bases', 3)));
+        $this->setIfNotEmpty($fields, 'clarifications', $this->stripMarkup($this->extractTopLevelSection($wikitext, 'Clarifications')));
         $this->setIfNotEmpty($fields, 'effects', $this->extractMechanicsIntro($wikitext));
-        $this->setIfNotEmpty($fields, 'tips', $this->extractSection($wikitext, 'Strategy', 3));
-        $this->setIfNotEmpty($fields, 'synergy', $this->extractSection($wikitext, 'Synergy', 3));
+        $this->setIfNotEmpty($fields, 'tips', $this->stripMarkup($this->extractSection($wikitext, 'Strategy', 3)));
+        $this->setIfNotEmpty($fields, 'synergy', $this->stripMarkup($this->extractSection($wikitext, 'Synergy', 3)));
         $this->setIfNotEmpty($fields, 'suggestionTeaser', $this->extractSuggestionTeaser($wikitext));
 
         return $fields;
+    }
+
+    /**
+     * Pre-process wikitext before section extraction.
+     *
+     * Handles HTML-level noise that the MediaWiki API includes in wikitext:
+     * - <s>...</s> struck-through errata'd card versions (removed entirely)
+     * - <sup>...</sup> FAQ superscripts (removed entirely)
+     * - <span id="..."> card-name anchors (tag removed, content kept)
+     * - <span style="..."> heading decorations (tag removed, content kept)
+     * - Any remaining HTML tags (stripped, content kept via strip_tags)
+     *
+     * After this pass, wikitext markup ([[links]], {{templates}}, '''bold''')
+     * is still intact and will be handled by stripMarkup().
+     */
+    public function preprocessWikitext(string $wikitext): string
+    {
+        // Remove struck-through errata'd content entirely (old card text, superseded)
+        $wikitext = preg_replace('/<s\b[^>]*>.*?<\/s>/si', '', $wikitext) ?? $wikitext;
+
+        // Remove FAQ superscripts entirely (content is just "FAQ" / anchor links)
+        $wikitext = preg_replace('/<sup\b[^>]*>.*?<\/sup>/si', '', $wikitext) ?? $wikitext;
+
+        // Strip remaining HTML tags — keep text content, remove tags and attributes.
+        // This handles <span style="...">, <span id="...">, <strong>, etc.
+        // strip_tags does NOT touch {{templates}} or [[wikilinks]] since they are not HTML.
+        $wikitext = strip_tags($wikitext);
+
+        return $wikitext;
     }
 
     /**
@@ -85,7 +123,7 @@ class WikitextParser
             return '';
         }
 
-        // First paragraph before the bullet list
+        // First paragraph (non-bullet, non-card-entry lines) before the card list
         $lines = explode("\n", $actionsSection);
         $teaser = [];
         foreach ($lines as $line) {
@@ -93,7 +131,7 @@ class WikitextParser
             if ($stripped === '' && !empty($teaser)) {
                 break;
             }
-            if ($stripped !== '' && !str_starts_with($stripped, '*')) {
+            if ($stripped !== '' && !str_starts_with($stripped, '*') && !preg_match('/^\d+x\s/', $stripped)) {
                 $teaser[] = $stripped;
             }
         }
@@ -102,7 +140,8 @@ class WikitextParser
     }
 
     /**
-     * Extract the bullet-list of action cards from the Actions subsection.
+     * Extract the individual card entries from the Actions subsection as a clean line-per-card list.
+     * Only current (non-errata'd) versions are included; errata notes are stripped.
      */
     public function extractActionList(string $wikitext): string
     {
@@ -115,16 +154,18 @@ class WikitextParser
         $listLines = [];
 
         foreach ($lines as $line) {
-            $stripped = ltrim($line);
-            // Individual card entries start with Nx (e.g. "1x '''Abduction'''")
-            if (preg_match('/^\d+x\s/', $stripped)) {
-                // Strip the errata notes in italics at line end
-                $stripped = preg_replace('/\s*\(errata\'d[^)]*\)/', '', $stripped) ?? $stripped;
-                // Remove duplicate errata lines (lines with "errata'd" mid-text)
-                if (str_contains($stripped, "errata'd")) {
-                    continue;
-                }
-                $listLines[] = $this->stripMarkup(trim($stripped));
+            $stripped = trim($line);
+            // Individual card entries start with Nx (e.g. "1x Abduction - ...")
+            if (!preg_match('/^\d+x\s/', $stripped)) {
+                continue;
+            }
+
+            // Strip errata attribution notes
+            $stripped = $this->stripErrataNote($stripped);
+            $cleaned = $this->stripMarkup($stripped);
+
+            if ($cleaned !== '') {
+                $listLines[] = $cleaned;
             }
         }
 
@@ -185,16 +226,20 @@ class WikitextParser
     /**
      * Extract the content of a wiki section at a given heading level.
      *
+     * Expects preprocessed wikitext (HTML already stripped by preprocessWikitext()).
+     * Headings may optionally have bold markers ('''text''') or trailing whitespace.
+     *
      * @param  int  $level  2 for ==, 3 for ===, 4 for ====
      */
     public function extractSection(string $wikitext, string $header, int $level): string
     {
         $eq = str_repeat('=', $level);
-        // Match the heading, case-insensitively, allowing surrounding spaces and bold markup
+
+        // Match the heading allowing optional bold markers and surrounding whitespace
         $pattern = '/^' . preg_quote($eq, '/') . "\s*'''?\s*" . preg_quote($header, '/') . "\s*'''?\s*" . preg_quote($eq, '/') . '\s*$/im';
 
         if (!preg_match($pattern, $wikitext, $matches, PREG_OFFSET_CAPTURE)) {
-            // Try simpler match without bold
+            // Fallback: simpler match without bold markers
             $pattern = '/^' . preg_quote($eq, '/') . '\s*' . preg_quote($header, '/') . '\s*' . preg_quote($eq, '/') . '\s*$/im';
             if (!preg_match($pattern, $wikitext, $matches, PREG_OFFSET_CAPTURE)) {
                 return '';
@@ -219,22 +264,28 @@ class WikitextParser
 
     /**
      * Strip all wiki markup from a text string, returning plain text.
+     *
+     * This method operates on already-preprocessed text (HTML removed).
+     * It handles wikitext-specific markup: links, templates, bold/italic, headings.
      */
     public function stripMarkup(string $text): string
     {
-        // Remove [[File:...]] and [[Image:...]] embeds (may span multiple chars)
+        // Safety: strip any HTML tags that slipped through preprocessing
+        $text = strip_tags($text);
+
+        // Remove [[File:...]] and [[Image:...]] embeds
         $text = preg_replace('/\[\[(File|Image):[^\]]*\]\]/i', '', $text) ?? $text;
 
         // Remove {{template|...}} blocks (non-greedy, handles nesting via repetition)
         $text = $this->removeTemplates($text);
 
-        // Remove internal anchor links [[#anchor|label]] and [[#anchor]] — must come before generic piped link
+        // Remove internal anchor links [[#anchor|label]] and [[#anchor]]
         $text = preg_replace('/\[\[#[^\]|]+(?:\|[^\]]+)?\]\]/', '', $text) ?? $text;
 
         // [[Link|Display text]] → Display text
         $text = preg_replace('/\[\[[^\[\]|]+\|([^\[\]]+)\]\]/', '$1', $text) ?? $text;
 
-        // [[Link]] → Link
+        // [[Link]] → Link text (strip the brackets)
         $text = preg_replace('/\[\[([^\[\]]+)\]\]/', '$1', $text) ?? $text;
 
         // [https://... label] → label
@@ -246,22 +297,20 @@ class WikitextParser
         // '''bold''' → text
         $text = preg_replace("/'''(.+?)'''/s", '$1', $text) ?? $text;
 
-        // ''italic'' → text
+        // ''italic'' markers → remove (unpaired single-quotes after bold stripping)
         $text = preg_replace("/''/", '', $text) ?? $text;
 
         // ==headings== at any level → remove the whole line
         $text = preg_replace('/^={2,6}[^=\n]+={2,6}\s*$/m', '', $text) ?? $text;
 
-        // FAQ links like [[#Questions on X|FAQ]] → remove
-        $text = preg_replace('/\[\[#[^\]]+\|[^\]]+\]\]/', '', $text) ?? $text;
+        // Errata attribution notes — strip from card text fields
+        $text = $this->stripErrataNote($text);
 
         // HTML entities
         $text = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 
-        // Trim each line
+        // Trim each line and collapse multiple blank lines into one
         $lines = array_map('trim', explode("\n", $text));
-
-        // Collapse multiple blank lines into one
         $result = [];
         $prevBlank = false;
         foreach ($lines as $line) {
@@ -282,7 +331,6 @@ class WikitextParser
      */
     private function removeTemplates(string $text): string
     {
-        // Iterate up to 5 times to handle nested templates
         for ($i = 0; $i < 5; $i++) {
             $new = preg_replace('/\{\{[^{}]*\}\}/', '', $text) ?? $text;
             if ($new === $text) {
@@ -292,6 +340,14 @@ class WikitextParser
         }
 
         return $text;
+    }
+
+    /**
+     * Strip "(errata'd by ...)" attribution notes from a line of card text.
+     */
+    private function stripErrataNote(string $text): string
+    {
+        return preg_replace("/\s*\(errata'd by[^)]*\)/i", '', $text) ?? $text;
     }
 
     /**
