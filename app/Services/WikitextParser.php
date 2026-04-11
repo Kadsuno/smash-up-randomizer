@@ -36,7 +36,10 @@ class WikitextParser
 
         $this->setIfNotEmpty($fields, 'description', $this->extractIntro($wikitext));
         $this->setIfNotEmpty($fields, 'cardsTeaser', $this->extractCardsTeaser($wikitext));
-        $this->setIfNotEmpty($fields, 'characters', $this->stripMarkup($this->extractSection($wikitext, 'Minions', 3)));
+        // Disney/Marvel factions use "Characters" instead of "Minions"
+        $minionsSection = $this->extractSection($wikitext, 'Minions', 3)
+            ?: $this->extractSection($wikitext, 'Characters', 3);
+        $this->setIfNotEmpty($fields, 'characters', $this->stripMarkup($minionsSection));
         $this->setIfNotEmpty($fields, 'actionTeaser', $this->extractActionTeaser($wikitext));
         $this->setIfNotEmpty($fields, 'actionList', $this->extractActionList($wikitext));
         $this->setIfNotEmpty($fields, 'actions', $this->stripMarkup($this->extractSection($wikitext, 'Actions', 3)));
@@ -68,13 +71,20 @@ class WikitextParser
         // Remove struck-through errata'd content entirely (old card text, superseded)
         $wikitext = preg_replace('/<s\b[^>]*>.*?<\/s>/si', '', $wikitext) ?? $wikitext;
 
-        // Remove FAQ superscripts entirely (content is just "FAQ" / anchor links)
-        $wikitext = preg_replace('/<sup\b[^>]*>.*?<\/sup>/si', '', $wikitext) ?? $wikitext;
+        // Remove FAQ superscripts entirely (content is just "FAQ" / anchor links).
+        // No dotall flag: some wiki pages have unclosed <sup> tags (missing </sup> on the same
+        // line), and dotall mode would then eat content across multiple lines including section
+        // headings. Unclosed <sup> tags are handled by the subsequent strip_tags() call.
+        $wikitext = preg_replace('/<sup\b[^>]*>.*?<\/sup>/i', '', $wikitext) ?? $wikitext;
 
         // Strip remaining HTML tags — keep text content, remove tags and attributes.
-        // This handles <span style="...">, <span id="...">, <strong>, etc.
-        // strip_tags does NOT touch {{templates}} or [[wikilinks]] since they are not HTML.
-        $wikitext = strip_tags($wikitext);
+        // We use a regex instead of strip_tags() because the wiki occasionally has malformed
+        // HTML attributes with unclosed quotes (e.g. id="Hawkeyes_Arrows> missing the closing ").
+        // strip_tags() honours opening quotes inside attributes and may consume content across
+        // many lines (including section headings) until it finds the matching closing quote.
+        // The regex <[^>]*> always stops at the first >, matching the intuitive tag boundary.
+        // {{templates}} and [[wikilinks]] are not HTML and are unaffected.
+        $wikitext = preg_replace('/<[^>]*>/', '', $wikitext) ?? $wikitext;
 
         return $wikitext;
     }
@@ -270,8 +280,10 @@ class WikitextParser
      */
     public function stripMarkup(string $text): string
     {
-        // Safety: strip any HTML tags that slipped through preprocessing
-        $text = strip_tags($text);
+        // Safety: strip any HTML tags that slipped through preprocessing.
+        // Same reasoning as preprocessWikitext(): regex is safer than strip_tags()
+        // for wiki pages with malformed HTML attributes.
+        $text = preg_replace('/<[^>]*>/', '', $text) ?? $text;
 
         // Remove [[File:...]] and [[Image:...]] embeds
         $text = preg_replace('/\[\[(File|Image):[^\]]*\]\]/i', '', $text) ?? $text;
