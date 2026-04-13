@@ -34,4 +34,10 @@ return [
         'api_key' => env('BREVO_API_KEY'),
     ],
 
+    'ai_rewrite' => [
+        'provider' => env('AI_REWRITE_PROVIDER', 'groq'),
+        'key'      => env('AI_REWRITE_KEY', ''),
+        'model'    => env('AI_REWRITE_MODEL', 'llama-3.3-70b-versatile'),
+    ],
+
 ];
