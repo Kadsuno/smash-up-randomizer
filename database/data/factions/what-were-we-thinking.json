@@ -17,7 +17,7 @@
         "synergy": "* Polynesian Voyagers: Idaho Smith provides another extra base. Guide powers up Wayfinder and any of your other Polynesian Voyagers that move around.\n* Ultimates: Utimates like any faction that provides more movement.",
         "tips": "",
         "effects": "Explorers focus on movements, base deck manipulation and playing extra minions on newly revealed bases.\n\nThe Explorers have the unique mechanic of knowing and influencing which will be the next bases drawn from the base deck, allowing you to look at the top cards of the base deck and selecting which base remains on top.\n\nThey also allow you to play an extra minion on a base when it's newly revealed, giving you a head start over the other players.\n\nFinally, the Explorers are a movement-heavy faction, able to move their minions and other players' minions.",
-        "image": "/images/factions/explorers.jpg"
+        "image": "/images/factions/explorers.svg"
     },
     {
         "name": "Grannies",
@@ -37,7 +37,7 @@
         "synergy": "",
         "tips": "",
         "effects": "Grannies focus on sorting your deck and drawing/playing cards from your deck if your deck is correctly sorted.\n\nThere are mainly two kinds of cards in the Grannies faction. Those that help you check and/or sort the top and bottom of your deck, and those that check the top or bottom of your deck and give you an advantage if the right type of card is present, usually the drawing of the card and/or playing it as an extra card.\n\nRegarding how to sort your deck correctly, Grannies like when actions are present on top of your deck and minions are present on the bottom.",
-        "image": "/images/factions/grannies.jpg"
+        "image": "/images/factions/grannies.svg"
     },
     {
         "name": "Rock Stars",
@@ -57,7 +57,7 @@
         "synergy": "",
         "tips": "",
         "effects": "The Rock Stars get advantages from high-breakpoint bases. Some of their cards have a secondary ability that only applies when the targeted base's breakpoint is 21 or higher, usually card draws\n\nTheir secondary mechanic is searching for and drawing their power-2 minions, which can be played all at once. If you manage to get all of five of them, that is a drop of 10 power.",
-        "image": "/images/factions/rock-stars.jpg"
+        "image": "/images/factions/rock-stars.svg"
     },
     {
         "name": "Teddy Bears",
@@ -77,6 +77,6 @@
         "synergy": "",
         "tips": "",
         "effects": "Teddy Bears have a wide array of abilities that can mess with most minion-focused factions. For example, some cards are deterrent or give you an advantage against swarm-type factions (Fun Bear, Group Hug, Bear Picnic), some cards give you advantage over high-power minions (Lovey Bear, Love Overload), and some cards help you counter minions with strong abilities (Cuddle).\n\nAdditionally, Teddy Bears have extra minion plays, usually allowing you to play groups of minions on the same base.",
-        "image": "/images/factions/teddy-bears.jpg"
+        "image": "/images/factions/teddy-bears.svg"
     }
 ]

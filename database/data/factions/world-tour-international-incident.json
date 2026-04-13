@@ -17,7 +17,7 @@
         "synergy": "",
         "tips": "",
         "effects": "The Luchadors have several cards that require you to already have an action on another player's minion before you can play them or invoke their abilities. The Luchadors themselves provide those kinds of actions in the form of Set-Up actions, which can only be played on other players' minions but help you fulfill those requirements.\n\nThey also have a secondary focus on retrieving and recurring actions, particularly those Set-Up actions.",
-        "image": "/images/factions/luchadors.jpg"
+        "image": "/images/factions/luchadors.svg"
     },
     {
         "name": "Mounties",
@@ -37,7 +37,7 @@
         "synergy": "",
         "tips": "",
         "effects": "The Mounties have two major mechanics: movement and power boost. Most of their movement abilities are limited to moving to bases where another player already has a minion and their power boost sometimes have a requirement of moving your minion first or there having other players' minions on their base.",
-        "image": "/images/factions/mounties.jpg"
+        "image": "/images/factions/mounties.svg"
     },
     {
         "name": "Musketeers",
@@ -57,7 +57,7 @@
         "synergy": "",
         "tips": "",
         "effects": "The Musketeers excel at starting chains of actions, with a particular focus on actions that directly affect your own minions. Also, each time you do play an action that directly affects one of your minions, you can gain various benefits which can be either a power boost, a card draw, or even another action play.",
-        "image": "/images/factions/musketeers.png"
+        "image": "/images/factions/musketeers.svg"
     },
     {
         "name": "Sumo Wrestlers",
@@ -77,6 +77,6 @@
         "synergy": "",
         "tips": "",
         "effects": "The Sumo Wrestlers can move other player's minions away from bases where you have a minion.\n\nThey are also able to gain power, especially +1 power counters, but usually at the cost of discarding cards. Though to complement this, they also have a lot of drawing ability.",
-        "image": "/images/factions/sumo-wrestlers.jpg"
+        "image": "/images/factions/sumo-wrestlers.svg"
     }
 ]

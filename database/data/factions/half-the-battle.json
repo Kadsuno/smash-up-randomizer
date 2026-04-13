@@ -17,7 +17,7 @@
         "synergy": "",
         "tips": "",
         "effects": "",
-        "image": "/images/factions/adolescent-epic-geckos.png"
+        "image": "/images/factions/adolescent-epic-geckos.svg"
     },
     {
         "name": "G.I. Gerald",
@@ -37,7 +37,7 @@
         "synergy": "",
         "tips": "",
         "effects": "",
-        "image": "/images/factions/gi-gerald.jpg"
+        "image": "/images/factions/gi-gerald.svg"
     },
     {
         "name": "Pearl and the Images",
@@ -57,7 +57,7 @@
         "synergy": "",
         "tips": "",
         "effects": "",
-        "image": "/images/factions/pearl-and-the-images.png"
+        "image": "/images/factions/pearl-and-the-images.svg"
     },
     {
         "name": "Rulers of the Cosmos",
@@ -77,6 +77,6 @@
         "synergy": "",
         "tips": "",
         "effects": "",
-        "image": "/images/factions/rulers-of-the-cosmos.png"
+        "image": "/images/factions/rulers-of-the-cosmos.svg"
     }
 ]

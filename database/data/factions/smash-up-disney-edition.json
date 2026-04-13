@@ -17,7 +17,7 @@
         "synergy": "* Beauty and the Beast\n* The Nightmare Before Christmas",
         "tips": "* Be wise but bold in using your precious Wish cards. They can help you break and win bases, but don’t be afraid to use one to fill out a weak hand if needed.\n* Several cards require discarding an action to work. Wish cards are great for that since Genie can fetch them back.\n* A Friend Like Me and other cards can help restock your hand.",
         "effects": "You have three powerful actions, the Wishes, that give you a choice between three interesting options. But in order to use them, you must have Genie in play, and on use, those actions go back to the box, making them one-time-use cards. To help you set up that play, you have The Lamp that allows you to retrieve the Genie, as well as several ways to get to The Lamp, such as Aladdin that give it on play and whose talent help you sift your deck, or Abu and Cave of Wonders that allow you to retrieve discarded actions. The Wishes themselved can easily be fetched once Genie is in play.\n\nAs a secondary mechanic is that the \"palace\" characters (Jasmine, Rajah and the Palace Guards) require discarding actions to use their talents. Wishes are great for that purpose because you can retrieve them later with Genie. You can also use A Friend Like Me and Aladdin to help you fill your hand with actions to discard.",
-        "image": "/images/factions/aladdin.jpg"
+        "image": "/images/factions/aladdin.svg"
     },
     {
         "name": "Beauty and the Beast",
@@ -37,7 +37,7 @@
         "synergy": "* Big Hero 6\n* Frozen",
         "tips": "* When you discard a card to activate an ability, discard one that then plays itself, if you can.\n* Belle, Mrs. Potts and Chip, and Be Our Guest can replenish your hand.\n* Belle and Beast help each other, but their talents are useful enough that you shouldn’t hesitate to use them alone.",
         "effects": "Beauty and the Beast are all about discarding cards from your hand to get various benefits. But the neat thing is they have cards that you want to discard (Enchanted Objects, Break the Curse, Discover the Library and Ever a Surprise) because those become playable for free when that happens, so you're not simply losing a card for a benefit.",
-        "image": "/images/factions/beauty-and-the-beast.jpg"
+        "image": "/images/factions/beauty-and-the-beast.svg"
     },
     {
         "name": "Big Hero 6",
@@ -57,7 +57,7 @@
         "synergy": "* Mulan\n* Beauty and the Beast",
         "tips": "* Try to get power counters on your hero characters if you can, both for the power and the extra abilities. If you can’t, their abilities are still a set of tools you can adapt to many situations.\n* Microbot Swarms are a source of steady growth in power counters, that you can move to other characters if needed.\n* Use Microbot Swarms carefully to bring each other back from the discard pile and play again.",
         "effects": "Big Hero 6 want to have +1 power counters on your characters. Some of their cards scale with the number of your characters with counters (Team Effort, Version 2.0, Yokai) and five of their characters get an \"upgraded\" ability if they have +1 power counters on them, either an additional ability, or an alternative ability. As such they have several ways to give out power counters, as well as ways to transfer them among your characters.\n\nAs a secondary mechanic, they focus on playing and managing Microbot Swarms, which are characters that generate power counters.",
-        "image": "/images/factions/big-hero-6.jpg"
+        "image": "/images/factions/big-hero-6.svg"
     },
     {
         "name": "Frozen",
@@ -77,7 +77,7 @@
         "synergy": "* The Lion King\n* The Nightmare Before Christmas",
         "tips": "* Get familiar with which characters and actions can find which characters, so that you can quickly find and play them again and again. Elsa is especially useful to get out early and often.\n* It’s okay to send characters to the discard pile, especially Snowgies, since they can be retrieved and even played from there.\n* Frozen Port can help you score a base by yourself.",
         "effects": "Their main mechanic is that their characters chain into one another, allowing you to search each one of them, even from the discard pile. Understanding which character is linked to which helps you get to your stronger characters faster and retrieving the necessary characters to redo that again and again. As such, Sven allows you to search for Kristoff, which searches for Anna, which searches for Elsa, which plays snowmen characters.\n\nAs a secondary mechanic, they help you thin your deck by allowing you to look at the top cards and to discard any unnecessary ones, mainly snowmen characters since Elsa and a few other cards can play them straight from there.",
-        "image": "/images/factions/frozen.jpg"
+        "image": "/images/factions/frozen.svg"
     },
     {
         "name": "Mulan",
@@ -97,7 +97,7 @@
         "synergy": "* Wreck-It Ralph\n* Big Hero 6",
         "tips": "* Power counter use is straight-forward, but you can also leverage it for extra card draw with Yao, Ling and Chien Po.\n* Plan ahead for the use of Shan Yu by making a character at least as strong as the character you want to eliminate before scoring.\n* Also plan for the use of Avalanche by not having weaker characters on the target base.",
         "effects": "Mulan places a lot of +1 power counters on your characters, preferably on characters whose ability triggers after a counter is placed on them, usually granting you a card draw.\n\nThey also have several removal abilities, usually destruction of characters.",
-        "image": "/images/factions/mulan.jpg"
+        "image": "/images/factions/mulan.svg"
     },
     {
         "name": "The Lion King",
@@ -117,7 +117,7 @@
         "synergy": "* Killer Plants - Killer Kudzu can easily recur Lion Cubs using its talent, and shuffle Lion Cubs or targets for their specials into your deck with its own special.\n* Kitty Cats - Kitty Cats love to destroy their own minions/characters, which helps enable the Lion Cubs' character searching and can get Mufasa into your discard easily. They can also steal other players' characters to use as fodder for Scar or Wildebeest Stampede.\n* Sharks - Sharks are good at destroying minions, especially with power 2 or less, making them excellent for triggering Lion Cub's special. Lion Cubs can fetch Great Whites or Hammerheads. Timon and Pumbaa can be recurred with Hakuna Matata, making them decent fodder for Sharks as well (but no worries, right?). Blood in the Water and Circle of Life allow you to play lots of extra minions quickly.\n* Superheroes - Mild Mannered Citizen can fetch Mufasa, and Rafiki can recur your Mild Mannered Citizens easily.\n* Samurai - Both factions benefit from minions going to discard, and are equipped wth plenty of tools to help it happen. Of particular note is Bushi, who scores you 1 VP if it has 5 or more power when it goes to discard from play. With He Lives In You on the same base, you have an easy way to increase Bushi's power. Timon and Pumbaa can place Bushi from your discard pile onto the bottom of your deck, allowing you to fetch it again using a Lion Cub or Wildebeest Stampede. With the right setup, it's entirely possible to farm VP by fetching Bushi, playing it on the base with He Lives in You, then destroying it with a card like Wildebeest Stampede or Yokai Attack.",
         "tips": "* Do what you can to get Mufasa in play early -- Wildebeest Stampede helps -- to both use him in play and to support you from the discard pile.\n* If any of Lion Cub, Simba, Mufasa, or Circle of Life trigger at the same time, you can choose their order of resolving to get multiple benefits for the same character.\n* Lion Cub can help quickly bring out Simba, Nala, or powerful characters from your partner faction.",
         "effects": "They have two main mechanics. First, they allow you to replace/retrieve new characters after one goes away. As such Lion Cubs help you get characters from your deck, the two Circle of Life allows you to play characters from your hand or discard pile, and Simba goes back into the deck to be drawn again later.\n\nAnd second, they have cards that get additional abilities when certain cards are in the discard pile. The main card you want to have in your discard pile is Mufasa, which not only powers up your characters the moment it leaves play to go to the discard pile, but several cards give you extra power while Mufasa is in the discard pile.",
-        "image": "/images/factions/the-lion-king.jpg"
+        "image": "/images/factions/the-lion-king.svg"
     },
     {
         "name": "The Nightmare Before Christmas",
@@ -137,7 +137,7 @@
         "synergy": "* Aladdin\n* Mulan",
         "tips": "* Most of your cards either are character modifiers, or search for, or react to character modifiers. Use them together to get more out of each play.\n* Your modifiers are a great toolbox. Usually you’ll use them opportunistically, but sometimes you’ll want to carefully set them up. Lock, Shock & Barrel can help pull off surprise wins of bases.\n* Halloween Town Folks help you sort your deck, placing the more useful cards on top.",
         "effects": "They revolve around character modifiers. Their characters all have abilities that interact in some ways with your character modifiers, such as allowing you to draw them faster, giving out more power, or allowing you to play character modifiers as extra actions.\n\nThe character modifiers they provide are also unique in that most of them have an ability that depends on whether it is attached to one of your characters, in which case the effect is beneficial for you, or it is attached to another player's character, in which case the effect is very detrimental to them.",
-        "image": "/images/factions/the-nightmare-before-christmas.jpg"
+        "image": "/images/factions/the-nightmare-before-christmas.svg"
     },
     {
         "name": "Wreck-It Ralph",
@@ -157,6 +157,6 @@
         "synergy": "* Steampunks: Steampunks and Wreck-It Ralph both reward consolidation strategies; Captain Ahab and Sugar Rush Racer can converge on a base where you have or just played a base modifier (play-on-base action), which is quite strong in tandem with Rotary Slug Throw and Sergeant Calhoun. Kart Bakery is a faster Difference Engine. Fix-It Felix Jr. can help recur Aggromotive and Rotary Slug Thrower much like Mechanic, albeit to hand rather than play, and place base modifiers on the top of their owner's deck. Ralph can speed out extra base modifiers outright and destroy troublesome base modifiers like those deployed by Tricksters and Dragons.\n* Dragons: Dragons provide some bite with effects that punish other players for playing or moving their characters to your bases. Dragon Lands can further power up your Sugar Rush Racers, Intimidating Presence reduces the power of rival characters, Bring Down The Walls let you play extra minions before a base scores, Ruins reduce other players' VP gained when the base scores, and most useful of all, Flank Attack lets you fetch a base modifier right out of your deck.",
         "tips": "* Be clever in your use of your base modifiers, both for their direct effects, and the advantages they give your characters.\n* Time your movements to build up characters’ power (Sugar Rush Racer, Vanellope Von Schweetz, Sugar Rush), break or flee bases (Research Lab Beacon, Escape Pod), and save cards to remain after a base scores (Escape Pod).\n* You can use with Cy-Bug Infestation and Mints Eruption to destroy or replace bases where your opponents are doing well.",
         "effects": "Wreck-It Ralph's main mechanics revolves around its base modifiers, with abilities that allow you to move your characters around, giving them power and disrupt your opponents, and characters that interact with those modifiers for more mobility and power.\n\nAs a secondary mechanic, they have abilities that affect bases, such as reducing their breakpoint, cancelling their abilities and replacing them.",
-        "image": "/images/factions/wreck-it-ralph.jpg"
+        "image": "/images/factions/wreck-it-ralph.svg"
     }
 ]
