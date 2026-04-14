@@ -166,7 +166,7 @@
                             {{ __('frontend.two_factor_status_on') }}
                         </p>
 
-                        <form method="POST" action="{{ route('account.two-factor.recovery-codes') }}" class="mb-6 border-b border-white/10 pb-6">
+                        <form method="POST" action="{{ route('account.two-factor.recovery-codes') }}" class="mb-8">
                             @csrf
                             <p class="mb-3 text-sm text-zinc-500">{{ __('frontend.two_factor_regenerate_intro') }}</p>
                             <div class="mb-4">
