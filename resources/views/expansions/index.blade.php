@@ -62,7 +62,7 @@
                     </div>
 
                     {{-- Info --}}
-                    <div class="flex items-start justify-between gap-3 p-4">
+                    <div class="mt-auto flex items-start justify-between gap-3 p-4">
                         <div>
                             <h2 class="text-sm font-bold leading-tight text-white transition group-hover:text-indigo-300">
                                 {{ $expansion['name'] }}
