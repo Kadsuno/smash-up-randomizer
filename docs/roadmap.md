@@ -23,6 +23,9 @@ High-level product and engineering priorities. Update this file in the same PR w
 
 - **Faction data pipeline** ✅ — All 106 factions seeded via versioned JSON files + `DeckSeeder` + `factions:import` Artisan command (idempotent). Foundation for full faction pages, filtering, and randomizer enrichment.
 - **Faction wiki enrichment** ✅ — `php artisan factions:enrich` fetches all faction fields from the Smash Up Fandom wiki (MediaWiki API), parses wikitext via `WikitextParser`, writes enriched JSON files, and syncs DB. All 13 previously-empty fields now populated per faction.
+- **Expansions pages** ✅ — `/expansions` overview + `/expansions/{slug}` detail; browse all officially released sets with faction count and thumbnail preview grid.
+- **Faction complexity filter** ✅ — Client-side Alpine filter pills (All / Easy / Medium / Hard) on the `/factions` list page.
+- **Quick shuffle `/random`** ✅ — One-click shuffle for 2 players without the wizard.
 
 ## Next
 

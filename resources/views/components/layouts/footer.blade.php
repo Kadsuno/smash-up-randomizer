@@ -27,6 +27,9 @@
                         <a class="sur-footer-link" href="{{ route('factionList') }}">{{ __('frontend.nav_factions') }}</a>
                     </li>
                     <li>
+                        <a class="sur-footer-link" href="{{ route('expansions') }}">{{ __('frontend.nav_expansions') }}</a>
+                    </li>
+                    <li>
                         <a class="sur-footer-link" href="{{ route('about') }}">{{ __('frontend.nav_about') }}</a>
                     </li>
                     <li>
