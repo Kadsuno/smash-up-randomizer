@@ -6,6 +6,8 @@ All notable changes to this project are documented in this file.
 
 ### Added
 
+- **Brand asset:** `public/images/brand/logo-mark.png` (512×512 PNG) for OAuth provider logo uploads; source is `logo-mark.svg`.
+
 - **Social login (OAuth):** Optional Google and GitHub sign-in via Laravel Socialite (`/auth/{provider}/redirect` + callback). New `users.provider` and `users.provider_id` columns; `password` is nullable for OAuth-only accounts. Login and register show provider buttons when `GOOGLE_CLIENT_ID` / `GITHUB_CLIENT_ID` are set. See `.env.example` and README.
 
 - **Account profile editing:** Authenticated users can now update their display name, e-mail address, and password directly from the `/account` page. E-mail changes re-trigger the verification flow automatically.

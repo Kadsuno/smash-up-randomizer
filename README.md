@@ -118,6 +118,8 @@ Local stack is defined in `.ddev/config.yaml` (PHP 8.3, MariaDB 10.4, Node 22, n
 
 Frontend users can sign in with Google or GitHub when credentials are configured. Set `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, and/or `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET` in `.env` (see `.env.example`). In each provider’s developer console, register the redirect URL as `{APP_URL}/auth/google/callback` or `{APP_URL}/auth/github/callback` (must match `APP_URL`). If client IDs are empty, social buttons stay hidden on `/login` and `/register`.
 
+For **OAuth app logos** (e.g. GitHub rejects SVG): use the rasterized mark at `public/images/brand/logo-mark.png` (512×512 PNG, exported from `logo-mark.svg`).
+
 ## Database (overview)
 
 Typical tables after migrations:
