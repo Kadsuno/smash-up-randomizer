@@ -24,11 +24,23 @@
 
     {{-- Main content --}}
     <x-sur.section>
+        @php
+            $factionsData = $decks->map(fn ($d) => [
+                'name'      => strtolower($d->name),
+                'playstyle' => $d->playstyle ?? '',
+            ])->values()->toJson();
+        @endphp
         <div
             x-data="{
                 search: '',
                 complexity: '',
-                visibleCount: {{ $total }},
+                factions: {{ $factionsData }},
+                get visibleCount() {
+                    return this.factions.filter(f =>
+                        (!this.search || f.name.includes(this.search.toLowerCase())) &&
+                        this.matchesComplexity(f.playstyle)
+                    ).length;
+                },
                 matchesComplexity(playstyle) {
                     if (!this.complexity) return true;
                     if (!playstyle) return false;
@@ -37,14 +49,8 @@
                     if (this.complexity === 'Medium') return p.includes('medium');
                     if (this.complexity === 'High')   return p.includes('high');
                     return true;
-                },
-                updateCount() {
-                    this.$nextTick(() => {
-                        this.visibleCount = this.$el.querySelectorAll('[data-faction-card]:not([style*=\'display: none\'])').length;
-                    });
                 }
             }"
-            @input.debounce.150ms="updateCount()"
         >
             {{-- Controls row --}}
             <div class="mb-8 flex flex-wrap items-center gap-3">
@@ -53,7 +59,6 @@
                     <i class="fa-solid fa-magnifying-glass pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-xs text-zinc-500" aria-hidden="true"></i>
                     <input
                         x-model="search"
-                        @input="updateCount()"
                         type="search"
                         placeholder="Search factions…"
                         class="w-full rounded-xl border border-white/8 bg-zinc-900/80 py-2.5 pl-9 pr-4 text-sm text-white placeholder-zinc-600 transition focus:border-indigo-500/50 focus:outline-none focus:ring-1 focus:ring-indigo-500/30"
@@ -65,7 +70,7 @@
                     @foreach(['' => __('frontend.factions_filter_all'), 'Low' => __('frontend.factions_filter_easy'), 'Medium' => __('frontend.factions_filter_medium'), 'High' => __('frontend.factions_filter_hard')] as $value => $label)
                     <button
                         type="button"
-                        @click="complexity = '{{ $value }}'; updateCount()"
+                        @click="complexity = '{{ $value }}'"
                         :class="complexity === '{{ $value }}'
                             ? 'border-indigo-500/50 bg-indigo-900/40 text-indigo-300'
                             : 'border-white/8 bg-zinc-900/60 text-zinc-500 hover:border-white/20 hover:text-zinc-300'"
@@ -159,7 +164,7 @@
             >
                 <i class="fa-solid fa-circle-xmark text-3xl text-zinc-700" aria-hidden="true"></i>
                 <p class="text-sm text-zinc-500">No factions found for "<span class="text-zinc-300" x-text="search"></span>".</p>
-                <button @click="search = ''; updateCount()" class="text-xs text-indigo-500 underline hover:text-indigo-400">Clear search</button>
+                <button @click="search = ''; complexity = ''" class="text-xs text-indigo-500 underline hover:text-indigo-400">Clear search</button>
             </div>
         </div>
     </x-sur.section>
