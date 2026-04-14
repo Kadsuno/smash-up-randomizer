@@ -16,8 +16,11 @@
         "suggestionTeaser": "",
         "synergy": "",
         "tips": "",
-        "effects": "Geeks' specialty is causing massive headaches to other players by disrupting their plans through discarding their cards and disabling or controlling their minions and actions. Geeks also provide support via card draw and extra plays.",
-        "image": "/images/factions/geeks.svg"
+        "effects": "The Geeks faction excels at throwing a wrench into their opponents' strategies, using their abilities to discard key cards, neutralize minions, and hijack actions. Meanwhile, they also offer a boost to their own player through increased card draw and additional plays, providing a foundation for a strong comeback or a dominating lead.",
+        "image": "/images/factions/geeks.svg",
+        "__rewritten": [
+            "effects"
+        ]
     },
     {
         "name": "Smash Up All Stars",
