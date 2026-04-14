@@ -316,4 +316,15 @@ return [
     'account_password_save'             => 'Passwort aktualisieren',
     'account_password_saved'            => 'Passwort erfolgreich aktualisiert.',
     'account_password_wrong_current'    => 'Das aktuelle Passwort ist falsch.',
+    'account_password_oauth_only'       => 'Passwort-Login ist für diesen Account nicht aktiv. Melde dich mit dem gleichen Social-Login an.',
+    'account_password_oauth_hint'       => 'Du hast dich mit Google oder GitHub angemeldet. Es gibt kein Passwort zum Ändern — nutze denselben Anbieter zum Anmelden.',
+
+    // Social Login (OAuth)
+    'social_divider'                  => 'Oder weiter mit',
+    'social_continue_google'          => 'Mit Google fortfahren',
+    'social_continue_github'          => 'Mit GitHub fortfahren',
+    'social_session_expired'          => 'Die Anmelde-Sitzung ist abgelaufen. Bitte erneut versuchen.',
+    'social_login_failed'             => 'Social-Login fehlgeschlagen. Bitte erneut versuchen oder E-Mail und Passwort nutzen.',
+    'social_email_required'           => 'Wir konnten keine E-Mail-Adresse aus deinem Konto lesen. Stelle sie öffentlich ein oder nutze einen anderen Anbieter.',
+    'social_email_taken_other_provider' => 'Diese E-Mail ist bereits mit einer anderen Anmeldemethode verknüpft.',
 ];

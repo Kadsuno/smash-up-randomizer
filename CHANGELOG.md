@@ -6,6 +6,8 @@ All notable changes to this project are documented in this file.
 
 ### Added
 
+- **Social login (OAuth):** Optional Google and GitHub sign-in via Laravel Socialite (`/auth/{provider}/redirect` + callback). New `users.provider` and `users.provider_id` columns; `password` is nullable for OAuth-only accounts. Login and register show provider buttons when `GOOGLE_CLIENT_ID` / `GITHUB_CLIENT_ID` are set. See `.env.example` and README.
+
 - **Account profile editing:** Authenticated users can now update their display name, e-mail address, and password directly from the `/account` page. E-mail changes re-trigger the verification flow automatically.
 
 - **Frontend user authentication:** Public registration (`/register`), login (`/login`), e-mail verification, and password reset flows for non-admin users. Frontend and admin auth are fully separated: all `/admin/*` routes are now protected by the new `EnsureUserIsAdmin` middleware (403 for non-admins). New `role` column on the `users` table (`admin` | `user`, default `user`). Existing admin users must be re-promoted via `php artisan users:promote {email}`. Nav header shows "Login" link for guests and the user's display name for authenticated non-admin users. Bilingual (EN + DE) — `resources/lang/de/frontend.php` created.

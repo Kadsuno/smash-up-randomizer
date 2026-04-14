@@ -40,6 +40,7 @@
                         {{ __('frontend.auth_register_submit') }}
                     </button>
                 </form>
+                <x-auth.social-buttons />
             </div>
             <p class="mt-5 text-center text-xs text-zinc-600">
                 {{ __('frontend.auth_register_have_account') }}

@@ -45,6 +45,7 @@
                         {{ __('frontend.login') }}
                     </button>
                 </form>
+                <x-auth.social-buttons />
             </div>
             <p class="mt-5 text-center text-xs text-zinc-600">
                 {{ __('frontend.auth_login_no_account') }}
