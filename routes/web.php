@@ -28,42 +28,42 @@ Route::get('/admin/backend', function () {
         'withDesc'       => $decks->filter(fn ($d) => !empty($d->description))->count(),
         'withoutDetails' => $decks->filter(fn ($d) => empty($d->teaser) && empty($d->description))->count(),
     ]);
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth', 'admin'])->name('dashboard');
 
 Route::get('/admin/backend/decks-manager', [
     DeckController::class,
     'index'
-])->middleware(['auth'])->name('decks-manager');
+])->middleware(['auth', 'admin'])->name('decks-manager');
 
 Route::get('/admin/backend/decks-manager/add-deck', [
     DeckController::class,
     'add'
-])->middleware(['auth'])->name('add-deck');
+])->middleware(['auth', 'admin'])->name('add-deck');
 
 Route::post('/admin/backend/decks-manager/store-deck', [
     DeckController::class,
     'store'
-])->middleware(['auth'])->name('store-deck');
+])->middleware(['auth', 'admin'])->name('store-deck');
 
 Route::post('/admin/backend/decks-manager/add-deck-csv', [
     DeckController::class,
     'addCsv'
-])->middleware(['auth'])->name('add-deck-csv');
+])->middleware(['auth', 'admin'])->name('add-deck-csv');
 
 Route::get('/admin/backend/decks-manager/delete/{name}', [
     DeckController::class,
     'delete'
-])->middleware(['auth'])->name('delete-decks');
+])->middleware(['auth', 'admin'])->name('delete-decks');
 
 Route::get('/admin/backend/decks-manager/decks/{name}/edit', [
     DeckController::class,
     'edit'
-])->middleware(['auth'])->name('edit-deck');
+])->middleware(['auth', 'admin'])->name('edit-deck');
 
 Route::post('/admin/backend/decks-manager/decks/{name}/update', [
     DeckController::class,
     'update'
-])->middleware(['auth'])->name('update-deck');
+])->middleware(['auth', 'admin'])->name('update-deck');
 
 Route::get('/shuffle', function () {
     return view('shuffle.form');
@@ -199,3 +199,4 @@ Route::get('/sitemap', function () {
 });
 
 require __DIR__ . '/auth.php';
+require __DIR__ . '/frontend-auth.php';

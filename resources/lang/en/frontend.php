@@ -245,4 +245,55 @@ return [
     // Quick shuffle
     'random_page_title'  => 'Quick Shuffle',
     'landing_cta_random' => 'Quick shuffle (2 players, instant)',
+
+    // Frontend auth — navigation
+    'nav_login'   => 'Login',
+    'nav_logout'  => 'Log out',
+    'nav_account' => 'My account',
+
+    // Frontend auth — shared
+    'auth_back_to_site' => 'Back to public site',
+
+    // Frontend auth — login
+    'auth_login_eyebrow'    => 'Sign in',
+    'auth_login_heading'    => 'Welcome back',
+    'auth_login_forgot'     => 'Forgot password?',
+    'auth_login_no_account' => 'No account yet?',
+    'auth_register_link'    => 'Create one',
+
+    // Frontend auth — register
+    'auth_register_eyebrow'          => 'Create account',
+    'auth_register_heading'          => 'Join Smash Up Randomizer',
+    'auth_register_name'             => 'Display name',
+    'auth_register_confirm_password' => 'Confirm password',
+    'auth_register_submit'           => 'Create account',
+    'auth_register_have_account'     => 'Already have an account?',
+    'auth_login_link'                => 'Sign in',
+
+    // Frontend auth — email verification
+    'auth_verify_heading' => 'Verify your e-mail',
+    'auth_verify_body'    => 'We sent a verification link to your e-mail address. Click the link to activate your account.',
+    'auth_verify_resend'  => 'Resend verification e-mail',
+    'auth_verify_resent'  => 'A new verification link has been sent to your e-mail address.',
+    'auth_verify_logout'  => 'Log out and try a different account',
+
+    // Frontend auth — forgot password
+    'auth_forgot_heading'       => 'Forgot your password?',
+    'auth_forgot_body'          => "Enter your e-mail address and we\'ll send you a link to reset your password.",
+    'auth_forgot_submit'        => 'Send reset link',
+    'auth_forgot_back_to_login' => 'Back to login',
+
+    // Frontend auth — reset password
+    'auth_reset_heading'      => 'Reset password',
+    'auth_reset_new_password' => 'New password',
+    'auth_reset_submit'       => 'Reset password',
+
+    // Account page
+    'account_eyebrow'           => 'My account',
+    'account_heading'           => 'Hello, :name',
+    'account_sub'               => 'Manage your Smash Up Randomizer account.',
+    'account_member_since'      => 'Member since',
+    'account_email_verified'    => 'Your e-mail has been verified.',
+    'account_features_soon'     => 'More features coming soon',
+    'account_features_soon_sub' => 'Faction collection, shuffle presets, and play history are on their way.',
 ];

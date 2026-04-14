@@ -75,6 +75,25 @@
                     <x-site-nav-link routeName="about" :label="__('frontend.nav_about')" />
                     <x-site-nav-link routeName="contact" :label="__('frontend.nav_contact')" />
                 </div>
+                @auth
+                    @if(! auth()->user()->isAdmin())
+                        <a
+                            href="{{ route('account') }}"
+                            class="inline-flex min-h-10 items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-4 text-sm text-zinc-300 transition hover:bg-white/[0.08] hover:text-white {{ request()->routeIs('account') ? 'border-indigo-500/30 text-indigo-300' : '' }}"
+                        >
+                            <i class="fa-solid fa-circle-user text-xs opacity-70" aria-hidden="true"></i>
+                            {{ auth()->user()->name }}
+                        </a>
+                    @endif
+                @else
+                    <a
+                        href="{{ route('login') }}"
+                        class="inline-flex min-h-10 items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-4 text-sm text-zinc-300 transition hover:bg-white/[0.08] hover:text-white"
+                    >
+                        <i class="fa-solid fa-right-to-bracket text-xs opacity-70" aria-hidden="true"></i>
+                        {{ __('frontend.nav_login') }}
+                    </a>
+                @endauth
                 <a
                     href="{{ route('home') }}#wizard"
                     class="{{ request()->routeIs('home') ? 'ring-2 ring-indigo-400/40 ring-offset-2 ring-offset-zinc-950' : '' }} sur-btn-primary min-h-10 rounded-full px-5 text-sm shadow-indigo-500/20"
@@ -118,6 +137,13 @@
                 <x-site-nav-link routeName="factionList" :routes="['factionList', 'factionDetail']" :label="__('frontend.nav_factions')" :mobile="true" />
                 <x-site-nav-link routeName="about" :label="__('frontend.nav_about')" :mobile="true" />
                 <x-site-nav-link routeName="contact" :label="__('frontend.nav_contact')" :mobile="true" />
+                @auth
+                    @if(! auth()->user()->isAdmin())
+                        <x-site-nav-link routeName="account" :label="auth()->user()->name" :mobile="true" />
+                    @endif
+                @else
+                    <x-site-nav-link routeName="login" :label="__('frontend.nav_login')" :mobile="true" />
+                @endauth
                 <a href="{{ route('home') }}#wizard" class="sur-btn-primary mt-3 flex w-full min-h-12 justify-center gap-2 rounded-xl">
                     <i class="fa-solid fa-shuffle" aria-hidden="true"></i>{{ __('frontend.nav_shuffle') }}
                 </a>
