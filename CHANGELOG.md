@@ -6,6 +6,8 @@ All notable changes to this project are documented in this file.
 
 ### Added
 
+- **Frontend user authentication:** Public registration (`/register`), login (`/login`), e-mail verification, and password reset flows for non-admin users. Frontend and admin auth are fully separated: all `/admin/*` routes are now protected by the new `EnsureUserIsAdmin` middleware (403 for non-admins). New `role` column on the `users` table (`admin` | `user`, default `user`). Existing admin users must be re-promoted via `php artisan users:promote {email}`. Nav header shows "Login" link for guests and the user's display name for authenticated non-admin users. Bilingual (EN + DE) — `resources/lang/de/frontend.php` created.
+
 - **Expansions pages:** New `/expansions` overview lists every officially released Smash Up set as a card with faction count and up to four faction thumbnails. `/expansions/{slug}` shows all factions from that set. Linked from footer and from the `/factions` hero.
 - **Faction complexity filter:** Filter pills (All / Easy / Medium / Hard) on the `/factions` list allow players to narrow by difficulty without a page reload (client-side Alpine). Also adds a "Browse by expansion" link to the faction list hero.
 - **Quick shuffle `/random`:** Hitting `/random` immediately assigns two random factions to each of two players using all available factions — no wizard steps required.

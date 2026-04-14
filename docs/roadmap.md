@@ -26,10 +26,13 @@ High-level product and engineering priorities. Update this file in the same PR w
 - **Expansions pages** ✅ — `/expansions` overview + `/expansions/{slug}` detail; browse all officially released sets with faction count and thumbnail preview grid.
 - **Faction complexity filter** ✅ — Client-side Alpine filter pills (All / Easy / Medium / Hard) on the `/factions` list page.
 - **Quick shuffle `/random`** ✅ — One-click shuffle for 2 players without the wizard.
+- **Frontend user authentication** ✅ — Public registration, login, e-mail verification, and password reset. Role-based separation (`admin` / `user`). Foundation for faction collection, shuffle presets, and play history.
 
 ## Next
 
-- *(Upcoming increments.)*
+- **Faction collection** — Authenticated users select which expansion sets they own; shuffle uses their personal card pool by default.
+- **Shuffle presets** — Save named shuffle configurations (player count + included/excluded factions) to re-use at future game nights.
+- **Play history** — Store past shuffle results per user; view recent faction pairings.
 
 ## First release readiness
 
