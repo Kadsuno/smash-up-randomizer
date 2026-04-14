@@ -278,21 +278,66 @@ return [
     'account_email_verified'    => 'Deine E-Mail-Adresse wurde bestätigt.',
     'account_features_soon'     => 'Weitere Funktionen kommen bald',
     'account_features_soon_sub' => 'Fraktionssammlung, Shuffle-Voreinstellungen und Spielverlauf sind in Arbeit.',
+    'account_features_heading'  => 'Deine Werkzeuge',
 
     // Account page — additional strings
     'account_profile_section'      => 'Profil',
     'account_role'                 => 'Kontotyp',
     'account_stat_factions'        => 'Fraktionen besessen',
-    'account_stat_shuffles'        => 'Shuffles durchgeführt',
+    'account_stat_expansions'      => 'Erweiterungen in der Sammlung',
+    'account_stat_presets'         => 'Gespeicherte Presets',
+    'account_stat_shuffles'        => 'Geloggte Shuffles',
     'account_stat_history'         => 'Spiele gespielt',
     'account_coming_soon_badge'    => 'Demnächst',
     'account_feat_collection_title' => 'Fraktionssammlung',
     'account_feat_collection_body'  => 'Markiere die Erweiterungen, die du besitzt, damit der Randomizer nur aus deiner Sammlung zieht.',
+    'account_feat_collection_cta'   => 'Sammlung verwalten',
     'account_feat_presets_title'   => 'Shuffle-Voreinstellungen',
     'account_feat_presets_body'    => 'Speichere benannte Konfigurationen — Spieleranzahl, enthaltene Sets — für zukünftige Spieleabende.',
+    'account_feat_presets_cta'     => 'Presets verwalten',
     'account_feat_history_title'   => 'Spielverlauf',
     'account_feat_history_body'    => 'Durchstöbere vergangene Shuffle-Ergebnisse und sieh, welche Fraktionskombinationen deine Gruppe gespielt hat.',
+    'account_feat_history_cta'     => 'Verlauf ansehen',
     'account_quick_actions'        => 'Schnellzugriff',
+
+    // Account — Sammlung
+    'account_collection_back'     => 'Zurück zum Account',
+    'account_collection_heading'    => 'Deine Sammlung',
+    'account_collection_sub'      => 'Wähle, welche Smash-Up-Erweiterungen du physisch besitzt.',
+    'account_collection_hint'     => 'Wenn mindestens ein Set gespeichert ist, nutzen der Shuffle-Assistent und der Schnell-Shuffle nur Fraktionen aus diesen Erweiterungen (Include/Exclude schränken weiter ein).',
+    'account_collection_save'     => 'Sammlung speichern',
+    'account_collection_saved'    => 'Sammlung aktualisiert.',
+    'account_collection_no_expansions' => 'Keine Erweiterungen in der Datenbank gefunden.',
+
+    // Account — Presets
+    'account_presets_back'        => 'Zurück zum Account',
+    'account_presets_heading'     => 'Shuffle-Presets',
+    'account_presets_sub'         => 'Speichere Spieleranzahl und optionale Include-/Exclude-Listen — dann öffnest du den Shuffle von der Startseite mit einem Klick.',
+    'account_preset_saved'        => 'Preset gespeichert.',
+    'account_preset_deleted'      => 'Preset gelöscht.',
+    'account_preset_delete'       => 'Löschen',
+    'account_preset_delete_confirm' => 'Dieses Preset löschen?',
+    'account_preset_apply'        => 'Im Shuffle nutzen',
+    'account_preset_meta'         => ':players Spieler',
+    'account_preset_form_heading' => 'Neues Preset',
+    'account_preset_name_label'   => 'Preset-Name',
+    'account_preset_players_label' => 'Spieler',
+    'account_preset_include_label' => 'Nur diese Fraktionen einschließen (optional)',
+    'account_preset_exclude_label' => 'Diese Fraktionen immer ausschließen (optional)',
+    'account_preset_optional_hint' => 'Include leer lassen, um alle Fraktionen aus deiner Sammlung zuzulassen.',
+    'account_preset_submit'       => 'Preset speichern',
+
+    // Account — Spielverlauf
+    'account_history_back'        => 'Zurück zum Account',
+    'account_history_heading'     => 'Spielverlauf',
+    'account_history_sub'         => 'Letzte Shuffles, während du angemeldet warst (max. 50).',
+    'account_history_empty'       => 'Noch keine Shuffles. Starte einen Shuffle auf der Startseite oder unter /random — angemeldet.',
+    'account_history_players'     => ':n Spieler',
+    'account_history_player_label' => 'Spieler :num',
+
+    // Shuffle-Validierung
+    'shuffle_error_invalid_players' => 'Bitte eine gültige Spieleranzahl wählen.',
+    'shuffle_error_not_enough_factions' => 'Nicht genug Fraktionen für die gewählte Spieleranzahl.',
 
     // Account — Bearbeitungsseite
     'account_edit_page_heading'         => 'Account bearbeiten',

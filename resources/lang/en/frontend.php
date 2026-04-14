@@ -296,21 +296,66 @@ return [
     'account_email_verified'    => 'Your e-mail has been verified.',
     'account_features_soon'     => 'More features coming soon',
     'account_features_soon_sub' => 'Faction collection, shuffle presets, and play history are on their way.',
+    'account_features_heading'  => 'Your tools',
 
     // Account page — additional strings
     'account_profile_section'      => 'Profile',
     'account_role'                 => 'Account type',
     'account_stat_factions'        => 'Factions owned',
-    'account_stat_shuffles'        => 'Shuffles done',
+    'account_stat_expansions'      => 'Expansions in collection',
+    'account_stat_presets'         => 'Saved presets',
+    'account_stat_shuffles'        => 'Shuffles logged',
     'account_stat_history'         => 'Games played',
     'account_coming_soon_badge'    => 'Coming soon',
     'account_feat_collection_title' => 'Faction collection',
     'account_feat_collection_body'  => 'Mark the expansion sets you own so the randomizer only draws from your collection.',
+    'account_feat_collection_cta'   => 'Manage collection',
     'account_feat_presets_title'   => 'Shuffle presets',
     'account_feat_presets_body'    => 'Save named configurations — player count, included sets — to reuse at future game nights.',
+    'account_feat_presets_cta'     => 'Manage presets',
     'account_feat_history_title'   => 'Play history',
     'account_feat_history_body'    => 'Browse past shuffle results and see which faction combos your group has played.',
+    'account_feat_history_cta'     => 'View history',
     'account_quick_actions'        => 'Quick actions',
+
+    // Account — collection
+    'account_collection_back'     => 'Back to account',
+    'account_collection_heading'    => 'Your collection',
+    'account_collection_sub'      => 'Select which Smash Up expansion sets you physically own.',
+    'account_collection_hint'     => 'When at least one set is saved, the shuffle wizard and quick shuffle only use factions from those expansions (you can still narrow further with include/exclude).',
+    'account_collection_save'     => 'Save collection',
+    'account_collection_saved'    => 'Collection updated.',
+    'account_collection_no_expansions' => 'No expansions found in the database.',
+
+    // Account — presets
+    'account_presets_back'        => 'Back to account',
+    'account_presets_heading'     => 'Shuffle presets',
+    'account_presets_sub'         => 'Save player count and optional include/exclude lists, then open the home shuffle with one click.',
+    'account_preset_saved'        => 'Preset saved.',
+    'account_preset_deleted'      => 'Preset removed.',
+    'account_preset_delete'       => 'Delete',
+    'account_preset_delete_confirm' => 'Delete this preset?',
+    'account_preset_apply'        => 'Use in shuffle',
+    'account_preset_meta'         => ':players players',
+    'account_preset_form_heading' => 'New preset',
+    'account_preset_name_label'   => 'Preset name',
+    'account_preset_players_label' => 'Players',
+    'account_preset_include_label' => 'Include only these factions (optional)',
+    'account_preset_exclude_label' => 'Always exclude these factions (optional)',
+    'account_preset_optional_hint' => 'Leave include empty to allow any faction from your collection.',
+    'account_preset_submit'       => 'Save preset',
+
+    // Account — play history
+    'account_history_back'        => 'Back to account',
+    'account_history_heading'     => 'Play history',
+    'account_history_sub'         => 'Recent shuffles while you were signed in (up to 50).',
+    'account_history_empty'       => 'No shuffles recorded yet. Run a shuffle from the home page or /random while logged in.',
+    'account_history_players'     => ':n players',
+    'account_history_player_label' => 'Player :num',
+
+    // Shuffle validation
+    'shuffle_error_invalid_players' => 'Please choose a valid player count.',
+    'shuffle_error_not_enough_factions' => 'Not enough factions available for the selected number of players.',
 
     // Account — edit page
     'account_edit_page_heading'         => 'Edit account',

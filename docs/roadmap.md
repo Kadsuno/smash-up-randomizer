@@ -30,9 +30,13 @@ High-level product and engineering priorities. Update this file in the same PR w
 
 ## Next
 
-- **Faction collection** — Authenticated users select which expansion sets they own; shuffle uses their personal card pool by default.
-- **Shuffle presets** — Save named shuffle configurations (player count + included/excluded factions) to re-use at future game nights.
-- **Play history** — Store past shuffle results per user; view recent faction pairings.
+- *(Open — add items as priorities emerge.)*
+
+## Shipped (account & shuffle)
+
+- **Faction collection** ✅ — `/account/collection`: users tick owned expansion sets; when at least one is saved, `ShuffleDeckPool` constrains the home wizard, `POST /shuffle/result`, and `/random` to factions from those expansions.
+- **Shuffle presets** ✅ — `/account/presets`: named presets (players + optional include/exclude); **Use in shuffle** opens `/?shuffle_preset={id}` and pre-fills the dialog.
+- **Play history** ✅ — `/account/history`: last 50 shuffles while logged in (`shuffle_histories` table).
 
 ## First release readiness
 
