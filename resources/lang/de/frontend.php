@@ -278,4 +278,19 @@ return [
     'account_email_verified'    => 'Deine E-Mail-Adresse wurde bestätigt.',
     'account_features_soon'     => 'Weitere Funktionen kommen bald',
     'account_features_soon_sub' => 'Fraktionssammlung, Shuffle-Voreinstellungen und Spielverlauf sind in Arbeit.',
+
+    // Account page — additional strings
+    'account_profile_section'      => 'Profil',
+    'account_role'                 => 'Kontotyp',
+    'account_stat_factions'        => 'Fraktionen besessen',
+    'account_stat_shuffles'        => 'Shuffles durchgeführt',
+    'account_stat_history'         => 'Spiele gespielt',
+    'account_coming_soon_badge'    => 'Demnächst',
+    'account_feat_collection_title' => 'Fraktionssammlung',
+    'account_feat_collection_body'  => 'Markiere die Erweiterungen, die du besitzt, damit der Randomizer nur aus deiner Sammlung zieht.',
+    'account_feat_presets_title'   => 'Shuffle-Voreinstellungen',
+    'account_feat_presets_body'    => 'Speichere benannte Konfigurationen — Spieleranzahl, enthaltene Sets — für zukünftige Spieleabende.',
+    'account_feat_history_title'   => 'Spielverlauf',
+    'account_feat_history_body'    => 'Durchstöbere vergangene Shuffle-Ergebnisse und sieh, welche Fraktionskombinationen deine Gruppe gespielt hat.',
+    'account_quick_actions'        => 'Schnellzugriff',
 ];

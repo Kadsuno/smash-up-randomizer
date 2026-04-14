@@ -296,4 +296,19 @@ return [
     'account_email_verified'    => 'Your e-mail has been verified.',
     'account_features_soon'     => 'More features coming soon',
     'account_features_soon_sub' => 'Faction collection, shuffle presets, and play history are on their way.',
+
+    // Account page — additional strings
+    'account_profile_section'      => 'Profile',
+    'account_role'                 => 'Account type',
+    'account_stat_factions'        => 'Factions owned',
+    'account_stat_shuffles'        => 'Shuffles done',
+    'account_stat_history'         => 'Games played',
+    'account_coming_soon_badge'    => 'Coming soon',
+    'account_feat_collection_title' => 'Faction collection',
+    'account_feat_collection_body'  => 'Mark the expansion sets you own so the randomizer only draws from your collection.',
+    'account_feat_presets_title'   => 'Shuffle presets',
+    'account_feat_presets_body'    => 'Save named configurations — player count, included sets — to reuse at future game nights.',
+    'account_feat_history_title'   => 'Play history',
+    'account_feat_history_body'    => 'Browse past shuffle results and see which faction combos your group has played.',
+    'account_quick_actions'        => 'Quick actions',
 ];
