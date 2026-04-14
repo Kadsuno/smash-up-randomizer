@@ -103,6 +103,21 @@ Route::get('/factions/{name}', [
     'detail'
 ])->name('factionDetail');
 
+Route::get('/expansions', [
+    DeckController::class,
+    'expansions'
+])->name('expansions');
+
+Route::get('/expansions/{slug}', [
+    DeckController::class,
+    'expansion'
+])->name('expansion');
+
+Route::get('/random', [
+    DeckController::class,
+    'quickShuffle'
+])->name('random');
+
 Route::get('/about', function () {
     $factionCount = \App\Models\Deck::count();
 
@@ -127,6 +142,16 @@ Route::get('/sitemap', function () {
         ->setLastModificationDate(now())
         ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY)
         ->setPriority(1.0));
+
+    $sitemap->add(Url::create('/expansions')
+        ->setLastModificationDate(now())
+        ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
+        ->setPriority(0.9));
+
+    $sitemap->add(Url::create('/random')
+        ->setLastModificationDate(now())
+        ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
+        ->setPriority(0.7));
 
     $sitemap->add(Url::create('/contact-us')
         ->setLastModificationDate(now())
@@ -157,6 +182,17 @@ Route::get('/sitemap', function () {
             ->setLastModificationDate($date)
             ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
             ->setPriority(0.8));
+    }
+
+    $expansionNames = \App\Models\Deck::whereNotNull('expansion')
+        ->where('expansion', '!=', '')
+        ->distinct()
+        ->pluck('expansion');
+    foreach ($expansionNames as $name) {
+        $sitemap->add(Url::create('/expansions/' . \Illuminate\Support\Str::slug($name))
+            ->setLastModificationDate(now())
+            ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
+            ->setPriority(0.7));
     }
 
     return $sitemap->toResponse(request());

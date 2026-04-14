@@ -12,6 +12,12 @@
                 <p class="mt-3 max-w-xl text-sm leading-relaxed text-zinc-500">
                     All <strong class="font-semibold text-zinc-300">{{ $total }}</strong> factions from the Smash Up universe — find yours, explore their playstyle, and build the perfect combo.
                 </p>
+                <div class="mt-5">
+                    <a href="{{ route('expansions') }}" class="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-400 transition hover:text-indigo-300">
+                        <i class="fa-solid fa-box-open text-[0.65rem]" aria-hidden="true"></i>
+                        {{ __('frontend.factions_browse_by_set') }} <i class="fa-solid fa-arrow-right text-[0.55rem]" aria-hidden="true"></i>
+                    </a>
+                </div>
             </x-sur.reveal>
         </x-sur.container>
     </section>
@@ -21,11 +27,17 @@
         <div
             x-data="{
                 search: '',
-                get filtered() {
-                    if (!this.search) return true;
-                    return (name) => name.toLowerCase().includes(this.search.toLowerCase());
-                },
+                complexity: '',
                 visibleCount: {{ $total }},
+                matchesComplexity(playstyle) {
+                    if (!this.complexity) return true;
+                    if (!playstyle) return false;
+                    const p = playstyle.toLowerCase();
+                    if (this.complexity === 'Low')    return p.startsWith('low') && !p.includes('medium') && !p.includes('high');
+                    if (this.complexity === 'Medium') return p.includes('medium');
+                    if (this.complexity === 'High')   return p.includes('high');
+                    return true;
+                },
                 updateCount() {
                     this.$nextTick(() => {
                         this.visibleCount = this.$el.querySelectorAll('[data-faction-card]:not([style*=\'display: none\'])').length;
@@ -34,9 +46,10 @@
             }"
             @input.debounce.150ms="updateCount()"
         >
-            {{-- Search bar --}}
-            <div class="mb-8 flex items-center gap-3">
-                <div class="relative flex-1 max-w-sm">
+            {{-- Controls row --}}
+            <div class="mb-8 flex flex-wrap items-center gap-3">
+                {{-- Search --}}
+                <div class="relative flex-1 max-w-sm min-w-40">
                     <i class="fa-solid fa-magnifying-glass pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-xs text-zinc-500" aria-hidden="true"></i>
                     <input
                         x-model="search"
@@ -46,7 +59,22 @@
                         class="w-full rounded-xl border border-white/8 bg-zinc-900/80 py-2.5 pl-9 pr-4 text-sm text-white placeholder-zinc-600 transition focus:border-indigo-500/50 focus:outline-none focus:ring-1 focus:ring-indigo-500/30"
                     >
                 </div>
-                <p class="shrink-0 text-sm text-zinc-600">
+
+                {{-- Complexity filter pills --}}
+                <div class="flex items-center gap-1.5" role="group" aria-label="{{ __('frontend.factions_filter_label') }}">
+                    @foreach(['' => __('frontend.factions_filter_all'), 'Low' => __('frontend.factions_filter_easy'), 'Medium' => __('frontend.factions_filter_medium'), 'High' => __('frontend.factions_filter_hard')] as $value => $label)
+                    <button
+                        type="button"
+                        @click="complexity = '{{ $value }}'; updateCount()"
+                        :class="complexity === '{{ $value }}'
+                            ? 'border-indigo-500/50 bg-indigo-900/40 text-indigo-300'
+                            : 'border-white/8 bg-zinc-900/60 text-zinc-500 hover:border-white/20 hover:text-zinc-300'"
+                        class="rounded-full border px-3 py-1.5 text-xs font-semibold transition"
+                    >{{ $label }}</button>
+                    @endforeach
+                </div>
+
+                <p class="ml-auto shrink-0 text-sm text-zinc-600">
                     <span x-text="visibleCount"></span> factions
                 </p>
             </div>
@@ -70,7 +98,8 @@
                 @endphp
                 <div
                     data-faction-card
-                    x-show="!search || '{{ addslashes(strtolower($deck->name)) }}'.includes(search.toLowerCase())"
+                    data-playstyle="{{ $deck->playstyle }}"
+                    x-show="(!search || '{{ addslashes(strtolower($deck->name)) }}'.includes(search.toLowerCase())) && matchesComplexity('{{ addslashes($deck->playstyle ?? '') }}')"
                     x-transition:enter="transition duration-150"
                     x-transition:enter-start="opacity-0 scale-95"
                     x-transition:enter-end="opacity-100 scale-100"

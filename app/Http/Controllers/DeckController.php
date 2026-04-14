@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use App\Models\Deck;
 use Illuminate\Http\Request;
-
-use function Psy\debug;
 
 class DeckController extends Controller
 {
@@ -48,6 +47,76 @@ class DeckController extends Controller
     {
         $deck = Deck::where('name', $name)->firstOrFail();
         return view('decks.detail', ['deck' => $deck]);
+    }
+
+    /**
+     * List all expansion sets grouped by name.
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function expansions(): \Illuminate\Contracts\View\View
+    {
+        $expansions = Deck::whereNotNull('expansion')
+            ->where('expansion', '!=', '')
+            ->get()
+            ->groupBy('expansion')
+            ->map(fn ($factions) => [
+                'name'    => $factions->first()->expansion,
+                'slug'    => Str::slug($factions->first()->expansion),
+                'count'   => $factions->count(),
+                'preview' => $factions->filter(fn ($d) => !empty($d->image))->take(4)->values(),
+            ])
+            ->sortKeys();
+
+        return view('expansions.index', compact('expansions'));
+    }
+
+    /**
+     * Show all factions for a single expansion set.
+     * @param string $slug URL slug of the expansion name
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function expansion(string $slug): \Illuminate\Contracts\View\View
+    {
+        $expansionNames = Deck::whereNotNull('expansion')
+            ->where('expansion', '!=', '')
+            ->distinct()
+            ->pluck('expansion');
+
+        $expansionName = $expansionNames->first(
+            fn ($name) => Str::slug($name) === $slug
+        );
+
+        if (!$expansionName) {
+            abort(404);
+        }
+
+        $decks = Deck::where('expansion', $expansionName)
+            ->orderBy('name')
+            ->get();
+
+        return view('expansions.show', [
+            'expansionName' => $expansionName,
+            'expansionSlug' => $slug,
+            'decks'         => $decks,
+        ]);
+    }
+
+    /**
+     * Quick-shuffle two players using all available factions.
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function quickShuffle(): \Illuminate\Contracts\View\View
+    {
+        $decks = Deck::all()->shuffle();
+        $selectedDecks = [];
+
+        for ($i = 0; $i < 2; $i++) {
+            $selectedDecks[] = $decks->splice(0, 2)
+                ->map(fn ($d) => ['name' => $d->name])
+                ->toArray();
+        }
+
+        return view('shuffle.shuffle-decks', compact('selectedDecks'));
     }
 
     /**

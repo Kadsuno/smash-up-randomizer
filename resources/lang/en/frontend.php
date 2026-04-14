@@ -224,4 +224,24 @@ return [
     'landing_faq_a3' => 'Yes — all officially released sets are included. You can include only the expansions you own tonight and exclude anything still in the box.',
     'landing_faq_q4' => 'Is my data collected or tracked?',
     'landing_faq_a4' => 'Optional analytics via self-hosted Matomo are enabled only after you explicitly opt in. No advertising cookies, no third-party trackers — ever.',
+
+    // Expansions
+    'nav_expansions'           => 'Expansions',
+    'expansions_hero_eyebrow'  => 'Browse by set',
+    'expansions_hero_title'    => 'Expansions',
+    'expansions_hero_sub'      => 'All :count officially released Smash Up sets — explore every faction by the box it came in.',
+    'expansions_factions_label' => ':count factions',
+    'expansion_back_link'      => 'All expansions',
+    'expansion_detail_sub'     => 'All factions from this set.',
+
+    // Faction list — complexity filter
+    'factions_filter_label'  => 'Complexity',
+    'factions_filter_all'    => 'All',
+    'factions_filter_easy'   => 'Easy',
+    'factions_filter_medium' => 'Medium',
+    'factions_filter_hard'   => 'Hard',
+    'factions_browse_by_set' => 'Browse by expansion',
+
+    // Quick shuffle
+    'random_page_title' => 'Quick Shuffle',
 ];
