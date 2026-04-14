@@ -6,6 +6,8 @@ All notable changes to this project are documented in this file.
 
 ### Added
 
+- **Two-factor authentication (TOTP):** Optional MFA for frontend accounts — after password or OAuth sign-in, users with MFA enabled must enter a 6-digit authenticator code or a one-time recovery code. Enable/disable and recovery-code regeneration from **Account → Edit account**. New Composer dependencies: `pragmarx/google2fa`, `pragmarx/google2fa-qrcode`, `bacon/bacon-qr-code`. New columns on `users`: `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`.
+
 - **Brand assets:** `public/images/brand/logo-mark.png` (512×512 PNG from `logo-mark.svg`); `public/images/brand/logo-mark-oauth.png` same mark on a light gray background for OAuth consoles (GitHub’s dark crop UI).
 
 - **Social login (OAuth):** Optional Google and GitHub sign-in via Laravel Socialite (`/auth/{provider}/redirect` + callback). New `users.provider` and `users.provider_id` columns; `password` is nullable for OAuth-only accounts. Login and register show provider buttons when `GOOGLE_CLIENT_ID` / `GITHUB_CLIENT_ID` are set. See `.env.example` and README.

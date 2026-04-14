@@ -30,6 +30,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'auth'  => \App\Http\Middleware\Authenticate::class,
             'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
             'admin' => \App\Http\Middleware\EnsureUserIsAdmin::class,
+            'two-factor.pending' => \App\Http\Middleware\EnsurePendingTwoFactorLogin::class,
         ]);
     })
     ->withSchedule(function (Schedule $schedule): void {

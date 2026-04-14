@@ -2,9 +2,12 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Models\User;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -45,7 +48,37 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        $user = $this->validateUserCredentials();
+
+        RateLimiter::clear($this->throttleKey());
+
+        if ($user->hasTwoFactorEnabled()) {
+            $this->session()->put('two_factor.login.id', $user->getKey());
+            $this->session()->put('two_factor.login.remember', $this->boolean('remember'));
+            throw new HttpResponseException(
+                redirect()->route('two-factor.login')
+            );
+        }
+
+        Auth::login($user, $this->boolean('remember'));
+    }
+
+    /**
+     * Validate e-mail and password and return the user model.
+     *
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    private function validateUserCredentials(): User
+    {
+        $email = Str::lower((string) $this->input('email'));
+        $user = User::query()->where('email', $email)->first();
+
+        if (
+            $user === null
+            || $user->password === null
+            || ! Hash::check((string) $this->input('password'), $user->password)
+        ) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
@@ -53,7 +86,7 @@ class LoginRequest extends FormRequest
             ]);
         }
 
-        RateLimiter::clear($this->throttleKey());
+        return $user;
     }
 
     /**
