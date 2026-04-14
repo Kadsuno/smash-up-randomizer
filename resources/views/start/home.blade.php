@@ -634,6 +634,10 @@
 </x-layouts.main>
 
 <script>
+    window.__SUR_SHUFFLE_PRESET__ = @json($shufflePresetPayload ?? null);
+    window.__SUR_OPEN_SHUFFLE_WITH_PRESET__ = @json($openShuffleWithPreset ?? false);
+</script>
+<script>
     document.addEventListener('DOMContentLoaded', () => {
         const shuffleDialog = document.getElementById('shuffle-modal');
         /**
@@ -852,6 +856,35 @@
 
         shuffleDialog?.addEventListener('close', nudgeViewportAfterShuffleDialogClose);
 
+        /** Apply saved preset (player count + include/exclude checkboxes). */
+        function applyShufflePreset(preset) {
+            if (!preset || typeof preset !== 'object') {
+                return;
+            }
+            const pc = preset.player_count;
+            if (pc) {
+                const radio = document.querySelector(`input[name="numberOfPlayers"][value="${pc}"]`);
+                if (radio) {
+                    radio.checked = true;
+                }
+            }
+            const inc = Array.isArray(preset.include) ? preset.include : [];
+            const exc = Array.isArray(preset.exclude) ? preset.exclude : [];
+            document.querySelectorAll('.include-faction').forEach((cb) => {
+                cb.checked = inc.includes(cb.value);
+            });
+            document.querySelectorAll('.exclude-faction').forEach((cb) => {
+                cb.checked = exc.includes(cb.value);
+            });
+        }
+
         resetShuffleWizard();
+        const presetPayload = window.__SUR_SHUFFLE_PRESET__;
+        if (presetPayload) {
+            applyShufflePreset(presetPayload);
+        }
+        if (window.__SUR_OPEN_SHUFFLE_WITH_PRESET__ && shuffleDialog && typeof shuffleDialog.showModal === 'function') {
+            shuffleDialog.showModal();
+        }
     });
 </script>

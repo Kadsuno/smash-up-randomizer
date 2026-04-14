@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\AccountCollectionController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AccountShuffleHistoryController;
+use App\Http\Controllers\AccountShufflePresetController;
 use App\Http\Controllers\AccountTwoFactorController;
 use App\Http\Controllers\Frontend\Auth\FrontendAuthenticatedSessionController;
 use App\Http\Controllers\Frontend\Auth\FrontendTwoFactorChallengeController;
@@ -100,4 +103,22 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::post('/account/two-factor/recovery-codes', [AccountTwoFactorController::class, 'regenerateRecoveryCodes'])
         ->name('account.two-factor.recovery-codes');
+
+    Route::get('/account/collection', [AccountCollectionController::class, 'edit'])
+        ->name('account.collection');
+
+    Route::put('/account/collection', [AccountCollectionController::class, 'update'])
+        ->name('account.collection.update');
+
+    Route::get('/account/presets', [AccountShufflePresetController::class, 'index'])
+        ->name('account.presets');
+
+    Route::post('/account/presets', [AccountShufflePresetController::class, 'store'])
+        ->name('account.presets.store');
+
+    Route::delete('/account/presets/{preset}', [AccountShufflePresetController::class, 'destroy'])
+        ->name('account.presets.destroy');
+
+    Route::get('/account/history', [AccountShuffleHistoryController::class, 'index'])
+        ->name('account.history');
 });

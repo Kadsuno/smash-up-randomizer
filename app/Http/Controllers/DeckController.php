@@ -3,13 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Deck;
+use App\Models\ShuffleHistory;
+use App\Services\ShuffleDeckPool;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use App\Models\Deck;
-use Illuminate\Http\Request;
 
 class DeckController extends Controller
 {
+    public function __construct(
+        private readonly ShuffleDeckPool $shufflePool
+    ) {}
+
     /**
      * Index action to send the factions to the view
      * @return \Illuminate\Contracts\View\View
@@ -102,18 +110,26 @@ class DeckController extends Controller
     }
 
     /**
-     * Quick-shuffle two players using all available factions.
-     * @return \Illuminate\Contracts\View\View
+     * Quick-shuffle two players using the eligible faction pool (respects logged-in user's collection).
      */
-    public function quickShuffle(): \Illuminate\Contracts\View\View
+    public function quickShuffle(Request $request): View
     {
-        $decks = Deck::all()->shuffle();
+        $user = $request->user();
+        $decks = $this->shufflePool->eligibleDecks($user, [], [])->shuffle();
         $selectedDecks = [];
 
         for ($i = 0; $i < 2; $i++) {
             $selectedDecks[] = $decks->splice(0, 2)
                 ->map(fn ($d) => ['name' => $d->name])
                 ->toArray();
+        }
+
+        if ($user !== null) {
+            ShuffleHistory::query()->create([
+                'user_id' => $user->id,
+                'player_count' => 2,
+                'results' => $selectedDecks,
+            ]);
         }
 
         return view('shuffle.shuffle-decks', compact('selectedDecks'));
@@ -207,26 +223,25 @@ class DeckController extends Controller
     }
 
     /**
-     * Shuffle action to shuffle random factions and assign to players
-     * @param Request $request Request object
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Contracts\View\View
+     * Shuffle action to shuffle random factions and assign to players.
+     *
+     * @return RedirectResponse|View
      */
-    public function shuffle(Request $request): \Illuminate\Http\RedirectResponse|\Illuminate\Contracts\View\View
+    public function shuffle(Request $request): RedirectResponse|View
     {
-        $numberOfPlayers = $request->input('numberOfPlayers');
-        $includedFactions = $request->input('includeFactions', []);
-        $excludedFactions = $request->input('excludeFactions', []);
+        $numberOfPlayers = (int) $request->input('numberOfPlayers');
+        $includedFactions = array_values(array_filter((array) $request->input('includeFactions', [])));
+        $excludedFactions = array_values(array_filter((array) $request->input('excludeFactions', [])));
 
-        $decks = Deck::when(!empty($includedFactions), function ($query) use ($includedFactions) {
-                return $query->whereIn('name', $includedFactions);
-            })
-            ->when(!empty($excludedFactions), function ($query) use ($excludedFactions) {
-                return $query->whereNotIn('name', $excludedFactions);
-            })
-            ->get();
+        if (! in_array($numberOfPlayers, [2, 3, 4], true)) {
+            return back()->with('error', __('frontend.shuffle_error_invalid_players'));
+        }
+
+        $user = $request->user();
+        $decks = $this->shufflePool->eligibleDecks($user, $includedFactions, $excludedFactions);
 
         if ($decks->count() < $numberOfPlayers * 2) {
-            return back()->with('error', 'Not enough factions available for the selected number of players.');
+            return back()->with('error', __('frontend.shuffle_error_not_enough_factions'));
         }
 
         $selectedDecks = [];
@@ -237,6 +252,14 @@ class DeckController extends Controller
                 return ['name' => $deck->name];
             })->toArray();
             $decks = $decks->diff($playerDecks);
+        }
+
+        if ($user !== null) {
+            ShuffleHistory::query()->create([
+                'user_id' => $user->id,
+                'player_count' => $numberOfPlayers,
+                'results' => $selectedDecks,
+            ]);
         }
 
         return view('shuffle.shuffle-decks', ['selectedDecks' => $selectedDecks]);

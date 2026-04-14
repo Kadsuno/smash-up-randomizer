@@ -14,8 +14,13 @@ class AccountController extends Controller
 {
     public function index(Request $request): View
     {
+        $user = $request->user();
+
         return view('account.index', [
-            'user' => $request->user(),
+            'user' => $user,
+            'statOwnedExpansions' => $user->userExpansions()->count(),
+            'statShuffleCount' => $user->shuffleHistories()->count(),
+            'statPresetCount' => $user->shufflePresets()->count(),
         ]);
     }
 

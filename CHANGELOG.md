@@ -6,6 +6,8 @@ All notable changes to this project are documented in this file.
 
 ### Added
 
+- **Account: collection, shuffle presets, play history:** Authenticated users can save **owned expansion sets** (`/account/collection`), manage **shuffle presets** (`/account/presets`) and open the home shuffle with one click (`/?shuffle_preset=id`), and browse **recent shuffles** (`/account/history`). When at least one expansion is saved, the shuffle wizard, `POST /shuffle/result`, and `/random` only draw from factions in those sets (guests and users with an empty selection still use all factions). New tables: `user_expansions`, `shuffle_presets`, `shuffle_histories`.
+
 - **Two-factor authentication (TOTP):** Optional MFA for frontend accounts — after password or OAuth sign-in, users with MFA enabled must enter a 6-digit authenticator code or a one-time recovery code. Enable/disable and recovery-code regeneration from **Account → Edit account**. New Composer dependencies: `pragmarx/google2fa`, `pragmarx/google2fa-qrcode`, `bacon/bacon-qr-code`. New columns on `users`: `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`.
 
 - **Brand assets:** `public/images/brand/logo-mark.png` (512×512 PNG from `logo-mark.svg`); `public/images/brand/logo-mark-oauth.png` same mark on a light gray background for OAuth consoles (GitHub’s dark crop UI).
