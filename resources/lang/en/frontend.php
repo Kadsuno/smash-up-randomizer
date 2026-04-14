@@ -243,5 +243,6 @@ return [
     'factions_browse_by_set' => 'Browse by expansion',
 
     // Quick shuffle
-    'random_page_title' => 'Quick Shuffle',
+    'random_page_title'  => 'Quick Shuffle',
+    'landing_cta_random' => 'Quick shuffle (2 players, instant)',
 ];
