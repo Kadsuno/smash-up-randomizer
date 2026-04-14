@@ -122,7 +122,7 @@ class AccountProfileUpdateTest extends TestCase
         $this->patch('/account/profile', [
             'name'  => 'New Name',
             'email' => $user->email,
-        ])->assertRedirect(route('account'));
+        ])->assertRedirect(route('account.edit'));
     }
 
     public function test_unauthenticated_user_is_redirected(): void

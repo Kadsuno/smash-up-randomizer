@@ -19,6 +19,13 @@ class AccountController extends Controller
         ]);
     }
 
+    public function edit(Request $request): View
+    {
+        return view('account.edit', [
+            'user' => $request->user(),
+        ]);
+    }
+
     public function updateProfile(Request $request): RedirectResponse
     {
         $user = $request->user();
@@ -45,7 +52,7 @@ class AccountController extends Controller
                 ->with('status', __('frontend.account_profile_email_changed'));
         }
 
-        return redirect()->route('account')->with('profile_status', __('frontend.account_profile_saved'));
+        return redirect()->route('account.edit')->with('profile_status', __('frontend.account_profile_saved'));
     }
 
     public function updatePassword(Request $request): RedirectResponse
@@ -58,7 +65,7 @@ class AccountController extends Controller
         $user = $request->user();
 
         if (! Hash::check($request->current_password, $user->password)) {
-            return redirect()->route('account')->withErrors(
+            return redirect()->route('account.edit')->withErrors(
                 ['current_password' => __('frontend.account_password_wrong_current')],
                 'passwordErrors'
             );
@@ -66,6 +73,6 @@ class AccountController extends Controller
 
         $user->update(['password' => Hash::make($request->password)]);
 
-        return redirect()->route('account')->with('password_status', __('frontend.account_password_saved'));
+        return redirect()->route('account.edit')->with('password_status', __('frontend.account_password_saved'));
     }
 }
