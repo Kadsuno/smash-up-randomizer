@@ -17,7 +17,7 @@
         "synergy": "",
         "tips": "",
         "effects": "Avengers have the unusual cast of only 6 unique characters, each with a printed power of 5, similar to the Princesses. But among their 14 actions, they have 6 peculiar ones that have a \"normal\" ability and an \"upgraded\" ability that can only be accessed when the corresponding Avenger character is in play, such as Hulk Smash, which normally allows you to destroy base modifiers but can alternatively destroy a whole base if Hulk is in play.\n\nAs a secondary mechanics and in order to support their main mechanics, they also have several cards that allow them to recur their characters from your discard pile and cycle through your deck to get to the right cards, increasing the chance that you'll be able to combine the Avenger characters with their unique actions.",
-        "image": ""
+        "image": "/images/factions/avengers.svg"
     },
     {
         "name": "Hydra",
@@ -37,7 +37,7 @@
         "synergy": "",
         "tips": "",
         "effects": "Hydra's mechanics revolve around triggering their swarm abilities by destroying your own characters, with the six copies of Hydra Agents being the preferred targets. To support that mechanics, they are also able to recycle their discarded power-2 characters and draw them from your deck.\n\nTo some extent, Hydra doesn't mind their characters getting destroyed, although they gain more benefits if you destroy your characters on your own terms, such as card draws and power boosts.",
-        "image": ""
+        "image": "/images/factions/hydra.svg"
     },
     {
         "name": "Kree",
@@ -57,7 +57,7 @@
         "synergy": "",
         "tips": "",
         "effects": "The Kree revolve around playing extra actions, getting power each time play an action, either from the action boosting a character's power or a character's ability triggering from the action being played, as well as drawing multiple cards, especially actions.",
-        "image": ""
+        "image": "/images/factions/kree.svg"
     },
     {
         "name": "Masters of Evil",
@@ -77,7 +77,7 @@
         "synergy": "",
         "tips": "",
         "effects": "The Masters of Evil have several cards that can grant you victory points if you are able to do their whole effects. Most involve either destroying your own characters for that, or some kind of tricky set-up. On top of that, their power-3 and power-4 characters have abilities that scale with your total number of victory points.",
-        "image": ""
+        "image": "/images/factions/masters-of-evil.svg"
     },
     {
         "name": "S.H.I.E.L.D.",
@@ -97,7 +97,7 @@
         "synergy": "",
         "tips": "",
         "effects": "They specialize in playing a lot of characters in one turn, especially characters of power-3 or less. Some cards even give you boosts of power depending on the number of characters you have or play on the same base.",
-        "image": ""
+        "image": "/images/factions/shield.svg"
     },
     {
         "name": "Sinister Six",
@@ -117,7 +117,7 @@
         "synergy": "",
         "tips": "",
         "effects": "Their main mechanics revolve around reducing the breakpoint of bases and gaining various advantages when their cards, both characters and base modifiers, are on bases with breakpoints of 19 or less.",
-        "image": ""
+        "image": "/images/factions/sinister-six.svg"
     },
     {
         "name": "Spider-Verse",
@@ -137,7 +137,7 @@
         "synergy": "",
         "tips": "",
         "effects": "The Spider-Verse possess various cards that can be played normally by spending a card play (which can be your free/regular card of your turns, or extra cards), but that can also be played during base scoring, although nearly all of them get weaker if you do so, either requiring you to have a character already on the scoring base, or reducing the power output.\n\nTo complement that, they also have a great card draw ability and ways to control the cards you'll draw from your deck.",
-        "image": ""
+        "image": "/images/factions/spider-verse.svg"
     },
     {
         "name": "Ultimates",
@@ -157,6 +157,6 @@
         "synergy": "",
         "tips": "",
         "effects": "They focus on moving characters from bases to bases, mainly your own characters, and triggering abilities that activate when characters are moved, usually resulting in power boosts.",
-        "image": ""
+        "image": "/images/factions/ultimates.svg"
     }
 ]

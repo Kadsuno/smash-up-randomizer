@@ -17,7 +17,7 @@
         "synergy": "",
         "tips": "",
         "effects": "Clerics revolve around saving your cards from the discard pile, either by retrieving cards or by moving your minions instead of discarding them.\n\nDeep Friars and Bin and Gone are very strong cards that allow you to save a minion after a base scores by moving it to another base, meaning that it gets to keep any actions and +1 power counters on it.\n\nUnlike Zombies, which specialize in minions, and Time Travelers, which specialize in actions, Clerics can get back any cards from your discard pile, but it's mitigated as the cards are usually chosen randomly.",
-        "image": ""
+        "image": "/images/factions/clerics.svg"
     },
     {
         "name": "Dwarves",
@@ -37,7 +37,7 @@
         "synergy": "* Thieves: Another Munchkin faction focused heavily on treasure. Thieves can discard treasure for benefits, while Dwarves can retrieve treasure from the discard pile. Gold Digger is especially useful for reloading treasure to discard to various Thief effects. You can discard treasure that can't played on minions to the Thieves and play the treasure that can on the Dwarves.\n* Warriors: Warriors are good at destroying monsters, which makes them good at gaining treasure as well (unless you play Ruckus).\n* Aladdin: Most treasures are actions, which the Aladdin faction can discard. Like with Thieves, Gold Digger is good at reloading treasures for repeat discarding.",
         "tips": "",
         "effects": "Dwarves specialize in getting treasures, especially from the treasure discard pile, and gaining power from on-minion treasures.\n\nOut of its 22 cards, the treasure discard pile has 10 actions that can be played on minions, so nearly half of the deck, though Potion of Cowardice is more detrimental to the Dwarves. Some of the Dwarf minions gaining advantage from having on-minion actions on them, they need to draw the right treasures from the treasure deck, or they can choose the appropriate treasures from the treasure discard pile.\n\nWhile players could think that Dwarves greatly depend on Munchkin bases to have treasures, Dwarves actually have several cards allowing them to draw treasures and to put treasures into the treasure discard pile. So, they can get treasure by themselves, but they do have an advantage when Munchkin bases are in play.",
-        "image": ""
+        "image": "/images/factions/dwarves.svg"
     },
     {
         "name": "Elves",
@@ -57,7 +57,7 @@
         "synergy": "",
         "tips": "",
         "effects": "Elves give other players advantages in ways that when used properly end up favoring themselves much more. All of the ongoing benefits Elves bestow are optional on your part, and need to be used selectively. This makes them more useful with more players, as you can choose to help the player who stands to gain the least. As an extension of Elf abilities needing to be used opportunistically comes many Elf abilities that only benefit you circumstantially (making other players shuffle their discard piles, all of them gaining plus 1 power, etc). Elves are particularly good at drawing cards (both you and your opponent). which comes back to favor them through Trade, taking good cards from their opponent. Trade also favors Elves as so many of their own cards are circumstantial, and stealing from others helps them more than it would help their opponents to steal back. This is a mechanic that comes back as well in Flower Child. Elves also have a decent amount of specials that are only to be played when they benefit them, furthering Elves circumstantially amicable nature.",
-        "image": ""
+        "image": "/images/factions/elves.svg"
     },
     {
         "name": "Halflings",
@@ -77,7 +77,7 @@
         "synergy": "",
         "tips": "",
         "effects": "Halflings specialize in playing many extra minions, though it's usually limited to bases where another player has more power than you, or where you don't already have a minion.",
-        "image": ""
+        "image": "/images/factions/halflings.svg"
     },
     {
         "name": "Mages",
@@ -97,7 +97,7 @@
         "synergy": "",
         "tips": "",
         "effects": "Mages specialize in discarding cards to do things, especially gaining power, playing extra cards or destroying minions.\n\nThey also have some interaction with the monsters, being able to summon them into play and temporarily take control of them.",
-        "image": ""
+        "image": "/images/factions/mages.svg"
     },
     {
         "name": "Orcs",
@@ -117,7 +117,7 @@
         "synergy": "",
         "tips": "",
         "effects": "Orcs are themed to be powerful bullies. They are very physically powerful and have many cards that give them advantages for being more powerful on a base than the opposition. They domino their own advantages, such as with ways to get extra victory points for already winning, get extra minions for having multiple minions. This expands further, with Orcs having lots of ways to be unaffected by other players cards attempting to knock them back. They even can prevent players from using last minute specials in a few ways. While Orc minions are protected from opponents fighting back, they have many ways to make weak opponents weaker through removing their minions.",
-        "image": ""
+        "image": "/images/factions/orcs.svg"
     },
     {
         "name": "Thieves",
@@ -137,7 +137,7 @@
         "synergy": "* Dwarves: Another Munchkin faction focused heavily on treasure. Thieves can discard treasure for benefits, while Dwarves can retrieve treasure from the discard pile. Gold Digger is especially useful for reloading treasure to discard to various Thief effects. You can discard treasure that can't played on minions to the Thieves and play treasure that can on the Dwarves.\n* Warriors: Warriors are good at destroying monsters, which makes them good at gaining treasure as well.\n* Aladdin: Most treasures are actions, which the Aladdin faction can discard as well.",
         "tips": "",
         "effects": "Thieves specialize in drawing treasure cards and trading them for effects, such as power boosts and VPs.\n\nWhile players could think Thieves depend on Munchkin bases, they actually have several cards to draw treasures without having to destroy monsters.\n\nWhile the treasures are useable as treasures, Thieves can use them to greater effects to get VPs, or to boost their minions. Cat Burglar is especially potent if you manage to keep many treasures in your hand.",
-        "image": ""
+        "image": "/images/factions/thieves.svg"
     },
     {
         "name": "Warriors",
@@ -157,6 +157,6 @@
         "synergy": "",
         "tips": "",
         "effects": "Warriors specialize in playing monsters and destroying them to get power boosts (in addition to their treasures). Some cards even allow them to gain power simply from the presence of monsters.\n\nWhile players could think Warriors greatly depend on Munchkin bases to have monsters around, they actually have several cards allowing them to summon monsters into play on any base.",
-        "image": ""
+        "image": "/images/factions/warriors.svg"
     }
 ]

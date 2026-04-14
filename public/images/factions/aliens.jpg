@@ -1,0 +1,608 @@
+[[File:Invader.jpg|thumb|300px|<strong>''Aliens''</strong>'' change the very nature of the battle, moving enemies about, and manipulating the Base cards you fight for.'' - AEG]]
+
+{{Q|Aliens love to mess with people, and they love to mess with other players even more. From bouncing minions back to players’ hands, to replacing bases in play, aliens are out to have a great time, at any planet’s expense.|[[Core Set]] rulebook}}
+
+The '''Aliens''' are one of the 8 [[factions]] from the [[Core Set]].
+
+Aliens abduct your friends and foes. You might see them again. Who knows?
+
+Their complexity rating is: Low-Medium.
+
+''Other factions from the same set: ''[[Dinosaurs]], [[Ninjas]], [[Pirates]], [[Robots]], [[Tricksters]], [[Wizards]], [[Zombies]].
+
+== <span style="{{ColorOutline | #FFFFFF}}; color:#8F3371; margin-left: 3px">'''Cards'''</span> ==
+
+[[File:Aliens.jpg|thumb|300px|right]]
+
+The Aliens have the usual 10 minions and 10 actions. The total minion base power (not counting any abilities) is slightly lower than usual at only 28 or an average of 2.8 per minion compared to the usual 30 and 3.
+
+Among their actions, there are:
+* 0 play-on-minion actions,
+* 1 play-on-base action: Jammed Signal,
+* 9 standard actions (7 that affect one or more minions, '''in bold'''): '''Abduction''', '''Beam Up (2x)''', '''Crop Circles''', '''Disintegrator (2x)''', '''Invasion''', Probe, Terraforming,
+* 0 actions that directly increase a minion's power.
+
+=== Minions ===
+
+1x <span id="Supreme_Overlord">'''Supreme Overlord'''</span> - power 5 - You may return a minion to its owner’s hand. <sup>[[#Questions on Supreme Overlord|FAQ]]</sup>
+
+2x <span id="Invader">'''Invader'''</span> - power 3 - Gain 1 VP. <sup>[[#Questions on Invader|FAQ]]</sup>
+
+<s>3x '''Scout''' - power 3 - Special: After this base is scored, you may place this minion into your hand instead of the discard pile.</s>
+
+3x <span id="Scout">'''Scout'''</span> - power 3 - Special: After this base is scored, you may return this minion to your hand. ''(errata'd by [[Smash Up POD]])'' <sup>[[#Questions on Scout|FAQ]]</sup>
+
+<s>4x '''Collector''' - power 2 - You may return a minion of power 3 or less on this base to its owner’s hand.</s>
+
+<s>4x Collector - power 2 - You may return a non-Collector minion of power 3 or less on this base to its owner’s hand. ''(errata'd by [[The Bigger Geekier Box]]''</s>
+
+4x <span id="Collector">'''Collector'''</span> - power 2 - You may return a minion of power 3 or less on this base to its owner’s hand. ''(errata'd by [[Smash Up POD]])'' <sup>[[#Questions on Collector|FAQ]]</sup>
+
+=== Actions ===
+
+1x <span id="Abduction">'''Abduction'''</span> - Return a minion to its owner’s hand. Play an extra minion. <sup>[[#Questions on Abduction|FAQ]]</sup>
+
+2x <span id="Beam_Up">'''Beam Up'''</span> - Return a minion to its owner’s hand. <sup>[[#Questions on Beam Up|FAQ]]</sup>
+
+1x <span id="Crop_Circles">'''Crop Circles'''</span> - Choose a base. Return each minion on that base to its owner’s hand. <sup>[[#Questions on Crop Circles|FAQ]]</sup>
+
+2x <span id="Disintegrator">'''Disintegrator'''</span> - Place a minion of power 3 or less on the bottom of its owner’s deck. <sup>[[#Questions on Disintegrator|FAQ]]</sup>
+
+1x <span id="Invasion">'''Invasion'''</span> - Move a minion to another base. <sup>[[#Questions on Invasion|FAQ]]</sup>
+
+<s>1x '''Jammed Signal''' - Play on a base. Ongoing: All players ignore this base’s ability.</s>
+
+1x <span id="Jammed_Signal">'''Jammed Signal'''</span> - Play on a base. Ongoing: This base's abilities are cancelled. ''(errata'd by [[Smash Up POD]])'' <sup>[[#Questions on Jammed Signal|FAQ]]</sup>
+
+1x <span id="Probe">'''Probe'''</span> - Look at another player’s hand and choose a minion in it. That player discards that minion. <sup>[[#Questions on Probe|FAQ]]</sup>
+
+<s>1x '''Terraforming''' - Search the base deck for a base. Swap it with a base in play (discard all actions attached to it). Shuffle the base deck. You may play an extra minion on the new base.</s>
+
+<s>1x <span id="Terraforming">'''Terraforming'''</span> - Search the base deck for a base. Swap it with a base in play (discard all actions attached to it). All minions from the original base remain. Shuffle the base deck. You may play an extra minion on the new base. ''(errata'd by [[The Bigger Geekier Box]])''</s> <sup>[[#Questions on Terraforming|FAQ]]</sup>
+
+1x <span id="Terraforming">'''Terraforming'''</span> - Search the base deck for a base and swap it with a base in play. You may play an extra minion there. ''(errata'd by [[Smash Up POD]])'' <sup>[[#Questions on Terraforming|FAQ]]</sup>
+
+[[File:Aliens.png|thumb|115px]]
+
+=== Bases ===
+
+* [[The Homeworld]]
+* [[The Mothership]]
+
+== <span style="{{ColorOutline | #FFFFFF}}; color:#8F3371; margin-left: 3px">'''Clarifications'''</span> ==
+
+Here are the official clarifications as they appear in [[The Bigger Geekier Box]] rulebook:
+
+'''Collector:''' Collectors cannot return Collectors.
+
+'''Invader:''' If the Invader is destroyed, you do not lose the VP it gave you.
+
+'''Jammed Signal:''' Ignoring a base’s ability means: you do not follow a base’s instructions, you are not subject to its restrictions, and your cards are neither affected nor protected by its ability.
+
+'''Terraforming:''' You do not discard minions on the Terraformed base, nor actions attached to them.
+
+== <span style="{{ColorOutline | #FFFFFF}}; color:#8F3371; margin-left: 3px">'''Mechanics ''' ==
+
+Like those in our stories, the elusive and mysterious Aliens of Smash Up take people for who knows what reasons. Aliens are experts at returning anyone's minions back to their hand. They can Beam Up their friends to safety, and Abduct their adversaries to Probe them for information. Can you withstand their bubble-helmed Invasion?
+
+====[[Strategy#Returning Minions to Hands|Returning Minions to Hands]]====
+
+In isolation, returning minions to their owners' hands is not that significant of an ability, but Aliens leverage their expertise to enable a number of unique strategies. All of their returning abilities can target friend or foe. After you return an enemy's minion, use [[Strategy#Forcing_Opponents_to_Discard_Random_Cards|Probe to discard it]], and also spy on their hand. You might preemptively deny them a powerful minion you weren't aware of! Aliens have a minor ability to [[Strategy#Playing_Extra_Cards|play extra minions]] to help replay your own minions you return.
+
+Aliens can do more than just return minions to hands. [[Strategy#Placing_Cards_on_Top_or_Bottom_of_Your_Deck|Send them to their decks]] instead with Disintegrator! This is especially strong against [[Tenacious Z]]s. As always, you can use this on your own minions. How about bases? Enter Terraforming! You also get to play an extra minion.
+
+===Strategy===
+
+Aliens' overall power is quite low, so they're not too great at [[Strategy#Breaking_a_Base|breaking bases]]. Their Scout minions, however, are specialized at maintaining presence on the bases. You may return them to your hand after the base they are on scores, so you can reuse them. You're not likely to win bases this way, but second and third place are enough to support you along with the next strategy.
+
+Invaders probably have the most powerful on-play ability in the whole game. By playing, returning, replaying, and rereturning them in an "Invader Dance", you can theoretically win the game without breaking any bases. More commonly, Invaders make up just one component of the Aliens' overall game plan. Relying on this tactic consumes a lot of your minion plays, so reserve Crop Circles to simultaneously slow your opponents' efforts at breaking bases. While fairly easy in a 2-player game, this gets harder the more opponents you face, because they will more and more easily break bases without your input.
+
+===Synergy===
+
+Aliens work best alongside factions that are also good at returning minions to hands. The next best have and/or support on-play abilities and help slow down the game for your opponents.
+*[[Ninjas]]: Master Ninja and Tiger Assassin are even more formidable if you can return them to hand and re-use their minion-destroying on-play abilities.
+*[[Robots]]: Zapbot, Hoverbot, Microbot Fixer, and Microbot Reclaimer all have useful on-play abilities that provide extra minion plays.
+*[[Tricksters]]: Blending their tricks and hindrances in with the Aliens, Tricksters also offer much-desired extra minion plays for you to farm VPs.
+*[[Time Travelers]]: Directly replay Invaders with Do Over! and take control of the bases.
+*[[Star Roamers]]: Ship's Captain can fetch any minion you need, and even play them as an extra minion if their power is 3 or less (like the Invader). Science Officer's talent lets you return one of your minions to your hand to play another with a different name, giving you access to a VP farming engine with Invader. Collector and Supreme Overlord are good partners for that combo, allowing you to repeatedly return other minions to hand. Medical Officer lets you return your Invaders and other minions to hand if they would be destroyed. Ensigns and Protector Fields can protect your Invaders and other minions from removal outright.
+
+===External Strategy Guides===
+
+*[https://www.smashupdata.com/post/aliens SmashUpData.com Faction Guide - Aliens]
+*[https://www.youtube.com/watch?v=owKd5VYLILk |Smash Up Faction Guide| Can Aliens do anything else?]
+*[https://www.youtube.com/watch?v=q_tPdZ8IiR4 The Geek Profs: Smash Up Strategy - Aliens]
+*[https://www.youtube.com/watch?v=WR385eNONHY Action Awareness #12: Terraforming]
+*[https://www.youtube.com/watch?v=5yd6xL1rGjE Smash Up Aliens Faction Review!]
+*[https://www.youtube.com/watch?v=Pi8pdeAkqj8&t=07m55s Smash Up Tier List - Core Set: Aliens]
+
+==<span style="{{ColorOutline | #FFFFFF}}; color:#8F3371; margin-left: 3px">'''FAQ'''</span>==
+
+==='''Questions on [[#Supreme Overlord|Supreme Overlord]]'''===
+
+Q: Which minion can I return?
+
+<blockquote>A: You can target any minion that's in play, even Supreme Overlord itself:<br />- If it's a minion you own on a base, it's returned to your hand.<br />- If it's a minion owned by another player on a base, it's returned to that player's hand.<br />- If it's a minion that no one owns (e.g. a [[treasure]], a [[monster]]), it remains in play.<br />- If it's a minion in stasis, it remains in stasis.</blockquote>
+
+{{A Minion Rule}}
+{{Monsters Treasures Owner Rule}}
+{{Affecting Stasis Card Rule}}
+
+Q: Can I return a minion from the discard pile?
+
+<blockquote>A: No, it must be a minion in play. Cards that allow you to target something in the discard pile, like the cards from the [[Zombie]] faction, will explicitly say so. By default, "a minion" refers to a minion that's in play.</blockquote>
+
+{{A Minion Rule}}
+
+Q: Can it return a minion on any base or just its own base?
+
+<blockquote>A: There's no restriction, so it can be any minion (even itself!) on any base.</blockquote>
+
+{{No Limit Rule}}
+
+Q: I return a minion. What happens to actions that were played on the returned minion? Are they also returned to their owners' hands?
+
+<blockquote>A: They are discarded in the appropriate discard piles.</blockquote>
+
+{{Discard Attachments Rule}}
+
+Q: Another player already has ten cards in their hand. I return their minion to their hand. Because they already have 10 cards, is it immediately discarded instead? Do they keep it and choose which card to discard during my draw 2 cards phase?
+
+<blockquote>A: They don't discard any card until '''their''' next Draw 2 Cards phase (so not any Draw 2 Cards phase!). At that point, they will indeed need to draw two cards and discard down to 10 if they have more than 10. That's the only moment where they must discard down to 10. At any other time, they keep their hand of cards.</blockquote>
+
+{{Discard Down To 10 Rule}}
+
+----
+
+==='''Questions on [[#Invader|Invader]]'''===
+
+Q: If an Invader leaves play (e.g. it's destroyed, its base scores) or if its ability is later cancelled by another card, do I keep the 1 VP I gained from playing the Invader?
+
+<blockquote>A: Yes, you gained the VP and, unless otherwise stated, you keep it for the rest of the game. This makes it very attractive to use Collector, Abduction, and similar abilities to return the Invaders to your hand to play them again for more VPs.</blockquote>
+
+{{On-play No Further Effect Rule}}
+
+Q: If I give control of an Invader to another player or if another player takes control of it, do I also give them the VP I gained from playing the Invader? If not, do they gain 1 VP from Invader?
+
+<blockquote>A: No to both. You gained the VP and, unless otherwise stated, you keep it for the rest of the game. Also, Invader's ability is an on-play ability, which is only resolved when it is played. When a minion's controller changes, that's not playing it, so its ability isn't resolved again.</blockquote>
+
+{{On-play No Further Effect Rule}}
+
+----
+
+==='''Questions on [[#Scout|Scout]]'''===
+
+Q: The card says "Special" so I can play it outside of my turn, right?
+
+<blockquote>A: "[[Special]]" does '''not''' mean the card can be played out of turn. "Special" simply means that it's an ability that can be used when its condition is met. Whether it can be used out of turn, activated straight from your hand/discard pile, or if it can only be used when it's already in play (essentially being a synonym of [[Ongoing]]), it entirely depends on the wording. In the case of Scout, the condition is "after this base is scored", this means that you can only activate it after its base is scored, "its base" being the base it is currently on. Obviously, if Scout isn't in play, there's no "this base" that the condition can refer to. So Scout is actually a Special card that can only be used when it is in play.</blockquote>
+
+{{Special Description Rule}}
+{{This Base Scores Rule}}
+
+Q: When is it placed in hand with its ability?
+
+<blockquote>A: After its base scores, its ability is triggered during the step where the players can play/invoke after-scoring abilities. But, that's just when its controller can decide to activate it or not. If they choose to activate it, '''nothing happens for the moment'''. However, when the players move on to the step where the cards on the base are all discarded, that's when it is placed into its owner''s hand instead of being discarded.''</blockquote>
+
+{{Discard All Cards Step Rule}}
+
+Q: When I use its ability, does it count as returning it to my hand? E.g. for [[Entangled]], [[Ship’s Engineer]], [[Hissy Fit]].
+
+<blockquote>A: No. Even though the card also goes from a base to your hand, it says "[[place]]", not "[[return]]". Entangled and Ship’s Engineer do not interact with cards that are "placed".</blockquote>
+
+{{Specific Words Rule}}
+
+Q: If its controller is changed during the game, after its base scores, who decides whether its ability is activated or not? And whose hand does it go to? It says "your hand", so it's probably its current controller, right?
+
+<blockquote>A: It's Scout's current controller who decides whether its ability is activated. But, if they decide that it is, then it will be returned to its owner's hand, not theirs.</blockquote>
+
+{{You On Minion Action Rule}}
+{{Visible Card Movement Rule}}
+
+Q: A base scores where I have a Scout. I already have ten cards in my hand, so if I decide to place the Scout back in my hand, is it immediately discarded instead? Do I keep it and choose which card to discard during the next draw 2 cards phase?
+
+<blockquote>A: You don't discard any card until '''your''' next Draw 2 Cards phase (so not any Draw 2 Cards phase!). At that point, you will indeed need to draw two cards and discard down to 10 if you have more than 10. That's the only moment where you must discard down to 10. At any other time, you keep their hand of cards. So if the base scored during another player's turn, you keep your cards and will be able to play your next turn with more than ten cards.</blockquote>
+
+{{Discard Down To 10 Rule}}
+
+Q: A base scores where I have a Scout. I decide to place it back in my hand. What happens to actions that were played on it? Are they also placed in my hand? their owners' hands?
+
+<blockquote>A: They are discarded in the appropriate discard piles.</blockquote>
+
+{{Discard Attachments Rule}}
+
+----
+
+==='''Questions on [[#Collector|Collector]]'''===
+
+Q: Which minion can I return?
+
+<blockquote>A: ''Note that this card received an erratum in [[The Bigger Geekier Box]] rulebook.'' You can target any '''non-Collector''' minion of power 3 or less on the same base as the Collector:<br />- If it's a minion you own, it's returned to your hand.<br />- If it's a minion owned by another player, it's returned to that player's hand.<br />- If it's a minion that no one owns (e.g. a [[treasure]], a [[monster]]), it remains in play.</blockquote>
+
+{{A Minion Rule}}
+{{Monsters Treasures Owner Rule}}
+
+Q: I return a minion. What happens to actions that were played on the returned minion? Are they also returned to their owners' hands?
+
+<blockquote>A: They are discarded in the appropriate discard piles.</blockquote>
+
+{{Discard Attachments Rule}}
+
+Q: Another player already has ten cards in their hand. I return their minion to their hand. Because they already have 10 cards, is it immediately discarded instead? Do they keep it and choose which card to discard during my draw 2 cards phase?
+
+<blockquote>A: They don't discard any card until '''their''' next Draw 2 Cards phase (so not any Draw 2 Cards phase!). At that point, they will indeed need to draw two cards and discard down to 10 if they have more than 10. That's the only moment where they must discard down to 10. At any other time, they keep their hand of cards.</blockquote>
+
+{{Discard Down To 10 Rule}}
+
+----
+
+==='''Questions on [[#Abduction|Abduction]]'''===
+
+Q: Which minion can I return?
+
+<blockquote>A: You can target any minion that's in play:<br />- If it's a minion you own, it's returned to your hand.<br />- If it's a minion owned by another player, it's returned to that player's hand.<br />- If it's a minion that no one owns (e.g. a [[treasure]], a [[monster]]), it remains in play.<br />- If it's a minion in stasis, it remains in stasis.</blockquote>
+
+{{A Minion Rule}}
+{{Monsters Treasures Owner Rule}}
+{{Affecting Stasis Card Rule}}
+
+Q: Can I return a minion card from the discard pile?
+
+<blockquote>A: No, it must be a minion in play. Cards that allow you to target something in the discard pile, like the cards from the [[Zombie]] faction, will explicitly say so. By default, "a minion" refers to a minion that's in play.</blockquote>
+
+{{A Minion Rule}}
+
+Q: If I return a minion to my hand with Abduction, can I play it again as Abduction's extra minion?
+
+<blockquote>A: Sure. You can play any minion in your hand as the extra minion, even the one that was returned to your hand.</blockquote>
+
+{{No Limit Rule}}
+
+Q: If the minion I targeted isn't returned (e.g. because of [[Entangled]] or [[Ship’s Engineer]]), can I still play an extra minion?
+
+<blockquote>A: Yes, returning the minion and the extra minion are independent, so you still get an extra minion play even if no minion was returned.</blockquote>
+
+{{Entire Resolution Rule}}
+
+Q: I return a minion. What happens to actions that were played on the returned minion? Are they also returned to their owners' hands?
+
+<blockquote>A: They are discarded in the appropriate discard piles.</blockquote>
+
+{{Discard Attachments Rule}}
+
+Q: I return another player's minion to their hand. Who gets to play an extra minion? Them or me?
+
+<blockquote>A: You get to play the extra minion.</blockquote>
+
+{{You On Minion Action Rule}}
+
+Q: Another player already has ten cards in their hand. I return their minion to their hand. Because they already have 10 cards, is it immediately discarded instead? Do they keep it and choose which card to discard during my draw 2 cards phase?
+
+<blockquote>A: They don't discard any card until '''their''' next Draw 2 Cards phase (so not any Draw 2 Cards phase!). At that point, they will indeed need to draw two cards and discard down to 10 if they have more than 10. That's the only moment where they must discard down to 10. At any other time, they keep their hand of cards.</blockquote>
+
+{{Discard Down To 10 Rule}}
+
+Q: How does this interact with the [[Disco Dancers]]' mechanic and [[Funky Town]]'s ability?
+
+<blockquote>A: - If [[Diva]] copies it, Diva is considered as indirectly affected by the action and is returned to its owner's hand, regardless of whoever owns the minion that was directly affected by the action. Note that you don't get a second extra minion for affecting a second minion, because Diva only copies the part that returns a minion and the extra minion part isn't changed by the number of affected minions.<br />- If [[Dancing King]] copies it onto a minion (it can be itself), that minion is considered as indirectly affected by the action and is returned to its owner's hand, regardless of whoever owns the minion that was directly affected by the action. Note that if the minion is a [[monster]] or a [[treasure]], it remains in play because monsters and treasures can't be affected by cards that refer to a card's owner. Also, note that you don't get a second extra minion for affecting a second minion, because Dancing King only copies the part that returns a minion and the extra minion part isn't changed by the number of affected minions.<br />- If [[We are Family]] copies it, the minion it is on is considered as indirectly affected by the action and is returned to its owner's hand, regardless of whoever owns the minion that was directly affected by the action. Note that if the minion is a monster or a treasure, it remains in play because monsters and treasures can't be affected by cards that refer to a card's owner. Also, note that you don't get a second extra minion for affecting a second minion, because We are Family only copies the part that returns a minion and the extra minion part isn't changed by the number of affected minions.<br />- With [[Funky Town]], you can only copy it if you're the one who played the action and if it affects one of your minions, but if Funky Town does copy it, the minion is considered as indirectly affected by the action and is returned to its owner's hand, regardless of whoever owns the minion that was directly affected by the action. Note that if the minion is a monster or a treasure, it remains in play because monsters and treasures can't be affected by cards that refer to a card's owner. Also, note that you don't get a second extra minion for affecting a second minion, because Funky Town only copies the part that returns a minion and the extra minion part isn't changed by the number of affected minions.</blockquote>
+
+{{Visible Card Movement Rule}}
+{{Monsters Treasures Owner Rule}}
+
+----
+
+==='''Questions on [[#Beam Up|Beam Up]]'''===
+
+Q: Which minion can I return?
+
+<blockquote>A: You can target any minion that's in play:<br />- If it's a minion you own, it's returned to your hand.<br />- If it's a minion owned by another player, it's returned to that player's hand.<br />- If it's a minion that no one owns (e.g. a [[treasure]], a [[monster]]), it remains in play.<br />- If it's a minion in stasis, it remains in stasis.</blockquote>
+
+{{A Minion Rule}}
+{{Monsters Treasures Owner Rule}}
+{{Affecting Stasis Card Rule}}
+
+Q: Can I return a minion card from the discard pile?
+
+<blockquote>A: No, it must be a minion in play. Cards that allow you to target something in the discard pile, like the cards from the [[Zombie]] faction, will explicitly say so. By default, "a minion" refers to a minion that's in play.</blockquote>
+
+{{A Minion Rule}}
+
+Q: I return a minion. What happens to actions that were played on the returned minion? Are they also returned to their owners' hands?
+
+<blockquote>A: They are discarded in the appropriate discard piles.</blockquote>
+
+{{Discard Attachments Rule}}
+
+Q: Another player already has ten cards in their hand. I return their minion to their hand. Because they already have 10 cards, is it immediately discarded instead? Do they keep it and choose which card to discard during my draw 2 cards phase?
+
+<blockquote>A: They don't discard any card until '''their''' next Draw 2 Cards phase (so not any Draw 2 Cards phase!). At that point, they will indeed need to draw two cards and discard down to 10 if they have more than 10. That's the only moment where they must discard down to 10. At any other time, they keep their hand of cards.</blockquote>
+
+{{Discard Down To 10 Rule}}
+
+Q: How does this interact with the [[Disco Dancers]]' mechanic and [[Funky Town]]'s ability?
+
+<blockquote>A: - If [[Diva]] copies it, Diva is considered as indirectly affected by the action and is returned to its owner's hand, regardless of whoever owns the minion that was directly affected by the action.<br />- If [[Dancing King]] copies it onto a minion (it can be itself), that minion is considered as indirectly affected by the action and is returned to its owner's hand, regardless of whoever owns the minion that was directly affected by the action. Note that if the minion is a [[monster]] or a [[treasure]], it remains in play because monsters and treasures can't be affected by cards that refer to a card's owner.<br />- If [[We are Family]] copies it, the minion it is on is considered as indirectly affected by the action and is returned to its owner's hand, regardless of whoever owns the minion that was directly affected by the action. Note that if the minion is a monster or a treasure, it remains in play because monsters and treasures can't be affected by cards that refer to a card's owner.<br />- With [[Funky Town]], you can only copy it if you're the one who played the action and if it affects one of your minions, but if Funky Town does copy it, the minion is considered as indirectly affected by the action and is returned to its owner's hand, regardless of whoever owns the minion that was directly affected by the action. Note that if the minion is a monster or a treasure, it remains in play because monsters and treasures can't be affected by cards that refer to a card's owner.</blockquote>
+
+{{Visible Card Movement Rule}}
+{{Monsters Treasures Owner Rule}}
+
+----
+
+==='''Questions on [[#Crop Circles|Crop Circles]]'''===
+
+Q: I return minions. What happens to actions that were played on a returned minion? Are they also returned to their owners' hand?
+
+<blockquote>A: They are discarded in the appropriate discard piles.</blockquote>
+
+{{Discard Attachments Rule}}
+
+Q: In what order do I return the minions? For example, if someone has a [[Ship’s Engineer]] there, can I return it before their other minions?
+
+<blockquote>A: The minions are all returned at the same time, so there's no order to decide. A Ship’s Engineer there would trigger for each of that player's other minions that are returned.</blockquote>
+
+{{One Player Many Cards Rule}}
+
+Q: Can I play Crop Circles and choose [[The Dread Gazebo]] or a base with [[Magic Ward]]?
+
+<blockquote>A: Yes. Crop Circles targets a base, but is not ''played'' on it. Those cards only prevent "play on a base" actions, and Crop Circles is no such action.</blockquote>
+
+{{POB Actions Are On Bases Rule}}
+
+Q: Another player already has ten cards in their hand. I return their minions to their hand. Because they already have 10 cards, are they immediately discarded instead? Do they keep them and choose which cards to discard during my draw 2 cards phase?
+
+<blockquote>A: They don't discard any card until '''their''' next Draw 2 Cards phase (so not any Draw 2 Cards phase!). At that point, they will indeed need to draw two cards and discard down to 10 if they have more than 10. That's the only moment where they must discard down to 10. At any other time, they keep their hand of cards.</blockquote>
+
+{{Discard Down To 10 Rule}}
+
+Q: How does this interact with the [[Disco Dancers]]' mechanic and [[Funky Town]]'s ability?
+
+<blockquote>A: While being a standard action and one that affects minions, Crop Circles won't interact with the Disco Dancers, nor with Funky Town, because Crop Circles already directly affect all minions on the base (with the notable exceptions of [[monsters]] and [[treasures]]), and copying the effect can only be applied to minions that aren't already directly affected by the action.</blockquote>
+
+{{Monsters Treasures Owner Rule}}
+
+----
+
+==='''Questions on [[#Disintegrator|Disintegrator]]'''===
+
+Q: Can I use it on a minion that cannot be returned to the deck? E.g. because of [[Superiority]].
+
+<blockquote>A: Yes. The card says "[[place]]", not "[[return]]". So it can be used on a card that cannot be "returned to the deck". Also, there are currently no abilities that "return" a card in play to the deck. [[The Bigger Geekier Box]] rulebook even clarifies that Superiority "does not protect a minion from being placed or shuffled."</blockquote>
+
+{{Specific Words Rule}}
+
+Q: Is its ability the same as moving/returning the minion?
+
+<blockquote>A: Unless the card explicitly tells you to "[[move]]" or "[[return]]" the minion, it is not moving or returning the minion, so no.</blockquote>
+
+{{Specific Words Rule}}
+
+Q: Can I use it to place a minion of power 3 or less from a player's discard pile to the bottom of that player's deck?
+
+<blockquote>A: No. The minion must be a minion in play. Cards that allow you to target something in the discard pile, like the cards from the [[Zombie]] faction, will explicitly say so. By default, "a minion" refers to a minion that's in play.</blockquote>
+
+{{A Minion Rule}}
+
+Q: Can I use it to place a minion of power 3 or less in stasis to the bottom of that player's deck?
+
+<blockquote>A: No, cards in stasis cannot be affected by cards that do not explicitly state they work on cards in stasis.</blockquote>
+
+{{Affecting Stasis Card Rule}}
+
+Q: I target a minion with it. What happens to actions that were played on the targeted minion? Are they also placed on the bottom of their owners' decks?
+
+<blockquote>A: They are discarded in the appropriate discard piles.</blockquote>
+
+{{Discard Attachments Rule}}
+
+Q: How does this interact with the [[Disco Dancers]]' mechanic and [[Funky Town]]'s ability?
+
+<blockquote>A: - If [[Diva]] copies it (and it can copy it even if its power is more than 3), Diva is considered as indirectly affected by the action and is placed on the bottom of its owner's deck, regardless of whoever owns the minion that was directly affected by the action.<br />- If [[Dancing King]] copies it onto a minion (it can be itself and it can copy it even if the power of the minion that gets the copy is more than 3), that minion is considered as indirectly affected by the action and is placed on the bottom of its owner's deck, regardless of whoever owns the minion that was directly affected by the action. Note that if the minion is a [[monster]] or a [[treasure]], it remains in play because monsters and treasures can't be affected by cards that refer to a card's owner.<br />- If [[We are Family]] copies it (and it can copy it even if the power of the minion it is on is more than 3), the minion it is on is considered as indirectly affected by the action and is placed on the bottom of its owner's deck, regardless of whoever owns the minion that was directly affected by the action. Note that if the minion is a monster or a treasure, it remains in play because monsters and treasures can't be affected by cards that refer to a card's owner.<br />- With [[Funky Town]], you can only copy it if you're the one who played the action and if it affects one of your minions, but if Funky Town does copy it (and it can copy it even if the power of the minion that gets the copy is more than 3), the minion is considered as indirectly affected by the action and is placed on the bottom of its owner's deck, regardless of whoever owns the minion that was directly affected by the action. Note that if the minion is a monster or a treasure, it remains in play because monsters and treasures can't be affected by cards that refer to a card's owner.</blockquote>
+
+{{Visible Card Movement Rule}}
+{{Monsters Treasures Owner Rule}}
+
+----
+
+==='''Questions on [[#Invasion|Invasion]]'''===
+
+Q: Can it move another player's minion, or just my own minion?
+
+<blockquote>A: It doesn't specify "your minion"; it just says "a minion", so you can target any minion that's in play, even uncontrolled [[monsters]].</blockquote>
+
+{{A Minion Rule}}
+
+Q: Can I use it to move a minion of power 3 or less from stasis to a base?
+
+<blockquote>A: No, cards in stasis cannot be affected by cards that do not explicitly state they work on cards in stasis.</blockquote>
+
+{{Affecting Stasis Card Rule}}
+
+Q: How does this interact with the [[Disco Dancers]]' mechanic and [[Funky Town]]'s ability?
+
+<blockquote>A: - If [[Diva]] copies it, Diva is considered as indirectly affected by the action and is moved to the same base as the minion that was directly affected by the action.<br />- If [[Dancing King]] copies it onto a minion (it can be itself), that minion is considered as indirectly affected by the action and is moved to the same base as the minion that was directly affected by the action.<br />- If [[We are Family]] copies it, the minion it is on is considered as indirectly affected by the action and is moved to the same base as the minion that was directly affected by the action.<br />- With [[Funky Town]], you can only copy it if you're the one who played the action and if it moves one of your minions away from Funky Town, but if Funky Town does copy it, the minion is considered as indirectly affected by the action and is moved to the same base as the minion that was directly affected by the action.</blockquote>
+
+{{Do What Card Says Rule}}
+
+----
+
+==='''Questions on [[#Jammed Signal|Jammed Signal]]'''===
+
+Q: Can I play it on [[The Dread Gazebo]]?
+
+<blockquote>A: No. The Ongoing ability of Jammed Signal would take effect ''after'' being played there, and the Dread Gazebo prohibits you from playing Jammed Signal there at all, though if you still try to play it there, Jammed Signal will be '''discarded without effect'''. However, Jammed Signal can be [[transferred]] there using [[Rules Lawyer]].</blockquote>
+
+{{Prohibited Play Rule}}
+
+Q: What does Jammed Signal stop?
+
+<blockquote>A: It shuts off the ability of the base for all players, regardless of when that ability is triggered or what it does. It does not prevent the base from breaking when the breakpoint is reached. In fact, [[The Bigger Geekier Box]] rulebook clarifies that once Jammed Signal is on a base, all players must stop following its instructions, are not subject to its restrictions, and your cards can neither be affected, nor be protected by the base's ability.</blockquote>
+
+{{Base Ability Rule}}
+
+<blockquote>Rule: Definition of "[[ignore]]".</blockquote>
+
+Q: Do uncontrolled [[monsters]] also ignore a base's ability? E.g. a monster on [[The Central Brain]] with Jammed Signal played on it.
+
+<blockquote>A: No. Uncontrolled monsters aren't any player's cards so they are still affected by its ability.</blockquote>
+
+<blockquote>Rule: [[Ignore|Definition of "ignore".]]</blockquote>
+
+Q: Does it cancel other player's actions played on the same base?
+
+<blockquote>A: No. Jammed Signal only makes players ignore the base's ability. The abilities of actions played there don't count as the base's ability.</blockquote>
+
+{{Base Ability Rule}}
+
+Q: How does this interact with the [[Disco Dancers]]' mechanic and [[Funky Town]]'s ability?
+
+<blockquote>A: It doesn't interact with them at all, because it says "Play on a base", which means that it is '''not''' a standard action.</blockquote>
+
+<blockquote>Rule: Definition of "[[standard]]".</blockquote>
+
+----
+
+==='''Questions on [[#Probe|Probe]]'''===
+
+Q: Do I look at a player's entire hand or just their minions?
+
+<blockquote>A: You look at their entire hand.</blockquote>
+
+{{Do What Card Says Rule}}
+
+Q: If the discarded minion is a [[Fan]], an [[Igor]], or a [[Deputy]], does the minion's owner get to use their benefit (i.e. draw a card, place a +1 power counter, or give +2 power)?
+
+<blockquote>A: No. Fan only lets you draw a card if it's discarded through its own Special ability. Igor's ability is an Ongoing ability, so it only works if it's discarded from play. And Deputy only lets you give +2 power to a minion if it's discarded through its own Special ability.</blockquote>
+
+{{Other Card Doing X Rule}}
+{{Ongoing In Play Rule}}
+
+Q: If the discarded minion is a [[Enchanted Objects]], does the minion's owner get to use their benefit (i.e. play it as an extra minion)?
+
+<blockquote>A: Yes, because [[Enchanted Objects]] triggers from being discarded from the hand and because it is carriedt by the other player, not the player who played Probe.</blockquote>
+
+{{Special Description Rule}}
+{{Effect Credit Rule}}
+
+Q: How does this interact with the [[Disco Dancers]]' mechanic and [[Funky Town]]'s ability?
+
+<blockquote>A: It doesn't interact with them at all, because it doesn't affect any minions in play and so its effect can't be copied.</blockquote>
+
+{{Do What Card Says Rule}}
+
+----
+
+==='''Questions on [[#Terraforming|Terraforming]]'''===
+
+Q: Does it destroy actions played on the base, or are they "discarded"?
+
+<blockquote>A: They are not "destroyed"; they are "discarded". This works similar to what happens when scoring a base. Also, Terraforming actually doesn't do anything to those actions; the part in parenthesis is there to remind you the rule that "When a card leaves play, discard attachments." So, when a base leaves play, any actions attached to it are discarded.</blockquote>
+
+{{Discard Attachments Rule}}
+
+Q: When it is played, does [[Steam Queen]] prevent the actions from being discarded?
+
+<blockquote>A: No. Steam Queen protects actions from being affected. Being "discarded" is not listed as being "affected". Also Steam Queen only protects against other players' cards, and what happens to the actions are not because of Terraforming, but because of the general rule that "When a card leaves play, discard attachments."</blockquote>
+
+<blockquote>Rule: Definition of "[[affect]]". Discarding a card from play does not affect the card.</blockquote>
+
+Q: Can I use it on [[The Dread Gazebo]] or a base with [[Magic Ward]]?
+
+<blockquote>A: Yes. Terraforming targets a base, but is not played on it. Those cards only prevent "play on a base" cards, and Terraforming is no such action.</blockquote>
+
+{{POB Actions Are On Bases Rule}}
+
+Q: Where do I put the base that was in play?
+
+<blockquote>A: It's shuffled back into the base deck.</blockquote>
+
+{{Do What Card Says Rule}}
+
+Q: What happens to the minions on the swapped base and actions played on minions there?
+
+<blockquote>A: [[The Bigger Geekier Box]] gave an erratum for the card text and a clarification. Minions remain in play and go on the replacement base and actions on minions are not discarded, unlike actions on the base.</blockquote>
+
+<blockquote>Rule: [[#Terraforming|Check Terraforming's erratum]] and [[#Clarifications|clarification.]]</blockquote>
+
+Q: What happens to a titan on the swapped base?
+
+<blockquote>A: It is removed from play and set aside near its owner's deck. Any +1 power counters on it are removed.</blockquote>
+
+{{Titan When Base Leaves Rule}}
+
+Q: What does it do to monsters?
+
+<blockquote>A: Nothing, they go on the new base, exactly as stated on Terraforming's errata'd ability.</blockquote>
+
+<blockquote>Rule: [[#Terraforming|Check Terraforming's erratum]] and [[#Clarifications|clarification.]]</blockquote>
+
+Q: Before a base scores, I manage to play it (e.g. with a [[Mole]]). I target the scoring base. What happens now?
+
+<blockquote>A: The scoring stops for that base (because it's not the same base anymore), but you still get to play an extra minion there, that must be done immediately or not at all. Then, you must continue the Score Bases back to step 1 if a base (including the new base) is ready to score.<ref>https://boardgamegeek.com/article/22359274#22359274</ref></blockquote>
+
+{{Removed Scoring Base Rule}}
+
+Q: How does this interact with the [[Disco Dancers]]' mechanic and [[Funky Town]]'s ability?
+
+<blockquote>A: It doesn't interact with them at all, because it doesn't affect any minions in play and so its effect can't be copied.</blockquote>
+
+<blockquote>Rule: Definition of "[[affect]]".</blockquote>
+
+==<span style="{{ColorOutline | #FFFFFF}}; color:#8F3371; margin-left: 3px">'''Trivia'''</span>==
+
+* The artist is Conceptopolis, who also designed the art of the [[Steampunks]].
+*Their divider (available in [[The Big Geeky Box]] and [[The Bigger Geekier Box]]) features Scout.
+*The font used for this faction is '''Fontdinerdotcom Jazz Dark''' by Font Diner.
+* The Aliens are heavily based on their portrayal in Invasion of the Saucer Men and Mars Attacks!
+*Beam Up is a reference to Star Trek.
+
+==<span style="{{ColorOutline | #FFFFFF}}; color:#8F3371; margin-left: 3px">'''In other languages'''</span>==
+
+{| class="article-table"
+!Language
+! Name
+|-
+| Chinese
+|外星人
+|-
+|Czech
+| Mimozemšťané
+|-
+| French
+|Aliens
+|-
+| German
+|Aliens
+|-
+|Greek
+|Εξωγήινοι
+|-
+|Hebrew
+|חייזרים
+|-
+|Italian
+|Alieni
+|-
+|Japanese
+|宇宙人
+|-
+|Polish
+|Obcy
+|-
+|Portuguese
+|Alienígenas
+|-
+|Russian
+|Пришельцы
+|-
+|Spanish
+| Alienígenas
+|-
+|Turkish
+|Uzaylılar
+|}
+
+{{Core Set Navibox}}
+{{Sets Navibox}}
+
+=References=
+
+<references />
+[[Category:Factions]]

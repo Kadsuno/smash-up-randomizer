@@ -17,7 +17,7 @@
         "synergy": "",
         "tips": "",
         "effects": "Dragons specialized in ruining other players control over bases and make bases unattractive to other while improving your plays. Their minions Hatchling, and Imperial Dragon give more control over it while reducing theirs and minion like Wyvern can destroy minion and able to reduce the breakpoints of bases making it easier to capture. Dragons have many actions that can ruin other player action or control of the base. Action such as Dragon Lands, Bring Down the Walls, Intimidating Presence and Dangerous Ground give player more control over bases while making other weaker and action like Raze and Burn it Down give you an ability to destroy an action control over any bases as well. Finally, their best and worst are Ruins and Great Wyrm as they have the ability to reduce the VP score thus reducing the number of point upon capturing a base. Like Tricksters, the downside is that Dragons' abilities can be avoided easily.",
-        "image": ""
+        "image": "/images/factions/dragons.svg"
     },
     {
         "name": "Mythic Greeks",
@@ -25,7 +25,7 @@
         "teaser": "Get power boosts each time you play an action.",
         "mechanics": "Get power boosts each time you play an action.",
         "playstyle": "Low-Medium",
-        "description": "The Mythic Greeks are one of the 5 factions from the It’s Your Fault! set.\n\nThe Mythic Greek minions gain more power the more actions you play.\n\nTheir complexity rating is: Low-Medium.\n\nOther factions from the same set: Dragons, Sharks, Superheroes, Tornados.",
+        "description": "Discover the Mythic Greeks, a faction from the It's Your Fault! expansion. This faction excels at amplifying the strength of its minions through repeated action plays. With a complexity level of Low-Medium, they offer an accessible yet engaging experience. The Mythic Greeks are joined by four other factions in this set: Dragons, Sharks, Superheroes, and Tornados.",
         "cardsTeaser": "The Mythic Greeks have the usual 10 minions and 10 actions. The total minion base power (not counting any abilities) is the usual 30 or an average of 3 per minion. Additionally, there are several abilities that can boost the power of minions beyond its base value. The Mythic Greeks have 10 unique actions that represent the favors of the Greek gods. As each of the gods is unique, so are the actions.\n\nAmong their actions, there are:\n* 0 play-on-minion actions,\n* 0 play-on-base actions,\n* 10 standard actions (3 that affect one or more minions, in bold): Favor of Aphrodite, Favor of Apollo, Favor of Ares, Favor of Athena, Favor of Dionysus, Favor of Hades, Favor of Hera, Favor of Hermes, Favor of Poseidon, Favor of Zeus,\n* 3 actions that directly increase a minion's power: Favor of Ares, Favor of Dionysus, Favor of Hera.",
         "actionTeaser": "",
         "actionList": "1x Favor of Aphrodite - Play an extra minion.\n1x Favor of Apollo - Draw a card and play an extra action.\n1x Favor of Ares - One of your minions gains +3 power until the end of the turn.\n1x Favor of Athena - Reveal the top 5 cards of your deck. You may place one of the revealed actions into your hand, and return the rest to the top of your deck in any order.\n1x Favor of Dionysus - One of your minions gains +1 power until the end of the turn. Play an extra action. You may place this card on top of your deck instead of the discard pile.\n1x Favor of Hades - Place an action card from your discard pile into your hand.\n1x Favor of Hera - Place a +1 power counter on up to two of your minions.\n1x Favor of Hermes - Play two extra actions.\n1x Favor of Poseidon - Shuffle up to three cards from your discard pile into your deck.\n1x Favor of Zeus - Reduce the breakpoint of a base by 5 until the end of the turn.",
@@ -37,7 +37,10 @@
         "synergy": "",
         "tips": "",
         "effects": "Mythic Greeks specialize in getting stronger by using powerful actions, known as the \"favors of the Gods\" which grant them many diverse abilities.  The minions Spartan, Jason, Heracles and Odysseus get buffed as more actions are played.  Argonaut is counted as both an action and a minion so if a minion or action is played, the Argonaut can be played as the other.  The Mythic Greeks minions are fairly weak and don't have any diversity so they have to depend on their actions instead.",
-        "image": ""
+        "image": "/images/factions/mythic-greeks.svg",
+        "__rewritten": [
+            "description"
+        ]
     },
     {
         "name": "Sharks",
@@ -57,7 +60,7 @@
         "synergy": "",
         "tips": "",
         "effects": "Sharks specialized in destruction and buffing. Sharks are not only capable of destroying low level target but they have the ability to get stronger the more minions destroy. Mako and Hammerhead give you some advantages as Mako allow player to play them as extra minion if player destroy a minion while Hammerhead get a 1 power counter for each minion destroy as well. Great White and Megalodon give you an ability to destroy minion as well. Action such as Blood in the Water, Chum, Week of Sharks and Feeding Frenzy give you some advantages for each minion you kill. However, their downside is that their only role is destruction so they have lack of support and control cards.",
-        "image": ""
+        "image": "/images/factions/sharks.svg"
     },
     {
         "name": "Superheroes",
@@ -77,7 +80,7 @@
         "synergy": "* Zombies: The Mild-Mannered Citizen can be brought out of the graveyard by Zombie minions and actions.\n* Killer Plants: The Mild-Mannered Citizen can fetch the Venus Man Trap, who can fetch even more Mild-Mannered Citizens.\n* Werewolves: Werewolves like having high power, and the Superheroes certainly provide plenty.\n* Princesses: The Mild-Mannered Citizen can fetch the powerful power-5 Princesses and the Princesses' actions make it easier to move Superheroes and Princesses around.\n* Sharks: Sharks trigger off minions being destroyed, and wouldn't you know, the Mild-Mannered Citizens destroy themselves as part of their ongoing ability.\n* Magical Girls: Lunar Captain is a fantastic target for Mild-Mannered Citizen, as she can easily retrieve the Citizen, letting you play the same Citizen over and over again. Both factions have lots of actions that either place minions from your discard pile into your deck or return them to your hand, making it easy to play them again and again.\n* The Lion King: Mufasa can be fetched using Mild-Mannered Citizen, and you can use Wildebeest Stampede to fetch the power-5 Superheroes.",
         "tips": "",
         "effects": "Superheroes' main mechanic is changing your low-power minions into power-5 minions. They even have an ensemble cast of four power-5 minions you can choose from, not including the boss minion from their partner faction.\n\nTheir main drawback is their low-power minion, being a power-2, can easily be targeted by other players before you're able to transform it into a power-5 minion. To make up for it, the Superheroes have a few cards allowing you to protect them until you're able to use them.\n\nAdditionally, the Superheroes are able to put back minions from your discard pile into your deck, allowing you to recur your power-5 minions.",
-        "image": ""
+        "image": "/images/factions/superheroes.svg"
     },
     {
         "name": "Tornados",
@@ -97,6 +100,6 @@
         "synergy": "",
         "tips": "",
         "effects": "Tornados focus on moving cards around, especially minions. Nearly their entire deck involves moving something. You can move your minions or other players' minions.\n\nThey also have a few Special cards allowing you to move minions around before a base scores, allowing you to change the state of the game to your advantage.",
-        "image": ""
+        "image": "/images/factions/tornados.svg"
     }
 ]

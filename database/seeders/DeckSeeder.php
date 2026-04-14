@@ -43,7 +43,7 @@ class DeckSeeder extends Seeder
                 $name = $faction['name'];
                 $attributes = array_filter(
                     $faction,
-                    static fn(string $key) => $key !== 'name',
+                    static fn(string $key) => $key !== 'name' && !str_starts_with($key, '__'),
                     ARRAY_FILTER_USE_KEY
                 );
 

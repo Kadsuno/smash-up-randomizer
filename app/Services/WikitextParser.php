@@ -46,8 +46,8 @@ class WikitextParser
         $this->setIfNotEmpty($fields, 'bases', $this->stripMarkup($this->extractSection($wikitext, 'Bases', 3)));
         $this->setIfNotEmpty($fields, 'clarifications', $this->stripMarkup($this->extractTopLevelSection($wikitext, 'Clarifications')));
         $this->setIfNotEmpty($fields, 'effects', $this->extractMechanicsIntro($wikitext));
-        $this->setIfNotEmpty($fields, 'tips', $this->stripMarkup($this->extractSection($wikitext, 'Strategy', 3)));
-        $this->setIfNotEmpty($fields, 'synergy', $this->stripMarkup($this->extractSection($wikitext, 'Synergy', 3)));
+        $this->setIfNotEmpty($fields, 'tips', $this->extractTips($wikitext));
+        $this->setIfNotEmpty($fields, 'synergy', $this->extractSynergy($wikitext));
         $this->setIfNotEmpty($fields, 'suggestionTeaser', $this->extractSuggestionTeaser($wikitext));
 
         return $fields;
@@ -199,29 +199,100 @@ class WikitextParser
     }
 
     /**
+     * Extract strategy tips.
+     * Tries === Strategy === first, then the Disney-set heading
+     * "=== Suggested Disney Matchups and Tips for Play ===".
+     * For Disney sections, extracts only the "Tips for play:" bullet list.
+     */
+    public function extractTips(string $wikitext): string
+    {
+        $section = $this->extractSection($wikitext, 'Strategy', 3);
+        if ($section !== '') {
+            return $this->stripMarkup($section);
+        }
+
+        $disney = $this->extractDisneyMatchupsSection($wikitext);
+        if ($disney === '') {
+            return '';
+        }
+
+        // Extract only the "Tips for play:" portion of the Disney section
+        if (preg_match("/'''Tips for play:'''\s*\n(.*?)(?:\n'''|\z)/si", $disney, $m)) {
+            return $this->stripMarkup(trim($m[1]));
+        }
+
+        return $this->stripMarkup($disney);
+    }
+
+    /**
+     * Extract synergy / partner recommendations.
+     * Tries === Synergy === first, then parses "Good beginning partner factions" from the
+     * Disney matchups section.
+     */
+    public function extractSynergy(string $wikitext): string
+    {
+        $section = $this->extractSection($wikitext, 'Synergy', 3);
+        if ($section !== '') {
+            return $this->stripMarkup($section);
+        }
+
+        $disney = $this->extractDisneyMatchupsSection($wikitext);
+        if ($disney === '') {
+            return '';
+        }
+
+        // Extract only the partner factions line(s) from the Disney matchups section
+        if (preg_match("/'''Good beginning partner factions:'''\s*\n(.*?)(?:\n'''|\z)/si", $disney, $m)) {
+            $partners = trim($m[1]);
+            // Convert comma-separated faction list into a bulleted list
+            $factions = array_map('trim', explode(',', $this->stripMarkup($partners)));
+            $factions = array_filter($factions);
+
+            return implode("\n", array_map(static fn(string $f) => "* $f", $factions));
+        }
+
+        return $this->stripMarkup($disney);
+    }
+
+    /**
      * Extract the first sentence of the Synergy section as the suggestionTeaser.
+     * Falls back to the Disney partner factions as a teaser.
      */
     public function extractSuggestionTeaser(string $wikitext): string
     {
         $synergy = $this->extractSection($wikitext, 'Synergy', 3);
-        if ($synergy === '') {
-            return '';
-        }
 
-        // First non-bullet, non-empty line
-        $lines = explode("\n", $synergy);
-        foreach ($lines as $line) {
-            $line = trim($line);
-            if ($line !== '' && !str_starts_with($line, '*')) {
-                // Take up to the first sentence end
-                $pos = strpos($line, '. ');
-                $teaser = $pos !== false ? substr($line, 0, $pos + 1) : $line;
+        if ($synergy !== '') {
+            // First non-bullet, non-empty line
+            $lines = explode("\n", $synergy);
+            foreach ($lines as $line) {
+                $line = trim($line);
+                if ($line !== '' && !str_starts_with($line, '*')) {
+                    $pos = strpos($line, '. ');
+                    $teaser = $pos !== false ? substr($line, 0, $pos + 1) : $line;
 
-                return $this->stripMarkup($teaser);
+                    return $this->stripMarkup($teaser);
+                }
             }
         }
 
+        // Disney fallback: use the partner factions list as teaser
+        $disney = $this->extractDisneyMatchupsSection($wikitext);
+        if ($disney !== '' && preg_match("/'''Good beginning partner factions:'''\s*\n(.*?)(?:\n|$)/s", $disney, $m)) {
+            return 'Good partner factions: ' . $this->stripMarkup(trim($m[1]));
+        }
+
         return '';
+    }
+
+    /**
+     * Extract the "Suggested Disney Matchups and Tips for Play" subsection.
+     * This heading is used by the Smash Up: Disney Edition factions instead of
+     * the standard === Strategy === / === Synergy === subsections.
+     */
+    private function extractDisneyMatchupsSection(string $wikitext): string
+    {
+        return $this->extractSection($wikitext, 'Suggested Disney Matchups and Tips for Play', 3);
     }
 
     /**
