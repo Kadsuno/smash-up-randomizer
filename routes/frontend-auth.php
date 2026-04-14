@@ -53,4 +53,10 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/account', [AccountController::class, 'index'])
         ->name('account');
+
+    Route::patch('/account/profile', [AccountController::class, 'updateProfile'])
+        ->name('account.profile.update');
+
+    Route::patch('/account/password', [AccountController::class, 'updatePassword'])
+        ->name('account.password.update');
 });

@@ -311,4 +311,21 @@ return [
     'account_feat_history_title'   => 'Play history',
     'account_feat_history_body'    => 'Browse past shuffle results and see which faction combos your group has played.',
     'account_quick_actions'        => 'Quick actions',
+
+    // Account — edit profile
+    'account_edit_profile_heading'      => 'Edit profile',
+    'account_edit_profile_name'         => 'Display name',
+    'account_edit_profile_email'        => 'E-mail address',
+    'account_edit_profile_save'         => 'Save changes',
+    'account_profile_saved'             => 'Profile updated successfully.',
+    'account_profile_email_changed'     => 'E-mail updated. Please verify your new address.',
+
+    // Account — change password
+    'account_change_password_heading'   => 'Change password',
+    'account_password_current'          => 'Current password',
+    'account_password_new'              => 'New password',
+    'account_password_confirm'          => 'Confirm new password',
+    'account_password_save'             => 'Update password',
+    'account_password_saved'            => 'Password updated successfully.',
+    'account_password_wrong_current'    => 'The current password is incorrect.',
 ];

@@ -293,4 +293,21 @@ return [
     'account_feat_history_title'   => 'Spielverlauf',
     'account_feat_history_body'    => 'Durchstöbere vergangene Shuffle-Ergebnisse und sieh, welche Fraktionskombinationen deine Gruppe gespielt hat.',
     'account_quick_actions'        => 'Schnellzugriff',
+
+    // Account — Profil bearbeiten
+    'account_edit_profile_heading'      => 'Profil bearbeiten',
+    'account_edit_profile_name'         => 'Anzeigename',
+    'account_edit_profile_email'        => 'E-Mail-Adresse',
+    'account_edit_profile_save'         => 'Änderungen speichern',
+    'account_profile_saved'             => 'Profil erfolgreich aktualisiert.',
+    'account_profile_email_changed'     => 'E-Mail aktualisiert. Bitte bestätige deine neue Adresse.',
+
+    // Account — Passwort ändern
+    'account_change_password_heading'   => 'Passwort ändern',
+    'account_password_current'          => 'Aktuelles Passwort',
+    'account_password_new'              => 'Neues Passwort',
+    'account_password_confirm'          => 'Neues Passwort bestätigen',
+    'account_password_save'             => 'Passwort aktualisieren',
+    'account_password_saved'            => 'Passwort erfolgreich aktualisiert.',
+    'account_password_wrong_current'    => 'Das aktuelle Passwort ist falsch.',
 ];
