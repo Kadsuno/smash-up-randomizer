@@ -334,4 +334,15 @@ return [
     'account_password_save'             => 'Update password',
     'account_password_saved'            => 'Password updated successfully.',
     'account_password_wrong_current'    => 'The current password is incorrect.',
+    'account_password_oauth_only'       => 'Password login is not enabled for this account. Sign in with your social provider.',
+    'account_password_oauth_hint'       => 'You signed in with Google or GitHub. There is no password to change. Use the same provider to sign in again.',
+
+    // Social login (OAuth)
+    'social_divider'                  => 'Or continue with',
+    'social_continue_google'          => 'Continue with Google',
+    'social_continue_github'          => 'Continue with GitHub',
+    'social_session_expired'          => 'The sign-in session expired. Please try again.',
+    'social_login_failed'             => 'Social sign-in failed. Please try again or use e-mail and password.',
+    'social_email_required'           => 'We could not read an e-mail address from your account. Make sure it is public or try another provider.',
+    'social_email_taken_other_provider' => 'This e-mail is already linked to another sign-in method.',
 ];

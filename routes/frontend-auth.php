@@ -7,10 +7,19 @@ use App\Http\Controllers\Frontend\Auth\FrontendEmailVerificationPromptController
 use App\Http\Controllers\Frontend\Auth\FrontendNewPasswordController;
 use App\Http\Controllers\Frontend\Auth\FrontendPasswordResetLinkController;
 use App\Http\Controllers\Frontend\Auth\FrontendRegisteredUserController;
+use App\Http\Controllers\Frontend\Auth\FrontendSocialAuthController;
 use App\Http\Controllers\Frontend\Auth\FrontendVerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
+    Route::get('/auth/{provider}/redirect', [FrontendSocialAuthController::class, 'redirect'])
+        ->whereIn('provider', ['google', 'github'])
+        ->name('social.redirect');
+
+    Route::get('/auth/{provider}/callback', [FrontendSocialAuthController::class, 'callback'])
+        ->whereIn('provider', ['google', 'github'])
+        ->name('social.callback');
+
     Route::get('/register', [FrontendRegisteredUserController::class, 'create'])
         ->name('register');
 

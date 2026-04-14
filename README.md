@@ -114,11 +114,15 @@ Local stack is defined in `.ddev/config.yaml` (PHP 8.3, MariaDB 10.4, Node 22, n
 7. `npm run dev` (or `npm run build` for production assets)
 8. `php artisan serve` (or your web server of choice pointing at `public/`)
 
+### OAuth (Google / GitHub, optional)
+
+Frontend users can sign in with Google or GitHub when credentials are configured. Set `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, and/or `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET` in `.env` (see `.env.example`). In each provider’s developer console, register the redirect URL as `{APP_URL}/auth/google/callback` or `{APP_URL}/auth/github/callback` (must match `APP_URL`). If client IDs are empty, social buttons stay hidden on `/login` and `/register`.
+
 ## Database (overview)
 
 Typical tables after migrations:
 
-- **users** — admin/backend accounts (Laravel UI auth under `/admin`)
+- **users** — frontend and admin accounts; optional `provider` / `provider_id` for OAuth; `password` nullable for social-only users
 - **decks** — faction/deck content (name, expansion, text fields, image path, etc.)
 - **contacts** — contact form submissions
 - **jobs**, **failed_jobs** — queue

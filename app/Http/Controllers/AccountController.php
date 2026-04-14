@@ -57,12 +57,19 @@ class AccountController extends Controller
 
     public function updatePassword(Request $request): RedirectResponse
     {
+        $user = $request->user();
+
+        if ($user->password === null) {
+            return redirect()->route('account.edit')->withErrors(
+                ['current_password' => __('frontend.account_password_oauth_only')],
+                'passwordErrors'
+            );
+        }
+
         $request->validate([
             'current_password' => ['required', 'string'],
             'password'         => ['required', 'string', 'confirmed', Password::min(8)],
         ]);
-
-        $user = $request->user();
 
         if (! Hash::check($request->current_password, $user->password)) {
             return redirect()->route('account.edit')->withErrors(
