@@ -25,30 +25,28 @@
                     href="{{ route('expansion', ['slug' => $expansion['slug']]) }}"
                     class="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/8 bg-zinc-900/60 transition duration-200 hover:border-indigo-500/30 hover:bg-zinc-800/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60"
                 >
-                    {{-- Preview thumbnails — 2×2 grid --}}
+                    {{-- Preview thumbnails — fixed-height 2×2 grid --}}
                     @php $preview = $expansion['preview']; @endphp
-                    @if($preview->isEmpty())
-                        <div class="flex h-44 items-center justify-center bg-zinc-800/40">
-                            <i class="fa-solid fa-box-open text-3xl text-zinc-700" aria-hidden="true"></i>
-                        </div>
-                    @else
-                        <div class="grid grid-cols-2 gap-0.5 overflow-hidden">
-                            @for($i = 0; $i < 4; $i++)
-                                <div class="h-24 overflow-hidden">
-                                    @if(isset($preview[$i]))
-                                        <img
-                                            src="{{ asset($preview[$i]->image) }}"
-                                            alt="{{ $preview[$i]->name }}"
-                                            class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.04]"
-                                            loading="lazy"
-                                        >
-                                    @else
-                                        <div class="h-full bg-zinc-800/30"></div>
-                                    @endif
-                                </div>
-                            @endfor
-                        </div>
-                    @endif
+                    <div class="grid h-48 grid-cols-2 grid-rows-2 gap-0.5 overflow-hidden">
+                        @for($i = 0; $i < 4; $i++)
+                            <div class="overflow-hidden">
+                                @if(isset($preview[$i]))
+                                    <img
+                                        src="{{ asset($preview[$i]->image) }}"
+                                        alt="{{ $preview[$i]->name }}"
+                                        class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.04]"
+                                        loading="lazy"
+                                    >
+                                @else
+                                    <div class="flex h-full items-center justify-center bg-zinc-800/50">
+                                        @if($i === 0 && $preview->isEmpty())
+                                            <i class="fa-solid fa-box-open text-2xl text-zinc-700" aria-hidden="true"></i>
+                                        @endif
+                                    </div>
+                                @endif
+                            </div>
+                        @endfor
+                    </div>
 
                     {{-- Info --}}
                     <div class="flex flex-1 items-center justify-between gap-3 p-4">
