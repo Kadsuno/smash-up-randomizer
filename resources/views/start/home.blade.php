@@ -21,7 +21,11 @@
                         <a href="{{ route('factionList') }}" class="sur-btn-secondary min-h-12 px-8 text-base">{{ __('frontend.landing_cta_factions') }}</a>
                         <a href="{{ route('contact') }}" class="sur-btn-ghost min-h-12 border-white/15 px-8 text-base">{{ __('frontend.landing_cta_contact') }}</a>
                     </div>
-                    <p class="mt-5 max-w-xl text-sm leading-relaxed text-zinc-500">
+                    <a href="{{ route('random') }}" class="mt-3 inline-flex items-center gap-1.5 text-sm text-zinc-500 transition hover:text-indigo-400">
+                        <i class="fa-solid fa-bolt text-xs" aria-hidden="true"></i>
+                        {{ __('frontend.landing_cta_random') }}
+                    </a>
+                    <p class="mt-4 max-w-xl text-sm leading-relaxed text-zinc-500">
                         {{ __('frontend.landing_hero_note') }}
                     </p>
                 </div>
