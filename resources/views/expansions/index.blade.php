@@ -25,27 +25,40 @@
                     href="{{ route('expansion', ['slug' => $expansion['slug']]) }}"
                     class="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/8 bg-zinc-900/60 transition duration-200 hover:border-indigo-500/30 hover:bg-zinc-800/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60"
                 >
-                    {{-- Preview thumbnails — fixed-height 2×2 grid --}}
-                    @php $preview = $expansion['preview']; @endphp
-                    <div class="grid h-48 grid-cols-2 grid-rows-2 gap-0.5 overflow-hidden">
-                        @for($i = 0; $i < 4; $i++)
-                            <div class="overflow-hidden">
-                                @if(isset($preview[$i]))
-                                    <img
-                                        src="{{ asset($preview[$i]->image) }}"
-                                        alt="{{ $preview[$i]->name }}"
-                                        class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.04]"
-                                        loading="lazy"
-                                    >
-                                @else
-                                    <div class="flex h-full items-center justify-center bg-zinc-800/50">
-                                        @if($i === 0 && $preview->isEmpty())
-                                            <i class="fa-solid fa-box-open text-2xl text-zinc-700" aria-hidden="true"></i>
-                                        @endif
-                                    </div>
-                                @endif
+                    {{-- Preview thumbnails — adaptive layout, no empty slots --}}
+                    @php $preview = $expansion['preview']; $pc = count($preview); @endphp
+                    <div class="h-48 overflow-hidden">
+                        @if($pc === 0)
+                            <div class="flex h-full items-center justify-center bg-zinc-800/40">
+                                <i class="fa-solid fa-box-open text-3xl text-zinc-700" aria-hidden="true"></i>
                             </div>
-                        @endfor
+                        @elseif($pc === 1)
+                            <img src="{{ asset($preview[0]->image) }}" alt="{{ $preview[0]->name }}"
+                                class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.04]" loading="lazy">
+                        @elseif($pc === 2)
+                            <div class="grid h-full grid-cols-2 gap-0.5">
+                                @foreach($preview as $f)
+                                    <img src="{{ asset($f->image) }}" alt="{{ $f->name }}"
+                                        class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.04]" loading="lazy">
+                                @endforeach
+                            </div>
+                        @elseif($pc === 3)
+                            <div class="grid h-full grid-cols-2 grid-rows-2 gap-0.5">
+                                <img src="{{ asset($preview[0]->image) }}" alt="{{ $preview[0]->name }}"
+                                    class="col-span-2 h-full w-full object-cover transition duration-300 group-hover:scale-[1.04]" loading="lazy">
+                                <img src="{{ asset($preview[1]->image) }}" alt="{{ $preview[1]->name }}"
+                                    class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.04]" loading="lazy">
+                                <img src="{{ asset($preview[2]->image) }}" alt="{{ $preview[2]->name }}"
+                                    class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.04]" loading="lazy">
+                            </div>
+                        @else
+                            <div class="grid h-full grid-cols-2 grid-rows-2 gap-0.5">
+                                @foreach($preview->take(4) as $f)
+                                    <img src="{{ asset($f->image) }}" alt="{{ $f->name }}"
+                                        class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.04]" loading="lazy">
+                                @endforeach
+                            </div>
+                        @endif
                     </div>
 
                     {{-- Info --}}
