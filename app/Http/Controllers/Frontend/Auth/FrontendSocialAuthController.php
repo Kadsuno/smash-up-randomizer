@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Frontend\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Frontend\Auth\Concerns\RedirectsAfterFrontendAuth;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +17,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse as SymfonyRedirect;
 
 class FrontendSocialAuthController extends Controller
 {
+    use RedirectsAfterFrontendAuth;
+
     /** @var list<string> */
     private const ALLOWED = ['google', 'github'];
 
@@ -70,9 +73,7 @@ class FrontendSocialAuthController extends Controller
             ->first();
 
         if ($user !== null) {
-            Auth::login($user, true);
-
-            return $this->authenticatedRedirect();
+            return $this->loginOrTwoFactorChallenge($user, true);
         }
 
         $existing = User::query()->where('email', $email)->first();
@@ -89,9 +90,7 @@ class FrontendSocialAuthController extends Controller
                 'name'        => filled($existing->name) ? $existing->name : ($socialUser->getName() ?: Str::before($email, '@')),
             ])->save();
 
-            Auth::login($existing, true);
-
-            return $this->authenticatedRedirect();
+            return $this->loginOrTwoFactorChallenge($existing, true);
         }
 
         $name = $socialUser->getName()
@@ -113,9 +112,7 @@ class FrontendSocialAuthController extends Controller
             $user->forceFill(['email_verified_at' => now()])->save();
         }
 
-        Auth::login($user, true);
-
-        return $this->authenticatedRedirect();
+        return $this->loginOrTwoFactorChallenge($user, true);
     }
 
     /**
@@ -146,21 +143,22 @@ class FrontendSocialAuthController extends Controller
         }
     }
 
-    private function authenticatedRedirect(): RedirectResponse
+    /**
+     * Log in or require MFA challenge when enabled.
+     */
+    private function loginOrTwoFactorChallenge(User $user, bool $remember): RedirectResponse
     {
-        $user = Auth::user();
-        if ($user === null) {
-            return redirect()->route('login');
+        if ($user->hasTwoFactorEnabled()) {
+            session([
+                'two_factor.login.id' => $user->getKey(),
+                'two_factor.login.remember' => $remember,
+            ]);
+
+            return redirect()->route('two-factor.login');
         }
 
-        if ($user->isAdmin()) {
-            return redirect()->intended(route('dashboard'));
-        }
+        Auth::login($user, $remember);
 
-        if (! $user->hasVerifiedEmail()) {
-            return redirect()->route('verification.notice');
-        }
-
-        return redirect()->intended(route('account'));
+        return $this->redirectAfterFrontendAuthenticated();
     }
 }

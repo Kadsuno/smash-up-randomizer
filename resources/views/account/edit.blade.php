@@ -136,6 +136,105 @@
                     </form>
                     @endif
                 </div>
+
+                {{-- Two-factor authentication --}}
+                <div class="rounded-2xl border border-white/8 bg-zinc-900/80 p-7 shadow-2xl backdrop-blur-sm" id="mfa">
+                    <h2 class="mb-6 text-center text-lg font-bold text-white">{{ __('frontend.two_factor_account_heading') }}</h2>
+
+                    @if(session('mfa_recovery_codes'))
+                        <div class="mb-4 rounded-lg border border-amber-500/30 bg-amber-900/20 px-4 py-3 text-sm text-amber-200">
+                            <p class="mb-2 font-semibold">{{ __('frontend.two_factor_recovery_codes_title') }}</p>
+                            <p class="mb-3 text-xs text-amber-200/80">{{ __('frontend.two_factor_recovery_codes_warning') }}</p>
+                            <ul class="font-mono text-xs leading-relaxed">
+                                @foreach(session('mfa_recovery_codes') as $rc)
+                                    <li>{{ $rc }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    @if(session('mfa_disabled'))
+                        <div class="mb-4 flex items-center gap-2 rounded-lg border border-emerald-500/20 bg-emerald-900/20 px-4 py-3 text-sm text-emerald-400">
+                            <i class="fa-solid fa-circle-check shrink-0" aria-hidden="true"></i>
+                            {{ __('frontend.two_factor_disabled_message') }}
+                        </div>
+                    @endif
+
+                    @if($user->hasTwoFactorEnabled())
+                        <p class="mb-4 text-center text-sm text-emerald-400">
+                            <i class="fa-solid fa-shield-halved mr-1" aria-hidden="true"></i>
+                            {{ __('frontend.two_factor_status_on') }}
+                        </p>
+
+                        <form method="POST" action="{{ route('account.two-factor.recovery-codes') }}" class="mb-6 border-b border-white/10 pb-6">
+                            @csrf
+                            <p class="mb-3 text-sm text-zinc-500">{{ __('frontend.two_factor_regenerate_intro') }}</p>
+                            <div class="mb-4">
+                                <label for="mfa_regen_code" class="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-zinc-400">{{ __('frontend.two_factor_code_label') }}</label>
+                                <input
+                                    id="mfa_regen_code"
+                                    type="text"
+                                    name="code"
+                                    autocomplete="one-time-code"
+                                    class="w-full rounded-xl border border-white/10 bg-zinc-800/60 px-4 py-2.5 text-sm text-white outline-none transition focus:border-indigo-500/60 focus:ring-2 focus:ring-indigo-500/20 {{ $errors->twoFactorRecovery->has('code') ? 'border-red-500/40' : '' }}"
+                                >
+                                @if($errors->twoFactorRecovery->has('code'))
+                                    <p class="mt-1.5 text-xs text-red-400">{{ $errors->twoFactorRecovery->first('code') }}</p>
+                                @endif
+                            </div>
+                            <button type="submit" class="w-full rounded-xl border border-white/10 bg-zinc-800/60 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-zinc-800">
+                                {{ __('frontend.two_factor_regenerate_button') }}
+                            </button>
+                        </form>
+
+                        <form method="POST" action="{{ route('account.two-factor.disable') }}">
+                            @csrf
+                            @if($user->password !== null)
+                                <p class="mb-3 text-sm text-zinc-500">{{ __('frontend.two_factor_disable_password_intro') }}</p>
+                                <div class="mb-4">
+                                    <label for="mfa_disable_password" class="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-zinc-400">{{ __('frontend.account_password_current') }}</label>
+                                    <input
+                                        id="mfa_disable_password"
+                                        type="password"
+                                        name="password"
+                                        autocomplete="current-password"
+                                        class="w-full rounded-xl border border-white/10 bg-zinc-800/60 px-4 py-2.5 text-sm text-white outline-none transition focus:border-indigo-500/60 focus:ring-2 focus:ring-indigo-500/20 {{ $errors->twoFactorDisable->has('password') ? 'border-red-500/40' : '' }}"
+                                    >
+                                    @if($errors->twoFactorDisable->has('password'))
+                                        <p class="mt-1.5 text-xs text-red-400">{{ $errors->twoFactorDisable->first('password') }}</p>
+                                    @endif
+                                </div>
+                            @else
+                                <p class="mb-3 text-sm text-zinc-500">{{ __('frontend.two_factor_disable_oauth_intro') }}</p>
+                                <div class="mb-4">
+                                    <label for="mfa_disable_code" class="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-zinc-400">{{ __('frontend.two_factor_code_or_recovery') }}</label>
+                                    <input
+                                        id="mfa_disable_code"
+                                        type="text"
+                                        name="code"
+                                        autocomplete="one-time-code"
+                                        class="w-full rounded-xl border border-white/10 bg-zinc-800/60 px-4 py-2.5 text-sm text-white outline-none transition focus:border-indigo-500/60 focus:ring-2 focus:ring-indigo-500/20 {{ $errors->twoFactorDisable->has('code') ? 'border-red-500/40' : '' }}"
+                                    >
+                                    @if($errors->twoFactorDisable->has('code'))
+                                        <p class="mt-1.5 text-xs text-red-400">{{ $errors->twoFactorDisable->first('code') }}</p>
+                                    @endif
+                                </div>
+                            @endif
+                            <button type="submit" class="flex w-full items-center justify-center gap-2 rounded-xl border border-red-500/30 bg-red-950/30 px-4 py-2.5 text-sm font-semibold text-red-300 transition hover:bg-red-950/50">
+                                {{ __('frontend.two_factor_disable_button') }}
+                            </button>
+                        </form>
+                    @else
+                        <p class="mb-4 text-center text-sm text-zinc-500">{{ __('frontend.two_factor_status_off') }}</p>
+                        <form method="POST" action="{{ route('account.two-factor.start') }}">
+                            @csrf
+                            <button type="submit" class="flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-500">
+                                <i class="fa-solid fa-shield-halved text-xs" aria-hidden="true"></i>
+                                {{ __('frontend.two_factor_enable_button') }}
+                            </button>
+                        </form>
+                    @endif
+                </div>
             </div>
         </div>
     </section>
