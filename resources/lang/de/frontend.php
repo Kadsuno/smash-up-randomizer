@@ -294,6 +294,12 @@ return [
     'account_feat_history_body'    => 'Durchstöbere vergangene Shuffle-Ergebnisse und sieh, welche Fraktionskombinationen deine Gruppe gespielt hat.',
     'account_quick_actions'        => 'Schnellzugriff',
 
+    // Account — Bearbeitungsseite
+    'account_edit_page_heading'         => 'Account bearbeiten',
+    'account_edit_page_sub'             => 'Ändere deinen Anzeigenamen, deine E-Mail-Adresse und dein Passwort.',
+    'account_edit_back'                 => 'Zurück zum Account',
+    'account_edit_link'                 => 'Account bearbeiten',
+
     // Account — Profil bearbeiten
     'account_edit_profile_heading'      => 'Profil bearbeiten',
     'account_edit_profile_name'         => 'Anzeigename',

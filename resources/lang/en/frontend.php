@@ -312,6 +312,12 @@ return [
     'account_feat_history_body'    => 'Browse past shuffle results and see which faction combos your group has played.',
     'account_quick_actions'        => 'Quick actions',
 
+    // Account — edit page
+    'account_edit_page_heading'         => 'Edit account',
+    'account_edit_page_sub'             => 'Update your display name, e-mail address, and password.',
+    'account_edit_back'                 => 'Back to account',
+    'account_edit_link'                 => 'Edit account',
+
     // Account — edit profile
     'account_edit_profile_heading'      => 'Edit profile',
     'account_edit_profile_name'         => 'Display name',

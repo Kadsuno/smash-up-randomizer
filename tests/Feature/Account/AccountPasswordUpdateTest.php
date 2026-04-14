@@ -33,7 +33,7 @@ class AccountPasswordUpdateTest extends TestCase
             'current_password'      => 'current-password',
             'password'              => 'new-password-123',
             'password_confirmation' => 'new-password-123',
-        ])->assertRedirect(route('account'));
+        ])->assertRedirect(route('account.edit'));
 
         $user->refresh();
         $this->assertTrue(Hash::check('new-password-123', $user->password));
