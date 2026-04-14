@@ -1,11 +1,11 @@
 <x-layouts.main>
 
-    {{-- Page background with gradient --}}
+    {{-- Page background: gradient centered in viewport (not above fold only) + explicit z stacking --}}
     <div class="relative min-h-screen bg-zinc-950 pt-14" style="padding-bottom: 10rem">
-        <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-5%,rgb(99_102_241_/_0.18),transparent)]" aria-hidden="true"></div>
-        <div class="pointer-events-none absolute inset-0 opacity-[0.025] [background-image:linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] [background-size:40px_40px]" aria-hidden="true"></div>
+        <div class="sur-account-radial-bg" aria-hidden="true"></div>
+        <div class="sur-account-grid-bg" aria-hidden="true"></div>
 
-        <x-sur.container class="relative">
+        <x-sur.container class="relative z-10">
 
             {{-- Profile card --}}
             <x-sur.reveal>
@@ -24,13 +24,19 @@
                                 <p class="mt-1.5 text-xs text-zinc-600">{{ __('frontend.account_member_since') }}: {{ $user->created_at->format('d M Y') }}</p>
                             </div>
                         </div>
-                        <form method="POST" action="{{ route('frontend.logout') }}" class="shrink-0">
+                    <div class="flex shrink-0 items-center gap-3">
+                        <a href="{{ route('account.edit') }}" class="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.05] px-5 py-2.5 text-sm font-medium text-zinc-300 transition hover:bg-white/[0.08] hover:text-white">
+                            <i class="fa-solid fa-pen text-xs" aria-hidden="true"></i>
+                            {{ __('frontend.account_edit_link') }}
+                        </a>
+                        <form method="POST" action="{{ route('frontend.logout') }}">
                             @csrf
                             <button type="submit" class="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.05] px-5 py-2.5 text-sm font-medium text-zinc-300 transition hover:border-red-500/40 hover:bg-red-500/10 hover:text-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500/40">
                                 <i class="fa-solid fa-right-from-bracket text-xs" aria-hidden="true"></i>
                                 {{ __('frontend.nav_logout') }}
                             </button>
                         </form>
+                    </div>
                     </div>
 
                     @if(session('status') === 'verified')
@@ -140,21 +146,6 @@
                 </div>
             </x-sur.reveal>
 
-            {{-- Edit account link --}}
-            <x-sur.reveal>
-                <div class="rounded-2xl border border-white/10 bg-white/[0.04] shadow-lg shadow-black/20 backdrop-blur-sm">
-                    <div class="border-b border-white/8 px-8 py-6">
-                        <h2 class="text-sm font-semibold text-white">{{ __('frontend.account_edit_page_heading') }}</h2>
-                    </div>
-                    <div class="flex items-center justify-between px-8 py-6">
-                        <p class="text-sm text-zinc-500">{{ __('frontend.account_edit_page_sub') }}</p>
-                        <a href="{{ route('account.edit') }}" class="ml-6 inline-flex shrink-0 items-center gap-2 rounded-xl border border-white/10 bg-white/[0.05] px-5 py-2.5 text-sm font-medium text-zinc-300 transition hover:bg-white/[0.08] hover:text-white">
-                            <i class="fa-solid fa-pen text-xs" aria-hidden="true"></i>
-                            {{ __('frontend.account_edit_link') }}
-                        </a>
-                    </div>
-                </div>
-            </x-sur.reveal>
 
         </x-sur.container>
     </div>

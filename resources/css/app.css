@@ -183,6 +183,32 @@ html::-webkit-scrollbar-thumb:active,
         @apply pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-indigo-500/35 to-transparent;
     }
 
+    /* Account overview — indigo radial glow (explicit CSS so it always ships; arbitrary Tailwind gradients can be omitted from the build) */
+    .sur-account-radial-bg {
+        pointer-events: none;
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background: radial-gradient(
+            ellipse 65% 55% at 50% 32%,
+            rgba(99, 102, 241, 0.26) 0%,
+            rgba(99, 102, 241, 0.07) 48%,
+            transparent 72%
+        );
+    }
+
+    .sur-account-grid-bg {
+        pointer-events: none;
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        opacity: 0.04;
+        background-image:
+            linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+        background-size: 40px 40px;
+    }
+
     .sur-btn-primary {
         @apply inline-flex min-h-11 items-center justify-center rounded-xl bg-indigo-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition duration-200 ease-out hover:bg-indigo-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 active:scale-[0.98];
     }
