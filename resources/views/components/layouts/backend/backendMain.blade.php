@@ -22,16 +22,49 @@
             <nav class="flex flex-col gap-1 p-2 pt-3">
                 @php
                     $links = [
-                        ['route' => 'dashboard',     'icon' => 'fa-house',  'label' => __('backend.nav_dashboard')],
-                        ['route' => 'decks-manager', 'icon' => 'fa-layer-group', 'label' => __('backend.nav_faction_manager')],
+                        [
+                            'href' => route('dashboard'),
+                            'active' => request()->routeIs('dashboard'),
+                            'icon' => 'fa-house',
+                            'label' => __('backend.nav_dashboard'),
+                        ],
+                        [
+                            'href' => route('decks-manager'),
+                            'active' => request()->routeIs('decks-manager', 'add-deck', 'edit-deck'),
+                            'icon' => 'fa-layer-group',
+                            'label' => __('backend.nav_faction_manager'),
+                        ],
+                        [
+                            'href' => route('admin.contacts.index'),
+                            'active' => request()->routeIs('admin.contacts.*'),
+                            'icon' => 'fa-envelope',
+                            'label' => __('backend.nav_contacts'),
+                        ],
+                        [
+                            'href' => route('admin.users.index'),
+                            'active' => request()->routeIs('admin.users.*'),
+                            'icon' => 'fa-users',
+                            'label' => __('backend.nav_users'),
+                        ],
+                        [
+                            'href' => route('admin.shuffle-stats'),
+                            'active' => request()->routeIs('admin.shuffle-stats'),
+                            'icon' => 'fa-shuffle',
+                            'label' => __('backend.nav_shuffle_stats'),
+                        ],
+                        [
+                            'href' => route('admin.maintenance'),
+                            'active' => request()->routeIs('admin.maintenance'),
+                            'icon' => 'fa-terminal',
+                            'label' => __('backend.nav_maintenance'),
+                        ],
                     ];
                 @endphp
                 @foreach($links as $link)
-                @php $active = request()->routeIs($link['route']); @endphp
-                <a href="{{ route($link['route']) }}"
-                    class="sidebar-link group flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition duration-150 {{ $active ? 'bg-indigo-500/10 text-indigo-300' : 'text-zinc-500 hover:bg-white/5 hover:text-zinc-200' }}"
+                <a href="{{ $link['href'] }}"
+                    class="sidebar-link group flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition duration-150 {{ $link['active'] ? 'bg-indigo-500/10 text-indigo-300' : 'text-zinc-500 hover:bg-white/5 hover:text-zinc-200' }}"
                 >
-                    <i class="fa-solid {{ $link['icon'] }} w-4 shrink-0 text-center text-sm {{ $active ? 'text-indigo-400' : 'text-zinc-600 group-hover:text-zinc-400' }}" aria-hidden="true"></i>
+                    <i class="fa-solid {{ $link['icon'] }} w-4 shrink-0 text-center text-sm {{ $link['active'] ? 'text-indigo-400' : 'text-zinc-600 group-hover:text-zinc-400' }}" aria-hidden="true"></i>
                     <span class="sidebar-text truncate">{{ $link['label'] }}</span>
                 </a>
                 @endforeach
