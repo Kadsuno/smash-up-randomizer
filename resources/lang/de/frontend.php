@@ -38,6 +38,8 @@ return [
     'help_howto_fun' => 'Viel Spaß!',
     'player' => 'Spieler',
     'result' => 'Ergebnis',
+    'auth_admin_access_denied' => 'Dieses Konto ist kein Admin. Wenn du früher Admin warst, setze die Rolle mit: php artisan users:promote deine@email.com',
+
     'email' => 'E-Mail-Adresse',
     'password' => 'Passwort',
     'remember_me' => 'Angemeldet bleiben',
@@ -403,4 +405,24 @@ return [
     'social_login_failed'             => 'Social-Login fehlgeschlagen. Bitte erneut versuchen oder E-Mail und Passwort nutzen.',
     'social_email_required'           => 'Wir konnten keine E-Mail-Adresse aus deinem Konto lesen. Stelle sie öffentlich ein oder nutze einen anderen Anbieter.',
     'social_email_taken_other_provider' => 'Diese E-Mail ist bereits mit einer anderen Anmeldemethode verknüpft.',
+
+    // Transactional email (HTML)
+    'email_contact_admin_title' => 'Neue Nachricht von :name',
+    'email_contact_admin_sub'   => 'Du hast eine neue Nachricht über das Kontaktformular erhalten.',
+    'email_confirm_title'       => 'Danke für deine Nachricht, :name',
+    'email_confirm_sub'         => 'Wir haben deine Nachricht erhalten und melden uns so schnell wie möglich.',
+    'email_section_details'     => 'Details',
+    'email_section_message'     => 'Nachricht',
+    'email_confirm_details_heading' => 'Deine Angaben',
+    'email_confirm_message_heading' => 'Deine Nachricht',
+    'email_field_name'          => 'Name',
+    'email_field_email'         => 'E-Mail',
+    'email_field_phone'         => 'Telefon',
+    'email_field_subject'       => 'Betreff',
+    'email_test_title'          => 'E-Mail-Konfigurationstest',
+    'email_test_sub'            => 'Diese Nachricht prüft, ob ausgehende E-Mails (SMTP oder API-Transport) korrekt eingerichtet sind.',
+    'email_test_section'        => 'Testdetails',
+    'email_field_timestamp'     => 'Zeitstempel',
+    'email_field_application'   => 'Anwendung',
+    'email_test_ok'             => 'Wenn du das hier lesen kannst, funktioniert deine Mail-Konfiguration.',
 ];

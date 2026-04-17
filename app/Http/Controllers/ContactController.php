@@ -42,36 +42,46 @@ class ContactController extends Controller
             return redirect()->back()->with(['error' => 'Spam detected!']);
         }
 
-        Contact::create($request->all());
+        $phone = $request->filled('phone') ? (string) $request->input('phone') : null;
+
+        Contact::create([
+            'name'    => (string) $request->input('name'),
+            'email'   => (string) $request->input('email'),
+            'phone'   => $phone,
+            'subject' => (string) $request->input('subject'),
+            'message' => (string) $request->input('message'),
+        ]);
 
         $mailer = new TransactionalMailService();
+
+        $mailPayload = [
+            'name'    => (string) $request->input('name'),
+            'email'   => (string) $request->input('email'),
+            'phone'   => $phone,
+            'subject' => (string) $request->input('subject'),
+            'message' => (string) $request->input('message'),
+        ];
 
         $mailer->send(
             $request->email,
             'Thank you for contacting Smash Up Randomizer',
             'Thank you for contacting Smash Up Randomizer. We will get back to you shortly.',
             'emails.confirmContact',
-            [
-                'name' => $request->name,
-                'email' => $request->email,
-                'phone' => $request->phone,
-                'subject' => $request->subject,
-                'message' => $request->message
-            ]
+            $mailPayload
         );
+
+        $adminPlain = 'New contact from Smash Up Randomizer. Name: '.$mailPayload['name']
+            .' Email: '.$mailPayload['email']
+            .' Phone: '.($mailPayload['phone'] ?? '—')
+            .' Subject: '.$mailPayload['subject']
+            .' Message: '.$mailPayload['message'];
 
         $mailer->send(
             (string) config('mail.admin_email', 'info@smash-up-randomizer.com'),
             'New contact from Smash Up Randomizer',
-            'New contact from Smash Up Randomizer. Name: ' . $request->name . ' Email: ' . $request->email . ' Phone: ' . $request->phone . ' Subject: ' . $request->subject . ' Message: ' . $request->message,
+            $adminPlain,
             'emails.contact',
-            [
-                'name' => $request->name,
-                'email' => $request->email,
-                'phone' => $request->phone,
-                'subject' => $request->subject,
-                'message' => $request->message
-            ]
+            $mailPayload
         );
 
         return redirect()->back()

@@ -81,7 +81,11 @@
     </div>
 </footer>
 
-@if (config('matomo.enabled'))
+@php
+    /** Marketing / asset capture: omit consent strip + FAB (non-production only). */
+    $surHideCookieForScreenshot = ! app()->isProduction() && request()->boolean('sur_screenshot');
+@endphp
+@if (config('matomo.enabled') && ! $surHideCookieForScreenshot)
     <x-cookie-banner />
 @endif
 

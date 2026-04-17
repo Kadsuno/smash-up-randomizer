@@ -122,7 +122,7 @@ class HomeLandingTest extends TestCase
 
         $response->assertOk();
         $response->assertSee(__('frontend.landing_result_title'), false);
-        $response->assertSee('images/landing/result-preview.jpg', false);
+        $response->assertSee('images/landing/result-preview.png', false);
     }
 
     public function test_og_meta_tags_use_updated_copy(): void

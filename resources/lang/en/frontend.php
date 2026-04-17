@@ -37,6 +37,8 @@ return [
     'help_howto_fun' => 'Have fun!',
     'player' => 'Player',
     'result' => 'Result',
+    'auth_admin_access_denied' => 'This account is not an admin. If you were promoted before the role system was added, run: php artisan users:promote your@email.com',
+
     'email' => 'Email address',
     'password' => 'Password',
     'remember_me' => 'Remember me',
@@ -421,4 +423,24 @@ return [
     'social_login_failed'             => 'Social sign-in failed. Please try again or use e-mail and password.',
     'social_email_required'           => 'We could not read an e-mail address from your account. Make sure it is public or try another provider.',
     'social_email_taken_other_provider' => 'This e-mail is already linked to another sign-in method.',
+
+    // Transactional email (HTML)
+    'email_contact_admin_title' => 'New message from :name',
+    'email_contact_admin_sub'   => 'You have received a new message via the contact form.',
+    'email_confirm_title'       => 'Thanks for reaching out, :name',
+    'email_confirm_sub'         => 'We received your message and will get back to you as soon as we can.',
+    'email_section_details'     => 'Details',
+    'email_section_message'     => 'Message',
+    'email_confirm_details_heading' => 'Your message details',
+    'email_confirm_message_heading' => 'Your message',
+    'email_field_name'          => 'Name',
+    'email_field_email'         => 'Email',
+    'email_field_phone'         => 'Phone',
+    'email_field_subject'       => 'Subject',
+    'email_test_title'          => 'Mail configuration test',
+    'email_test_sub'            => 'This message checks that outbound mail (SMTP or API transport) is set up correctly.',
+    'email_test_section'        => 'Test details',
+    'email_field_timestamp'     => 'Timestamp',
+    'email_field_application'   => 'Application',
+    'email_test_ok'             => 'If you are reading this, your mail configuration is working.',
 ];

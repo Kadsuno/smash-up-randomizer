@@ -447,12 +447,12 @@
             <x-sur.reveal :delay="80" class="w-full flex-1 lg:max-w-lg">
                 <div class="relative rounded-2xl border border-white/10 bg-zinc-900/50 p-1 shadow-2xl shadow-black/60 ring-1 ring-white/5">
                     <img
-                        src="{{ asset('images/landing/result-preview.jpg') }}"
+                        src="{{ asset('images/landing/result-preview.png') }}"
                         alt="{{ __('frontend.landing_result_img_alt') }}"
                         class="w-full rounded-xl"
                         loading="lazy"
-                        width="800"
-                        height="805"
+                        width="1920"
+                        height="1650"
                     >
                 </div>
             </x-sur.reveal>

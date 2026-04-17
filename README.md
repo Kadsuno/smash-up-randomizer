@@ -95,6 +95,12 @@ Local stack is defined in `.ddev/config.yaml` (PHP 8.3, MariaDB 10.4, Node 22, n
     ddev exec php artisan migrate
     ```
 
+    **Admin role:** The `users.role` column defaults to `user`. Existing accounts created before that migration are **not** automatically admins. To open `/admin/backend`, promote your account once:
+
+    ```bash
+    ddev exec php artisan users:promote you@example.com
+    ```
+
 8. Frontend assets:
 
     ```bash
@@ -110,7 +116,7 @@ Local stack is defined in `.ddev/config.yaml` (PHP 8.3, MariaDB 10.4, Node 22, n
 3. `npm install`
 4. `cp .env.example .env` — set `DB_*` and mail settings
 5. `php artisan key:generate`
-6. `php artisan migrate`
+6. `php artisan migrate` — then promote at least one admin: `php artisan users:promote you@example.com` (see **Admin role** under DDEV step 7 above).
 7. `npm run dev` (or `npm run build` for production assets)
 8. `php artisan serve` (or your web server of choice pointing at `public/`)
 

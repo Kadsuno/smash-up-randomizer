@@ -48,6 +48,19 @@ class AuthenticationTest extends TestCase
         $response->assertRedirect(route('dashboard'));
     }
 
+    public function test_non_admin_user_cannot_use_admin_login_form(): void
+    {
+        $user = User::factory()->create(['role' => 'user']);
+
+        $response = $this->post(route('admin.login'), [
+            'email'    => $user->email,
+            'password' => 'password',
+        ]);
+
+        $this->assertGuest();
+        $response->assertSessionHasErrors('email');
+    }
+
     public function test_users_can_not_authenticate_with_invalid_password(): void
     {
         $user = User::factory()->create();

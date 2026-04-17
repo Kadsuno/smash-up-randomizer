@@ -4,6 +4,12 @@ All notable changes to this project are documented in this file.
 
 ## [Unreleased]
 
+### Changed
+
+- **Admin login:** `POST /admin` now logs out and returns a validation error if the account is not `role=admin` (instead of redirecting to the dashboard and hitting HTTP 403). This matches deployments where the `users.role` migration set every existing row to `user` — use `php artisan users:promote email@example.com` to restore backend access. README documents the promote step after `migrate`.
+
+- **Landing result preview:** Marketing screenshot is now a **1920×1650 PNG** (`images/landing/result-preview.png`) from a **2× device-scale** headless capture and Lanczos downscale — replaces the small, over-compressed JPEG.
+
 ### Added
 
 - **Account: collection, shuffle presets, play history:** Authenticated users can save **owned expansion sets** (`/account/collection`), manage **shuffle presets** (`/account/presets`) and open the home shuffle with one click (`/?shuffle_preset=id`), and browse **recent shuffles** (`/account/history`). When at least one expansion is saved, the shuffle wizard, `POST /shuffle/result`, and `/random` only draw from factions in those sets (guests and users with an empty selection still use all factions). New tables: `user_expansions`, `shuffle_presets`, `shuffle_histories`.

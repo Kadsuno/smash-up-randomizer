@@ -40,7 +40,7 @@
 
                 <h1 class="mb-6 text-center text-lg font-bold text-white">{{ __('frontend.login') }}</h1>
 
-                <form method="POST" action="{{ route('login') }}" novalidate>
+                <form method="POST" action="{{ route('admin.login') }}" novalidate>
                     @csrf
 
                     <div class="mb-4">

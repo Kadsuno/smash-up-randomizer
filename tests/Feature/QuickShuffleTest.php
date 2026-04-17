@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
@@ -64,5 +65,26 @@ class QuickShuffleTest extends TestCase
         );
 
         $this->assertCount(4, array_unique($allNames), 'All 4 assigned factions should be unique');
+    }
+
+    public function test_random_page_with_sur_screenshot_omits_cookie_banner_when_matomo_enabled(): void
+    {
+        Config::set('matomo.enabled', true);
+
+        DB::table('decks')->insert([
+            ['name' => 'Ninjas'],
+            ['name' => 'Zombies'],
+            ['name' => 'Aliens'],
+            ['name' => 'Pirates'],
+        ]);
+
+        $withBar = $this->get('/random');
+        $withBar->assertOk();
+        $withBar->assertSee('id="sur-cookie-consent-bar"', false);
+
+        $preview = $this->get('/random?sur_screenshot=1');
+        $preview->assertOk();
+        $preview->assertDontSee('id="sur-cookie-consent-bar"', false);
+        $preview->assertDontSee('id="sur-cookie-fab"', false);
     }
 }
