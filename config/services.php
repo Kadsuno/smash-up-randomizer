@@ -34,4 +34,22 @@ return [
         'api_key' => env('BREVO_API_KEY'),
     ],
 
+    'ai_rewrite' => [
+        'provider' => env('AI_REWRITE_PROVIDER', 'groq'),
+        'key'      => env('AI_REWRITE_KEY', ''),
+        'model'    => env('AI_REWRITE_MODEL', 'llama-3.3-70b-versatile'),
+    ],
+
+    'google' => [
+        'client_id'     => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect'      => env('GOOGLE_REDIRECT_URI', env('APP_URL').'/auth/google/callback'),
+    ],
+
+    'github' => [
+        'client_id'     => env('GITHUB_CLIENT_ID'),
+        'client_secret' => env('GITHUB_CLIENT_SECRET'),
+        'redirect'      => env('GITHUB_REDIRECT_URI', env('APP_URL').'/auth/github/callback'),
+    ],
+
 ];

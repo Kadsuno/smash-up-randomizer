@@ -3,7 +3,7 @@
 [![Laravel](https://img.shields.io/badge/Laravel-13.x-FF2D20?style=flat-square&logo=laravel&logoColor=white)](https://laravel.com)
 [![PHP](https://img.shields.io/badge/PHP-8.3+-777BB4?style=flat-square&logo=php&logoColor=white)](https://php.net)
 [![MariaDB](https://img.shields.io/badge/MariaDB-10.4-003545?style=flat-square&logo=mariadb&logoColor=white)](https://mariadb.org)
-[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.x-7952B3?style=flat-square&logo=bootstrap&logoColor=white)](https://getbootstrap.com)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.x-38bdf8?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
 [![GitHub last commit](https://img.shields.io/github/last-commit/kadsuno/smash-up-randomizer?style=flat-square)](https://github.com/kadsuno/smash-up-randomizer/commits)
@@ -22,7 +22,7 @@ Smash Up Randomizer supports:
 - Contact form with email delivery (Laravel mail: SMTP or Brevo API)
 - Admin area for managing deck data (authenticated users)
 - XML sitemap (`/sitemap`) via `spatie/laravel-sitemap`
-- Dark-themed, responsive frontend (Bootstrap 5, Vite, Blade)
+- Dark-themed, mobile-first frontend (Tailwind CSS 4, Vite + `@tailwindcss/vite`, Blade, Alpine.js)
 
 ## Repository layout & workflow
 
@@ -31,6 +31,7 @@ Smash Up Randomizer supports:
 | ----------------- | ----------------------------------------------------------------------------------- |
 | `docs/roadmap.md` | Product/engineering priorities — update when work matches listed items              |
 | `docs/tickets/`   | Ticket specs (`YYYY-MM-DD-short-slug.md`), see `.cursor/rules/ticket-authoring.mdc` |
+| `docs/image-credits.md` | AI carousel: four base-game faction spotlights (original art, not AEG illustrations) |
 | `.cursor/rules/`  | Cursor project rules (full workflow, ticket format, etc.)                           |
 
 
@@ -51,12 +52,12 @@ Default branch for integration work is **dev** (see `.cursor/rules/smash-up-full
 
 - PHP **8.3+** (see `composer.json`)
 - Composer 2.x
-- Node.js **18+** recommended (matches DDEV `nodejs_version`)
+- Node.js **20+** required for Tailwind CSS v4 (`@tailwindcss/oxide`); DDEV uses `nodejs_version: "22"` in `.ddev/config.yaml`
 - MariaDB or MySQL compatible with Laravel’s requirements
 
 ### DDEV (recommended)
 
-Local stack is defined in `.ddev/config.yaml` (PHP 8.3, MariaDB 10.4, Node 18, nginx-fpm).
+Local stack is defined in `.ddev/config.yaml` (PHP 8.3, MariaDB 10.4, Node 22, nginx-fpm).
 
 1. Install [DDEV](https://ddev.readthedocs.io/en/stable/)
 2. Clone the repository:
@@ -94,6 +95,12 @@ Local stack is defined in `.ddev/config.yaml` (PHP 8.3, MariaDB 10.4, Node 18, n
     ddev exec php artisan migrate
     ```
 
+    **Admin role:** The `users.role` column defaults to `user`. Existing accounts created before that migration are **not** automatically admins. To open `/admin/backend`, promote your account once:
+
+    ```bash
+    ddev exec php artisan users:promote you@example.com
+    ```
+
 8. Frontend assets:
 
     ```bash
@@ -109,15 +116,21 @@ Local stack is defined in `.ddev/config.yaml` (PHP 8.3, MariaDB 10.4, Node 18, n
 3. `npm install`
 4. `cp .env.example .env` — set `DB_*` and mail settings
 5. `php artisan key:generate`
-6. `php artisan migrate`
+6. `php artisan migrate` — then promote at least one admin: `php artisan users:promote you@example.com` (see **Admin role** under DDEV step 7 above).
 7. `npm run dev` (or `npm run build` for production assets)
 8. `php artisan serve` (or your web server of choice pointing at `public/`)
+
+### OAuth (Google / GitHub, optional)
+
+Frontend users can sign in with Google or GitHub when credentials are configured. Set `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, and/or `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET` in `.env` (see `.env.example`). In each provider’s developer console, register the redirect URL as `{APP_URL}/auth/google/callback` or `{APP_URL}/auth/github/callback` (must match `APP_URL`). If client IDs are empty, social buttons stay hidden on `/login` and `/register`.
+
+For **OAuth app logos** (e.g. GitHub rejects SVG): use `public/images/brand/logo-mark-oauth.png` — 512×512 PNG on a light gray canvas so the mark is visible in dark-themed upload dialogs. The plain `logo-mark.png` keeps the original dark chip; it can look like a black square in those UIs because the SVG design uses `#0c0c0f` as background.
 
 ## Database (overview)
 
 Typical tables after migrations:
 
-- **users** — admin/backend accounts (Laravel UI auth under `/admin`)
+- **users** — frontend and admin accounts; optional `provider` / `provider_id` for OAuth; `password` nullable for social-only users
 - **decks** — faction/deck content (name, expansion, text fields, image path, etc.)
 - **contacts** — contact form submissions
 - **jobs**, **failed_jobs** — queue
@@ -148,8 +161,8 @@ Blade under `resources/views/`: `start/`, `shuffle/`, `decks/`, `frontend/`, `ba
 
 ### Frontend assets
 
-- **Vite** (`vite.config.js`): entries under `resources/js/`, styles under `resources/sass/`
-- **Stack**: Bootstrap 5, jQuery, Alpine.js (see `package.json`), Font Awesome / Bootstrap Icons
+- **Vite** (`vite.config.js`): `@tailwindcss/vite` plugin + `laravel-vite-plugin`; global styles in `resources/css/app.css` (`@import "tailwindcss"`, design tokens in `@theme`, PostCSS for Autoprefixer only)
+- **Stack**: Tailwind CSS 4, Alpine.js, jQuery (legacy where present), Font Awesome, animate.css (see `package.json`)
 
 ### Email
 

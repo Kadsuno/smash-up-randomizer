@@ -1,61 +1,172 @@
 <x-layouts.main>
-    <div class="container mt-5 pt-5">
-        <div class="alert alert-info text-center mb-4">
-            <strong>Work in Progress</strong> This page is currently under construction. Thank you for your patience.
-        </div>
-        <h1 class="mb-4 text-center animate__animated animate__fadeInDown">Faction List</h1>
-        <div class="row justify-content-center">
-            @foreach($decks as $deck)
-                @if($deck->teaser)
-                <div class="col-md-4 mb-4">
-                    <a href="{{ route('factionDetail', ['name' => $deck->name]) }}" class="text-decoration-none">
-                        <div class="card bg-dark text-white h-100 shadow-sm hover-card animate__animated animate__fadeIn">
+
+    {{-- Hero --}}
+    <section class="relative overflow-hidden border-b border-white/6 bg-linear-to-br from-indigo-950/50 via-zinc-950 to-zinc-950 py-16 md:py-20">
+        <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_-5%,rgb(99_102_241_/_0.10),transparent)]" aria-hidden="true"></div>
+        <x-sur.container>
+            <x-sur.reveal>
+                <p class="mb-3 text-xs font-bold uppercase tracking-widest text-indigo-400">Browse</p>
+                <h1 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+                    Faction List
+                </h1>
+                <p class="mt-3 max-w-xl text-sm leading-relaxed text-zinc-500">
+                    All <strong class="font-semibold text-zinc-300">{{ $total }}</strong> factions from the Smash Up universe — find yours, explore their playstyle, and build the perfect combo.
+                </p>
+                <div class="mt-5">
+                    <a href="{{ route('expansions') }}" class="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-400 transition hover:text-indigo-300">
+                        <i class="fa-solid fa-box-open text-[0.65rem]" aria-hidden="true"></i>
+                        {{ __('frontend.factions_browse_by_set') }} <i class="fa-solid fa-arrow-right text-[0.55rem]" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </x-sur.reveal>
+        </x-sur.container>
+    </section>
+
+    {{-- Main content --}}
+    <x-sur.section>
+        @php
+            $factionsData = $decks->map(fn ($d) => [
+                'name'      => strtolower($d->name),
+                'playstyle' => $d->playstyle ?? '',
+            ])->values()->toJson();
+        @endphp
+        <div
+            x-data="{
+                search: '',
+                complexity: '',
+                factions: {{ $factionsData }},
+                get visibleCount() {
+                    return this.factions.filter(f =>
+                        (!this.search || f.name.includes(this.search.toLowerCase())) &&
+                        this.matchesComplexity(f.playstyle)
+                    ).length;
+                },
+                matchesComplexity(playstyle) {
+                    if (!this.complexity) return true;
+                    if (!playstyle) return false;
+                    const p = playstyle.toLowerCase();
+                    if (this.complexity === 'Low')    return p.startsWith('low') && !p.includes('medium') && !p.includes('high');
+                    if (this.complexity === 'Medium') return p.includes('medium');
+                    if (this.complexity === 'High')   return p.includes('high');
+                    return true;
+                }
+            }"
+        >
+            {{-- Controls row --}}
+            <div class="mb-8 flex flex-wrap items-center gap-3">
+                {{-- Search --}}
+                <div class="relative flex-1 max-w-sm min-w-40">
+                    <i class="fa-solid fa-magnifying-glass pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-xs text-zinc-500" aria-hidden="true"></i>
+                    <input
+                        x-model="search"
+                        type="search"
+                        placeholder="Search factions…"
+                        class="w-full rounded-xl border border-white/8 bg-zinc-900/80 py-2.5 pl-9 pr-4 text-sm text-white placeholder-zinc-600 transition focus:border-indigo-500/50 focus:outline-none focus:ring-1 focus:ring-indigo-500/30"
+                    >
+                </div>
+
+                {{-- Complexity filter pills --}}
+                <div class="flex items-center gap-1.5" role="group" aria-label="{{ __('frontend.factions_filter_label') }}">
+                    @foreach(['' => __('frontend.factions_filter_all'), 'Low' => __('frontend.factions_filter_easy'), 'Medium' => __('frontend.factions_filter_medium'), 'High' => __('frontend.factions_filter_hard')] as $value => $label)
+                    <button
+                        type="button"
+                        @click="complexity = '{{ $value }}'"
+                        :class="complexity === '{{ $value }}'
+                            ? 'border-indigo-500/50 bg-indigo-900/40 text-indigo-300'
+                            : 'border-white/8 bg-zinc-900/60 text-zinc-500 hover:border-white/20 hover:text-zinc-300'"
+                        class="rounded-full border px-3 py-1.5 text-xs font-semibold transition"
+                    >{{ $label }}</button>
+                    @endforeach
+                </div>
+
+                <p class="ml-auto shrink-0 text-sm text-zinc-600">
+                    <span x-text="visibleCount"></span> factions
+                </p>
+            </div>
+
+            {{-- Grid --}}
+            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                @foreach($decks as $deck)
+                @php
+                    $palettes = [
+                        'from-indigo-900/80 to-violet-900/80',
+                        'from-emerald-900/80 to-teal-900/80',
+                        'from-rose-900/80 to-pink-900/80',
+                        'from-amber-900/80 to-orange-900/80',
+                        'from-sky-900/80 to-blue-900/80',
+                        'from-violet-900/80 to-purple-900/80',
+                        'from-teal-900/80 to-cyan-900/80',
+                        'from-red-900/80 to-rose-900/80',
+                    ];
+                    $palette = $palettes[$loop->index % count($palettes)];
+                    $letter  = strtoupper(substr($deck->name, 0, 1));
+                @endphp
+                <div
+                    data-faction-card
+                    data-playstyle="{{ $deck->playstyle }}"
+                    x-show="(!search || '{{ addslashes(strtolower($deck->name)) }}'.includes(search.toLowerCase())) && matchesComplexity('{{ addslashes($deck->playstyle ?? '') }}')"
+                    x-transition:enter="transition duration-150"
+                    x-transition:enter-start="opacity-0 scale-95"
+                    x-transition:enter-end="opacity-100 scale-100"
+                >
+                    <a
+                        href="{{ route('factionDetail', ['name' => $deck->name]) }}"
+                        class="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/8 bg-zinc-900/60 transition duration-200 hover:border-indigo-500/30 hover:bg-zinc-800/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60"
+                    >
+                        {{-- Thumbnail --}}
+                        <div class="relative h-36 overflow-hidden">
                             @if($deck->image)
-                                <img src="{{ asset($deck->image) }}" class="card-img-top img-fluid" alt="{{ $deck->name }}">
+                                <img
+                                    src="{{ asset($deck->image) }}"
+                                    alt="{{ $deck->name }}"
+                                    class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.04]"
+                                    loading="lazy"
+                                >
                             @else
-                                <div class="card-img-top bg-gradient text-white d-flex align-items-center justify-content-center" style="height: 200px;">
-                                    <span>No Image Available</span>
+                                <div class="flex h-full w-full items-center justify-center bg-linear-to-br {{ $palette }}">
+                                    <span class="text-5xl font-black text-white/10 select-none">{{ $letter }}</span>
                                 </div>
                             @endif
-                            <div class="card-body">
-                                <h5 class="card-title fw-bold">{{ $deck->name }}</h5>
-                                @if($deck->teaser)
-                                    <p class="card-text">{!! $deck->teaser !!}</p>
-                                @else
-                                    <p class="card-text text-muted fst-italic">No description available.</p>
-                                @endif
-                            </div>
-                            <div class="card-footer bg-transparent border-0">
-                                
+                            {{-- Expansion badge --}}
+                            @if($deck->expansion)
+                                <span class="absolute bottom-2 left-2 rounded-full bg-black/60 px-2 py-0.5 text-[0.65rem] font-semibold text-zinc-300 backdrop-blur-sm">
+                                    {{ $deck->expansion }}
+                                </span>
+                            @endif
+                        </div>
+
+                        {{-- Info --}}
+                        <div class="flex flex-1 flex-col gap-1.5 p-4">
+                            <h2 class="text-sm font-bold leading-tight text-white transition group-hover:text-indigo-300">
+                                {{ $deck->name }}
+                            </h2>
+                            @if($deck->teaser)
+                                <p class="line-clamp-2 text-xs leading-relaxed text-zinc-500">{!! strip_tags($deck->teaser) !!}</p>
+                            @else
+                                <p class="text-xs italic text-zinc-700">No description yet.</p>
+                            @endif
+                            <div class="mt-auto pt-2">
+                                <span class="inline-flex items-center gap-1 text-[0.65rem] font-semibold text-indigo-500 transition group-hover:text-indigo-400">
+                                    View faction <i class="fa-solid fa-arrow-right text-[0.55rem]" aria-hidden="true"></i>
+                                </span>
                             </div>
                         </div>
                     </a>
                 </div>
-                @else
-                    
-                @endif
-            @endforeach
+                @endforeach
+            </div>
+
+            {{-- Empty state --}}
+            <div
+                x-show="visibleCount === 0"
+                x-transition
+                class="mt-16 flex flex-col items-center gap-3 text-center"
+            >
+                <i class="fa-solid fa-circle-xmark text-3xl text-zinc-700" aria-hidden="true"></i>
+                <p class="text-sm text-zinc-500">No factions found for "<span class="text-zinc-300" x-text="search"></span>".</p>
+                <button @click="search = ''; complexity = ''" class="text-xs text-indigo-500 underline hover:text-indigo-400">Clear search</button>
+            </div>
         </div>
-    </div>
+    </x-sur.section>
+
 </x-layouts.main>
-
-<style>
-    .hover-card {
-        transition: transform 0.3s ease-in-out;
-    }
-    .hover-card:hover {
-        transform: translateY(-5px);
-    }
-    .animate__animated {
-        animation-duration: 1s;
-    }
-</style>
-
-<script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-        const cards = document.querySelectorAll('.hover-card');
-        cards.forEach((card, index) => {
-            card.style.animationDelay = `${index * 0.1}s`;
-        });
-    });
-</script>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+    <title>Smash Up Randomizer</title>
+    <defs>
+        <linearGradient id="gA" x1="0" y1="0" x2="1" y2="1">
+            <stop stop-color="#fcd34d"/>
+            <stop offset="1" stop-color="#b45309"/>
+        </linearGradient>
+        <linearGradient id="gB" x1="0" y1="0" x2="1" y2="1">
+            <stop stop-color="#818cf8"/>
+            <stop offset="1" stop-color="#7c3aed"/>
+        </linearGradient>
+        <linearGradient id="gBorder" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#6366f1" stop-opacity="0.55"/>
+            <stop offset="1" stop-color="#8b5cf6" stop-opacity="0.35"/>
+        </linearGradient>
+        <filter id="fA" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#000" flood-opacity="0.5"/>
+        </filter>
+        <filter id="fB" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#000" flood-opacity="0.65"/>
+        </filter>
+    </defs>
+
+    <!-- Background chip -->
+    <rect width="64" height="64" rx="16" fill="#0c0c0f"/>
+    <rect x="1" y="1" width="62" height="62" rx="15" stroke="url(#gBorder)" stroke-width="1.25"/>
+
+    <!-- Amber card (back, left, tilted counter-clockwise) -->
+    <rect x="6" y="12" width="24" height="32" rx="5"
+          fill="url(#gA)" filter="url(#fA)"
+          transform="rotate(-16 18 28)"/>
+
+    <!-- Indigo card (front, right, tilted clockwise) -->
+    <rect x="34" y="10" width="24" height="32" rx="5"
+          fill="url(#gB)" filter="url(#fB)"
+          transform="rotate(14 46 26)"/>
+
+</svg>

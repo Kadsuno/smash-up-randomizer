@@ -1,7 +1,6 @@
 /**
- * First-party cookie consent: bottom strip + preference modal; Matomo loads only after analytics opt-in.
+ * First-party cookie consent: bottom strip + preference dialog; Matomo loads only after analytics opt-in.
  */
-import { Modal } from 'bootstrap';
 
 const STORAGE_KEY = 'sur_cookie_consent_v1';
 const BODY_BAR_CLASS = 'sur-cookie-bar-visible';
@@ -89,7 +88,7 @@ function setBodyBarOffset(bar) {
     if (!bar) {
         return;
     }
-    if (bar.classList.contains('d-none')) {
+    if (bar.classList.contains('hidden')) {
         document.body.classList.remove(BODY_BAR_CLASS);
     } else {
         document.body.classList.add(BODY_BAR_CLASS);
@@ -103,15 +102,24 @@ function hideBar(bar) {
     if (!bar) {
         return;
     }
-    bar.classList.add('d-none');
+    bar.classList.add('hidden');
     document.body.classList.remove(BODY_BAR_CLASS);
 }
 
 /**
- * @param {HTMLElement} modalEl
- * @param {Modal} modal
+ * @param {HTMLDialogElement} dialogEl
  */
-function applyConsentChoice(analytics, modalEl, modal) {
+function closeDialog(dialogEl) {
+    if (dialogEl && typeof dialogEl.close === 'function') {
+        dialogEl.close();
+    }
+}
+
+/**
+ * @param {boolean} analytics
+ * @param {HTMLDialogElement} dialogEl
+ */
+function applyConsentChoice(analytics, dialogEl) {
     const prev = readConsent()?.analytics === true;
     writeConsent(analytics);
     if (analytics) {
@@ -120,17 +128,17 @@ function applyConsentChoice(analytics, modalEl, modal) {
         window.location.reload();
         return;
     }
-    modal.hide();
-    syncCheckboxFromStorage(modalEl.querySelector('[data-sur-analytics-checkbox]'));
+    closeDialog(dialogEl);
+    syncCheckboxFromStorage(dialogEl.querySelector('[data-sur-analytics-checkbox]'));
 }
 
 /**
- * Bootstrap cookie consent UI and Matomo loading.
+ * Cookie consent UI and Matomo loading.
  */
 function initCookieBanner() {
     const bar = document.getElementById('sur-cookie-consent-bar');
-    const modalEl = document.getElementById('surCookieConsentModal');
-    if (!modalEl) {
+    const dialogEl = document.getElementById('surCookieConsentModal');
+    if (!dialogEl || dialogEl.tagName !== 'DIALOG') {
         return;
     }
 
@@ -141,37 +149,39 @@ function initCookieBanner() {
 
     setBodyBarOffset(bar);
 
-    const modal = new Modal(modalEl, {
-        backdrop: 'static',
-        keyboard: false,
-    });
+    const analyticsCheckbox = dialogEl.querySelector('[data-sur-analytics-checkbox]');
 
-    const analyticsCheckbox = modalEl.querySelector('[data-sur-analytics-checkbox]');
-
-    const openModal = () => {
+    const openDialog = () => {
         syncCheckboxFromStorage(analyticsCheckbox);
-        modal.show();
+        if (typeof dialogEl.showModal === 'function') {
+            dialogEl.showModal();
+        }
     };
 
     document.querySelectorAll('[data-sur-open-cookie-settings]').forEach((node) => {
         node.addEventListener('click', (e) => {
             e.preventDefault();
-            openModal();
+            openDialog();
         });
     });
 
-    modalEl.addEventListener('hidden.bs.modal', () => {
+    dialogEl.addEventListener('close', () => {
         syncCheckboxFromStorage(analyticsCheckbox);
+    });
+
+    /** Static backdrop: block Escape from closing (parity with former Bootstrap modal). */
+    dialogEl.addEventListener('cancel', (e) => {
+        e.preventDefault();
     });
 
     const rejectOptional = () => {
         hideBar(bar);
-        applyConsentChoice(false, modalEl, modal);
+        applyConsentChoice(false, dialogEl);
     };
 
     const acceptAll = () => {
         hideBar(bar);
-        applyConsentChoice(true, modalEl, modal);
+        applyConsentChoice(true, dialogEl);
     };
 
     document.querySelectorAll('[data-sur-action="bar-reject"]').forEach((btn) => {
@@ -184,27 +194,34 @@ function initCookieBanner() {
 
     document.querySelectorAll('[data-sur-action="bar-customize"]').forEach((btn) => {
         btn.addEventListener('click', () => {
-            openModal();
+            openDialog();
         });
     });
 
-    const saveBtn = modalEl.querySelector('[data-sur-action="save-settings"]');
+    const saveBtn = dialogEl.querySelector('[data-sur-action="save-settings"]');
     if (saveBtn && analyticsCheckbox) {
         saveBtn.addEventListener('click', () => {
             const next = Boolean(analyticsCheckbox.checked);
             hideBar(bar);
-            applyConsentChoice(next, modalEl, modal);
+            applyConsentChoice(next, dialogEl);
         });
     }
 
-    modalEl.querySelectorAll('[data-sur-action="modal-reject"]').forEach((btn) => {
+    dialogEl.querySelectorAll('[data-sur-action="modal-reject"]').forEach((btn) => {
         btn.addEventListener('click', rejectOptional);
     });
 
-    modalEl.querySelectorAll('[data-sur-action="modal-cancel"]').forEach((btn) => {
+    dialogEl.querySelectorAll('[data-sur-action="modal-cancel"]').forEach((btn) => {
         btn.addEventListener('click', () => {
             syncCheckboxFromStorage(analyticsCheckbox);
-            modal.hide();
+            closeDialog(dialogEl);
+        });
+    });
+
+    dialogEl.querySelectorAll('[data-sur-action="modal-close"]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+            syncCheckboxFromStorage(analyticsCheckbox);
+            closeDialog(dialogEl);
         });
     });
 }

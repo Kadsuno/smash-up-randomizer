@@ -1,0 +1,629 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+
+@import 'animate.css';
+
+@import '@fortawesome/fontawesome-free/css/all.css';
+
+@import 'tailwindcss';
+
+@theme {
+    --font-sans: 'Nunito', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
+}
+
+/*
+ * Design tokens: dark-first, mobile-first. Accent: indigo / violet (SaaS-style).
+ */
+
+/*
+ * Global scrollbar (document + opt-in). Firefox: scrollbar-color; WebKit: pseudo-elements.
+ * “SUR” thumb: diagonal indigo→violet gradient, lit edge, soft outer glow — track: deep zinc + indigo hairline.
+ */
+:root {
+    --sur-scrollbar-w: 12px;
+    --sur-scrollbar-fg: rgba(165, 180, 252, 0.95);
+    --sur-scrollbar-bg: rgba(10, 10, 13, 0.98);
+}
+
+html {
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: var(--sur-scrollbar-fg) var(--sur-scrollbar-bg);
+}
+
+html::-webkit-scrollbar,
+.scroll-container::-webkit-scrollbar,
+.sur-scrollbar::-webkit-scrollbar {
+    width: var(--sur-scrollbar-w);
+    height: var(--sur-scrollbar-w);
+}
+
+html::-webkit-scrollbar-track,
+.scroll-container::-webkit-scrollbar-track,
+.sur-scrollbar::-webkit-scrollbar-track {
+    background: linear-gradient(
+        180deg,
+        rgba(24, 24, 27, 0.99) 0%,
+        rgba(9, 9, 11, 1) 45%,
+        rgba(18, 18, 22, 0.98) 100%
+    );
+    border-left: 1px solid rgba(99, 102, 241, 0.14);
+    box-shadow: inset 3px 0 12px rgba(0, 0, 0, 0.4);
+}
+
+html::-webkit-scrollbar-thumb,
+.scroll-container::-webkit-scrollbar-thumb,
+.sur-scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 9999px;
+    border: 2px solid rgba(8, 8, 10, 0.95);
+    background: linear-gradient(
+        165deg,
+        rgba(224, 231, 255, 0.55) 0%,
+        rgba(129, 140, 248, 0.98) 28%,
+        rgba(99, 102, 241, 1) 55%,
+        rgba(124, 58, 237, 0.96) 100%
+    );
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.22),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.25),
+        0 0 0 1px rgba(99, 102, 241, 0.28),
+        0 2px 18px rgba(99, 102, 241, 0.28);
+}
+
+html::-webkit-scrollbar-thumb:hover,
+.scroll-container::-webkit-scrollbar-thumb:hover,
+.sur-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(
+        165deg,
+        rgba(238, 242, 255, 0.75) 0%,
+        rgba(165, 180, 252, 1) 30%,
+        rgba(129, 140, 248, 1) 60%,
+        rgba(167, 139, 250, 0.98) 100%
+    );
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        0 0 0 1px rgba(165, 180, 252, 0.45),
+        0 4px 22px rgba(99, 102, 241, 0.4);
+}
+
+html::-webkit-scrollbar-thumb:active,
+.scroll-container::-webkit-scrollbar-thumb:active,
+.sur-scrollbar::-webkit-scrollbar-thumb:active {
+    background: linear-gradient(180deg, rgba(67, 56, 202, 1) 0%, rgba(109, 40, 217, 0.98) 100%);
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.scroll-container,
+.sur-scrollbar {
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: var(--sur-scrollbar-fg) var(--sur-scrollbar-bg);
+}
+
+@layer base {
+    html {
+        @apply scroll-smooth;
+    }
+
+    body {
+        @apply min-h-screen bg-zinc-950 font-sans text-zinc-100 antialiased;
+    }
+
+    [x-cloak] {
+        display: none !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+@layer components {
+    .sur-link-nav {
+        @apply rounded-lg px-3 py-2 text-sm font-medium text-zinc-200 transition duration-200 ease-out hover:bg-white/5 hover:text-indigo-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60;
+    }
+
+    .sur-site-header {
+        @apply fixed top-0 z-50 w-full border-b border-white/10 bg-zinc-950/75 backdrop-blur-2xl transition-[box-shadow,border-color,background-color] duration-300;
+    }
+
+    .sur-site-header.sur-site-header--scrolled {
+        @apply border-white/[0.08] bg-zinc-950/90 shadow-lg shadow-black/50;
+    }
+
+    .sur-nav-pill {
+        @apply whitespace-nowrap rounded-full px-3.5 py-2 text-sm font-medium transition duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60;
+    }
+
+    .sur-nav-pill-active {
+        @apply bg-white/10 text-white shadow-sm ring-1 ring-white/10;
+    }
+
+    .sur-nav-pill-idle {
+        @apply text-zinc-400 hover:bg-white/5 hover:text-white;
+    }
+
+    .sur-nav-mobile-link {
+        @apply flex min-h-12 w-full items-center rounded-xl border px-4 text-base font-medium transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60;
+    }
+
+    .sur-nav-mobile-link-active {
+        @apply border-indigo-500/35 bg-indigo-500/10 text-white;
+    }
+
+    .sur-nav-mobile-link-idle {
+        @apply border-transparent text-zinc-300 hover:border-white/10 hover:bg-white/5 hover:text-white;
+    }
+
+    .sur-footer-heading {
+        @apply mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500;
+    }
+
+    .sur-footer-link {
+        @apply text-sm text-zinc-400 transition duration-200 hover:text-indigo-300;
+    }
+
+    .sur-social-btn {
+        @apply flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-zinc-200 transition duration-200 hover:border-indigo-500/40 hover:bg-indigo-500/10 hover:text-indigo-200;
+    }
+
+    .sur-site-footer {
+        @apply relative mt-auto border-t border-white/10 bg-linear-to-b from-zinc-950 via-zinc-950 to-black text-zinc-300;
+    }
+
+    .sur-site-footer::before {
+        content: '';
+        @apply pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-indigo-500/35 to-transparent;
+    }
+
+    /* Account overview — indigo radial glow (explicit CSS so it always ships; arbitrary Tailwind gradients can be omitted from the build) */
+    .sur-account-radial-bg {
+        pointer-events: none;
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background: radial-gradient(
+            ellipse 65% 55% at 50% 32%,
+            rgba(99, 102, 241, 0.26) 0%,
+            rgba(99, 102, 241, 0.07) 48%,
+            transparent 72%
+        );
+    }
+
+    .sur-account-grid-bg {
+        pointer-events: none;
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        opacity: 0.04;
+        background-image:
+            linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+        background-size: 40px 40px;
+    }
+
+    .sur-btn-primary {
+        @apply inline-flex min-h-11 items-center justify-center rounded-xl bg-indigo-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition duration-200 ease-out hover:bg-indigo-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 active:scale-[0.98];
+    }
+
+    .sur-btn-secondary {
+        @apply inline-flex min-h-11 items-center justify-center rounded-xl border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-zinc-100 transition duration-200 hover:border-white/25 hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50 active:scale-[0.98];
+    }
+
+    .sur-btn-ghost {
+        @apply inline-flex min-h-11 items-center justify-center rounded-xl border border-white/10 bg-transparent px-4 py-2 text-sm font-medium text-zinc-200 transition hover:border-indigo-500/40 hover:text-indigo-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50;
+    }
+
+    .sur-input {
+        @apply w-full rounded-xl border border-white/10 bg-zinc-900/80 px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-500 shadow-inner transition focus:border-indigo-500/50 focus:outline-none focus:ring-2 focus:ring-indigo-500/30;
+    }
+
+    .sur-card {
+        @apply rounded-2xl border border-white/10 bg-zinc-900/80 p-6 shadow-xl shadow-black/40 backdrop-blur-sm transition duration-300 ease-out;
+    }
+
+    .sur-card-interactive {
+        @apply rounded-2xl border border-white/10 bg-zinc-900/80 p-6 shadow-xl shadow-black/40 backdrop-blur-sm transition duration-300 ease-out hover:-translate-y-1 hover:border-indigo-500/25 hover:shadow-indigo-500/10;
+    }
+
+    .needs-validation.was-validated .sur-input:invalid,
+    .needs-validation.was-validated select:invalid,
+    .needs-validation.was-validated textarea:invalid {
+        @apply border-red-500/80 ring-2 ring-red-500/30;
+    }
+
+    .sur-cookie-bar {
+        z-index: 1040;
+        border-top: 1px solid rgba(99, 102, 241, 0.35);
+        box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.45);
+        backdrop-filter: blur(10px);
+    }
+
+    .btn-sur-cookie-primary {
+        color: #fafafa;
+        background-color: #6366f1;
+        border: 1px solid #6366f1;
+        @apply inline-flex min-h-9 items-center justify-center rounded-lg px-3 py-1.5 text-sm font-semibold transition duration-200 hover:bg-indigo-400 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300;
+    }
+
+    .btn-sur-cookie-outline {
+        color: #a5b4fc;
+        border: 1px solid rgba(129, 140, 248, 0.55);
+        @apply inline-flex min-h-9 items-center justify-center rounded-lg bg-transparent px-3 py-1.5 text-sm font-medium transition duration-200 hover:border-indigo-400 hover:bg-indigo-500/15 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60;
+    }
+
+    body.sur-cookie-bar-visible {
+        padding-bottom: 8rem;
+    }
+
+    @media (min-width: 1024px) {
+        body.sur-cookie-bar-visible {
+            padding-bottom: 5.5rem;
+        }
+    }
+
+    body.sur-cookie-bar-visible .sur-cookie-fab {
+        bottom: max(8.5rem, env(safe-area-inset-bottom));
+    }
+
+    .sur-cookie-fab {
+        position: fixed;
+        right: max(1rem, env(safe-area-inset-right));
+        bottom: max(1rem, env(safe-area-inset-bottom));
+        z-index: 1045;
+        width: 3.25rem;
+        height: 3.25rem;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 9999px;
+        background: rgba(20, 20, 20, 0.94);
+        border: 1px solid rgba(129, 140, 248, 0.55);
+        color: #a5b4fc;
+        box-shadow: 0 4px 22px rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease,
+            border-color 0.2s ease,
+            background-color 0.2s ease,
+            color 0.2s ease;
+    }
+
+    .sur-cookie-fab:hover {
+        color: #fff;
+        background-color: rgba(99, 102, 241, 0.28);
+        border-color: #818cf8;
+        box-shadow: 0 6px 28px rgba(0, 0, 0, 0.55);
+        transform: translateY(-3px);
+    }
+
+    .sur-cookie-fab:focus-visible {
+        outline: 2px solid #818cf8;
+        outline-offset: 3px;
+    }
+
+    #surCookieConsentModal {
+        margin: auto;
+        width: min(100vw - 2rem, 42rem);
+        max-height: min(90vh, 48rem);
+        border: none;
+        border-radius: 0.75rem;
+        padding: 0;
+        background: #18181b;
+        color: #fafafa;
+        box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.55);
+    }
+
+    #surCookieConsentModal::backdrop {
+        background: rgba(0, 0, 0, 0.72);
+        backdrop-filter: blur(6px);
+    }
+
+    .sur-cookie-category {
+        padding: 0.75rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .sur-cookie-category:last-of-type {
+        border-bottom: none;
+    }
+
+    /* Only when open (showModal): `display: flex` must not apply to a closed <dialog> or it overrides UA `display: none` and the modal is visible on load. */
+    /* Top-anchored (not vertically centered): avoids Chromium re-centering the dialog when focus/:has() shifts intrinsic height — which jumped the modal upward off-screen when picking factions at the bottom of a scrolled list. */
+    #shuffle-modal:open {
+        position: fixed;
+        left: 50%;
+        top: max(0.75rem, env(safe-area-inset-top, 0px));
+        transform: translateX(-50%);
+        margin: 0;
+        width: min(100vw - 1.25rem, 42rem);
+        max-height: min(calc(100dvh - 1.5rem), 52rem);
+        overflow: hidden;
+        border: none;
+        border-radius: 1rem;
+        padding: 0;
+        background: transparent;
+        color: #fafafa;
+        /* Flex column so max-height caps the used height and inner flex-1/min-h-0 regions can scroll. */
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+    }
+
+    #shuffle-modal .shuffle-modal-card {
+        flex: 1 1 auto;
+        min-height: 0;
+        max-height: 100%;
+    }
+
+    /* Badge + stepper stay outside `.shuffle-modal-scroll` so only step bodies scroll. */
+    #shuffle-modal .shuffle-modal-chrome {
+        flex-shrink: 0;
+    }
+
+    #shuffle-modal::backdrop {
+        /* No backdrop-filter: compositor can leave blur visible after close(); solid dim only */
+        background: rgba(9, 9, 11, 0.88);
+        /* Chromium: avoid transition/inheritance quirks on the top-layer backdrop */
+        transition: none;
+    }
+
+    .sur-progress-track {
+        @apply h-2 overflow-hidden rounded-full bg-zinc-700;
+    }
+
+    .sur-progress-fill {
+        @apply h-full rounded-full bg-linear-to-r from-indigo-600 via-indigo-500 to-violet-500 transition-all duration-300 ease-out;
+    }
+
+    .sur-main {
+        @apply flex min-h-0 w-full flex-1 flex-col;
+    }
+
+    .sur-skip-link {
+        position: absolute;
+        left: -9999px;
+        top: 0;
+        z-index: 100;
+        border-radius: 0.5rem;
+        background-color: #18181b;
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #fafafa;
+        text-decoration: none;
+        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.45);
+    }
+
+    .sur-skip-link:focus {
+        left: max(1rem, env(safe-area-inset-left));
+        top: max(1rem, env(safe-area-inset-top));
+        outline: 2px solid rgba(129, 140, 248, 0.65);
+        outline-offset: 2px;
+    }
+
+    .sur-reveal {
+        opacity: 0;
+        transform: translateY(1.25rem);
+        transition:
+            opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+            transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+        transition-delay: var(--sur-reveal-delay, 0ms);
+        will-change: opacity, transform;
+    }
+
+    .sur-reveal--in {
+        opacity: 1;
+        transform: translateY(0);
+        will-change: auto;
+    }
+
+    .bg-options {
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .hero-height {
+        background-size: cover;
+        background-position: center;
+    }
+
+    .sur-footer-col {
+        animation: sur-footer-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+    }
+
+    .sur-footer-col:nth-child(1) {
+        animation-delay: 0ms;
+    }
+
+    .sur-footer-col:nth-child(2) {
+        animation-delay: 0.08s;
+    }
+
+    .sur-footer-col:nth-child(3) {
+        animation-delay: 0.16s;
+    }
+
+    .sur-footer-col:nth-child(4) {
+        animation-delay: 0.24s;
+    }
+}
+
+@keyframes sur-footer-in {
+    from {
+        opacity: 0;
+        transform: translateY(0.75rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Shuffle wizard (home modal) */
+.faction-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.5rem;
+}
+
+@media (min-width: 640px) {
+    .faction-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 0.625rem;
+    }
+}
+
+.faction-item {
+    position: relative;
+    text-align: center;
+}
+
+/* Checked state via :has() — avoids Tailwind `peer` compositing glitches in the shuffle dialog */
+.faction-item:has(input:checked) .faction-chip {
+    border-color: rgba(99, 102, 241, 0.85);
+    background-color: rgba(99, 102, 241, 0.15);
+    color: #e0e7ff;
+    box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.12);
+}
+
+.shuffle-modal-scroll {
+    overflow-anchor: none;
+    overscroll-behavior: contain;
+    padding-bottom: max(1.5rem, env(safe-area-inset-bottom, 0px));
+}
+
+.shuffle-wizard-stepper ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.shuffle-wizard-step {
+    position: relative;
+}
+
+.shuffle-wizard-step__index {
+    display: flex;
+    height: 2.5rem;
+    width: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    border: 2px solid rgba(63, 63, 70, 0.95);
+    background: rgba(24, 24, 27, 0.85);
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #a1a1aa;
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.shuffle-wizard-step__label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #71717a;
+    line-height: 1.2;
+    transition: color 0.2s ease;
+}
+
+@media (min-width: 640px) {
+    .shuffle-wizard-step__label {
+        font-size: 0.75rem;
+    }
+}
+
+.shuffle-wizard-step.is-current .shuffle-wizard-step__index {
+    border-color: rgba(129, 140, 248, 0.85);
+    background: linear-gradient(145deg, rgba(79, 70, 229, 0.35), rgba(109, 40, 217, 0.25));
+    color: #eef2ff;
+    box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.35);
+}
+
+.shuffle-wizard-step.is-current .shuffle-wizard-step__label {
+    color: #c7d2fe;
+}
+
+.shuffle-wizard-step.is-complete .shuffle-wizard-step__index {
+    border-color: rgba(52, 211, 153, 0.55);
+    background: rgba(6, 78, 59, 0.45);
+    color: #d1fae5;
+}
+
+.shuffle-wizard-step.is-complete .shuffle-wizard-step__label {
+    color: #86efac;
+}
+
+.shuffle-wizard-connector {
+    margin-top: 1.15rem;
+    flex: 1 1 0%;
+    min-width: 0.75rem;
+    height: 2px;
+    border-radius: 9999px;
+    background: linear-gradient(90deg, rgba(63, 63, 70, 0.9), rgba(82, 82, 91, 0.5));
+}
+
+.shuffle-wizard--error {
+    box-shadow: 0 0 0 2px rgba(248, 113, 113, 0.45);
+}
+
+.shuffle-step-content {
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+}
+
+.shuffle-step-content.slide-out {
+    opacity: 0;
+    transform: translateX(-100%);
+}
+
+.shuffle-step-content.slide-in {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/*
+ * Faction detail — full-height scroll container (scroll-snap). Thumb/track match global SUR scrollbar above.
+ */
+.scroll-container {
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scroll-container {
+        scroll-behavior: auto;
+    }
+}
+
+/* Landing home — faction teaser strip */
+.sur-faction-strip {
+    scrollbar-width: none;
+}
+
+.sur-faction-strip::-webkit-scrollbar {
+    display: none;
+}
+
+/* Landing home — carousel chrome */
+.sur-landing-carousel-btn {
+    @apply pointer-events-auto flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-zinc-950/70 text-sm text-white shadow-lg shadow-black/40 backdrop-blur-md transition hover:border-indigo-400/45 hover:bg-indigo-500/15 hover:text-indigo-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60 sm:h-11 sm:w-11;
+}

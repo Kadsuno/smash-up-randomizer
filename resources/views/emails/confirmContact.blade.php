@@ -1,47 +1,53 @@
-<div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; background-color: #1a1a1a; color: #f5f5f5; border-radius: 8px; border: 1px solid #333;">
-    <!-- Header -->
-    <h2 style="color: #bfbb00; border-bottom: 2px solid #bfbb00; padding-bottom: 10px; text-align: center;">
-        Thank You for Contacting Us, {{ $data->name }}!
-    </h2>
-
-    <!-- Intro Text -->
-    <p style="margin-top: 20px; font-size: 16px; color: #dcdcdc; text-align: center;">
-        We’ve received your message, and our team at Smash Up Randomizer will get back to you as soon as possible. Here are the details of your message:
-    </p>
-
-    <!-- User Details Section -->
-    <div style="margin-top: 20px; padding: 15px; background-color: #292929; border-radius: 8px;">
-        <h3 style="color: #bfbb00; margin-bottom: 10px;">Your Message Details</h3>
-        <table style="width: 100%; border-collapse: collapse;">
+<x-emails.shell
+    :title="__('frontend.email_confirm_title', ['name' => $data->name])"
+    :subtitle="__('frontend.email_confirm_sub')"
+>
+    <div
+        style="margin-top:8px;padding:16px 18px;background-color:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;"
+    >
+        <h2
+            style="margin:0 0 12px;font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#a5b4fc;"
+        >
+            {{ __('frontend.email_confirm_details_heading') }}
+        </h2>
+        <table role="presentation" style="width:100%;border-collapse:collapse;">
             <tr>
-                <td style="padding: 10px; font-weight: bold; color: #bfbb00;">Name:</td>
-                <td style="padding: 10px; color: #f5f5f5;">{{ $data->name }}</td>
+                <td style="padding:8px 12px 8px 0;vertical-align:top;font-weight:700;font-size:13px;color:#c7d2fe;white-space:nowrap;">
+                    {{ __('frontend.email_field_name') }}
+                </td>
+                <td style="padding:8px 0;vertical-align:top;font-size:15px;color:#f4f4f5;line-height:1.45;">{{ $data->name }}</td>
             </tr>
             <tr>
-                <td style="padding: 10px; font-weight: bold; color: #bfbb00;">Email:</td>
-                <td style="padding: 10px; color: #f5f5f5;">{{ $data->email }}</td>
+                <td style="padding:8px 12px 8px 0;vertical-align:top;font-weight:700;font-size:13px;color:#c7d2fe;white-space:nowrap;">
+                    {{ __('frontend.email_field_email') }}
+                </td>
+                <td style="padding:8px 0;vertical-align:top;font-size:15px;color:#f4f4f5;line-height:1.45;">{{ $data->email }}</td>
             </tr>
+            @if (! empty($data->phone))
+                <tr>
+                    <td style="padding:8px 12px 8px 0;vertical-align:top;font-weight:700;font-size:13px;color:#c7d2fe;white-space:nowrap;">
+                        {{ __('frontend.email_field_phone') }}
+                    </td>
+                    <td style="padding:8px 0;vertical-align:top;font-size:15px;color:#f4f4f5;line-height:1.45;">{{ $data->phone }}</td>
+                </tr>
+            @endif
             <tr>
-                <td style="padding: 10px; font-weight: bold; color: #bfbb00;">Phone:</td>
-                <td style="padding: 10px; color: #f5f5f5;">{{ $data->phone }}</td>
-            </tr>
-            <tr>
-                <td style="padding: 10px; font-weight: bold; color: #bfbb00;">Subject:</td>
-                <td style="padding: 10px; color: #f5f5f5;">{{ $data->subject }}</td>
+                <td style="padding:8px 12px 8px 0;vertical-align:top;font-weight:700;font-size:13px;color:#c7d2fe;white-space:nowrap;">
+                    {{ __('frontend.email_field_subject') }}
+                </td>
+                <td style="padding:8px 0;vertical-align:top;font-size:15px;color:#f4f4f5;line-height:1.45;">{{ $data->subject }}</td>
             </tr>
         </table>
     </div>
 
-    <!-- Message Section -->
-    <div style="margin-top: 20px; padding: 15px; background-color: #292929; border-radius: 8px;">
-        <h3 style="color: #bfbb00;">Your Message</h3>
-        <p style="font-size: 16px; color: #dcdcdc;">
-            {{ $data->message }}
-        </p>
+    <div
+        style="margin-top:16px;padding:16px 18px;background-color:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;"
+    >
+        <h2
+            style="margin:0 0 12px;font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#a5b4fc;"
+        >
+            {{ __('frontend.email_confirm_message_heading') }}
+        </h2>
+        <p style="margin:0;font-size:15px;line-height:1.55;color:#d4d4d8;white-space:pre-wrap;">{{ $data->message }}</p>
     </div>
-
-    <!-- Footer -->
-    <p style="margin-top: 20px; font-size: 14px; color: #888888; text-align: center;">
-        Thank you for reaching out to us! Visit us anytime at <a href="https://www.smash-up-randomizer.com" style="color: #bfbb00; text-decoration: none;">Smash Up Randomizer</a>.
-    </p>
-</div>
+</x-emails.shell>

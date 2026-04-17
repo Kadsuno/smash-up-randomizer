@@ -7,84 +7,45 @@
 
     <title>{{ config('app.name') }} - Authorization</title>
 
-    <!-- Styles -->
-    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
-
-    <style>
-        .passport-authorize .container {
-            margin-top: 30px;
-        }
-
-        .passport-authorize .scopes {
-            margin-top: 20px;
-        }
-
-        .passport-authorize .buttons {
-            margin-top: 25px;
-            text-align: center;
-        }
-
-        .passport-authorize .btn {
-            width: 125px;
-        }
-
-        .passport-authorize .btn-approve {
-            margin-right: 15px;
-        }
-
-        .passport-authorize form {
-            display: inline;
-        }
-    </style>
+    @vite(['resources/css/app.css'])
 </head>
-<body class="passport-authorize">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card card-default">
-                    <div class="card-header">
-                        Authorization Request
+<body class="min-h-screen bg-zinc-950 text-zinc-100 antialiased">
+    <div class="mx-auto max-w-lg px-4 py-12 sm:px-6">
+        <div class="sur-card border-white/10">
+            <div class="border-b border-white/10 px-5 py-4">
+                <h1 class="text-lg font-semibold text-white">Authorization Request</h1>
+            </div>
+            <div class="px-5 py-5 text-sm leading-relaxed text-zinc-300">
+                <p class="mb-4"><strong class="text-white">{{ $client->name }}</strong> is requesting permission to access your account.</p>
+
+                @if (count($scopes) > 0)
+                    <div class="mb-6">
+                        <p class="mb-2 font-medium text-zinc-200">This application will be able to:</p>
+                        <ul class="list-disc space-y-1 pl-5">
+                            @foreach ($scopes as $scope)
+                                <li>{{ $scope->description }}</li>
+                            @endforeach
+                        </ul>
                     </div>
-                    <div class="card-body">
-                        <!-- Introduction -->
-                        <p><strong>{{ $client->name }}</strong> is requesting permission to access your account.</p>
+                @endif
 
-                        <!-- Scope List -->
-                        @if (count($scopes) > 0)
-                            <div class="scopes">
-                                    <p><strong>This application will be able to:</strong></p>
+                <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+                    <form method="post" action="{{ route('passport.authorizations.approve') }}" class="inline">
+                        @csrf
+                        <input type="hidden" name="state" value="{{ $request->state }}">
+                        <input type="hidden" name="client_id" value="{{ $client->getKey() }}">
+                        <input type="hidden" name="auth_token" value="{{ $authToken }}">
+                        <button type="submit" class="sur-btn-primary min-h-11 min-w-[8rem]">Authorize</button>
+                    </form>
 
-                                    <ul>
-                                        @foreach ($scopes as $scope)
-                                            <li>{{ $scope->description }}</li>
-                                        @endforeach
-                                    </ul>
-                            </div>
-                        @endif
-
-                        <div class="buttons">
-                            <!-- Authorize Button -->
-                            <form method="post" action="{{ route('passport.authorizations.approve') }}">
-                                @csrf
-
-                                <input type="hidden" name="state" value="{{ $request->state }}">
-                                <input type="hidden" name="client_id" value="{{ $client->getKey() }}">
-                                <input type="hidden" name="auth_token" value="{{ $authToken }}">
-                                <button type="submit" class="btn btn-success btn-approve">Authorize</button>
-                            </form>
-
-                            <!-- Cancel Button -->
-                            <form method="post" action="{{ route('passport.authorizations.deny') }}">
-                                @csrf
-                                @method('DELETE')
-
-                                <input type="hidden" name="state" value="{{ $request->state }}">
-                                <input type="hidden" name="client_id" value="{{ $client->getKey() }}">
-                                <input type="hidden" name="auth_token" value="{{ $authToken }}">
-                                <button class="btn btn-danger">Cancel</button>
-                            </form>
-                        </div>
-                    </div>
+                    <form method="post" action="{{ route('passport.authorizations.deny') }}" class="inline">
+                        @csrf
+                        @method('DELETE')
+                        <input type="hidden" name="state" value="{{ $request->state }}">
+                        <input type="hidden" name="client_id" value="{{ $client->getKey() }}">
+                        <input type="hidden" name="auth_token" value="{{ $authToken }}">
+                        <button type="submit" class="sur-btn-secondary min-h-11 min-w-[8rem] border-red-500/40 text-red-200 hover:border-red-400/50 hover:bg-red-500/10">Cancel</button>
+                    </form>
                 </div>
             </div>
         </div>

@@ -1,153 +1,134 @@
 <x-layouts.backend.backendHeader />
-    <div class="d-flex">
-        <div id="sidebar" class="bg-dark text-white sidebar mt-5">
-            <div class="sidebar-header d-flex justify-content-between align-items-center p-3">
-                <button id="sidebarCollapse" class="btn btn-secondary rounded-circle">
-                    <i class="fas fa-chevron-left"></i>
+
+    <div class="flex min-h-screen pt-14">
+
+        {{-- Sidebar --}}
+        <aside id="sidebar" class="sidebar fixed top-14 bottom-0 z-40 flex flex-col border-r border-white/6 bg-zinc-950 transition-[width] duration-200 ease-in-out" style="width: 220px;">
+
+            {{-- Collapse toggle --}}
+            <div class="flex items-center justify-between border-b border-white/6 px-3 py-2.5">
+                <span id="sidebar-label" class="text-[0.6rem] font-bold uppercase tracking-widest text-zinc-600">Navigation</span>
+                <button
+                    id="sidebarCollapse"
+                    type="button"
+                    class="flex h-7 w-7 items-center justify-center rounded-lg text-zinc-600 transition hover:bg-white/5 hover:text-zinc-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60"
+                    aria-label="Toggle sidebar"
+                >
+                    <i id="collapseIcon" class="fas fa-chevron-left text-xs" aria-hidden="true"></i>
                 </button>
             </div>
-            <ul class="nav flex-column mb-auto p-3">
-                <li class="nav-item mb-2">
-                    <a href="{{ route('dashboard') }}" class="nav-link sidebar-link d-flex align-items-center justify-content-center btn {{ request()->routeIs('dashboard') ? 'btn-primary' : 'btn-secondary' }} rounded-pill">
-                        <i class="fa-solid fa-house icon-margin"></i>
-                        <span class="menu-text">Dashboard</span>
-                    </a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a href="{{ route('decks-manager') }}" class="nav-link sidebar-link d-flex align-items-center justify-content-center btn {{ request()->routeIs('decks-manager') ? 'btn-primary' : 'btn-secondary' }} rounded-pill">
-                        <i class="fa-solid fa-wrench icon-margin"></i>
-                        <span class="menu-text">Faction Manager</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div id="content" class="flex-grow-1 p-4 mt-5">
-            <main class="container-fluid">
+
+            {{-- Nav links --}}
+            <nav class="flex flex-col gap-1 p-2 pt-3">
+                @php
+                    $links = [
+                        [
+                            'href' => route('dashboard'),
+                            'active' => request()->routeIs('dashboard'),
+                            'icon' => 'fa-house',
+                            'label' => __('backend.nav_dashboard'),
+                        ],
+                        [
+                            'href' => route('decks-manager'),
+                            'active' => request()->routeIs('decks-manager', 'add-deck', 'edit-deck'),
+                            'icon' => 'fa-layer-group',
+                            'label' => __('backend.nav_faction_manager'),
+                        ],
+                        [
+                            'href' => route('admin.contacts.index'),
+                            'active' => request()->routeIs('admin.contacts.*'),
+                            'icon' => 'fa-envelope',
+                            'label' => __('backend.nav_contacts'),
+                        ],
+                        [
+                            'href' => route('admin.users.index'),
+                            'active' => request()->routeIs('admin.users.*'),
+                            'icon' => 'fa-users',
+                            'label' => __('backend.nav_users'),
+                        ],
+                        [
+                            'href' => route('admin.shuffle-stats'),
+                            'active' => request()->routeIs('admin.shuffle-stats'),
+                            'icon' => 'fa-shuffle',
+                            'label' => __('backend.nav_shuffle_stats'),
+                        ],
+                        [
+                            'href' => route('admin.maintenance'),
+                            'active' => request()->routeIs('admin.maintenance'),
+                            'icon' => 'fa-terminal',
+                            'label' => __('backend.nav_maintenance'),
+                        ],
+                    ];
+                @endphp
+                @foreach($links as $link)
+                <a href="{{ $link['href'] }}"
+                    class="sidebar-link group flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition duration-150 {{ $link['active'] ? 'bg-indigo-500/10 text-indigo-300' : 'text-zinc-500 hover:bg-white/5 hover:text-zinc-200' }}"
+                >
+                    <i class="fa-solid {{ $link['icon'] }} w-4 shrink-0 text-center text-sm {{ $link['active'] ? 'text-indigo-400' : 'text-zinc-600 group-hover:text-zinc-400' }}" aria-hidden="true"></i>
+                    <span class="sidebar-text truncate">{{ $link['label'] }}</span>
+                </a>
+                @endforeach
+            </nav>
+
+        </aside>
+
+        {{-- Main content — offset by sidebar width --}}
+        <div id="content" class="min-w-0 flex-1 p-6 pt-8 transition-[margin] duration-200 ease-in-out" style="margin-left: 220px;">
+            <main class="mx-auto w-full max-w-5xl">
                 {{ $slot }}
             </main>
         </div>
+
     </div>
+
     <x-layouts.backend.backendFooter />
+
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var sidebarCollapse = document.getElementById('sidebarCollapse');
-            var sidebar = document.getElementById('sidebar');
-            var content = document.getElementById('content');
-            var menuTexts = document.querySelectorAll('.menu-text');
-            var sidebarLinks = document.querySelectorAll('.sidebar-link');
-            var icons = document.querySelectorAll('.icon-margin');
+    (function () {
+        var sidebar   = document.getElementById('sidebar');
+        var content   = document.getElementById('content');
+        var btn       = document.getElementById('sidebarCollapse');
+        var icon      = document.getElementById('collapseIcon');
+        var label     = document.getElementById('sidebar-label');
+        var texts     = document.querySelectorAll('.sidebar-text');
+        var collapsed = localStorage.getItem('sidebar') === 'collapsed';
 
-            function toggleSidebar() {
-                sidebar.classList.toggle('active');
-                content.classList.toggle('active');
-                menuTexts.forEach(function(text) {
-                    text.classList.toggle('d-none');
-                });
-                sidebarLinks.forEach(function(link) {
-                    link.classList.toggle('justify-content-center');
-                    link.classList.toggle('justify-content-start');
-                });
-                icons.forEach(function(icon) {
-                    icon.classList.toggle('me-0');
-                });
-                
-                // Store sidebar state in localStorage
-                localStorage.setItem('sidebarState', sidebar.classList.contains('active') ? 'collapsed' : 'expanded');
-
-                // Toggle arrow direction
-                var arrow = sidebarCollapse.querySelector('i');
-                arrow.classList.toggle('fa-chevron-left');
-                arrow.classList.toggle('fa-chevron-right');
+        function apply(instant) {
+            if (instant) {
+                sidebar.style.transition = 'none';
+                content.style.transition = 'none';
             }
-
-            if (sidebarCollapse) {
-                sidebarCollapse.addEventListener('click', toggleSidebar);
-            }
-
-            // Check and apply saved sidebar state on page load
-            var sidebarState = localStorage.getItem('sidebarState');
-            if (sidebarState === 'collapsed') {
-                toggleSidebar();
+            if (collapsed) {
+                sidebar.style.width = '64px';
+                content.style.marginLeft = '64px';
+                icon.classList.replace('fa-chevron-left', 'fa-chevron-right');
+                label.classList.add('hidden');
+                texts.forEach(function (t) { t.classList.add('hidden'); });
             } else {
-                sidebarLinks.forEach(function(link) {
-                    link.classList.add('justify-content-start');
+                sidebar.style.width = '220px';
+                content.style.marginLeft = '220px';
+                icon.classList.replace('fa-chevron-right', 'fa-chevron-left');
+                label.classList.remove('hidden');
+                texts.forEach(function (t) { t.classList.remove('hidden'); });
+            }
+            if (instant) {
+                // Re-enable transitions after paint
+                requestAnimationFrame(function () {
+                    sidebar.style.transition = '';
+                    content.style.transition = '';
                 });
             }
+        }
 
-            sidebarLinks.forEach(function(link) {
-                link.addEventListener('mouseenter', function() {
-                    this.classList.add('animate__animated', 'animate__pulse');
-                });
-                link.addEventListener('mouseleave', function() {
-                    this.classList.remove('animate__animated', 'animate__pulse');
-                });
-            });
+        apply(true);
+
+        btn.addEventListener('click', function () {
+            collapsed = !collapsed;
+            localStorage.setItem('sidebar', collapsed ? 'collapsed' : 'expanded');
+            apply(false);
         });
+    })();
     </script>
-    <style>
-        .sidebar {
-            min-width: 250px;
-            max-width: 250px;
-            min-height: 100vh;
-            transition: all 0.3s;
-            position: relative;
-        }
-        .sidebar.active {
-            min-width: 80px;
-            max-width: 80px;
-        }
-        #content {
-            width: 100%;
-            transition: all 0.3s;
-        }
-        #content.active {
-            margin-left: -170px;
-        }
-        .sidebar-link {
-            color: #fff;
-            transition: all 0.3s;
-        }
-        .sidebar-link:hover {
-            color: #17a2b8;
-            background-color: rgba(255,255,255,0.2);
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-        .sidebar-link.btn-primary {
-            color: #fff;
-            background-color: #0056b3;
-        }
-        .sidebar-link.btn-secondary {
-            color: #fff;
-            background-color: #6c757d;
-        }
-        .sidebar-link.btn-primary:hover,
-        .sidebar-link.btn-secondary:hover {
-            filter: brightness(110%);
-        }
-        #sidebarCollapse {
-            position: absolute;
-            top: 50%;
-            right: -20px;
-            transform: translateY(-50%);
-            width: 40px;
-            height: 40px;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-        .sidebar-link i {
-            min-width: 20px;
-            text-align: center;
-        }
-        .icon-margin {
-            margin-right: 0.5rem;
-        }
-        .sidebar.active .icon-margin {
-            margin-right: 0;
-        }
-    </style>
+
 </body>
 </html>
