@@ -6,8 +6,18 @@ alwaysApply: true
 ## Scope
 
 - Applies to **every user request related to code or features** in this repository **by default**.
-- **Opt-out** examples: "skip workflow" / "kein Workflow", "quick fix" / "nur quick fix", "no merge" / "kein Merge", "nur Erklärung, kein Code", "suggestion only".
+- **Opt-out** examples: "skip workflow" / "kein Workflow", "quick fix" / "nur quick fix", "no merge" / "kein Merge", "nur Erklärung, kein Code", "suggestion only", "explore only" / "nur spike" / "read-only".
 - If intent is ambiguous, ask **one concise message** with all open questions before deviating from the sequence.
+
+## Track selection (decision tree)
+
+Use this to pick **read-only** vs **Quick** vs **Full** before **First response** below:
+
+1. **Read-only?** User wants explanation, audit, or exploration **without** shipping code → use **readonly** tools only; no branch/ticket unless they later ask for implementation.
+2. **Quick track?** User said quick fix **or** the change is clearly ≤3 files, no migration, no new route, no guest-visible UX → **Quick track**.
+3. **Otherwise** → **Full track** (ticket + hard stop before the first productive edit).
+
+If still unclear → **Clarification first** (single message, all open questions).
 
 ### First response (when starting work on a change)
 
@@ -36,6 +46,11 @@ All phases apply. Use when **any** of the following is true:
 **Trigger:** user says "quick fix" / "nur quick fix" / "kleine Korrektur" **or** the change clearly touches ≤ 3 files with no migration, no new route, no UX impact.  
 **Phases still required:** Branch → Implement → Lint → Commit → Push → PR → Merge.
 
+### Efficiency (optional)
+
+- While long commands run (e.g. `ddev exec php artisan test`, Pint), **prepare** CHANGELOG `[Unreleased]` bullets and EN/DE lang keys in chat or as draft edits.
+- **Commit only** after Phases 6–7 pass — do not commit on failing tests or lints.
+
 ---
 
 ## Hard stop — before ANY code change (Full track only)
@@ -50,6 +65,8 @@ All phases apply. Use when **any** of the following is true:
 ```
 
 **Inline markdown plans are not a substitute** for Cursor Plan mode + `CreatePlan` where Phase 3 applies.
+
+**Exploration / spike (read-only)** — When the user explicitly wants **exploration only** ("spike", "nur recherchieren", "read-only audit"), you may use **readonly** tools (`Read`, `Grep`, `Glob`, semantic codebase search) **before** the checklist. The checklist still applies **before** the first `StrReplace`, `Write`, `Delete`, or implementation `Shell` (anything that changes the repo or runs non-readonly shell). Switching from exploration to implementation **restarts** Full track from Phase 1–4 as needed.
 
 ---
 
@@ -97,7 +114,8 @@ Do not implement while blocking questions are unanswered.
 Follow **`ticket-authoring.mdc`**.
 
 - `Write` the ticket to `docs/tickets/YYYY-MM-DD-short-slug.md` (content matches chat).
-- **IssueForge (optional):** Only if `.env` defines `ISSUE_FORGE_BASE_URL`, `ISSUE_FORGE_PROJECT_ID`, and `API_ADMIN_TOKEN`. Then `POST` with `project_id`, `title`, `description`, `status: "open"`, `priority`. On **201**, report id. On missing env or failure: note **IssueForge: skipped**.
+- **Ticket vs Plan:** Keep the ticket focused on **Requirements**, **Testing**, and **Impact** — do **not** duplicate the full ordered step list from Plan mode; a short cross-reference is enough when Phase 3 runs.
+- **IssueForge (optional, non-blocking):** Only if `.env` defines `ISSUE_FORGE_BASE_URL`, `ISSUE_FORGE_PROJECT_ID`, and `API_ADMIN_TOKEN`. After the ticket file exists, `POST` with `project_id`, `title`, `description`, `status: "open"`, `priority`. On **201**, report id. **Do not** delay Phase 4+ on IssueForge latency; on missing env or failure, note **IssueForge: skipped** and continue.
 
 ---
 
@@ -114,6 +132,8 @@ Use Cursor **Plan mode** when **any** of the following applies:
 Wait for **explicit user confirmation**, then return to Agent mode.
 
 For changes that meet Full track criteria but **none** of the Plan mode triggers above: skip Plan mode, document reasoning briefly, proceed to Phase 4.
+
+When Plan mode **is** used, **CreatePlan** holds the ordered steps; keep the ticket free of copy-pasted plan prose.
 
 ---
 
@@ -210,7 +230,8 @@ git push -u origin <branch-name>
 
 ## Phase 13 — Merge (GitHub)
 
-- After PR creation, **attempt merge in the same workflow** when GitHub allows and checks pass, unless the user opted out.
+- After PR creation, **attempt merge in the same workflow** when GitHub allows and **required checks are green**, unless the user opted out.
+- If checks are **queued or pending**, report status and **wait** for green (or stop with next steps) — do not merge on a red or unknown CI state unless the user explicitly overrides.
 - Prefer: `gh pr merge <number> --squash --delete-branch`
 - Do **not** merge if required checks failed unless the user explicitly overrides.
 
