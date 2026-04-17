@@ -190,12 +190,16 @@
 <div class="mt-10 rounded-xl border border-red-500/15 bg-red-950/10 p-5">
     <h3 class="mb-1 text-xs font-bold uppercase tracking-wide text-red-400">Danger zone</h3>
     <p class="mb-4 text-xs text-zinc-600">Permanently delete this faction. This action cannot be undone.</p>
-    <a href="{{ route('delete-decks', $deck->name) }}"
-        class="inline-flex items-center gap-2 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-2 text-sm font-semibold text-red-400 transition hover:bg-red-500/20 hover:text-red-300"
-        onclick="return confirm('{{ __('backend.confirm_delete') }}')">
-        <i class="fa-solid fa-trash-alt text-xs" aria-hidden="true"></i>
-        Delete {{ $deck->name }}
-    </a>
+    <form action="{{ route('delete-decks', ['name' => $deck->name]) }}" method="POST" class="inline"
+        onsubmit="return confirm(@json(__('backend.confirm_delete')))">
+        @csrf
+        @method('DELETE')
+        <button type="submit"
+            class="inline-flex items-center gap-2 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-2 text-sm font-semibold text-red-400 transition hover:bg-red-500/20 hover:text-red-300">
+            <i class="fa-solid fa-trash-alt text-xs" aria-hidden="true"></i>
+            Delete {{ $deck->name }}
+        </button>
+    </form>
 </div>
 
 {{-- CKEditor 5 --}}

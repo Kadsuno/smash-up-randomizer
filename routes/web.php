@@ -1,6 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\ContactMessageController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\FactionDeckController;
+use App\Http\Controllers\Admin\MaintenanceController;
+use App\Http\Controllers\Admin\ShuffleStatsController;
+use App\Http\Controllers\Admin\UserAdminController;
 use App\Http\Controllers\DeckController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
@@ -20,50 +26,40 @@ Route::get('/', [
     'index'
 ])->name('home');
 
-Route::get('/admin/backend', function () {
-    $decks = \App\Models\Deck::all();
-    return view('backend.dashboard', [
-        'total'          => $decks->count(),
-        'withTeaser'     => $decks->filter(fn ($d) => !empty($d->teaser))->count(),
-        'withDesc'       => $decks->filter(fn ($d) => !empty($d->description))->count(),
-        'withoutDetails' => $decks->filter(fn ($d) => empty($d->teaser) && empty($d->description))->count(),
-    ]);
-})->middleware(['auth', 'admin'])->name('dashboard');
+Route::middleware(['auth', 'admin'])->group(function (): void {
+    Route::get('/admin/backend', DashboardController::class)->name('dashboard');
 
-Route::get('/admin/backend/decks-manager', [
-    DeckController::class,
-    'index'
-])->middleware(['auth', 'admin'])->name('decks-manager');
+    Route::get('/admin/backend/contacts', [ContactMessageController::class, 'index'])
+        ->name('admin.contacts.index');
+    Route::get('/admin/backend/contacts/{contact}', [ContactMessageController::class, 'show'])
+        ->name('admin.contacts.show');
 
-Route::get('/admin/backend/decks-manager/add-deck', [
-    DeckController::class,
-    'add'
-])->middleware(['auth', 'admin'])->name('add-deck');
+    Route::get('/admin/backend/users', [UserAdminController::class, 'index'])
+        ->name('admin.users.index');
+    Route::post('/admin/backend/users/role', [UserAdminController::class, 'updateRole'])
+        ->name('admin.users.update-role');
 
-Route::post('/admin/backend/decks-manager/store-deck', [
-    DeckController::class,
-    'store'
-])->middleware(['auth', 'admin'])->name('store-deck');
+    Route::get('/admin/backend/shuffle-stats', ShuffleStatsController::class)
+        ->name('admin.shuffle-stats');
 
-Route::post('/admin/backend/decks-manager/add-deck-csv', [
-    DeckController::class,
-    'addCsv'
-])->middleware(['auth', 'admin'])->name('add-deck-csv');
+    Route::get('/admin/backend/maintenance', MaintenanceController::class)
+        ->name('admin.maintenance');
 
-Route::get('/admin/backend/decks-manager/delete/{name}', [
-    DeckController::class,
-    'delete'
-])->middleware(['auth', 'admin'])->name('delete-decks');
-
-Route::get('/admin/backend/decks-manager/decks/{name}/edit', [
-    DeckController::class,
-    'edit'
-])->middleware(['auth', 'admin'])->name('edit-deck');
-
-Route::post('/admin/backend/decks-manager/decks/{name}/update', [
-    DeckController::class,
-    'update'
-])->middleware(['auth', 'admin'])->name('update-deck');
+    Route::get('/admin/backend/decks-manager', [FactionDeckController::class, 'index'])
+        ->name('decks-manager');
+    Route::get('/admin/backend/decks-manager/add-deck', [FactionDeckController::class, 'create'])
+        ->name('add-deck');
+    Route::post('/admin/backend/decks-manager/store-deck', [FactionDeckController::class, 'store'])
+        ->name('store-deck');
+    Route::post('/admin/backend/decks-manager/add-deck-csv', [FactionDeckController::class, 'importCsv'])
+        ->name('add-deck-csv');
+    Route::delete('/admin/backend/decks-manager/decks/{name}', [FactionDeckController::class, 'destroy'])
+        ->name('delete-decks');
+    Route::get('/admin/backend/decks-manager/decks/{name}/edit', [FactionDeckController::class, 'edit'])
+        ->name('edit-deck');
+    Route::post('/admin/backend/decks-manager/decks/{name}/update', [FactionDeckController::class, 'update'])
+        ->name('update-deck');
+});
 
 Route::get('/shuffle', function () {
     return view('shuffle.form');

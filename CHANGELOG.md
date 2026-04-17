@@ -4,6 +4,10 @@ All notable changes to this project are documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- **Admin backend:** Expanded `/admin/backend` with **Contacts** (list + detail for stored contact form messages), **Users** (promote/demote with protection for the last admin), **Shuffle stats** (aggregates + recent history), and a **CLI reference** page (read-only Artisan hints). Faction manager now uses **server-side search**, content and expansion filters, **pagination**, **DELETE + CSRF** for removals (replacing GET delete), and validated **CSV upload** via `UploadedFile`. Dashboard stats include contacts, users, and shuffle totals; faction admin actions moved to `App\Http\Controllers\Admin\*`.
+
 ### Changed
 
 - **Admin login:** `POST /admin` now logs out and returns a validation error if the account is not `role=admin` (instead of redirecting to the dashboard and hitting HTTP 403). This matches deployments where the `users.role` migration set every existing row to `user` — use `php artisan users:promote email@example.com` to restore backend access. README documents the promote step after `migrate`.

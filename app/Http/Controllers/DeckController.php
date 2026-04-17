@@ -1,15 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Deck;
 use App\Models\ShuffleHistory;
 use App\Services\ShuffleDeckPool;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class DeckController extends Controller
@@ -19,59 +19,45 @@ class DeckController extends Controller
     ) {}
 
     /**
-     * Index action to send the factions to the view
-     * @return \Illuminate\Contracts\View\View
+     * Public faction list (sorted by name).
      */
-    public function index(): \Illuminate\Contracts\View\View
-    {
-        $decks = Deck::all();
-
-        $decks = $decks->sortBy('name');
-
-        return view('backend.decks-manager', ['decks' => $decks]);
-    }
-
-    /**
-     * Index action to send the factions to the view
-     * @return \Illuminate\Contracts\View\View
-     */
-    public function list(): \Illuminate\Contracts\View\View
+    public function list(): View
     {
         $decks = Deck::all()->sortBy('name');
 
         return view('decks.list', [
-            'decks'       => $decks,
-            'total'       => $decks->count(),
-            'withDetails' => $decks->filter(fn ($d) => !empty($d->teaser))->count(),
+            'decks' => $decks,
+            'total' => $decks->count(),
+            'withDetails' => $decks->filter(fn ($d) => ! empty($d->teaser))->count(),
         ]);
     }
 
     /**
-     * Detail action to send the faction to the view
-     * @param string $name Name of the faction
-     * @return \Illuminate\Contracts\View\View
+     * Public faction detail page.
+     *
+     * @param  string  $name  Name of the faction
      */
-    public function detail(string $name): \Illuminate\Contracts\View\View
+    public function detail(string $name): View
     {
         $deck = Deck::where('name', $name)->firstOrFail();
+
         return view('decks.detail', ['deck' => $deck]);
     }
 
     /**
      * List all expansion sets grouped by name.
-     * @return \Illuminate\Contracts\View\View
      */
-    public function expansions(): \Illuminate\Contracts\View\View
+    public function expansions(): View
     {
         $expansions = Deck::whereNotNull('expansion')
             ->where('expansion', '!=', '')
             ->get()
             ->groupBy('expansion')
             ->map(fn ($factions) => [
-                'name'    => $factions->first()->expansion,
-                'slug'    => Str::slug($factions->first()->expansion),
-                'count'   => $factions->count(),
-                'preview' => $factions->filter(fn ($d) => !empty($d->image))->take(4)->values(),
+                'name' => $factions->first()->expansion,
+                'slug' => Str::slug($factions->first()->expansion),
+                'count' => $factions->count(),
+                'preview' => $factions->filter(fn ($d) => ! empty($d->image))->take(4)->values(),
             ])
             ->sortKeys();
 
@@ -80,10 +66,10 @@ class DeckController extends Controller
 
     /**
      * Show all factions for a single expansion set.
-     * @param string $slug URL slug of the expansion name
-     * @return \Illuminate\Contracts\View\View
+     *
+     * @param  string  $slug  URL slug of the expansion name
      */
-    public function expansion(string $slug): \Illuminate\Contracts\View\View
+    public function expansion(string $slug): View
     {
         $expansionNames = Deck::whereNotNull('expansion')
             ->where('expansion', '!=', '')
@@ -94,7 +80,7 @@ class DeckController extends Controller
             fn ($name) => Str::slug($name) === $slug
         );
 
-        if (!$expansionName) {
+        if (! $expansionName) {
             abort(404);
         }
 
@@ -105,7 +91,7 @@ class DeckController extends Controller
         return view('expansions.show', [
             'expansionName' => $expansionName,
             'expansionSlug' => $slug,
-            'decks'         => $decks,
+            'decks' => $decks,
         ]);
     }
 
@@ -136,94 +122,7 @@ class DeckController extends Controller
     }
 
     /**
-     * Add action to add new factions
-     * @return \Illuminate\Contracts\View\View
-     */
-    public function add(): \Illuminate\Contracts\View\View
-    {
-        return view('decks.add');
-    }
-
-    /**
-     * Create action to create a new faction
-     * @param Request $request Request object
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store(Request $request): \Illuminate\Http\RedirectResponse
-    {
-        $deck = Deck::where('name', $request->name)->first();
-
-        $imageUrl = config('app.url') . '/images/factions/' . strtolower($request->name) . '.png';
-
-        if ($deck) {
-            Deck::where('name', $request->name)->update([
-                'image' => $imageUrl,
-                'teaser' => $request->teaser,
-                'description' => $request->description,
-                'cardsTeaser' => $request->cardsTeaser,
-                'actionTeaser' => $request->actionTeaser,
-                'actionList' => $request->actionList,
-                'actions' => $request->actions,
-                'characters' => $request->characters,
-                'bases' => $request->bases,
-                'clarifications' => $request->clarifications,
-                'suggestionTeaser' => $request->suggestionTeaser,
-                'synergy' => $request->synergy,
-                'tips' => $request->tips,
-                'mechanics' => $request->mechanics,
-                'expansion' => $request->expansion,
-                'effects' => $request->effects,
-                'playstyle' => $request->playstyle
-            ]);
-
-            session()->flash('success', 'Faction (' . $deck->name . ', ID: ' . $deck->id . ') already exists, updated successfully!');
-        }
-        else {
-            $deck = Deck::create([
-                'name' => $request->name,
-                'image' => $imageUrl,
-                'teaser' => $request->teaser,
-                'description' => $request->description,
-                'cardsTeaser' => $request->cardsTeaser,
-                'actionTeaser' => $request->actionTeaser,
-                'actionList' => $request->actionList,
-                'actions' => $request->actions,
-                'characters' => $request->characters,
-                'bases' => $request->bases,
-                'clarifications' => $request->clarifications,
-                'suggestionTeaser' => $request->suggestionTeaser,
-                'synergy' => $request->synergy,
-                'tips' => $request->tips,
-                'mechanics' => $request->mechanics,
-                'expansion' => $request->expansion,
-                'effects' => $request->effects,
-                'playstyle' => $request->playstyle
-            ]);
-
-            session()->flash('success', 'Created faction (' . $deck->name . ', ID: ' . $deck->id . ') successfully!');
-        }
-
-        return redirect()->route('decks-manager');
-    }
-
-    /**
-     * Delete action to delete a selected faction
-     * @param id $id ID of the faction
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function delete(string $name): \Illuminate\Http\RedirectResponse
-    {
-        $deck = Deck::where('name', $name)->first();
-
-        Deck::where('name', $name)->delete();
-
-        session()->flash('success', 'Deleted faction (' . $deck->name . ', ID: ' . $deck->id . ') successfully!');
-
-        return redirect()->route('decks-manager');
-    }
-
-    /**
-     * Shuffle action to shuffle random factions and assign to players.
+     * Shuffle random factions and assign to players (wizard POST).
      *
      * @return RedirectResponse|View
      */
@@ -263,83 +162,5 @@ class DeckController extends Controller
         }
 
         return view('shuffle.shuffle-decks', ['selectedDecks' => $selectedDecks]);
-    }
-
-    /**
-     * AddCsv action to import faction via CSV file
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function addCsv(): \Illuminate\Http\RedirectResponse
-    {
-        $tmpName = $_FILES['csv']['tmp_name'];
-        $factionCsv = array_map('str_getcsv', file($tmpName));
-        foreach ($factionCsv as $factionArray) {
-            $deckExists = FALSE;
-
-            if ($factionArray[1] != '') {
-                $deckName = $factionArray[1];
-
-                $decks = Deck::all();
-
-                foreach ($decks as $deck) {
-                    if ($deck->name == $deckName) {
-                        $deckExists = TRUE;
-                    }
-                }
-
-                if (!$deckExists) {
-                    $deck = new Deck();
-                    $deck->name = $deckName;
-                    $deck->save();
-                }
-            }
-        }
-
-        session()->flash('success', 'Imported factions via CSV successfully!');
-
-        return redirect()->route('decks-manager');
-    }
-
-    /**
-     * Edit action to edit selected faction
-     * @param Request $request Request object
-     * @param string $name Name of the faction
-     * @return \Illuminate\Contracts\View\View
-     */
-    public function edit(Request $request, string $name): \Illuminate\Contracts\View\View
-    {
-        $deck = Deck::where('name', $request->name)->first();
-
-        return view('decks.edit', ['deck' => $deck]);
-    }
-
-    public function update(Request $request): \Illuminate\Http\RedirectResponse
-    {
-        $deck = Deck::where('name', $request->name)->first();
-        $imageUrl = config('app.url') . '/images/factions/' . strtolower($request->name) . '.png';
-
-        Deck::where('name', $request->name)->update([
-            'image' => $imageUrl,
-            'teaser' => $request->teaser,
-            'description' => $request->description,
-            'cardsTeaser' => $request->cardsTeaser,
-            'actionTeaser' => $request->actionTeaser,
-            'actionList' => $request->actionList,
-            'actions' => $request->actions,
-            'characters' => $request->characters,
-            'bases' => $request->bases,
-            'clarifications' => $request->clarifications,
-            'suggestionTeaser' => $request->suggestionTeaser,
-            'synergy' => $request->synergy,
-            'tips' => $request->tips,
-            'mechanics' => $request->mechanics,
-            'expansion' => $request->expansion,
-            'effects' => $request->effects,
-            'playstyle' => $request->playstyle
-        ]);
-
-        session()->flash('success', 'Updated faction (' . $deck->name . ', ID: ' . $deck->id . ') successfully!');
-
-        return redirect()->route('decks-manager');
     }
 }
