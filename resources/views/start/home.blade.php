@@ -51,19 +51,40 @@
                             aria-roledescription="slide"
                             aria-label="{{ __('frontend.landing_slide_1_title') }}"
                         >
-                            <div class="flex flex-1 flex-col items-center justify-center gap-4 px-6 sm:px-10">
-                                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400/90">Step 1</p>
-                                <div class="grid w-full max-w-xs grid-cols-3 gap-3">
-                                    @foreach([2, 3, 4] as $n)
-                                        <div class="flex flex-col items-center justify-center rounded-2xl border px-2 py-4 text-center
-                                            {{ $n === 2 ? 'border-indigo-500 bg-indigo-500/15 shadow-lg shadow-indigo-500/20' : 'border-white/15 bg-zinc-900/60' }}">
-                                            <span class="text-3xl font-extrabold tabular-nums {{ $n === 2 ? 'text-white' : 'text-zinc-400' }} sm:text-4xl">{{ $n }}</span>
-                                            <span class="mt-1 text-[0.65rem] font-medium uppercase tracking-wider {{ $n === 2 ? 'text-indigo-200' : 'text-zinc-600' }}">{{ __('frontend.shuffle_wizard_players_unit') }}</span>
+                            <div class="flex min-h-0 flex-1 flex-col">
+                                <div class="h-11 shrink-0" aria-hidden="true"></div>
+                                <div class="flex min-h-0 flex-1 items-stretch gap-1 px-2 pb-2 sm:gap-2 sm:px-3">
+                                    <button
+                                        type="button"
+                                        class="sur-landing-carousel-btn shrink-0 self-center"
+                                        @click="prev()"
+                                        aria-label="{{ __('frontend.landing_carousel_prev') }}"
+                                    >
+                                        <i class="fa-solid fa-chevron-left fa-fw text-xs sm:text-sm" aria-hidden="true"></i>
+                                    </button>
+                                    <div class="flex min-h-0 min-w-0 flex-1 flex-col items-center justify-center gap-4">
+                                        <p class="text-center text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400/90">Step 1</p>
+                                        <div class="mx-auto grid w-full max-w-[15.5rem] grid-cols-3 gap-2 sm:max-w-sm sm:gap-3">
+                                            @foreach([2, 3, 4] as $n)
+                                                <div class="flex min-h-[5.25rem] min-w-0 flex-col items-center justify-center rounded-2xl border px-1 py-3 text-center sm:min-h-[6rem] sm:px-2 sm:py-4
+                                                    {{ $n === 2 ? 'border-indigo-500 bg-indigo-500/15 shadow-lg shadow-indigo-500/20' : 'border-white/15 bg-zinc-900/60' }}">
+                                                    <span class="text-3xl font-extrabold tabular-nums {{ $n === 2 ? 'text-white' : 'text-zinc-400' }} sm:text-4xl">{{ $n }}</span>
+                                                    <span class="mt-1 text-[0.65rem] font-medium uppercase tracking-wider {{ $n === 2 ? 'text-indigo-200' : 'text-zinc-600' }}">{{ __('frontend.shuffle_wizard_players_unit') }}</span>
+                                                </div>
+                                            @endforeach
                                         </div>
-                                    @endforeach
+                                    </div>
+                                    <button
+                                        type="button"
+                                        class="sur-landing-carousel-btn shrink-0 self-center"
+                                        @click="next()"
+                                        aria-label="{{ __('frontend.landing_carousel_next') }}"
+                                    >
+                                        <i class="fa-solid fa-chevron-right fa-fw text-xs sm:text-sm" aria-hidden="true"></i>
+                                    </button>
                                 </div>
                             </div>
-                            <div class="border-t border-white/8 bg-black/40 px-5 py-4 sm:px-7">
+                            <div class="shrink-0 border-t border-white/8 bg-black/40 px-5 py-4 sm:px-7">
                                 <h2 class="text-base font-bold text-white sm:text-xl">{{ __('frontend.landing_slide_1_title') }}</h2>
                                 <p class="mt-1 text-xs leading-relaxed text-zinc-300 sm:text-sm">{{ __('frontend.landing_slide_1_tagline') }}</p>
                             </div>
@@ -79,22 +100,44 @@
                             aria-roledescription="slide"
                             aria-label="{{ __('frontend.landing_slide_2_title') }}"
                         >
-                            <div class="flex flex-1 flex-col justify-center px-6 sm:px-10">
-                                <p class="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400/90">Step 2</p>
-                                @if($factions->isNotEmpty())
-                                    <div class="flex flex-wrap gap-1.5">
-                                        @foreach($factions->take(10) as $idx => $faction)
-                                            <span class="rounded-lg border px-2.5 py-1.5 text-xs font-medium transition
-                                                {{ $idx < 6 ? 'border-indigo-500/40 bg-indigo-500/12 text-indigo-200' : 'border-white/10 bg-zinc-800/60 text-zinc-500 line-through' }}">
-                                                {{ $faction->name }}
-                                            </span>
-                                        @endforeach
+                            <div class="flex min-h-0 flex-1 flex-col">
+                                <div class="h-11 shrink-0" aria-hidden="true"></div>
+                                <div class="flex min-h-0 flex-1 items-stretch gap-1 px-2 pb-2 sm:gap-2 sm:px-3">
+                                    <button
+                                        type="button"
+                                        class="sur-landing-carousel-btn shrink-0 self-center"
+                                        @click="prev()"
+                                        aria-label="{{ __('frontend.landing_carousel_prev') }}"
+                                    >
+                                        <i class="fa-solid fa-chevron-left fa-fw text-xs sm:text-sm" aria-hidden="true"></i>
+                                    </button>
+                                    {{-- Top-align + scroll: justify-center here clips overflow on mobile (centered flex + overflow-y). --}}
+                                    <div class="flex min-h-0 min-w-0 flex-1 flex-col items-center justify-start gap-2 overflow-y-auto overscroll-y-contain py-1 touch-pan-y sm:gap-3">
+                                        <p class="shrink-0 text-center text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400/90">Step 2</p>
+                                        @if($factions->isNotEmpty())
+                                            <div class="mx-auto w-full max-w-xl shrink-0 grid grid-cols-2 gap-1.5 sm:grid-cols-5 sm:gap-2">
+                                                @foreach($factions->take(10) as $idx => $faction)
+                                                    <span class="flex min-h-[2.55rem] items-center justify-center rounded-lg border px-1.5 py-1.5 text-center text-[0.625rem] font-medium leading-snug transition sm:min-h-[3rem] sm:px-2 sm:py-2 sm:text-xs
+                                                        {{ $idx < 6 ? 'border-indigo-500/40 bg-indigo-500/12 text-indigo-200' : 'border-white/10 bg-zinc-800/60 text-zinc-500 line-through' }}">
+                                                        <span class="line-clamp-2 break-words">{{ $faction->name }}</span>
+                                                    </span>
+                                                @endforeach
+                                            </div>
+                                        @else
+                                            <p class="text-center text-sm text-zinc-500">{{ __('frontend.landing_slide_2_tagline') }}</p>
+                                        @endif
                                     </div>
-                                @else
-                                    <p class="text-sm text-zinc-500">{{ __('frontend.landing_slide_2_tagline') }}</p>
-                                @endif
+                                    <button
+                                        type="button"
+                                        class="sur-landing-carousel-btn shrink-0 self-center"
+                                        @click="next()"
+                                        aria-label="{{ __('frontend.landing_carousel_next') }}"
+                                    >
+                                        <i class="fa-solid fa-chevron-right fa-fw text-xs sm:text-sm" aria-hidden="true"></i>
+                                    </button>
+                                </div>
                             </div>
-                            <div class="border-t border-white/8 bg-black/40 px-5 py-4 sm:px-7">
+                            <div class="shrink-0 border-t border-white/8 bg-black/40 px-5 py-4 sm:px-7">
                                 <h2 class="text-base font-bold text-white sm:text-xl">{{ __('frontend.landing_slide_2_title') }}</h2>
                                 <p class="mt-1 text-xs leading-relaxed text-zinc-300 sm:text-sm">{{ __('frontend.landing_slide_2_tagline') }}</p>
                             </div>
@@ -111,36 +154,69 @@
                             aria-label="{{ __('frontend.landing_slide_3_title') }}"
                         >
                             @php $demoFactions = $factions->take(4); @endphp
-                            <div class="flex flex-1 flex-col justify-center gap-3 px-6 sm:px-10">
-                                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400/90">Step 3</p>
-                                @if($demoFactions->count() >= 4)
-                                    @foreach([[0,1],[2,3]] as $pi => $pair)
-                                        <div class="rounded-2xl border border-white/10 bg-zinc-800/50 px-4 py-3">
-                                            <p class="mb-2 text-[0.65rem] font-semibold uppercase tracking-wider text-zinc-500">
-                                                {{ str_replace(':n', $pi + 1, __('frontend.landing_slide_player_label')) }}
-                                            </p>
-                                            <div class="flex flex-wrap items-center gap-2">
-                                                <span class="rounded-xl border border-indigo-500/35 bg-indigo-500/12 px-3 py-1.5 text-xs font-semibold text-indigo-200">{{ $demoFactions[$pair[0]]->name }}</span>
-                                                <span class="text-sm font-bold text-zinc-500">+</span>
-                                                <span class="rounded-xl border border-violet-500/35 bg-violet-500/12 px-3 py-1.5 text-xs font-semibold text-violet-200">{{ $demoFactions[$pair[1]]->name }}</span>
+                            <div class="flex min-h-0 flex-1 flex-col">
+                                <div class="h-11 shrink-0" aria-hidden="true"></div>
+                                <div class="flex min-h-0 flex-1 items-stretch gap-1 px-2 pb-2 sm:gap-2 sm:px-3">
+                                    <button
+                                        type="button"
+                                        class="sur-landing-carousel-btn shrink-0 self-center"
+                                        @click="prev()"
+                                        aria-label="{{ __('frontend.landing_carousel_prev') }}"
+                                    >
+                                        <i class="fa-solid fa-chevron-left fa-fw text-xs sm:text-sm" aria-hidden="true"></i>
+                                    </button>
+                                    {{-- Same as slide 2: avoid justify-center + overflow clipping on short viewports. --}}
+                                    <div class="flex min-h-0 min-w-0 flex-1 flex-col items-center justify-start gap-2 overflow-y-auto overscroll-y-contain py-1 touch-pan-y sm:gap-3">
+                                        <p class="shrink-0 text-center text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400/90">Step 3</p>
+                                        @if($demoFactions->count() >= 4)
+                                            <div class="mx-auto flex w-full max-w-md shrink-0 flex-col gap-2 sm:gap-3">
+                                                @foreach([[0,1],[2,3]] as $pi => $pair)
+                                                    @php
+                                                        $nameA = $demoFactions[$pair[0]]->name;
+                                                        $nameB = $demoFactions[$pair[1]]->name;
+                                                    @endphp
+                                                    <div class="flex min-h-[5.25rem] flex-col justify-center rounded-2xl border border-white/10 bg-zinc-800/50 px-3 py-2 sm:min-h-[6rem] sm:px-4 sm:py-3">
+                                                        <p class="mb-1.5 text-center text-[0.65rem] font-semibold uppercase tracking-wider text-zinc-500 sm:mb-2">
+                                                            {{ str_replace(':n', $pi + 1, __('frontend.landing_slide_player_label')) }}
+                                                        </p>
+                                                        <div class="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-x-1.5 gap-y-1 sm:gap-x-2">
+                                                            <span class="flex min-h-[2.45rem] min-w-0 items-center justify-center rounded-xl border border-indigo-500/35 bg-indigo-500/12 px-1.5 py-1 text-center text-[0.7rem] font-semibold leading-tight text-indigo-200 sm:min-h-[2.5rem] sm:px-2 sm:py-1.5 sm:text-xs" title="{{ $nameA }}">
+                                                                <span class="line-clamp-2 break-words">{{ $nameA }}</span>
+                                                            </span>
+                                                            <span class="shrink-0 text-sm font-bold text-zinc-500">+</span>
+                                                            <span class="flex min-h-[2.45rem] min-w-0 items-center justify-center rounded-xl border border-violet-500/35 bg-violet-500/12 px-1.5 py-1 text-center text-[0.7rem] font-semibold leading-tight text-violet-200 sm:min-h-[2.5rem] sm:px-2 sm:py-1.5 sm:text-xs" title="{{ $nameB }}">
+                                                                <span class="line-clamp-2 break-words">{{ $nameB }}</span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
                                             </div>
-                                        </div>
-                                    @endforeach
-                                @else
-                                    <p class="text-sm text-zinc-500">{{ __('frontend.landing_slide_3_tagline') }}</p>
-                                @endif
+                                        @else
+                                            <p class="text-center text-sm text-zinc-500">{{ __('frontend.landing_slide_3_tagline') }}</p>
+                                        @endif
+                                    </div>
+                                    <button
+                                        type="button"
+                                        class="sur-landing-carousel-btn shrink-0 self-center"
+                                        @click="next()"
+                                        aria-label="{{ __('frontend.landing_carousel_next') }}"
+                                    >
+                                        <i class="fa-solid fa-chevron-right fa-fw text-xs sm:text-sm" aria-hidden="true"></i>
+                                    </button>
+                                </div>
                             </div>
-                            <div class="border-t border-white/8 bg-black/40 px-5 py-4 sm:px-7">
+                            <div class="shrink-0 border-t border-white/8 bg-black/40 px-5 py-4 sm:px-7">
                                 <h2 class="text-base font-bold text-white sm:text-xl">{{ __('frontend.landing_slide_3_title') }}</h2>
                                 <p class="mt-1 text-xs leading-relaxed text-zinc-300 sm:text-sm">{{ __('frontend.landing_slide_3_tagline') }}</p>
                             </div>
                         </div>
 
-                        <div class="pointer-events-none absolute inset-x-0 top-4 flex justify-center gap-1.5 sm:justify-end sm:px-5">
+                        {{-- Dots only (top). Prev/next are in each slide row (items-stretch + self-center on buttons). --}}
+                        <div class="pointer-events-none absolute inset-x-0 top-0 z-30 flex h-11 items-center justify-center gap-1.5">
                             @foreach([0, 1, 2] as $idx)
                                 <button
                                     type="button"
-                                    class="pointer-events-auto h-2.5 w-2.5 rounded-full transition sm:h-2 sm:w-2"
+                                    class="pointer-events-auto h-2.5 w-2.5 shrink-0 rounded-full transition sm:h-2 sm:w-2"
                                     :class="i === {{ $idx }} ? 'bg-white shadow-lg shadow-indigo-500/40 ring-2 ring-indigo-400/50' : 'bg-white/35 hover:bg-white/60'"
                                     @click="go({{ $idx }})"
                                     :aria-current="i === {{ $idx }} ? 'true' : 'false'"
@@ -149,22 +225,6 @@
                             @endforeach
                         </div>
 
-                        <button
-                            type="button"
-                            class="sur-landing-carousel-btn absolute left-2 top-1/2 z-10 -translate-y-1/2 sm:left-3"
-                            @click="prev()"
-                            aria-label="{{ __('frontend.landing_carousel_prev') }}"
-                        >
-                            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
-                        </button>
-                        <button
-                            type="button"
-                            class="sur-landing-carousel-btn absolute right-2 top-1/2 z-10 -translate-y-1/2 sm:right-3"
-                            @click="next()"
-                            aria-label="{{ __('frontend.landing_carousel_next') }}"
-                        >
-                            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-                        </button>
                     </div>
                 </div>
             </div>
