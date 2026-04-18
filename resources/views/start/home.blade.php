@@ -111,12 +111,13 @@
                                     >
                                         <i class="fa-solid fa-chevron-left fa-fw text-xs sm:text-sm" aria-hidden="true"></i>
                                     </button>
-                                    <div class="flex min-h-0 min-w-0 flex-1 flex-col items-center justify-center gap-3 overflow-y-auto py-1 sm:max-h-full">
-                                        <p class="text-center text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400/90">Step 2</p>
+                                    {{-- Top-align + scroll: justify-center here clips overflow on mobile (centered flex + overflow-y). --}}
+                                    <div class="flex min-h-0 min-w-0 flex-1 flex-col items-center justify-start gap-2 overflow-y-auto overscroll-y-contain py-1 touch-pan-y sm:gap-3">
+                                        <p class="shrink-0 text-center text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400/90">Step 2</p>
                                         @if($factions->isNotEmpty())
-                                            <div class="mx-auto grid w-full max-w-xl grid-cols-2 gap-2 sm:grid-cols-5 sm:gap-2">
+                                            <div class="mx-auto w-full max-w-xl shrink-0 grid grid-cols-2 gap-1.5 sm:grid-cols-5 sm:gap-2">
                                                 @foreach($factions->take(10) as $idx => $faction)
-                                                    <span class="flex min-h-[2.85rem] items-center justify-center rounded-lg border px-1.5 py-2 text-center text-[0.625rem] font-medium leading-snug transition sm:min-h-[3rem] sm:px-2 sm:text-xs
+                                                    <span class="flex min-h-[2.55rem] items-center justify-center rounded-lg border px-1.5 py-1.5 text-center text-[0.625rem] font-medium leading-snug transition sm:min-h-[3rem] sm:px-2 sm:py-2 sm:text-xs
                                                         {{ $idx < 6 ? 'border-indigo-500/40 bg-indigo-500/12 text-indigo-200' : 'border-white/10 bg-zinc-800/60 text-zinc-500 line-through' }}">
                                                         <span class="line-clamp-2 break-words">{{ $faction->name }}</span>
                                                     </span>
