@@ -6,6 +6,8 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- **Shuffle wizard & landing copy:** Clarified that **include** is optional (nothing checked = all eligible factions; logged-in users follow **Collection** when set), explained when **exclude** saves clicks, and aligned carousel / how-it-works / FAQ with **faction-level** choices in the dialog (set-level filtering via account collection, not set toggles in the wizard). Bilingual EN/DE.
+
 - **Social preview (Open Graph / Twitter):** Default share image is now **`images/og-share.png`** (1200×630) instead of `images/result.png`, for consistent link previews on Discord and other platforms. URLs include **`?v=`** from `OG_SHARE_VERSION` / `config('app.og_share_version')` so you can bust crawler caches after replacing the PNG.
 
 ### Added
