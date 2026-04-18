@@ -51,7 +51,7 @@
                             aria-roledescription="slide"
                             aria-label="{{ __('frontend.landing_slide_1_title') }}"
                         >
-                            <div class="flex min-h-0 flex-1 flex-col items-center justify-center gap-4 px-10 pt-9 pb-2 sm:px-14 sm:pt-10">
+                            <div class="flex min-h-0 flex-1 flex-col items-center justify-center gap-4 px-10 pb-2 pt-14 sm:px-14 sm:pt-16">
                                 <p class="text-center text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400/90">Step 1</p>
                                 <div class="mx-auto grid w-full max-w-[15.5rem] grid-cols-3 gap-2 sm:max-w-sm sm:gap-3">
                                     @foreach([2, 3, 4] as $n)
@@ -79,7 +79,7 @@
                             aria-roledescription="slide"
                             aria-label="{{ __('frontend.landing_slide_2_title') }}"
                         >
-                            <div class="flex min-h-0 flex-1 flex-col items-center justify-center gap-3 px-10 pt-9 pb-2 sm:px-14 sm:pt-10">
+                            <div class="flex min-h-0 flex-1 flex-col items-center justify-center gap-3 px-10 pb-2 pt-14 sm:px-14 sm:pt-16">
                                 <p class="text-center text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400/90">Step 2</p>
                                 @if($factions->isNotEmpty())
                                     <div class="mx-auto grid w-full max-w-xl grid-cols-2 gap-2 sm:grid-cols-5 sm:gap-2">
@@ -111,7 +111,7 @@
                             aria-label="{{ __('frontend.landing_slide_3_title') }}"
                         >
                             @php $demoFactions = $factions->take(4); @endphp
-                            <div class="flex min-h-0 flex-1 flex-col items-center justify-center gap-3 px-10 pt-9 pb-2 sm:px-14 sm:pt-10">
+                            <div class="flex min-h-0 flex-1 flex-col items-center justify-center gap-3 px-10 pb-2 pt-14 sm:px-14 sm:pt-16">
                                 <p class="text-center text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400/90">Step 3</p>
                                 @if($demoFactions->count() >= 4)
                                     <div class="mx-auto flex w-full max-w-md flex-col gap-3">
@@ -146,37 +146,40 @@
                             </div>
                         </div>
 
-                        <div class="pointer-events-none absolute inset-x-0 top-4 z-20 flex justify-center gap-1.5">
-                            @foreach([0, 1, 2] as $idx)
+                        {{-- One nav row: prev | dots | next share the same vertical center (no separate strips / no bottom-* dependency) --}}
+                        <div class="pointer-events-none absolute inset-x-0 top-0 z-20 flex h-12 items-center justify-between gap-2 px-2 sm:h-14 sm:px-3">
+                            <span class="flex w-11 shrink-0 justify-center sm:w-12">
                                 <button
                                     type="button"
-                                    class="pointer-events-auto h-2.5 w-2.5 rounded-full transition sm:h-2 sm:w-2"
-                                    :class="i === {{ $idx }} ? 'bg-white shadow-lg shadow-indigo-500/40 ring-2 ring-indigo-400/50' : 'bg-white/35 hover:bg-white/60'"
-                                    @click="go({{ $idx }})"
-                                    :aria-current="i === {{ $idx }} ? 'true' : 'false'"
-                                    aria-label="Slide {{ $idx + 1 }}"
-                                ></button>
-                            @endforeach
-                        </div>
-
-                        {{-- Nav arrows: vertical center within main area (below dots, above caption strip) — avoids fragile top-% and Purge/safelist issues --}}
-                        <div class="pointer-events-none absolute inset-x-0 top-10 bottom-24 z-10 flex items-center justify-between px-2 sm:top-11">
-                            <button
-                                type="button"
-                                class="sur-landing-carousel-btn pointer-events-auto shrink-0"
-                                @click="prev()"
-                                aria-label="{{ __('frontend.landing_carousel_prev') }}"
-                            >
-                                <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
-                            </button>
-                            <button
-                                type="button"
-                                class="sur-landing-carousel-btn pointer-events-auto shrink-0"
-                                @click="next()"
-                                aria-label="{{ __('frontend.landing_carousel_next') }}"
-                            >
-                                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-                            </button>
+                                    class="sur-landing-carousel-btn pointer-events-auto"
+                                    @click="prev()"
+                                    aria-label="{{ __('frontend.landing_carousel_prev') }}"
+                                >
+                                    <i class="fa-solid fa-chevron-left fa-fw text-xs sm:text-sm" aria-hidden="true"></i>
+                                </button>
+                            </span>
+                            <span class="flex min-w-0 flex-1 justify-center gap-1.5">
+                                @foreach([0, 1, 2] as $idx)
+                                    <button
+                                        type="button"
+                                        class="pointer-events-auto h-2.5 w-2.5 shrink-0 rounded-full transition sm:h-2 sm:w-2"
+                                        :class="i === {{ $idx }} ? 'bg-white shadow-lg shadow-indigo-500/40 ring-2 ring-indigo-400/50' : 'bg-white/35 hover:bg-white/60'"
+                                        @click="go({{ $idx }})"
+                                        :aria-current="i === {{ $idx }} ? 'true' : 'false'"
+                                        aria-label="Slide {{ $idx + 1 }}"
+                                    ></button>
+                                @endforeach
+                            </span>
+                            <span class="flex w-11 shrink-0 justify-center sm:w-12">
+                                <button
+                                    type="button"
+                                    class="sur-landing-carousel-btn pointer-events-auto"
+                                    @click="next()"
+                                    aria-label="{{ __('frontend.landing_carousel_next') }}"
+                                >
+                                    <i class="fa-solid fa-chevron-right fa-fw text-xs sm:text-sm" aria-hidden="true"></i>
+                                </button>
+                            </span>
                         </div>
                     </div>
                 </div>
