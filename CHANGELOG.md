@@ -4,6 +4,10 @@ All notable changes to this project are documented in this file.
 
 ## [Unreleased]
 
+### Changed
+
+- **Home landing copy (EN/DE):** Hero, feature headings, quote strip eyebrow, bottom CTA band, faction strip, result preview, and Open Graph title now read as a **tool-first randomizer** instead of SaaS-style pitch lines (single-line hero, less “trusted everywhere” / triple-beat marketing cadence). Layout unchanged.
+
 ### Security
 
 - **Rollup (CVE-2026-27606 / GHSA-mw96-cpmx-2vgc):** Added an explicit **`rollup`** devDependency at **≥ 4.59** (resolved to 4.60.x) so the Vite build no longer uses a vulnerable Rollup 4.53.x. Mitigates arbitrary file write via path traversal in crafted output chunk/asset names during bundling.
