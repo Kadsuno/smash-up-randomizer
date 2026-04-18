@@ -6,7 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Fixed
 
-- **Landing hero carousel:** Demo slides use consistent horizontal padding (clear of arrow controls), centered step labels, even grids for player tiles and faction chips, and a fixed two-column faction row on the “combos” slide so card height stays uniform on small screens.
+- **Landing hero carousel:** Demo slides use consistent horizontal padding (clear of arrow controls), centered step labels, even grids for player tiles and faction chips, and a fixed two-column faction row on the “combos” slide so card height stays uniform on small screens. Prev/next controls sit in a dedicated strip (`top-10`–`bottom-24`, flex-centered) so arrows stay aligned on all breakpoints without fragile `top-%` positioning.
 
 ### Changed
 
