@@ -146,7 +146,7 @@
                             </div>
                         </div>
 
-                        <div class="pointer-events-none absolute inset-x-0 top-4 flex justify-center gap-1.5">
+                        <div class="pointer-events-none absolute inset-x-0 top-4 z-20 flex justify-center gap-1.5">
                             @foreach([0, 1, 2] as $idx)
                                 <button
                                     type="button"
@@ -159,22 +159,25 @@
                             @endforeach
                         </div>
 
-                        <button
-                            type="button"
-                            class="sur-landing-carousel-btn absolute left-2 z-10 top-[42%] -translate-y-1/2 sm:left-3 sm:top-[44%]"
-                            @click="prev()"
-                            aria-label="{{ __('frontend.landing_carousel_prev') }}"
-                        >
-                            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
-                        </button>
-                        <button
-                            type="button"
-                            class="sur-landing-carousel-btn absolute right-2 z-10 top-[42%] -translate-y-1/2 sm:right-3 sm:top-[44%]"
-                            @click="next()"
-                            aria-label="{{ __('frontend.landing_carousel_next') }}"
-                        >
-                            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-                        </button>
+                        {{-- Nav arrows: vertical center within main area (below dots, above caption strip) — avoids fragile top-% and Purge/safelist issues --}}
+                        <div class="pointer-events-none absolute inset-x-0 top-10 bottom-24 z-10 flex items-center justify-between px-2 sm:top-11">
+                            <button
+                                type="button"
+                                class="sur-landing-carousel-btn pointer-events-auto shrink-0"
+                                @click="prev()"
+                                aria-label="{{ __('frontend.landing_carousel_prev') }}"
+                            >
+                                <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                            </button>
+                            <button
+                                type="button"
+                                class="sur-landing-carousel-btn pointer-events-auto shrink-0"
+                                @click="next()"
+                                aria-label="{{ __('frontend.landing_carousel_next') }}"
+                            >
+                                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
