@@ -4,6 +4,10 @@ All notable changes to this project are documented in this file.
 
 ## [Unreleased]
 
+### Fixed
+
+- **Landing hero carousel:** Demo slides use consistent horizontal padding (clear of arrow controls), centered step labels, even grids for player tiles and faction chips, and a fixed two-column faction row on the “combos” slide so card height stays uniform on small screens.
+
 ### Changed
 
 - **Shuffle wizard & landing copy:** Clarified that **include** is optional (nothing checked = all eligible factions; logged-in users follow **Collection** when set), explained when **exclude** saves clicks, and aligned carousel / how-it-works / FAQ with **faction-level** choices in the dialog (set-level filtering via account collection, not set toggles in the wizard). Bilingual EN/DE.
