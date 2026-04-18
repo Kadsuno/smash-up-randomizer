@@ -93,4 +93,16 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Social share image cache buster (Open Graph / Twitter)
+    |--------------------------------------------------------------------------
+    |
+    | Query string appended to images/og-share.png. Bump OG_SHARE_VERSION in .env
+    | (or this default) after replacing the PNG so crawlers refetch (e.g. Discord).
+    |
+    */
+
+    'og_share_version' => env('OG_SHARE_VERSION', '2'),
+
 ];

@@ -27,7 +27,7 @@ Each slide uses **original AI-generated illustration** (Cursor image generation)
 
 Purpose: a **dedicated** social preview card (title + tagline + abstract card-stack motif) so Discord, Twitter/X, and similar crawlers get a consistent crop without reusing the old `result.png` asset.
 
-**Regeneration:** Replace the PNG and bump dimensions in the layout only if the aspect ratio changes from 1.91∶1 (1200×630). To force crawlers to refetch after an update, temporarily append a query string in `asset()` (e.g. `og-share.png?v=YYYYMMDD`) or rename the file and update the Blade reference.
+**Regeneration:** Replace the PNG and bump dimensions in the layout only if the aspect ratio changes from 1.91∶1 (1200×630). After replacing the file, increment **`OG_SHARE_VERSION`** in `.env` (or `config('app.og_share_version')` default in `config/app.php`) so `og:image` / `twitter:image` URLs change and crawlers refetch.
 
 ## Result preview (`result-preview.png`)
 

@@ -6,7 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
-- **Social preview (Open Graph / Twitter):** Default share image is now **`images/og-share.png`** (1200×630) instead of `images/result.png`, for consistent link previews on Discord and other platforms.
+- **Social preview (Open Graph / Twitter):** Default share image is now **`images/og-share.png`** (1200×630) instead of `images/result.png`, for consistent link previews on Discord and other platforms. URLs include **`?v=`** from `OG_SHARE_VERSION` / `config('app.og_share_version')` so you can bust crawler caches after replacing the PNG.
 
 ### Added
 
