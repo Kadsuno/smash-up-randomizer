@@ -575,7 +575,8 @@
                     </div>
 
                     <div class="shuffle-step-content hidden" id="step2-content">
-                        <h3 class="mb-4 text-lg font-semibold text-white sm:text-xl">{{ __('frontend.shuffle_wizard_heading_include') }}</h3>
+                        <h3 class="mb-2 text-lg font-semibold text-white sm:text-xl">{{ __('frontend.shuffle_wizard_heading_include') }}</h3>
+                        <p class="mb-4 text-sm leading-relaxed text-zinc-500">{{ __('frontend.shuffle_wizard_include_hint') }}</p>
                         <div class="mb-4">
                             <div class="mb-3 flex flex-wrap items-center justify-between gap-2">
                                 <span class="text-sm font-medium text-zinc-300">{{ __('frontend.shuffle_wizard_include_label') }}</span>
@@ -595,7 +596,8 @@
                     </div>
 
                     <div class="shuffle-step-content hidden" id="step3-content">
-                        <h3 class="mb-4 text-lg font-semibold text-white sm:text-xl">{{ __('frontend.shuffle_wizard_heading_exclude') }}</h3>
+                        <h3 class="mb-2 text-lg font-semibold text-white sm:text-xl">{{ __('frontend.shuffle_wizard_heading_exclude') }}</h3>
+                        <p class="mb-4 text-sm leading-relaxed text-zinc-500">{{ __('frontend.shuffle_wizard_exclude_hint') }}</p>
                         <div class="mb-4">
                             <div class="mb-3 flex flex-wrap items-center justify-between gap-2">
                                 <span class="text-sm font-medium text-zinc-300">{{ __('frontend.shuffle_wizard_exclude_label') }}</span>
