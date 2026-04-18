@@ -18,5 +18,11 @@ yarn-error.log
 /.vscode
 laravel.sql
 db.sql
+
+# Local DDEV / manual DB exports (never commit — may contain secrets & PII)
+/storage/app/ddev-local-export.sql
+/storage/app/ddev-local-export.sql.gz
+/storage/app/*-export.sql
+/storage/app/*-export.sql.gz
 /.ddev
 .ddev/commands/host/phpmyadmin

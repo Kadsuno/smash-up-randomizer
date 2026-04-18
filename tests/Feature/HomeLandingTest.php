@@ -131,6 +131,6 @@ class HomeLandingTest extends TestCase
 
         $response->assertOk();
         $response->assertSee(__('frontend.meta_og_title'), false);
-        $response->assertSee('images/result.png', false);
+        $response->assertSee('images/og-share.png', false);
     }
 }
