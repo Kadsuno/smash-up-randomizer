@@ -165,26 +165,27 @@
                                     >
                                         <i class="fa-solid fa-chevron-left fa-fw text-xs sm:text-sm" aria-hidden="true"></i>
                                     </button>
-                                    <div class="flex min-h-0 min-w-0 flex-1 flex-col items-center justify-center gap-3">
-                                        <p class="text-center text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400/90">Step 3</p>
+                                    {{-- Same as slide 2: avoid justify-center + overflow clipping on short viewports. --}}
+                                    <div class="flex min-h-0 min-w-0 flex-1 flex-col items-center justify-start gap-2 overflow-y-auto overscroll-y-contain py-1 touch-pan-y sm:gap-3">
+                                        <p class="shrink-0 text-center text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400/90">Step 3</p>
                                         @if($demoFactions->count() >= 4)
-                                            <div class="mx-auto flex w-full max-w-md flex-col gap-3">
+                                            <div class="mx-auto flex w-full max-w-md shrink-0 flex-col gap-2 sm:gap-3">
                                                 @foreach([[0,1],[2,3]] as $pi => $pair)
                                                     @php
                                                         $nameA = $demoFactions[$pair[0]]->name;
                                                         $nameB = $demoFactions[$pair[1]]->name;
                                                     @endphp
-                                                    <div class="flex min-h-[5.75rem] flex-col justify-center rounded-2xl border border-white/10 bg-zinc-800/50 px-4 py-3 sm:min-h-[6rem]">
-                                                        <p class="mb-2 text-center text-[0.65rem] font-semibold uppercase tracking-wider text-zinc-500">
+                                                    <div class="flex min-h-[5.25rem] flex-col justify-center rounded-2xl border border-white/10 bg-zinc-800/50 px-3 py-2 sm:min-h-[6rem] sm:px-4 sm:py-3">
+                                                        <p class="mb-1.5 text-center text-[0.65rem] font-semibold uppercase tracking-wider text-zinc-500 sm:mb-2">
                                                             {{ str_replace(':n', $pi + 1, __('frontend.landing_slide_player_label')) }}
                                                         </p>
-                                                        <div class="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-x-2 gap-y-1">
-                                                            <span class="flex min-h-[2.5rem] min-w-0 items-center justify-center rounded-xl border border-indigo-500/35 bg-indigo-500/12 px-2 py-1.5 text-center text-xs font-semibold text-indigo-200" title="{{ $nameA }}">
-                                                                <span class="truncate">{{ $nameA }}</span>
+                                                        <div class="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-x-1.5 gap-y-1 sm:gap-x-2">
+                                                            <span class="flex min-h-[2.45rem] min-w-0 items-center justify-center rounded-xl border border-indigo-500/35 bg-indigo-500/12 px-1.5 py-1 text-center text-[0.7rem] font-semibold leading-tight text-indigo-200 sm:min-h-[2.5rem] sm:px-2 sm:py-1.5 sm:text-xs" title="{{ $nameA }}">
+                                                                <span class="line-clamp-2 break-words">{{ $nameA }}</span>
                                                             </span>
                                                             <span class="shrink-0 text-sm font-bold text-zinc-500">+</span>
-                                                            <span class="flex min-h-[2.5rem] min-w-0 items-center justify-center rounded-xl border border-violet-500/35 bg-violet-500/12 px-2 py-1.5 text-center text-xs font-semibold text-violet-200" title="{{ $nameB }}">
-                                                                <span class="truncate">{{ $nameB }}</span>
+                                                            <span class="flex min-h-[2.45rem] min-w-0 items-center justify-center rounded-xl border border-violet-500/35 bg-violet-500/12 px-1.5 py-1 text-center text-[0.7rem] font-semibold leading-tight text-violet-200 sm:min-h-[2.5rem] sm:px-2 sm:py-1.5 sm:text-xs" title="{{ $nameB }}">
+                                                                <span class="line-clamp-2 break-words">{{ $nameB }}</span>
                                                             </span>
                                                         </div>
                                                     </div>
