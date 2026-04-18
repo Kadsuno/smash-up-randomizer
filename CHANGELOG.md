@@ -4,6 +4,10 @@ All notable changes to this project are documented in this file.
 
 ## [Unreleased]
 
+### Changed
+
+- **Social preview (Open Graph / Twitter):** Default share image is now **`images/og-share.png`** (1200×630) instead of `images/result.png`, for consistent link previews on Discord and other platforms.
+
 ### Added
 
 - **Admin backend:** Expanded `/admin/backend` with **Contacts** (list + detail for stored contact form messages), **Users** (promote/demote with protection for the last admin), **Shuffle stats** (aggregates + recent history), and a **CLI reference** page (read-only Artisan hints). Faction manager now uses **server-side search**, content and expansion filters, **pagination**, **DELETE + CSRF** for removals (replacing GET delete), and validated **CSV upload** via `UploadedFile`. Dashboard stats include contacts, users, and shuffle totals; faction admin actions moved to `App\Http\Controllers\Admin\*`.

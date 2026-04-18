@@ -7,9 +7,9 @@
     <meta name="description" content="{{ __('frontend.meta_description') }}">
     <meta name="keywords" content="Smash Up, card game, randomizer, faction picker, board game tool">
     <meta property="og:title" content="{{ __('frontend.meta_og_title') }}" />
-    <meta property="og:image" content="{{ asset('images/result.png') }}" />
-    <meta property="og:image:width" content="1792" />
-    <meta property="og:image:height" content="1024" />
+    <meta property="og:image" content="{{ asset('images/og-share.png') }}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ url()->current() }}" />
     <meta property="og:site_name" content="Smash Up Randomizer" />
@@ -17,7 +17,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="{{ __('frontend.meta_og_title') }}" />
     <meta name="twitter:description" content="{{ __('frontend.meta_description') }}" />
-    <meta name="twitter:image" content="{{ asset('images/result.png') }}" />
+    <meta name="twitter:image" content="{{ asset('images/og-share.png') }}" />
     <meta name="robots" content="index,follow" />
     <meta name="googlebot" content="index,follow" />
     <title>Smash Up Randomizer</title>

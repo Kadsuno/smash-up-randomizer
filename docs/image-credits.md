@@ -21,6 +21,14 @@ Each slide uses **original AI-generated illustration** (Cursor image generation)
 
 **Note:** Full-size PNGs; consider WebP or compression if performance budgets require it.
 
+## Open Graph / social share (`og-share.png`)
+
+**Path:** `public/images/og-share.png` — **1200×630** PNG used for `og:image` and `twitter:image` (see `resources/views/components/layouts/header.blade.php`).
+
+Purpose: a **dedicated** social preview card (title + tagline + abstract card-stack motif) so Discord, Twitter/X, and similar crawlers get a consistent crop without reusing the old `result.png` asset.
+
+**Regeneration:** Replace the PNG and bump dimensions in the layout only if the aspect ratio changes from 1.91∶1 (1200×630). To force crawlers to refetch after an update, temporarily append a query string in `asset()` (e.g. `og-share.png?v=YYYYMMDD`) or rename the file and update the Blade reference.
+
 ## Result preview (`result-preview.png`)
 
 Screenshot of the live **shuffle result** page (`GET /random`, two players) for the home page marketing block. **Hi-DPI capture** (2× device scale) then Lanczos downscale to 1920×1650 for sharp UI text; **PNG** (not JPEG) to avoid compression artifacts.
