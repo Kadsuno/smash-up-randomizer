@@ -4,6 +4,10 @@ All notable changes to this project are documented in this file.
 
 ## [Unreleased]
 
+### Security
+
+- **Rollup (CVE-2026-27606 / GHSA-mw96-cpmx-2vgc):** Added an explicit **`rollup`** devDependency at **≥ 4.59** (resolved to 4.60.x) so the Vite build no longer uses a vulnerable Rollup 4.53.x. Mitigates arbitrary file write via path traversal in crafted output chunk/asset names during bundling.
+
 ### Fixed
 
 - **Landing hero carousel:** Demo slides use consistent horizontal padding, centered step labels, even grids for player tiles and faction chips, and a fixed two-column faction row on the “combos” slide so card height stays uniform on small screens. Pagination dots stay in a thin top row with an `h-11` spacer below; prev/next share a **horizontal flex row** with the demo. The row uses **`items-stretch`** so the center column fills the available height and **`justify-center`** vertically centers the step/cards; chevron buttons use **`self-center`** so they sit on the same vertical axis as that content (avoids `items-center` collapsing the row to content height and sticking the block to the bottom).
