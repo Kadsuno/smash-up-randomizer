@@ -4,6 +4,14 @@ All notable changes to this project are documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- **CI:** GitHub Actions workflow **`.github/workflows/ci.yml`** runs on **push** and **pull_request** to **`dev`** and **`master`**: Composer install, `php artisan test`, `npm ci`, and **`npm run build`**. README badge links to the workflow run list.
+
+### Changed
+
+- **npm:** Removed unused **`axios`** devDependency (not referenced by any `resources/js` entry); shrinks install and audit surface.
+
 ### Fixed
 
 - **i18n source of truth:** Removed the duplicate root `lang/` directory. Laravel resolves translations from **`resources/lang`** when that folder exists, so the previous landing-copy update in root `lang/` never reached the running app. Landing strings are synced in **`resources/lang/en/frontend.php`** and **`resources/lang/de/frontend.php`**.
