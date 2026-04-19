@@ -151,6 +151,14 @@ class DeckController extends Controller
         $user = $request->user();
         $decks = $this->shufflePool->eligibleDecks($user, $includedFactions, $excludedFactions);
 
+        if ($decks->isEmpty()) {
+            if ($includedFactions !== [] && array_diff($includedFactions, $excludedFactions) === []) {
+                return back()->with('error', __('frontend.shuffle_error_include_exclude_conflict'));
+            }
+
+            return back()->with('error', __('frontend.shuffle_error_pool_empty'));
+        }
+
         if ($decks->count() < $numberOfPlayers * 2) {
             return back()->with('error', __('frontend.shuffle_error_not_enough_factions'));
         }

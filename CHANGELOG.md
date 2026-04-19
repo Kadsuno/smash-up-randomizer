@@ -6,6 +6,8 @@ All notable changes to this project are documented in this file.
 
 ### Added
 
+- **Landing hero demo:** The marketing carousel is labeled as **preview-only** (bilingual badge + hint), uses a clearer `aria-label`, and decorative tiles/chips use `pointer-events-none` so they do not feel clickable. **Shuffle wizard:** In-modal **toast** when include/exclude leaves no factions or too few for the player count; **server-side** distinct flash messages for include/exclude conflict vs. empty pool. **Faction detail:** `.deck-html` spacing and list typography improved for long descriptions (EN/DE strings where new).
+
 - **Design system:** [`docs/design-system.md`](docs/design-system.md) documents canonical **landing** patterns, **`sur-btn-*`** usage, hero glow tier, spacing (`x-sur.section` / `x-sur.container`), i18n expectations, a **full Blade UI inventory** (public / account / auth / backend), a **UI concepts catalog** (actions, forms, cards, flashes, chips, nav, marketing-only), **border/shadow tokens**, **drift hotspots**, and optional future **`sur-*` extractions**; Cursor rule **`.cursor/rules/design-system.mdc`** points to the doc.
 
 - **Shareable shuffle results:** Each successful **`POST /shuffle/result`** and **`GET /random`** stores the assignment in **`shared_shuffle_results`** (public ULID). **`GET /shuffle/share/{id}`** reopens the same table layout; the result screen adds **Copy link** and **Copy as text** (EN/DE). Permalink responses use **`noindex`** robots meta.
