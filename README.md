@@ -1,16 +1,16 @@
 # Smash Up Randomizer
 
-[Laravel](https://laravel.com)
-[PHP](https://php.net)
-[MariaDB](https://mariadb.org)
-[Tailwind CSS](https://tailwindcss.com)
-[Vite](https://vitejs.dev)
-[License](LICENSE)
-[GitHub last commit](https://github.com/kadsuno/smash-up-randomizer/commits)
-[GitHub issues](https://github.com/kadsuno/smash-up-randomizer/issues)
-[CI](https://github.com/kadsuno/smash-up-randomizer/actions/workflows/ci.yml)
-[Conventional Commits](https://conventionalcommits.org)
-[PRs Welcome](http://makeapullrequest.com)
+[![Laravel](https://img.shields.io/badge/Laravel-13.x-FF2D20?style=flat-square&logo=laravel&logoColor=white)](https://laravel.com)
+[![PHP](https://img.shields.io/badge/PHP-8.3+-777BB4?style=flat-square&logo=php&logoColor=white)](https://php.net)
+[![MariaDB](https://img.shields.io/badge/MariaDB-10.4-003545?style=flat-square&logo=mariadb&logoColor=white)](https://mariadb.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.x-38bdf8?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
+[![GitHub last commit](https://img.shields.io/github/last-commit/kadsuno/smash-up-randomizer?style=flat-square)](https://github.com/kadsuno/smash-up-randomizer/commits)
+[![GitHub issues](https://img.shields.io/github/issues/kadsuno/smash-up-randomizer?style=flat-square)](https://github.com/kadsuno/smash-up-randomizer/issues)
+[![CI](https://github.com/kadsuno/smash-up-randomizer/actions/workflows/ci.yml/badge.svg?branch=dev)](https://github.com/kadsuno/smash-up-randomizer/actions/workflows/ci.yml)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg?style=flat-square)](https://conventionalcommits.org)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 A web application to help Smash Up players randomly assign factions (decks) and browse faction details. UI copy is maintained in **English and German** where applicable.
 
