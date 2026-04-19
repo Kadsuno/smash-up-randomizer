@@ -14,6 +14,46 @@
 
 A web application to help Smash Up players randomly assign factions (decks) and browse faction details. UI copy is maintained in **English and German** where applicable.
 
+## Architecture at a glance
+
+High-level stack and data flow (Mermaid renders on GitHub):
+
+```mermaid
+flowchart TB
+  subgraph Browser["Browser"]
+    FE["Blade views · Tailwind 4 · Alpine.js · Vite-built assets"]
+  end
+
+  subgraph App["Laravel application"]
+    R["Routes: web.php, auth.php, frontend-auth.php"]
+    C["Controllers: Home, Deck, Contact, Shared shuffle, Admin…"]
+    M["Models: User, Deck, Contact, SharedShuffleResult…"]
+    S["Services: mail, sitemap, etc."]
+  end
+
+  DB[("MariaDB / MySQL")]
+  Mail["Outbound email · SMTP or Brevo API"]
+  Opt["Optional: Matomo · Sentry"]
+
+  Browser --> R --> C
+  C --> M
+  M --> DB
+  C --> Mail
+  FE -.-> Opt
+```
+
+Main public journeys (simplified):
+
+```mermaid
+flowchart LR
+  Home["/ — home + shuffle UI"] --> Shuffle["POST /shuffle/result"]
+  Shuffle --> Share["GET /shuffle/share/{id} — optional link"]
+  List["/factions"] --> Detail["/factions/{name}"]
+  Exp["/expansions"] --> ExpD["/expansions/{slug}"]
+  Contact["/contact-us"] --> MailOut["Email via Laravel mailer"]
+  Admin["/admin — login"] --> Backend["/admin/backend/* — decks, contacts, users…"]
+```
+
 ## About the Project
 
 Smash Up Randomizer supports:
