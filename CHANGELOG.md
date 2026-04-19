@@ -14,6 +14,8 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- **Design system doc:** [`docs/design-system.md`](docs/design-system.md) now documents **all** foundations — typography (Nunito weights, roles, FA6), color semantics + hardcoded hex/rgba, spacing, touch targets, radii, **motion** (reveal, footer, shuffle wizard, reduced-motion, `animate.css` status), z-index, scrollbars, breakpoints — plus **shuffle dialog**, **cookie layer**, **CKEditor** admin theme, backend shell sizing, and a **complete `sur-*` / related CSS register** from `app.css`.
+
 - **Blade UI / design system:** Public account overview, 2FA setup, saved presets, expansion detail shuffle CTA, faction detail empty-state + footer shuffle CTA, backend faction edit + wizard form + manager filters/CSV, contact/about submit CTAs, and footer contact chip now use **`sur-btn-*`** / **`sur-input`** instead of raw indigo Tailwind; extra **`hover:scale`** on **`sur-btn-primary`** (contact/about) removed so hover matches the shared button token.
 
 - **Shuffle result actions:** Primary/secondary CTAs use **`sur-btn-primary`** / **`sur-btn-secondary`** with **`frontend.browse_all_factions`** (EN/DE) instead of hard-coded English and inline Tailwind.

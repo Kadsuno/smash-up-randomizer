@@ -7,7 +7,7 @@ alwaysApply: true
 
 - **Canonical public UI reference:** [`resources/views/start/home.blade.php`](resources/views/start/home.blade.php) — match hero CTAs, glow tier, chips, and shuffle dialog patterns unless the ticket says otherwise.
 - **Secondary reference (logged-in):** account shell patterns in [`resources/views/account/`](resources/views/account/) — glass panels, tiles, radial/grid backgrounds.
-- **Full inventory & UI concept catalog:** [`docs/design-system.md`](docs/design-system.md) — Blade view zones, drift hotspots, chips/forms/modals, border tokens, optional future `sur-*` extractions.
+- **Full specification:** [`docs/design-system.md`](docs/design-system.md) — **foundations** (typography/Nunito + Font Awesome, color, spacing, radii, motion + reduced-motion, z-index, scrollbars), **complete `sur-*` register**, shuffle/cookie dialogs, Blade zones, UI concept catalog, border tokens, extractions.
 - **Named styles:** [`resources/css/app.css`](resources/css/app.css) `@layer components` — prefer **`sur-btn-primary`**, **`sur-btn-secondary`**, **`sur-btn-ghost`** over raw `bg-indigo-*` + `rounded-xl` button stacks.
 - **Hero / spotlight CTAs:** may add **one** extra indigo shadow utility on primary (e.g. `shadow-lg shadow-indigo-500/30`) **as on the landing**; do not invent new glow tokens per view.
 - **Layout rhythm:** [`x-sur.section`](resources/views/components/sur/section.blade.php), [`x-sur.container`](resources/views/components/sur/container.blade.php); button groups typically **`gap-3`**.
