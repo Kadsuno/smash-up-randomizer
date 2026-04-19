@@ -145,7 +145,7 @@
                             <div class="flex flex-shrink-0 flex-wrap items-center justify-start gap-3 lg:justify-end">
                                 <button
                                     type="button"
-                                    class="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-500 active:scale-[0.98]"
+                                    class="inline-flex cursor-pointer items-center gap-2 rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-500 active:scale-[0.98]"
                                     @click="copyUrl()"
                                 >
                                     <i class="fa-solid fa-link text-xs" aria-hidden="true"></i>
@@ -153,7 +153,7 @@
                                 </button>
                                 <button
                                     type="button"
-                                    class="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-zinc-900/60 px-5 py-2.5 text-sm font-semibold text-zinc-200 transition hover:border-white/25 hover:text-white active:scale-[0.98]"
+                                    class="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-white/15 bg-zinc-900/60 px-5 py-2.5 text-sm font-semibold text-zinc-200 transition hover:border-white/30 hover:bg-zinc-800/80 hover:text-white active:scale-[0.98]"
                                     @click="copyPlain()"
                                 >
                                     <i class="fa-solid fa-clipboard text-xs" aria-hidden="true"></i>
