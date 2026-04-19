@@ -1,3 +1,7 @@
+@props([
+    'metaRobots' => 'index, follow',
+])
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -18,8 +22,8 @@
     <meta name="twitter:title" content="{{ __('frontend.meta_og_title') }}" />
     <meta name="twitter:description" content="{{ __('frontend.meta_description') }}" />
     <meta name="twitter:image" content="{{ asset('images/og-share.png') }}?v={{ config('app.og_share_version') }}" />
-    <meta name="robots" content="index,follow" />
-    <meta name="googlebot" content="index,follow" />
+    <meta name="robots" content="{{ $metaRobots }}" />
+    <meta name="googlebot" content="{{ $metaRobots }}" />
     <title>Smash Up Randomizer</title>
     @vite(['resources/css/app.css'])
     <link rel="icon" type="image/svg+xml" href="{{ asset('images/brand/logo-mark.svg') }}">

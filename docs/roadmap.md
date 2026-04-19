@@ -34,7 +34,6 @@ Backlog from product discussion (2026-04-19). **Suggested pick order:** near-ter
 
 ### Near-term (high impact, manageable scope)
 
-- **Shareable shuffle results** — Permalink and/or “copy as text” (e.g. Discord/WhatsApp) so groups can reuse the same assignment without re-running the wizard.
 - **Anti-repeat / fairness option** — Optionally exclude or downweight faction combos that appear in recent **play history** (logged-in users); configurable window or count; tests for edge cases (small pools, presets).
 - **History actions** — Repeat a past shuffle, or **spawn a preset** from a history row (reuses existing presets + `shuffle_histories`).
 - **Print-friendly result view** — Dedicated Blade route/layout for a clean table printout (optional: browser PDF via print CSS).
@@ -54,6 +53,7 @@ Backlog from product discussion (2026-04-19). **Suggested pick order:** near-ter
 
 ## Shipped (account & shuffle)
 
+- **Shareable shuffle results** ✅ — `/shuffle/share/{id}` permalink for each run of `POST /shuffle/result` and `/random`; **Copy link** / **Copy as text** on the result view (`shared_shuffle_results`).
 - **Faction collection** ✅ — `/account/collection`: users tick owned expansion sets; when at least one is saved, `ShuffleDeckPool` constrains the home wizard, `POST /shuffle/result`, and `/random` to factions from those expansions.
 - **Shuffle presets** ✅ — `/account/presets`: named presets (players + optional include/exclude); **Use in shuffle** opens `/?shuffle_preset={id}` and pre-fills the dialog.
 - **Play history** ✅ — `/account/history`: last 50 shuffles while logged in (`shuffle_histories` table).
