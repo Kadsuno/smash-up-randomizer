@@ -8,6 +8,7 @@
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
 [![GitHub last commit](https://img.shields.io/github/last-commit/kadsuno/smash-up-randomizer?style=flat-square)](https://github.com/kadsuno/smash-up-randomizer/commits)
 [![GitHub issues](https://img.shields.io/github/issues/kadsuno/smash-up-randomizer?style=flat-square)](https://github.com/kadsuno/smash-up-randomizer/issues)
+[![CI](https://github.com/kadsuno/smash-up-randomizer/actions/workflows/ci.yml/badge.svg?branch=dev)](https://github.com/kadsuno/smash-up-randomizer/actions/workflows/ci.yml)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg?style=flat-square)](https://conventionalcommits.org)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
@@ -33,9 +34,10 @@ Smash Up Randomizer supports:
 | `docs/tickets/`   | Ticket specs (`YYYY-MM-DD-short-slug.md`), see `.cursor/rules/ticket-authoring.mdc` |
 | `docs/image-credits.md` | AI carousel: four base-game faction spotlights (original art, not AEG illustrations) |
 | `.cursor/rules/`  | Cursor project rules (full workflow, ticket format, etc.)                           |
+| `.github/workflows/ci.yml` | **CI** — on push/PR to `dev` or `master`: Composer install, `npm ci`, `npm run build` (Vite manifest for `@vite` in Blade), then `php artisan test` (SQLite in-memory per `phpunit.xml`) |
 
 
-Default branch for integration work is **dev** (workflow: `.cursor/rules/smash-up-full-workflow.mdc`, full phases: `smash-up-full-workflow-detail.mdc`).
+Default branch for integration work is **dev** (workflow: `.cursor/rules/smash-up-full-workflow.mdc`, full phases: `smash-up-full-workflow-detail.mdc`). Pull requests should stay green on **GitHub Actions** before merge.
 
 ## Features
 
