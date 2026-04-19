@@ -150,6 +150,9 @@ return [
     'landing_slide_3_title' => 'Eure Kombos, sofort',
     'landing_slide_3_tagline' => 'Zufällig, fair und bereit zum Spielen — kein Gezanke.',
     'landing_slide_player_label' => 'Spieler :n',
+    'landing_demo_carousel_badge' => 'Vorschau',
+    'landing_demo_carousel_hint' => 'Nur Illustration — Fraktionen und Spieler-Kacheln sind nicht anklickbar. Zum Mischen den Button „Jetzt mischen“ nutzen.',
+    'landing_demo_carousel_region_label' => 'Vorschau: So funktioniert der Misch-Assistent (Schritt für Schritt)',
     'landing_features_eyebrow' => 'Was der Randomizer macht',
     'landing_features_title' => 'Schnelles Setup am echten Tisch',
     'landing_feature_1_title' => 'Ehrlich zufällig, ehrlich fair',
@@ -349,7 +352,9 @@ return [
 
     // Shuffle-Validierung
     'shuffle_error_invalid_players' => 'Bitte eine gültige Spieleranzahl wählen.',
-    'shuffle_error_not_enough_factions' => 'Nicht genug Fraktionen für die gewählte Spieleranzahl.',
+    'shuffle_error_include_exclude_conflict' => 'Widerspruch: Unter „Einschließen“ gewählte Fraktionen stehen alle auch unter „Ausschließen“ — es bleibt nichts zum Ziehen übrig.',
+    'shuffle_error_pool_empty' => 'Keine Fraktion übrig: Passe Einschließen oder Ausschließen an (z. B. nicht alle Fraktionen ausschließen).',
+    'shuffle_error_not_enough_factions' => 'Zu wenig Fraktionen im Pool für die gewählte Spieleranzahl (jede Person braucht zwei Fraktionen).',
 
     // Account — Bearbeitungsseite
     'account_edit_page_heading'         => 'Account bearbeiten',

@@ -150,6 +150,9 @@ return [
     'landing_slide_3_title' => 'Your combos, instantly',
     'landing_slide_3_tagline' => 'Random, fair, and ready to play — no arguments.',
     'landing_slide_player_label' => 'Player :n',
+    'landing_demo_carousel_badge' => 'Preview',
+    'landing_demo_carousel_hint' => 'Illustration only — faction chips and player tiles are not interactive. Use “Shuffle” above to open the real wizard.',
+    'landing_demo_carousel_region_label' => 'Preview: how the shuffle wizard works (step by step)',
     'landing_features_eyebrow' => 'What it does',
     'landing_features_title' => 'A randomizer tuned for real tables',
     'landing_feature_1_title' => 'True random, truly fair',
@@ -367,7 +370,9 @@ return [
 
     // Shuffle validation
     'shuffle_error_invalid_players' => 'Please choose a valid player count.',
-    'shuffle_error_not_enough_factions' => 'Not enough factions available for the selected number of players.',
+    'shuffle_error_include_exclude_conflict' => 'Conflict: every faction you included is also excluded — nothing is left to draw.',
+    'shuffle_error_pool_empty' => 'No factions left: adjust include or exclude (for example, do not exclude the entire list).',
+    'shuffle_error_not_enough_factions' => 'Not enough factions in the pool for the selected player count (each player needs two factions).',
 
     // Account — edit page
     'account_edit_page_heading'         => 'Edit account',

@@ -7,6 +7,8 @@ alwaysApply: false
 
 Same defaults and opt-outs as **`smash-up-full-workflow.mdc`**. This file is the **long playbook**; the other file stays small for token cost.
 
+**Efficiency:** Obeying the Full **pre-code gate** in the quick-reference file avoids **Recovery** backfill — cheaper than fixing a skipped phase later.
+
 ---
 
 ## Recovery protocol (phases were skipped)
@@ -39,7 +41,7 @@ Do not implement while blocking questions are unanswered.
 3. Reuse existing patterns: thin controllers, Form Requests where appropriate, Eloquent, Blade components, Vite entrypoints, bilingual `__('frontend.key')` / `__('backend.key')`.
 4. **Output:** mental model of affected files, risks, test surfaces.
 
-5. **Roadmap scan:** Read **`docs/roadmap.md`** **only when** classification = `feature` or the chore explicitly maps to a roadmap bullet. If this change **implements, completes, or materially advances** any item, plan a **`docs/roadmap.md` edit in the same PR** (Phase 8). For bugfixes restoring documented behavior: **Roadmap: N/A** — no scan required.
+5. **Roadmap scan:** Read **`docs/roadmap.md`** **only when** classification = `feature` or the chore explicitly maps to a roadmap bullet. If this change **implements, completes, or materially advances** any item, plan a **`docs/roadmap.md` edit in the same PR** (Phase 8). For bugfixes restoring documented behavior: **Roadmap: N/A** — do **not** open `docs/roadmap.md`.
 
 6. **Public-facing copy (when applicable):** When a change materially affects **guest-visible** UI, landing/legal trust, or headline flows, plan updates in the **same PR** to:
    - **`CHANGELOG.md`** `[Unreleased]` (user-visible notes), and
@@ -68,10 +70,10 @@ Use Cursor **Plan mode** when **any** of the following applies:
 - New external dependency
 - Architectural trade-offs with no clear winner
 
-`SwitchMode(plan)` → `CreatePlan` — never substitute with an inline markdown plan when this phase applies.  
-Wait for **explicit user confirmation**, then return to Agent mode.
+**Gate (before `SwitchMode`):** Confirm **at least one** bullet above applies. If **none** apply — including a solution that **mirrors an existing pattern 1:1** with no other trigger — **skip Plan**; add one sentence to the ticket (e.g. "Plan: skipped — triggers not met" or the one-line **Approach** from the quick-reference **Plan mode skip** rule) and go to Phase 4.
 
-**Skip Plan mode** when **none** of the triggers above apply — including the case where the solution **mirrors an existing pattern 1:1** (document a one-line **Approach** in the ticket) — then proceed to Phase 4.
+When Plan mode **is** required: `SwitchMode(plan)` → `CreatePlan` — never substitute with an inline markdown plan.  
+Wait for **explicit user confirmation**, then return to Agent mode.
 
 When Plan mode **is** used, **CreatePlan** holds the ordered steps; keep the ticket free of copy-pasted plan prose.
 
@@ -104,6 +106,7 @@ If `dev` is missing, **ask** whether to use `main` or another base.
 
 - **PHPUnit:** `tests/Feature`, `tests/Unit`; factories/mocks; no real external services.
 - **Run** tests: `ddev exec php artisan test`. Do not only author tests — run them.
+- **Parallel with Phase 7:** You may run tests and Pint **at the same time** (e.g. two terminals) to save wall time. **Both** must pass before Phase 10.
 
 ---
 
@@ -160,6 +163,7 @@ git push -u origin <branch-name>
 - Target **`dev`** unless opted out or another base is agreed.
 - PR body: note **Roadmap** (updated vs N/A) and **Public copy** (CHANGELOG/Lang vs N/A).
 - Prefer **`gh pr create`** when available.
+- **Same-session flow:** When CI is quick or already green, chain **create PR → verify checks → merge** (Phase 13) so the branch does not linger.
 
 ---
 
