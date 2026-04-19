@@ -6,7 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Added
 
-- **CI:** GitHub Actions workflow **`.github/workflows/ci.yml`** runs on **push** and **pull_request** to **`dev`** and **`master`**: Composer install, `php artisan test`, `npm ci`, and **`npm run build`**. README badge links to the workflow run list.
+- **CI:** GitHub Actions workflow **`.github/workflows/ci.yml`** runs on **push** and **pull_request** to **`dev`** and **`master`**: Composer install, **`npm ci`** + **`npm run build`** first (so `public/build/manifest.json` exists for Blade `@vite` during tests), then **`php artisan test`**. README badge links to the workflow run list.
 
 ### Changed
 
