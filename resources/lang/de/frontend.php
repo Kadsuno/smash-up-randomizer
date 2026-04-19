@@ -82,6 +82,7 @@ return [
     'shuffle_button' => 'Jetzt mischen!',
     'shuffle_results' => 'Misch-Ergebnisse',
     'shuffle_again' => 'Erneut mischen',
+    'browse_all_factions' => 'Alle Fraktionen durchsuchen',
     'shuffle_share_heading' => 'Dieses Ergebnis teilen',
     'shuffle_share_hint' => 'Link schicken oder Text in den Gruppenchat kopieren.',
     'shuffle_share_copy_link' => 'Link kopieren',

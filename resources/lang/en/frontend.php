@@ -81,6 +81,7 @@ return [
     'shuffle_button' => "Let's shuffle!",
     'shuffle_results' => 'Shuffle Results',
     'shuffle_again' => 'Shuffle Again',
+    'browse_all_factions' => 'Browse all factions',
     'shuffle_share_heading' => 'Share this table',
     'shuffle_share_hint' => 'Send the link or paste the text in your group chat.',
     'shuffle_share_copy_link' => 'Copy link',

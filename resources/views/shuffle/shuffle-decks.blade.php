@@ -145,7 +145,7 @@
                             <div class="flex flex-shrink-0 flex-wrap items-center justify-start gap-3 lg:justify-end">
                                 <button
                                     type="button"
-                                    class="inline-flex cursor-pointer items-center gap-2 rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-500 active:scale-[0.98]"
+                                    class="sur-btn-primary inline-flex items-center gap-2"
                                     @click="copyUrl()"
                                 >
                                     <i class="fa-solid fa-link text-xs" aria-hidden="true"></i>
@@ -178,17 +178,17 @@
                 <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
                     <a
                         href="{{ route('home') }}#wizard"
-                        class="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-500 active:scale-[0.98]"
+                        class="sur-btn-primary inline-flex items-center gap-2"
                     >
                         <i class="fa-solid fa-shuffle text-xs" aria-hidden="true"></i>
                         {{ __('frontend.shuffle_again') }}
                     </a>
                     <a
                         href="{{ route('factionList') }}"
-                        class="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-zinc-900/60 px-5 py-2.5 text-sm font-semibold text-zinc-300 transition hover:border-white/20 hover:text-white"
+                        class="sur-btn-secondary inline-flex items-center gap-2"
                     >
                         <i class="fa-solid fa-list text-xs" aria-hidden="true"></i>
-                        Browse all factions
+                        {{ __('frontend.browse_all_factions') }}
                     </a>
                 </div>
             </x-sur.reveal>

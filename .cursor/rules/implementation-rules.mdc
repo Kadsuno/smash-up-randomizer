@@ -6,3 +6,5 @@ description: Pointer — use smash-up-full-workflow + smash-up-full-workflow-det
 Use **`smash-up-full-workflow.mdc`** (quick reference) + **`smash-up-full-workflow-detail.mdc`** (full phases) for implementation order, branching from `dev`, DDEV, tests, CHANGELOG, PR, merge.
 
 Keep **`README.md`** as the source for DDEV commands.
+
+For **UI consistency** (buttons, spacing, landing parity): **`design-system.mdc`** + **`docs/design-system.md`**.

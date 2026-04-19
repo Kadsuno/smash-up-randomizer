@@ -6,11 +6,15 @@ All notable changes to this project are documented in this file.
 
 ### Added
 
+- **Design system:** [`docs/design-system.md`](docs/design-system.md) documents canonical **landing** patterns, **`sur-btn-*`** usage, hero glow tier, spacing (`x-sur.section` / `x-sur.container`), and i18n expectations; Cursor rule **`.cursor/rules/design-system.mdc`** keeps agents aligned.
+
 - **Shareable shuffle results:** Each successful **`POST /shuffle/result`** and **`GET /random`** stores the assignment in **`shared_shuffle_results`** (public ULID). **`GET /shuffle/share/{id}`** reopens the same table layout; the result screen adds **Copy link** and **Copy as text** (EN/DE). Permalink responses use **`noindex`** robots meta.
 
 - **CI:** GitHub Actions workflow **`.github/workflows/ci.yml`** runs on **push** and **pull_request** to **`dev`** and **`master`**: Composer install, **`npm ci`** + **`npm run build`** first (so `public/build/manifest.json` exists for Blade `@vite` during tests), then **`php artisan test`**. README badge links to the workflow run list.
 
 ### Changed
+
+- **Shuffle result actions:** Primary/secondary CTAs use **`sur-btn-primary`** / **`sur-btn-secondary`** with **`frontend.browse_all_factions`** (EN/DE) instead of hard-coded English and inline Tailwind.
 
 - **npm:** Removed unused **`axios`** devDependency (not referenced by any `resources/js` entry); shrinks install and audit surface.
 
