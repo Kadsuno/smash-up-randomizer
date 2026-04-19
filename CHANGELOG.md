@@ -14,6 +14,8 @@ All notable changes to this project are documented in this file.
 
 ### Security
 
+- **immutable (prototype pollution):** Pinned transitive **`immutable`** to **5.1.5** via npm **`overrides`** (was 5.1.4) to pick up fixes for unsafe handling of `__proto__` in merge / `Map.toJS` / `Map.toObject` paths used by the optional Sass toolchain.
+
 - **Rollup (CVE-2026-27606 / GHSA-mw96-cpmx-2vgc):** Added an explicit **`rollup`** devDependency at **≥ 4.59** (resolved to 4.60.x) so the Vite build no longer uses a vulnerable Rollup 4.53.x. Mitigates arbitrary file write via path traversal in crafted output chunk/asset names during bundling.
 
 ### Fixed
