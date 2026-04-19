@@ -13,7 +13,7 @@ class SharedShuffleController extends Controller
      * Show a previously saved shuffle assignment by public id.
      *
      * @param  string  $publicId  Opaque ULID stored in `shared_shuffle_results.public_id`
-     * @return Response Rendered shuffle result view or 404
+     * @return \Illuminate\Http\Response Rendered shuffle result view or 404
      */
     public function show(string $publicId): Response
     {
