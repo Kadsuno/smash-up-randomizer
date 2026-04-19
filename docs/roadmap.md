@@ -30,7 +30,27 @@ High-level product and engineering priorities. Update this file in the same PR w
 
 ## Next
 
-- *(Open — add items as priorities emerge.)*
+Backlog from product discussion (2026-04-19). **Suggested pick order:** near-term items first — lower risk, fits existing account/shuffle/history surfaces.
+
+### Near-term (high impact, manageable scope)
+
+- **Shareable shuffle results** — Permalink and/or “copy as text” (e.g. Discord/WhatsApp) so groups can reuse the same assignment without re-running the wizard.
+- **Anti-repeat / fairness option** — Optionally exclude or downweight faction combos that appear in recent **play history** (logged-in users); configurable window or count; tests for edge cases (small pools, presets).
+- **History actions** — Repeat a past shuffle, or **spawn a preset** from a history row (reuses existing presets + `shuffle_histories`).
+- **Print-friendly result view** — Dedicated Blade route/layout for a clean table printout (optional: browser PDF via print CSS).
+- **Shuffle `<dialog>` accessibility** — Keyboard, focus management / trap, and screen reader labels for the home shuffle wizard (`<dialog>` stepper).
+
+### Larger scope (only with clear need)
+
+- **Multi-device session room** — Short code so all clients see the same result; implies realtime or polling, conflict handling, and guest vs auth policy.
+- **Public read-only API** — Only if a concrete consumer exists (e.g. bot); abuse limits, versioning; Laravel Passport already in stack — scope deliberately narrow.
+- **Faction synergy / tag system** — Game-feel uplift but ongoing **content** ownership and disagreement surface; needs editorial rules before build.
+
+### Nice-to-have / speculative
+
+- **More locales** beyond EN/DE (if audience demands).
+- **BoardGameGeek** or external metadata links (maintenance + relevance).
+- **Curated combo hints** (non-random suggestions) — overlaps with tags; treat as content product.
 
 ## Shipped (account & shuffle)
 
