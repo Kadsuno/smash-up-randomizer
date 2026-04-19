@@ -153,7 +153,7 @@
                                 </button>
                                 <button
                                     type="button"
-                                    class="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-white/15 bg-zinc-900/60 px-5 py-2.5 text-sm font-semibold text-zinc-200 transition hover:border-white/30 hover:bg-zinc-800/80 hover:text-white active:scale-[0.98]"
+                                    class="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-white/15 bg-zinc-900/60 px-5 py-2.5 text-sm font-semibold text-zinc-200 transition duration-200 hover:border-indigo-400/55 hover:bg-indigo-500/20 hover:text-white hover:shadow-lg hover:shadow-indigo-500/25 active:scale-[0.98]"
                                     @click="copyPlain()"
                                 >
                                     <i class="fa-solid fa-clipboard text-xs" aria-hidden="true"></i>
