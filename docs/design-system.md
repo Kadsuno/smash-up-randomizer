@@ -132,7 +132,7 @@ Single source of truth for **UI foundations** (typography, color, spacing, motio
 
 **`prefers-reduced-motion: reduce`** (`app.css`): global rule sets `animation-duration`, `transition-duration`, and `scroll-behavior` to effectively instant/auto for `*`, `::before`, `::after`. **Do not** bypass for essential feedback without an accessible alternative.
 
-**`animate.css`:** Imported in `app.css` but **no `animate__*` classes** are used in first-party views. Do not add Animate.css utilities without documenting them here and verifying reduced-motion behavior.
+**Third-party animation libraries:** None are bundled; motion uses Tailwind utilities, `app.css` keyframes, and Alpine-driven classes. If Animate.css or similar is ever added back, document `animate__*` usage here and verify reduced-motion behavior.
 
 **Marketing-only motion:** Landing hero may use **`hover:scale`** / **`active:scale`** on top of `sur-btn-primary` (see [Buttons § Hero emphasis](#hero-emphasis-glow-tier)). Inner pages should stay on default button motion unless the block is explicitly hero-style.
 
@@ -467,7 +467,6 @@ Alphabetical (includes `@layer components` and critical global hooks). **Impleme
 |------|-----------|
 | `sur-panel-auth`, `sur-panel-glass`, `sur-tile-grid` | Extract when the same 7+ token string appears in 3+ files |
 | `sur-checkbox`, `sur-btn-danger`, `sur-flash-*` | Extract when usage grows |
-| `animate.css` | Remove import if still unused, or document any new `animate__*` usage |
 
 **Aligned in code:** Auth and account forms use `sur-input` / `sur-btn-*`; public CTAs and faction manager primary actions use `sur-btn-primary`; footer contact uses `sur-btn-ghost` variant.
 
