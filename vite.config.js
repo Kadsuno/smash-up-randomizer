@@ -3,6 +3,11 @@ import laravel from 'laravel-vite-plugin';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
+    build: {
+        // Faster CI/production builds; gzip reporting is optional for local analysis only
+        reportCompressedSize: false,
+        chunkSizeWarningLimit: 700,
+    },
     plugins: [
         tailwindcss(),
         laravel([

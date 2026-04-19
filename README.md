@@ -189,7 +189,7 @@ Blade under `resources/views/`: `start/`, `shuffle/`, `decks/`, `frontend/`, `ba
 ### Frontend assets
 
 - **Vite** (`vite.config.js`): `@tailwindcss/vite` plugin + `laravel-vite-plugin`; global styles in `resources/css/app.css` (`@import "tailwindcss"`, design tokens in `@theme`, PostCSS for Autoprefixer only)
-- **Stack**: Tailwind CSS 4, Alpine.js, jQuery (legacy where present), Font Awesome, animate.css (see `package.json`)
+- **Stack**: Tailwind CSS 4, Alpine.js, Font Awesome (see `package.json`)
 
 ### Email
 
