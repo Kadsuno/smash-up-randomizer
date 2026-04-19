@@ -217,6 +217,25 @@ html::-webkit-scrollbar-thumb:active,
         @apply inline-flex min-h-11 items-center justify-center rounded-xl border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-zinc-100 transition duration-200 hover:border-white/25 hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50 active:scale-[0.98];
     }
 
+    /* Shuffle share — “copy as text”: explicit :hover so effect always ships (high contrast, not purge-sensitive). */
+    .sur-share-copy-text-btn {
+        @apply inline-flex cursor-pointer items-center gap-2 rounded-xl border border-white/15 bg-zinc-900/60 px-5 py-2.5 text-sm font-semibold text-zinc-200 shadow-sm shadow-black/30 outline-none transition-all duration-200 ease-out active:scale-[0.98];
+    }
+
+    .sur-share-copy-text-btn:hover {
+        border-color: rgb(165 180 252);
+        background-color: rgb(99 102 241);
+        color: rgb(255 255 255);
+        transform: scale(1.02);
+        box-shadow:
+            0 0 0 1px rgba(165, 180, 252, 0.55),
+            0 18px 48px -10px rgba(79, 70, 229, 0.72);
+    }
+
+    .sur-share-copy-text-btn:focus-visible {
+        @apply ring-2 ring-indigo-400 ring-offset-2 ring-offset-zinc-950;
+    }
+
     .sur-btn-ghost {
         @apply inline-flex min-h-11 items-center justify-center rounded-xl border border-white/10 bg-transparent px-4 py-2 text-sm font-medium text-zinc-200 transition hover:border-indigo-500/40 hover:text-indigo-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50;
     }
