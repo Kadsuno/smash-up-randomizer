@@ -15,8 +15,8 @@ class AccountProfileUpdateTest extends TestCase
     private function actingAsVerifiedUser(): User
     {
         $user = User::factory()->create([
-            'name'              => 'Original Name',
-            'email'             => 'original@example.com',
+            'name' => 'Original Name',
+            'email' => 'original@example.com',
             'email_verified_at' => now(),
         ]);
 
@@ -37,7 +37,7 @@ class AccountProfileUpdateTest extends TestCase
         $user = $this->actingAsVerifiedUser();
 
         $this->patch('/account/profile', [
-            'name'  => 'Updated Name',
+            'name' => 'Updated Name',
             'email' => 'updated@example.com',
         ])->assertRedirect();
 
@@ -51,7 +51,7 @@ class AccountProfileUpdateTest extends TestCase
         $user = $this->actingAsVerifiedUser();
 
         $this->patch('/account/profile', [
-            'name'  => $user->name,
+            'name' => $user->name,
             'email' => 'new@example.com',
         ]);
 
@@ -64,7 +64,7 @@ class AccountProfileUpdateTest extends TestCase
         $user = $this->actingAsVerifiedUser();
 
         $this->patch('/account/profile', [
-            'name'  => $user->name,
+            'name' => $user->name,
             'email' => 'new@example.com',
         ])->assertRedirect(route('verification.notice'));
     }
@@ -75,7 +75,7 @@ class AccountProfileUpdateTest extends TestCase
         $originalVerifiedAt = $user->email_verified_at;
 
         $this->patch('/account/profile', [
-            'name'  => 'New Name',
+            'name' => 'New Name',
             'email' => $user->email,
         ]);
 
@@ -89,7 +89,7 @@ class AccountProfileUpdateTest extends TestCase
         $this->actingAsVerifiedUser();
 
         $this->patch('/account/profile', [
-            'name'  => '',
+            'name' => '',
             'email' => 'test@example.com',
         ])->assertSessionHasErrors('name');
     }
@@ -99,7 +99,7 @@ class AccountProfileUpdateTest extends TestCase
         $this->actingAsVerifiedUser();
 
         $this->patch('/account/profile', [
-            'name'  => str_repeat('a', 256),
+            'name' => str_repeat('a', 256),
             'email' => 'test@example.com',
         ])->assertSessionHasErrors('name');
     }
@@ -110,7 +110,7 @@ class AccountProfileUpdateTest extends TestCase
         $this->actingAsVerifiedUser();
 
         $this->patch('/account/profile', [
-            'name'  => 'Test',
+            'name' => 'Test',
             'email' => 'taken@example.com',
         ])->assertSessionHasErrors('email');
     }
@@ -120,7 +120,7 @@ class AccountProfileUpdateTest extends TestCase
         $user = $this->actingAsVerifiedUser();
 
         $this->patch('/account/profile', [
-            'name'  => 'New Name',
+            'name' => 'New Name',
             'email' => $user->email,
         ])->assertRedirect(route('account.edit'));
     }
@@ -128,7 +128,7 @@ class AccountProfileUpdateTest extends TestCase
     public function test_unauthenticated_user_is_redirected(): void
     {
         $this->patch('/account/profile', [
-            'name'  => 'Test',
+            'name' => 'Test',
             'email' => 'test@example.com',
         ])->assertRedirect(route('login'));
     }

@@ -7,6 +7,7 @@ namespace App\Http\Requests\Admin;
 use App\Models\Deck;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Unique;
 
 class UpdateFactionRequest extends FormRequest
 {
@@ -19,7 +20,7 @@ class UpdateFactionRequest extends FormRequest
     }
 
     /**
-     * @return array<string, list<int|string|\Illuminate\Validation\Rules\Unique>>
+     * @return array<string, list<int|string|Unique>>
      */
     public function rules(): array
     {

@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Services\TransactionalMailService;
+use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
 class TestEmailService extends Command
@@ -31,7 +31,7 @@ class TestEmailService extends Command
     {
         $this->info('Testing transactional mail (default mailer)...');
 
-        $mailer = new TransactionalMailService();
+        $mailer = new TransactionalMailService;
         $testEmail = config('mail.test_email', 'info@smash-up-randomizer.com');
 
         try {
@@ -44,8 +44,8 @@ class TestEmailService extends Command
             );
 
             if ($ok) {
-                Log::info('Scheduled email test successful - Email sent to: ' . $testEmail);
-                $this->info('Email test successful! Sent to: ' . $testEmail);
+                Log::info('Scheduled email test successful - Email sent to: '.$testEmail);
+                $this->info('Email test successful! Sent to: '.$testEmail);
 
                 return Command::SUCCESS;
             }
@@ -55,8 +55,8 @@ class TestEmailService extends Command
 
             return Command::FAILURE;
         } catch (\Exception $e) {
-            Log::error('Scheduled email test exception: ' . $e->getMessage());
-            $this->error('Email test exception: ' . $e->getMessage());
+            Log::error('Scheduled email test exception: '.$e->getMessage());
+            $this->error('Email test exception: '.$e->getMessage());
 
             return Command::FAILURE;
         }

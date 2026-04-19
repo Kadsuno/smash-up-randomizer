@@ -1,18 +1,21 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FactionDeckController;
 use App\Http\Controllers\Admin\MaintenanceController;
 use App\Http\Controllers\Admin\ShuffleStatsController;
 use App\Http\Controllers\Admin\UserAdminController;
-use App\Http\Controllers\DeckController;
-use App\Http\Controllers\SharedShuffleController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DeckController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SharedShuffleController;
+use App\Models\Deck;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,7 +27,7 @@ use Spatie\Sitemap\Tags\Url;
 
 Route::get('/', [
     HomeController::class,
-    'index'
+    'index',
 ])->name('home');
 
 Route::middleware(['auth', 'admin'])->group(function (): void {
@@ -68,7 +71,7 @@ Route::get('/shuffle', function () {
 
 Route::post('/shuffle/result', [
     DeckController::class,
-    'shuffle'
+    'shuffle',
 ])->name('shuffle-result');
 
 Route::get('/shuffle/share/{publicId}', [SharedShuffleController::class, 'show'])
@@ -84,42 +87,42 @@ Route::get('/privacy-policy', function () {
 
 Route::get('contact-us', [
     ContactController::class,
-    'index'
+    'index',
 ])->name('contact');
 Route::post('contact-us', [
     ContactController::class,
-    'store'
+    'store',
 ])
     ->middleware('throttle:5,1')
     ->name('contact.us.store');
 
 Route::get('/factions', [
     DeckController::class,
-    'list'
+    'list',
 ])->name('factionList');
 
 Route::get('/factions/{name}', [
     DeckController::class,
-    'detail'
+    'detail',
 ])->name('factionDetail');
 
 Route::get('/expansions', [
     DeckController::class,
-    'expansions'
+    'expansions',
 ])->name('expansions');
 
 Route::get('/expansions/{slug}', [
     DeckController::class,
-    'expansion'
+    'expansion',
 ])->name('expansion');
 
 Route::get('/random', [
     DeckController::class,
-    'quickShuffle'
+    'quickShuffle',
 ])->name('random');
 
 Route::get('/about', function () {
-    $factionCount = \App\Models\Deck::count();
+    $factionCount = Deck::count();
 
     return view('legal.about', compact('factionCount'));
 })->name('about');
@@ -169,7 +172,7 @@ Route::get('/sitemap', function () {
         ->setPriority(1.0));
 
     // Fügen Sie dynamische Seiten, z. B. aus Ihrer Datenbank, hinzu
-    $decks = \App\Models\Deck::all();
+    $decks = Deck::all();
     $date = null;
     foreach ($decks as $deck) {
         if ($deck->updated_at) {
@@ -184,12 +187,12 @@ Route::get('/sitemap', function () {
             ->setPriority(0.8));
     }
 
-    $expansionNames = \App\Models\Deck::whereNotNull('expansion')
+    $expansionNames = Deck::whereNotNull('expansion')
         ->where('expansion', '!=', '')
         ->distinct()
         ->pluck('expansion');
     foreach ($expansionNames as $name) {
-        $sitemap->add(Url::create('/expansions/' . \Illuminate\Support\Str::slug($name))
+        $sitemap->add(Url::create('/expansions/'.Str::slug($name))
             ->setLastModificationDate(now())
             ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
             ->setPriority(0.7));
@@ -198,5 +201,5 @@ Route::get('/sitemap', function () {
     return $sitemap->toResponse(request());
 });
 
-require __DIR__ . '/auth.php';
-require __DIR__ . '/frontend-auth.php';
+require __DIR__.'/auth.php';
+require __DIR__.'/frontend-auth.php';

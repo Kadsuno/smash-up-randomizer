@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Contact;
 use App\Services\TransactionalMailService;
+use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
@@ -26,14 +26,14 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'    => 'required|string|max:255',
-            'email'   => 'required|email',
-            'phone'   => 'nullable|regex:/^[0-9\s\-()+]+$/',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'phone' => 'nullable|regex:/^[0-9\s\-()+]+$/',
             'subject' => 'required|string|max:255',
             'message' => 'required|string',
         ]);
 
-        if (!empty($request->context)) {
+        if (! empty($request->context)) {
             return redirect()->back()->with(['error' => 'Spam detected!']);
         }
 
@@ -45,19 +45,19 @@ class ContactController extends Controller
         $phone = $request->filled('phone') ? (string) $request->input('phone') : null;
 
         Contact::create([
-            'name'    => (string) $request->input('name'),
-            'email'   => (string) $request->input('email'),
-            'phone'   => $phone,
+            'name' => (string) $request->input('name'),
+            'email' => (string) $request->input('email'),
+            'phone' => $phone,
             'subject' => (string) $request->input('subject'),
             'message' => (string) $request->input('message'),
         ]);
 
-        $mailer = new TransactionalMailService();
+        $mailer = new TransactionalMailService;
 
         $mailPayload = [
-            'name'    => (string) $request->input('name'),
-            'email'   => (string) $request->input('email'),
-            'phone'   => $phone,
+            'name' => (string) $request->input('name'),
+            'email' => (string) $request->input('email'),
+            'phone' => $phone,
             'subject' => (string) $request->input('subject'),
             'message' => (string) $request->input('message'),
         ];

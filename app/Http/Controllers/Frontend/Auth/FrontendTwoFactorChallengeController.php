@@ -110,7 +110,7 @@ class FrontendTwoFactorChallengeController extends Controller
     }
 
     /**
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     private function ensureIsNotRateLimited(Request $request, User $user): void
     {

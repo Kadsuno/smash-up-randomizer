@@ -6,13 +6,15 @@ All notable changes to this project are documented in this file.
 
 ### Added
 
+- **GitHub automation:** **Dependabot** (`.github/dependabot.yml`) opens weekly update PRs for **Composer**, **npm**, and **GitHub Actions**. **CI** runs **`composer audit`** and **`./vendor/bin/pint --test`** after `composer install`. **`laravel/pint`** is a Composer **dev** dependency; PHP style is normalized project-wide to match Pint defaults.
+
 - **Landing hero demo:** The marketing carousel is labeled as **preview-only** (bilingual badge + hint), uses a clearer `aria-label`, and decorative tiles/chips use `pointer-events-none` so they do not feel clickable. **Shuffle wizard:** In-modal **toast** when include/exclude leaves no factions or too few for the player count; **server-side** distinct flash messages for include/exclude conflict vs. empty pool. **Faction detail:** `.deck-html` spacing and list typography improved for long descriptions (EN/DE strings where new).
 
 - **Design system:** [`docs/design-system.md`](docs/design-system.md) documents canonical **landing** patterns, **`sur-btn-*`** usage, hero glow tier, spacing (`x-sur.section` / `x-sur.container`), i18n expectations, a **full Blade UI inventory** (public / account / auth / backend), a **UI concepts catalog** (actions, forms, cards, flashes, chips, nav, marketing-only), **border/shadow tokens**, **drift hotspots**, and optional future **`sur-*` extractions**; Cursor rule **`.cursor/rules/design-system.mdc`** points to the doc.
 
 - **Shareable shuffle results:** Each successful **`POST /shuffle/result`** and **`GET /random`** stores the assignment in **`shared_shuffle_results`** (public ULID). **`GET /shuffle/share/{id}`** reopens the same table layout; the result screen adds **Copy link** and **Copy as text** (EN/DE). Permalink responses use **`noindex`** robots meta.
 
-- **CI:** GitHub Actions workflow **`.github/workflows/ci.yml`** runs on **push** and **pull_request** to **`dev`** and **`master`**: Composer install, **`npm ci`** + **`npm run build`** first (so `public/build/manifest.json` exists for Blade `@vite` during tests), then **`php artisan test`**. README badge links to the workflow run list.
+- **CI:** GitHub Actions **`.github/workflows/ci.yml`** on **push** / **pull_request** to **`dev`** and **`master`**: Composer install → **`composer audit`** → **`pint --test`** → app key from **`.env.example`**, then **`npm ci`** + **`npm run build`** (Vite manifest for Blade `@vite` during tests), then **`php artisan test`**. README badge links to the workflow run list.
 
 ### Changed
 
@@ -35,6 +37,8 @@ All notable changes to this project are documented in this file.
 - **Home landing copy (EN/DE):** Hero, feature headings, quote strip eyebrow, bottom CTA band, faction strip, result preview, and Open Graph title now read as a **tool-first randomizer** instead of SaaS-style pitch lines (single-line hero, less “trusted everywhere” / triple-beat marketing cadence). Layout unchanged.
 
 ### Security
+
+- **Composer:** **`phpseclib/phpseclib`** updated to **3.0.51** (addresses **CVE-2026-40194**, low-severity variable-time HMAC comparison in SSH2); **`composer audit`** is clean at time of release.
 
 - **immutable (prototype pollution):** Pinned transitive **`immutable`** to **5.1.5** via npm **`overrides`** (was 5.1.4) to pick up fixes for unsafe handling of `__proto__` in merge / `Map.toJS` / `Map.toObject` paths used by the optional Sass toolchain.
 

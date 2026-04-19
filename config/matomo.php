@@ -24,6 +24,6 @@ return [
     'tracker_url' => rtrim((string) env(
         'MATOMO_TRACKER_URL',
         'https://analytics.kadsuno.com'
-    ), '/') . '/',
+    ), '/').'/',
 
 ];

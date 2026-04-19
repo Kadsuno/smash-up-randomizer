@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Middleware\Authenticate;
+use App\Http\Middleware\EnsurePendingTwoFactorLogin;
+use App\Http\Middleware\EnsureUserIsAdmin;
+use App\Http\Middleware\Localization;
+use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -24,13 +29,13 @@ return Application::configure(basePath: dirname(__DIR__))
                 | Request::HEADER_X_FORWARDED_AWS_ELB
         );
         $middleware->web(append: [
-            \App\Http\Middleware\Localization::class,
+            Localization::class,
         ]);
         $middleware->alias([
-            'auth'  => \App\Http\Middleware\Authenticate::class,
-            'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
-            'admin' => \App\Http\Middleware\EnsureUserIsAdmin::class,
-            'two-factor.pending' => \App\Http\Middleware\EnsurePendingTwoFactorLogin::class,
+            'auth' => Authenticate::class,
+            'guest' => RedirectIfAuthenticated::class,
+            'admin' => EnsureUserIsAdmin::class,
+            'two-factor.pending' => EnsurePendingTwoFactorLogin::class,
         ]);
     })
     ->withSchedule(function (Schedule $schedule): void {

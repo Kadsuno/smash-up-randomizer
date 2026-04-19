@@ -13,6 +13,7 @@ class EnrichFactionsCommandTest extends TestCase
     use RefreshDatabase;
 
     private string $aliensWikitext;
+
     private string $tmpDir;
 
     protected function setUp(): void
@@ -22,7 +23,7 @@ class EnrichFactionsCommandTest extends TestCase
         $this->aliensWikitext = file_get_contents(base_path('tests/Fixtures/aliens-wikitext.txt'));
 
         // Create a temporary data directory with a minimal JSON file for testing
-        $this->tmpDir = sys_get_temp_dir() . '/smashup_enrich_test_' . uniqid();
+        $this->tmpDir = sys_get_temp_dir().'/smashup_enrich_test_'.uniqid();
         mkdir($this->tmpDir, 0755, true);
     }
 
@@ -47,13 +48,14 @@ class EnrichFactionsCommandTest extends TestCase
             Http::fake([
                 '*' => Http::response(['error' => ['code' => 'missingtitle']], 200),
             ]);
+
             return;
         }
 
         Http::fake([
             '*' => Http::response([
                 'parse' => [
-                    'title'    => $factionName,
+                    'title' => $factionName,
                     'wikitext' => ['*' => $wikitext],
                 ],
             ], 200),
@@ -67,9 +69,9 @@ class EnrichFactionsCommandTest extends TestCase
         $this->mockWikiResponse('Aliens', $this->aliensWikitext);
 
         $this->artisan('factions:enrich', [
-            '--faction'     => 'Aliens',
+            '--faction' => 'Aliens',
             '--skip-import' => true,
-            '--dry-run'     => true,
+            '--dry-run' => true,
         ])->assertExitCode(0);
     }
 
@@ -87,12 +89,12 @@ class EnrichFactionsCommandTest extends TestCase
 
         // Capture the modification time before
         $dataPath = database_path('data/factions');
-        $jsonFile = $dataPath . '/core-set.json';
+        $jsonFile = $dataPath.'/core-set.json';
         $mtimeBefore = filemtime($jsonFile);
 
         $this->artisan('factions:enrich', [
-            '--faction'  => 'Aliens',
-            '--dry-run'  => true,
+            '--faction' => 'Aliens',
+            '--dry-run' => true,
         ])->assertExitCode(0);
 
         clearstatcache(true, $jsonFile);
@@ -135,18 +137,19 @@ class EnrichFactionsCommandTest extends TestCase
         $cleanData = array_map(static function (array $f) {
             if ($f['name'] === 'Aliens') {
                 $f['description'] = '';
-                $f['characters']  = '';
-                $f['synergy']     = '';
+                $f['characters'] = '';
+                $f['synergy'] = '';
             }
+
             return $f;
         }, $originalData);
         file_put_contents(
             $jsonFile,
-            json_encode($cleanData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . "\n"
+            json_encode($cleanData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)."\n"
         );
 
         $this->artisan('factions:enrich', [
-            '--faction'     => 'Aliens',
+            '--faction' => 'Aliens',
             '--skip-import' => true,
         ])->assertExitCode(0);
 
@@ -160,7 +163,7 @@ class EnrichFactionsCommandTest extends TestCase
         // Restore original file
         file_put_contents(
             $jsonFile,
-            json_encode($originalData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . "\n"
+            json_encode($originalData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)."\n"
         );
     }
 
@@ -181,11 +184,11 @@ class EnrichFactionsCommandTest extends TestCase
         unset($entry);
         file_put_contents(
             $jsonFile,
-            json_encode($originalData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . "\n"
+            json_encode($originalData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)."\n"
         );
 
         $this->artisan('factions:enrich', [
-            '--faction'     => 'Aliens',
+            '--faction' => 'Aliens',
             '--skip-import' => true,
         ])->assertExitCode(0);
 
@@ -198,14 +201,15 @@ class EnrichFactionsCommandTest extends TestCase
         file_put_contents(
             $jsonFile,
             json_encode(
-                collect($originalData)->map(static function (array $f) use ($customTeaser) {
+                collect($originalData)->map(static function (array $f) {
                     if ($f['name'] === 'Aliens') {
                         $f['teaser'] = 'Return minions in play to their owners\' hands, gain a bonus for returning your own, and manipulate bases.';
                     }
+
                     return $f;
                 })->all(),
                 JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
-            ) . "\n"
+            )."\n"
         );
     }
 
@@ -218,9 +222,9 @@ class EnrichFactionsCommandTest extends TestCase
         // Use --dry-run so no JSON files are modified; --skip-import is the subject under test.
         // If factions:import were called despite both flags it would touch the DB.
         $this->artisan('factions:enrich', [
-            '--faction'     => 'Aliens',
+            '--faction' => 'Aliens',
             '--skip-import' => true,
-            '--dry-run'     => true,
+            '--dry-run' => true,
         ])->assertExitCode(0);
 
         // Database should be untouched (RefreshDatabase gives us empty DB)

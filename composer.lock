@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "887f6ca543a220d385b718f74a01a2e4",
+    "content-hash": "45a2f9a2397e5383be6a0807e517470c",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -4162,16 +4162,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "3.0.50",
+            "version": "3.0.51",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "aa6ad8321ed103dc3624fb600a25b66ebf78ec7b"
+                "reference": "d59c94077f9c9915abb51ddb52ce85188ece1748"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/aa6ad8321ed103dc3624fb600a25b66ebf78ec7b",
-                "reference": "aa6ad8321ed103dc3624fb600a25b66ebf78ec7b",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/d59c94077f9c9915abb51ddb52ce85188ece1748",
+                "reference": "d59c94077f9c9915abb51ddb52ce85188ece1748",
                 "shasum": ""
             },
             "require": {
@@ -4252,7 +4252,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpseclib/phpseclib/issues",
-                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.50"
+                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.51"
             },
             "funding": [
                 {
@@ -4268,7 +4268,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-03-19T02:57:58+00:00"
+            "time": "2026-04-10T01:33:53+00:00"
         },
         {
             "name": "pragmarx/google2fa",
@@ -9272,6 +9272,74 @@
                 "source": "https://github.com/hamcrest/hamcrest-php/tree/v2.1.1"
             },
             "time": "2025-04-30T06:54:44+00:00"
+        },
+        {
+            "name": "laravel/pint",
+            "version": "v1.29.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/pint.git",
+                "reference": "bdec963f53172c5e36330f3a400604c69bf02d39"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/pint/zipball/bdec963f53172c5e36330f3a400604c69bf02d39",
+                "reference": "bdec963f53172c5e36330f3a400604c69bf02d39",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "ext-tokenizer": "*",
+                "ext-xml": "*",
+                "php": "^8.2.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.94.2",
+                "illuminate/view": "^12.54.1",
+                "larastan/larastan": "^3.9.3",
+                "laravel-zero/framework": "^12.0.5",
+                "mockery/mockery": "^1.6.12",
+                "nunomaduro/termwind": "^2.4.0",
+                "pestphp/pest": "^3.8.6",
+                "shipfastlabs/agent-detector": "^1.1.0"
+            },
+            "bin": [
+                "builds/pint"
+            ],
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "App\\": "app/",
+                    "Database\\Seeders\\": "database/seeders/",
+                    "Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nuno Maduro",
+                    "email": "enunomaduro@gmail.com"
+                }
+            ],
+            "description": "An opinionated code formatter for PHP.",
+            "homepage": "https://laravel.com",
+            "keywords": [
+                "dev",
+                "format",
+                "formatter",
+                "lint",
+                "linter",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/pint/issues",
+                "source": "https://github.com/laravel/pint"
+            },
+            "time": "2026-03-12T15:51:39+00:00"
         },
         {
             "name": "laravel/sail",

@@ -6,13 +6,13 @@ use App\Http\Controllers\AccountShuffleHistoryController;
 use App\Http\Controllers\AccountShufflePresetController;
 use App\Http\Controllers\AccountTwoFactorController;
 use App\Http\Controllers\Frontend\Auth\FrontendAuthenticatedSessionController;
-use App\Http\Controllers\Frontend\Auth\FrontendTwoFactorChallengeController;
 use App\Http\Controllers\Frontend\Auth\FrontendEmailVerificationNotificationController;
 use App\Http\Controllers\Frontend\Auth\FrontendEmailVerificationPromptController;
 use App\Http\Controllers\Frontend\Auth\FrontendNewPasswordController;
 use App\Http\Controllers\Frontend\Auth\FrontendPasswordResetLinkController;
 use App\Http\Controllers\Frontend\Auth\FrontendRegisteredUserController;
 use App\Http\Controllers\Frontend\Auth\FrontendSocialAuthController;
+use App\Http\Controllers\Frontend\Auth\FrontendTwoFactorChallengeController;
 use App\Http\Controllers\Frontend\Auth\FrontendVerifyEmailController;
 use Illuminate\Support\Facades\Route;
 

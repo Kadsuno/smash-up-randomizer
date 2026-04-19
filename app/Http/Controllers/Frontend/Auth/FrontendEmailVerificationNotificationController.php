@@ -14,6 +14,7 @@ class FrontendEmailVerificationNotificationController extends Controller
             return redirect()->route('account');
         }
         $request->user()->sendEmailVerificationNotification();
+
         return back()->with('status', 'verification-link-sent');
     }
 }

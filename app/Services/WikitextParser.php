@@ -138,10 +138,10 @@ class WikitextParser
         $teaser = [];
         foreach ($lines as $line) {
             $stripped = trim($line);
-            if ($stripped === '' && !empty($teaser)) {
+            if ($stripped === '' && ! empty($teaser)) {
                 break;
             }
-            if ($stripped !== '' && !str_starts_with($stripped, '*') && !preg_match('/^\d+x\s/', $stripped)) {
+            if ($stripped !== '' && ! str_starts_with($stripped, '*') && ! preg_match('/^\d+x\s/', $stripped)) {
                 $teaser[] = $stripped;
             }
         }
@@ -166,7 +166,7 @@ class WikitextParser
         foreach ($lines as $line) {
             $stripped = trim($line);
             // Individual card entries start with Nx (e.g. "1x Abduction - ...")
-            if (!preg_match('/^\d+x\s/', $stripped)) {
+            if (! preg_match('/^\d+x\s/', $stripped)) {
                 continue;
             }
 
@@ -248,7 +248,7 @@ class WikitextParser
             $factions = array_map('trim', explode(',', $this->stripMarkup($partners)));
             $factions = array_filter($factions);
 
-            return implode("\n", array_map(static fn(string $f) => "* $f", $factions));
+            return implode("\n", array_map(static fn (string $f) => "* $f", $factions));
         }
 
         return $this->stripMarkup($disney);
@@ -267,7 +267,7 @@ class WikitextParser
             $lines = explode("\n", $synergy);
             foreach ($lines as $line) {
                 $line = trim($line);
-                if ($line !== '' && !str_starts_with($line, '*')) {
+                if ($line !== '' && ! str_starts_with($line, '*')) {
                     $pos = strpos($line, '. ');
                     $teaser = $pos !== false ? substr($line, 0, $pos + 1) : $line;
 
@@ -279,7 +279,7 @@ class WikitextParser
         // Disney fallback: use the partner factions list as teaser
         $disney = $this->extractDisneyMatchupsSection($wikitext);
         if ($disney !== '' && preg_match("/'''Good beginning partner factions:'''\s*\n(.*?)(?:\n|$)/s", $disney, $m)) {
-            return 'Good partner factions: ' . $this->stripMarkup(trim($m[1]));
+            return 'Good partner factions: '.$this->stripMarkup(trim($m[1]));
         }
 
         return '';
@@ -317,12 +317,12 @@ class WikitextParser
         $eq = str_repeat('=', $level);
 
         // Match the heading allowing optional bold markers and surrounding whitespace
-        $pattern = '/^' . preg_quote($eq, '/') . "\s*'''?\s*" . preg_quote($header, '/') . "\s*'''?\s*" . preg_quote($eq, '/') . '\s*$/im';
+        $pattern = '/^'.preg_quote($eq, '/')."\s*'''?\s*".preg_quote($header, '/')."\s*'''?\s*".preg_quote($eq, '/').'\s*$/im';
 
-        if (!preg_match($pattern, $wikitext, $matches, PREG_OFFSET_CAPTURE)) {
+        if (! preg_match($pattern, $wikitext, $matches, PREG_OFFSET_CAPTURE)) {
             // Fallback: simpler match without bold markers
-            $pattern = '/^' . preg_quote($eq, '/') . '\s*' . preg_quote($header, '/') . '\s*' . preg_quote($eq, '/') . '\s*$/im';
-            if (!preg_match($pattern, $wikitext, $matches, PREG_OFFSET_CAPTURE)) {
+            $pattern = '/^'.preg_quote($eq, '/').'\s*'.preg_quote($header, '/').'\s*'.preg_quote($eq, '/').'\s*$/im';
+            if (! preg_match($pattern, $wikitext, $matches, PREG_OFFSET_CAPTURE)) {
                 return '';
             }
         }
@@ -330,7 +330,7 @@ class WikitextParser
         $start = $matches[0][1] + strlen($matches[0][0]);
 
         // Find the next heading of same or higher level (fewer or equal = signs)
-        $nextPattern = '/^={1,' . $level . '}[^=]/m';
+        $nextPattern = '/^={1,'.$level.'}[^=]/m';
         $remaining = substr($wikitext, $start);
 
         if (preg_match($nextPattern, $remaining, $nextMatch, PREG_OFFSET_CAPTURE)) {

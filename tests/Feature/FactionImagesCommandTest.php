@@ -13,14 +13,15 @@ class FactionImagesCommandTest extends TestCase
     use RefreshDatabase;
 
     private string $tmpDir;
+
     private string $tmpImageDir;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->tmpDir      = sys_get_temp_dir() . '/smashup_images_test_' . uniqid();
-        $this->tmpImageDir = sys_get_temp_dir() . '/smashup_images_pub_' . uniqid();
+        $this->tmpDir = sys_get_temp_dir().'/smashup_images_test_'.uniqid();
+        $this->tmpImageDir = sys_get_temp_dir().'/smashup_images_pub_'.uniqid();
         mkdir($this->tmpDir, 0755, true);
         mkdir($this->tmpImageDir, 0755, true);
     }
@@ -42,11 +43,11 @@ class FactionImagesCommandTest extends TestCase
         $file = "{$this->tmpDir}/core-set.json";
         file_put_contents($file, json_encode([
             [
-                'name'      => $factionName,
+                'name' => $factionName,
                 'expansion' => 'Core Set',
-                'image'     => '',
+                'image' => '',
             ],
-        ], JSON_PRETTY_PRINT) . "\n");
+        ], JSON_PRETTY_PRINT)."\n");
 
         return $file;
     }
@@ -61,8 +62,8 @@ class FactionImagesCommandTest extends TestCase
                 'query' => [
                     'pages' => [
                         '1' => [
-                            'pageid'   => 1,
-                            'title'    => $title,
+                            'pageid' => 1,
+                            'title' => $title,
                             'original' => ['source' => $imageUrl, 'width' => 300, 'height' => 420],
                         ],
                     ],
@@ -80,7 +81,7 @@ class FactionImagesCommandTest extends TestCase
         $this->fakePageImages('Aliens', $imageUrl);
 
         $this->artisan('factions:images', [
-            '--dry-run'     => true,
+            '--dry-run' => true,
             '--skip-import' => true,
         ])
             ->expectsOutputToContain('[Dry run]')
@@ -97,8 +98,8 @@ class FactionImagesCommandTest extends TestCase
                 'query' => [
                     'pages' => [
                         '1' => [
-                            'pageid'   => 1,
-                            'title'    => 'Aliens',
+                            'pageid' => 1,
+                            'title' => 'Aliens',
                             'original' => ['source' => $imageUrl],
                         ],
                     ],
@@ -107,8 +108,8 @@ class FactionImagesCommandTest extends TestCase
         ]);
 
         $this->artisan('factions:images', [
-            '--faction'     => 'Aliens',
-            '--dry-run'     => true,
+            '--faction' => 'Aliens',
+            '--dry-run' => true,
             '--skip-import' => true,
         ])->assertSuccessful();
     }
@@ -124,7 +125,7 @@ class FactionImagesCommandTest extends TestCase
         ]);
 
         $this->artisan('factions:images', [
-            '--dry-run'     => true,
+            '--dry-run' => true,
             '--skip-import' => true,
         ])
             ->expectsOutputToContain('no image found on wiki')
@@ -140,8 +141,8 @@ class FactionImagesCommandTest extends TestCase
                 'query' => [
                     'pages' => [
                         '1' => [
-                            'pageid'   => 1,
-                            'title'    => 'Aliens',
+                            'pageid' => 1,
+                            'title' => 'Aliens',
                             'original' => ['source' => 'https://example.com/aliens.jpg'],
                         ],
                     ],
@@ -150,8 +151,8 @@ class FactionImagesCommandTest extends TestCase
         ]);
 
         $this->artisan('factions:images', [
-            '--faction'     => 'Aliens',
-            '--dry-run'     => true,
+            '--faction' => 'Aliens',
+            '--dry-run' => true,
             '--skip-import' => true,
         ])
             ->expectsOutputToContain('Aliens')
