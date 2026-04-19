@@ -4,6 +4,10 @@ All notable changes to this project are documented in this file.
 
 ## [Unreleased]
 
+### Fixed
+
+- **i18n source of truth:** Removed the duplicate root `lang/` directory. Laravel resolves translations from **`resources/lang`** when that folder exists, so the previous landing-copy update in root `lang/` never reached the running app. Landing strings are synced in **`resources/lang/en/frontend.php`** and **`resources/lang/de/frontend.php`**.
+
 ### Changed
 
 - **Home landing copy (EN/DE):** Hero, feature headings, quote strip eyebrow, bottom CTA band, faction strip, result preview, and Open Graph title now read as a **tool-first randomizer** instead of SaaS-style pitch lines (single-line hero, less “trusted everywhere” / triple-beat marketing cadence). Layout unchanged.
