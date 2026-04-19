@@ -1,16 +1,16 @@
 # Smash Up Randomizer
 
-[![Laravel](https://img.shields.io/badge/Laravel-13.x-FF2D20?style=flat-square&logo=laravel&logoColor=white)](https://laravel.com)
-[![PHP](https://img.shields.io/badge/PHP-8.3+-777BB4?style=flat-square&logo=php&logoColor=white)](https://php.net)
-[![MariaDB](https://img.shields.io/badge/MariaDB-10.4-003545?style=flat-square&logo=mariadb&logoColor=white)](https://mariadb.org)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.x-38bdf8?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
-[![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
-[![GitHub last commit](https://img.shields.io/github/last-commit/kadsuno/smash-up-randomizer?style=flat-square)](https://github.com/kadsuno/smash-up-randomizer/commits)
-[![GitHub issues](https://img.shields.io/github/issues/kadsuno/smash-up-randomizer?style=flat-square)](https://github.com/kadsuno/smash-up-randomizer/issues)
-[![CI](https://github.com/kadsuno/smash-up-randomizer/actions/workflows/ci.yml/badge.svg?branch=dev)](https://github.com/kadsuno/smash-up-randomizer/actions/workflows/ci.yml)
-[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg?style=flat-square)](https://conventionalcommits.org)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+[Laravel](https://laravel.com)
+[PHP](https://php.net)
+[MariaDB](https://mariadb.org)
+[Tailwind CSS](https://tailwindcss.com)
+[Vite](https://vitejs.dev)
+[License](LICENSE)
+[GitHub last commit](https://github.com/kadsuno/smash-up-randomizer/commits)
+[GitHub issues](https://github.com/kadsuno/smash-up-randomizer/issues)
+[CI](https://github.com/kadsuno/smash-up-randomizer/actions/workflows/ci.yml)
+[Conventional Commits](https://conventionalcommits.org)
+[PRs Welcome](http://makeapullrequest.com)
 
 A web application to help Smash Up players randomly assign factions (decks) and browse faction details. UI copy is maintained in **English and German** where applicable.
 
@@ -68,12 +68,12 @@ Smash Up Randomizer supports:
 ## Repository layout & workflow
 
 
-| Path              | Purpose                                                                             |
-| ----------------- | ----------------------------------------------------------------------------------- |
-| `docs/roadmap.md` | Product/engineering priorities — update when work matches listed items              |
-| `docs/tickets/`   | Ticket specs (`YYYY-MM-DD-short-slug.md`), see `.cursor/rules/ticket-authoring.mdc` |
-| `docs/image-credits.md` | AI carousel: four base-game faction spotlights (original art, not AEG illustrations) |
-| `.cursor/rules/`  | Cursor project rules (full workflow, ticket format, etc.)                           |
+| Path                       | Purpose                                                                                                                                                                                  |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `docs/roadmap.md`          | Product/engineering priorities — update when work matches listed items                                                                                                                   |
+| `docs/tickets/`            | Ticket specs (`YYYY-MM-DD-short-slug.md`), see `.cursor/rules/ticket-authoring.mdc`                                                                                                      |
+| `docs/image-credits.md`    | AI carousel: four base-game faction spotlights (original art, not AEG illustrations)                                                                                                     |
+| `.cursor/rules/`           | Cursor project rules (full workflow, ticket format, etc.)                                                                                                                                |
 | `.github/workflows/ci.yml` | **CI** — on push/PR to `dev` or `master`: Composer install, `npm ci`, `npm run build` (Vite manifest for `@vite` in Blade), then `php artisan test` (SQLite in-memory per `phpunit.xml`) |
 
 
@@ -103,53 +103,38 @@ Local stack is defined in `.ddev/config.yaml` (PHP 8.3, MariaDB 10.4, Node 22, n
 
 1. Install [DDEV](https://ddev.readthedocs.io/en/stable/)
 2. Clone the repository:
-
-    ```bash
+  ```bash
     git clone https://github.com/kadsuno/smash-up-randomizer.git
     cd smash-up-randomizer
-    ```
-
+  ```
 3. Start DDEV:
-
-    ```bash
+  ```bash
     ddev start
-    ```
-
+  ```
 4. Install dependencies:
-
-    ```bash
+  ```bash
     ddev composer install
     ddev npm install
-    ```
-
+  ```
 5. Environment and app key:
-
-    ```bash
+  ```bash
     ddev exec cp .env.example .env
     ddev exec php artisan key:generate
-    ```
-
+  ```
 6. Configure `.env` (database credentials are usually pre-filled for DDEV; set mail for outbound email — local dev often uses Mailpit on `127.0.0.1:1025`; production can use **`MAIL_MAILER=brevo`** + `BREVO_API_KEY` (Issue Forge–style) or **SMTP** — see **Email** below). Optional **Matomo** (public site analytics): `MATOMO_ENABLED` (default `true`), `MATOMO_TRACKER_URL` (default `https://analytics.kadsuno.com`), `MATOMO_SITE_ID` (default `1`) — see `config/matomo.php`. Set `MATOMO_ENABLED=false` locally if you do not want the tracker script loaded. Optional **Sentry** (error monitoring): set `SENTRY_LARAVEL_DSN` from your Sentry project (leave empty to disable). See `config/sentry.php` and run `php artisan sentry:test` after configuring. For full stack trace *argument* values in PHP error reports, set `zend.exception_ignore_args=Off` in `php.ini` (server-level).
-
 7. Migrations:
-
-    ```bash
+  ```bash
     ddev exec php artisan migrate
-    ```
-
+  ```
     **Admin role:** The `users.role` column defaults to `user`. Existing accounts created before that migration are **not** automatically admins. To open `/admin/backend`, promote your account once:
-
     ```bash
     ddev exec php artisan users:promote you@example.com
     ```
-
 8. Frontend assets:
-
-    ```bash
+  ```bash
     ddev npm run dev
-    ```
-
-9. Open **https://smash-up-randomizer.ddev.site** (hostname follows `name:` in `.ddev/config.yaml`).
+  ```
+9. Open **[https://smash-up-randomizer.ddev.site](https://smash-up-randomizer.ddev.site)** (hostname follows `name:` in `.ddev/config.yaml`).
 
 ### Standard installation (without DDEV)
 
@@ -230,18 +215,18 @@ Other Symfony mail transports remain available in `composer.json` if you switch 
 ### Routes (high level)
 
 
-| Path                                               | Notes                                                                          |
-| -------------------------------------------------- | ------------------------------------------------------------------------------ |
-| `/`                                                | Home (shuffle modal → `POST /shuffle/result`)                                  |
-| `POST /shuffle/result`                             | Shuffle results (`DeckController@shuffle`)                                   |
-| `/factions`, `/factions/{name}`                    | Faction list & detail                                                          |
-| `/contact-us`                                      | GET/POST contact                                                               |
-| `/about`                                           | About                                                                          |
-| `/imprint`, `/privacy-policy`                      | Legal                                                                          |
-| `/sitemap`                                         | Dynamic XML sitemap                                                            |
-| `/admin`, `POST /admin`                            | Login                                                                          |
-| `/admin/register`                                  | Registration (guest)                                                           |
-| `/admin/backend`, `/admin/backend/decks-manager/*` | Admin UI (auth)                                                                |
+| Path                                               | Notes                                         |
+| -------------------------------------------------- | --------------------------------------------- |
+| `/`                                                | Home (shuffle modal → `POST /shuffle/result`) |
+| `POST /shuffle/result`                             | Shuffle results (`DeckController@shuffle`)    |
+| `/factions`, `/factions/{name}`                    | Faction list & detail                         |
+| `/contact-us`                                      | GET/POST contact                              |
+| `/about`                                           | About                                         |
+| `/imprint`, `/privacy-policy`                      | Legal                                         |
+| `/sitemap`                                         | Dynamic XML sitemap                           |
+| `/admin`, `POST /admin`                            | Login                                         |
+| `/admin/register`                                  | Registration (guest)                          |
+| `/admin/backend`, `/admin/backend/decks-manager/*` | Admin UI (auth)                               |
 
 
 ## Development
