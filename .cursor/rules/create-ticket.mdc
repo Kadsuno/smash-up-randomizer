@@ -6,6 +6,7 @@ description: Legacy pointer — use ticket-authoring + smash-up-full-workflow
 Superseded by:
 
 - **`ticket-authoring.mdc`** — Markdown structure and `docs/tickets/` filename rules
-- **`smash-up-full-workflow.mdc`** — full Phase 1–13 pipeline (ticket is Phase 2)
+- **`smash-up-full-workflow.mdc`** — workflow quick reference (ticket = Phase 2 in detail file)
+- **`smash-up-full-workflow-detail.mdc`** — full Phase 1–14 playbook
 
 For a ticket **without** full implementation in the same session, still follow **`ticket-authoring.mdc`** and write `docs/tickets/YYYY-MM-DD-short-slug.md`.

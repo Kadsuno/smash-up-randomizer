@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\Deck;
+use App\Models\SharedShuffleResult;
 use App\Models\ShuffleHistory;
 use App\Services\ShuffleDeckPool;
 use Illuminate\Contracts\View\View;
@@ -118,7 +119,18 @@ class DeckController extends Controller
             ]);
         }
 
-        return view('shuffle.shuffle-decks', compact('selectedDecks'));
+        $share = SharedShuffleResult::query()->create([
+            'public_id' => (string) Str::ulid(),
+            'player_count' => 2,
+            'results' => $selectedDecks,
+        ]);
+
+        return view('shuffle.shuffle-decks', [
+            'selectedDecks' => $selectedDecks,
+            'sharePublicId' => $share->public_id,
+            'sharePlainText' => SharedShuffleResult::plainTextSummary($selectedDecks),
+            'metaRobots' => 'index, follow',
+        ]);
     }
 
     /**
@@ -161,6 +173,17 @@ class DeckController extends Controller
             ]);
         }
 
-        return view('shuffle.shuffle-decks', ['selectedDecks' => $selectedDecks]);
+        $share = SharedShuffleResult::query()->create([
+            'public_id' => (string) Str::ulid(),
+            'player_count' => $numberOfPlayers,
+            'results' => $selectedDecks,
+        ]);
+
+        return view('shuffle.shuffle-decks', [
+            'selectedDecks' => $selectedDecks,
+            'sharePublicId' => $share->public_id,
+            'sharePlainText' => SharedShuffleResult::plainTextSummary($selectedDecks),
+            'metaRobots' => 'index, follow',
+        ]);
     }
 }

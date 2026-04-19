@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 312" fill="none">
+    <title>Smash Up Randomizer - Facebook cover</title>
+    <defs>
+        <linearGradient id="fc_bg" x1="0" y1="0" x2="1" y2="0">
+            <stop stop-color="#0c0c0f"/>
+            <stop offset="0.55" stop-color="#0f0f14"/>
+            <stop offset="1" stop-color="#12101a"/>
+        </linearGradient>
+        <radialGradient id="fc_glow" cx="85%" cy="35%" r="55%" fx="85%" fy="35%">
+            <stop offset="0" stop-color="#6366f1" stop-opacity="0.22"/>
+            <stop offset="0.45" stop-color="#4f46e5" stop-opacity="0.08"/>
+            <stop offset="1" stop-color="#0c0c0f" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="fc_gA" x1="0" y1="0" x2="1" y2="1">
+            <stop stop-color="#fcd34d"/>
+            <stop offset="1" stop-color="#b45309"/>
+        </linearGradient>
+        <linearGradient id="fc_gB" x1="0" y1="0" x2="1" y2="1">
+            <stop stop-color="#818cf8"/>
+            <stop offset="1" stop-color="#7c3aed"/>
+        </linearGradient>
+        <linearGradient id="fc_gBorder" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#6366f1" stop-opacity="0.55"/>
+            <stop offset="1" stop-color="#8b5cf6" stop-opacity="0.35"/>
+        </linearGradient>
+        <filter id="fc_fA" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#000" flood-opacity="0.5"/>
+        </filter>
+        <filter id="fc_fB" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#000" flood-opacity="0.65"/>
+        </filter>
+        <linearGradient id="fc_rule" x1="0" y1="0" x2="1" y2="0">
+            <stop stop-color="#6366f1" stop-opacity="0"/>
+            <stop offset="0.15" stop-color="#818cf8" stop-opacity="0.85"/>
+            <stop offset="0.85" stop-color="#a78bfa" stop-opacity="0.55"/>
+            <stop offset="1" stop-color="#8b5cf6" stop-opacity="0"/>
+        </linearGradient>
+    </defs>
+
+    <rect width="820" height="312" fill="url(#fc_bg)"/>
+    <rect width="820" height="312" fill="url(#fc_glow)"/>
+
+    <!-- Mark (same geometry as logo-mark.svg, scaled) -->
+    <g transform="translate(48 86) scale(2.1875)">
+        <rect width="64" height="64" rx="16" fill="#0c0c0f"/>
+        <rect x="1" y="1" width="62" height="62" rx="15" stroke="url(#fc_gBorder)" stroke-width="1.25"/>
+        <rect x="6" y="12" width="24" height="32" rx="5"
+              fill="url(#fc_gA)" filter="url(#fc_fA)"
+              transform="rotate(-16 18 28)"/>
+        <rect x="34" y="10" width="24" height="32" rx="5"
+              fill="url(#fc_gB)" filter="url(#fc_fB)"
+              transform="rotate(14 46 26)"/>
+    </g>
+
+    <text x="218" y="138" fill="#fafafa" font-family="Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="40" font-weight="800" letter-spacing="-0.03em">Smash Up Randomizer</text>
+    <text x="218" y="178" fill="#a1a1aa" font-family="Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="18" font-weight="600">Random factions - Owned-set filters - Faction browser</text>
+    <rect x="218" y="194" width="520" height="3" rx="1.5" fill="url(#fc_rule)" opacity="0.9"/>
+</svg>

@@ -1,7 +1,8 @@
-<x-layouts.main>
+<x-layouts.main :metaRobots="$metaRobots ?? 'index, follow'">
 
     @php
         $playerCount = count($selectedDecks);
+        $shareUrl = isset($sharePublicId) ? route('shuffle.share', ['publicId' => $sharePublicId]) : null;
 
         $playerAccents = [
             1 => ['border' => 'border-indigo-500/40',  'bg' => 'bg-indigo-500/10',  'text' => 'text-indigo-400',  'ring' => 'ring-indigo-500/30'],
@@ -106,9 +107,75 @@
                 @endforeach
             </div>
 
+            @if($shareUrl !== null)
+                <x-sur.reveal :delay="$playerCount * 80 + 20">
+                    <div
+                        class="mt-10 rounded-2xl border border-indigo-500/20 bg-indigo-950/25 px-6 py-5 sm:px-8 sm:py-6"
+                        x-data="{
+                            shareUrl: {{ \Illuminate\Support\Js::from($shareUrl) }},
+                            shareText: {{ \Illuminate\Support\Js::from($sharePlainText ?? '') }},
+                            copied: null,
+                            timer: null,
+                            flash(kind) {
+                                this.copied = kind;
+                                clearTimeout(this.timer);
+                                this.timer = setTimeout(() => { this.copied = null }, 2000);
+                            },
+                            async copyUrl() {
+                                try {
+                                    await navigator.clipboard.writeText(this.shareUrl);
+                                    this.flash('link');
+                                } catch (e) {}
+                            },
+                            async copyPlain() {
+                                try {
+                                    await navigator.clipboard.writeText(this.shareText);
+                                    this.flash('text');
+                                } catch (e) {}
+                            }
+                        }"
+                    >
+                        <div class="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
+                            <div class="min-w-0 space-y-2 lg:max-w-2xl">
+                                <h2 class="text-sm font-bold uppercase tracking-widest text-indigo-300">
+                                    {{ __('frontend.shuffle_share_heading') }}
+                                </h2>
+                                <p class="text-sm leading-relaxed text-zinc-400">{{ __('frontend.shuffle_share_hint') }}</p>
+                            </div>
+                            <div class="flex flex-shrink-0 flex-wrap items-center justify-start gap-3 lg:justify-end">
+                                <button
+                                    type="button"
+                                    class="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-500 active:scale-[0.98]"
+                                    @click="copyUrl()"
+                                >
+                                    <i class="fa-solid fa-link text-xs" aria-hidden="true"></i>
+                                    {{ __('frontend.shuffle_share_copy_link') }}
+                                </button>
+                                <button
+                                    type="button"
+                                    class="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-zinc-900/60 px-5 py-2.5 text-sm font-semibold text-zinc-200 transition hover:border-white/25 hover:text-white active:scale-[0.98]"
+                                    @click="copyPlain()"
+                                >
+                                    <i class="fa-solid fa-clipboard text-xs" aria-hidden="true"></i>
+                                    {{ __('frontend.shuffle_share_copy_text') }}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mt-3" aria-live="polite">
+                            <p
+                                class="text-xs font-medium leading-tight text-emerald-400"
+                                x-show="copied !== null"
+                                x-cloak
+                                x-text="copied === 'link' ? {{ \Illuminate\Support\Js::from(__('frontend.shuffle_share_copied_link')) }} : (copied === 'text' ? {{ \Illuminate\Support\Js::from(__('frontend.shuffle_share_copied_text')) }} : '')"
+                            ></p>
+                        </div>
+                    </div>
+                </x-sur.reveal>
+            @endif
+
             {{-- Actions --}}
             <x-sur.reveal :delay="$playerCount * 80 + 40">
-                <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
+                <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
                     <a
                         href="{{ route('home') }}#wizard"
                         class="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-500 active:scale-[0.98]"

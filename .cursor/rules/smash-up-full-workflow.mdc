@@ -1,268 +1,103 @@
 ---
-description: Full dev workflow for this repo — analyze → ticket → plan → branch → implement → tests → lint → browser → docs → commit → push → PR → merge → cleanup. Default for code/feature work unless the user opts out.
+description: Smash Up Randomizer dev workflow — quick reference. Full phased steps live in smash-up-full-workflow-detail.mdc. Default for code/feature work unless the user opts out.
 alwaysApply: true
 ---
 
 ## Scope
 
 - Applies to **every user request related to code or features** in this repository **by default**.
-- **Opt-out** examples: "skip workflow" / "kein Workflow", "quick fix" / "nur quick fix", "no merge" / "kein Merge", "nur Erklärung, kein Code", "suggestion only", "explore only" / "nur spike" / "read-only".
-- If intent is ambiguous, ask **one concise message** with all open questions before deviating from the sequence.
+- **Opt-out:** "skip workflow" / "kein Workflow", "quick fix" / "nur quick fix", "no merge" / "kein Merge", "nur Erklärung, kein Code", "suggestion only", "explore only" / "nur spike" / "read-only".
+- If intent is ambiguous, ask **one concise message** with all open questions before deviating.
 
-## Track selection (decision tree)
-
-Use this to pick **read-only** vs **Quick** vs **Full** before **First response** below:
-
-1. **Read-only?** User wants explanation, audit, or exploration **without** shipping code → use **readonly** tools only; no branch/ticket unless they later ask for implementation.
-2. **Quick track?** User said quick fix **or** the change is clearly ≤3 files, no migration, no new route, no guest-visible UX → **Quick track**.
-3. **Otherwise** → **Full track** (ticket + hard stop before the first productive edit).
-
-If still unclear → **Clarification first** (single message, all open questions).
-
-### First response (when starting work on a change)
-
-State the track being followed:
-
-> **Full workflow:** Analyze (roadmap scan + public copy check) → Ticket → Plan → Branch → Implement → Tests → Lint → Browser → Docs → Commit → Push → PR → Merge → Cleanup.
-
-> **Quick track:** Branch → Implement → Lint → Commit → Push → PR → Merge.
+**Full playbook:** `.cursor/rules/smash-up-full-workflow-detail.mdc` (Phases 1–14, recovery, stack).
 
 ---
 
-## Two-tier system
+## Track pick (before the first implementation edit)
 
-### Full track (default for non-trivial work)
+| Goal | Track | First productive edit allowed when |
+|------|--------|-------------------------------------|
+| Explain / audit / explore only | **Read-only** | Never (readonly tools only until user asks to ship). |
+| Small, safe change | **Quick** | Branch from `dev` exists (ticket/plan/roadmap scan skipped). |
+| Anything else | **Full** | **Pre-code gate** below is complete. |
 
-All phases apply. Use when **any** of the following is true:
-- New DB migration
-- New public route or controller
-- More than 5 files changed
-- New external dependency
-- UX-visible change affecting guests
+**Quick track** — use when the user says quick fix **or** **all** are true: ≤3 files, no DB migration, no new public route/controller, no guest-visible UX change. Still: branch → implement → **tests** (`ddev exec php artisan test` when PHP/app or test code changed; doc-only may run a quick smoke or skip if nothing executable changed) → lint → commit → push → PR → merge (or defer merge; see detail Phase 13).
 
-### Quick track (opt-in for small fixes)
+**Prefer Quick** for typos, single-file fixes, and internal refactors that do not hit the Full triggers — less ticket overhead, same quality gates.
 
-**Phases skipped:** Ticket file, Plan mode, roadmap scan.  
-**Trigger:** user says "quick fix" / "nur quick fix" / "kleine Korrektur" **or** the change clearly touches ≤ 3 files with no migration, no new route, no UX impact.  
-**Phases still required:** Branch → Implement → Lint → Commit → Push → PR → Merge.
+### First response (when starting a change)
 
-### Efficiency (optional)
+State the track:
 
-- While long commands run (e.g. `ddev exec php artisan test`, Pint), **prepare** CHANGELOG `[Unreleased]` bullets and EN/DE lang keys in chat or as draft edits.
-- **Commit only** after Phases 6–7 pass — do not commit on failing tests or lints.
+> **Full workflow:** Analyze → Ticket → Plan (if triggered) → Branch → Implement → Tests → Lint → Docs (draft) → Browser (if UI) → Docs (finalize) → Commit → Push → PR → Merge → Cleanup. Detail: `.cursor/rules/smash-up-full-workflow-detail.mdc`.
+
+> **Quick track:** Branch → Implement → Tests (when code warrants) → Lint → Commit → Push → PR → Merge (or documented defer).
 
 ---
 
-## Hard stop — before ANY code change (Full track only)
+## Trigger matrix (single source of truth)
 
-**Do not** call `StrReplace`, `Write`, `Delete`, or implementation `Shell` before completing:
+Use **any row** in "Full + Plan" as a **Full track** trigger. Use the **Plan column** to decide Plan mode (see detail Phase 3).
+
+| Trigger | Full track | Plan mode (`CreatePlan`) | Quick track allowed? |
+|--------|------------|---------------------------|----------------------|
+| New DB migration | Yes | Yes | No |
+| New public route or controller | Yes | Yes | No |
+| More than 5 files changed (expected) | Yes | Yes | No |
+| New external dependency | Yes | Yes | No |
+| Guest-visible UX change | Yes | If unclear / trade-offs | No |
+| Architectural / design choice with no obvious winner | Yes (if shipping code) | Yes | No |
+| None of the above + ≤3 files + internal/low risk | No — use Quick if Quick rules match | No | Yes |
+
+**Plan mode skip (Full track):** If the change **follows an existing repo pattern 1:1** (e.g. same controller/Request/Blade shape as a recent feature) and there is **no** migration, **no** new route, **no** dependency, **no** arch fork — skip `CreatePlan`; add one short **Approach** line in the ticket (e.g. "Mirror `FooController` / `store` flow") and proceed to Branch.
+
+---
+
+## Unified gates (use `TodoWrite` on long runs; close items when done)
+
+### Pre-code gate (**Full track only**)
+
+Do **not** call `StrReplace`, `Write`, `Delete`, or implementation `Shell` until:
 
 ```
-[ ] Phase 1 — Analyze: codebase explored, affected files/patterns identified
-[ ] Phase 2 — Ticket: `docs/tickets/YYYY-MM-DD-short-slug.md` written (see `ticket-authoring.mdc`)
-[ ] Phase 3 — Plan: criteria met → `SwitchMode(plan)` + `CreatePlan`; user confirmed
-[ ] Phase 4 — Branch: feature/fix branch created from latest `dev`
+[ ] Phase 1 — Analyze: explored; affected files/patterns known (see detail)
+[ ] Phase 2 — Ticket: docs/tickets/YYYY-MM-DD-short-slug.md (ticket-authoring.mdc)
+[ ] Phase 3 — Plan: if matrix says Plan → SwitchMode(plan) + CreatePlan + user confirm; else skip with brief rationale
+[ ] Phase 4 — Branch: from latest dev (see detail)
 ```
 
-**Inline markdown plans are not a substitute** for Cursor Plan mode + `CreatePlan` where Phase 3 applies.
+**Exploration → implementation:** Read-only/spike first is fine; switching to implementation **restarts** Full pre-code from Analyze as needed. **Inline markdown plans** are not a substitute for Plan mode when Plan is required.
 
-**Exploration / spike (read-only)** — When the user explicitly wants **exploration only** ("spike", "nur recherchieren", "read-only audit"), you may use **readonly** tools (`Read`, `Grep`, `Glob`, semantic codebase search) **before** the checklist. The checklist still applies **before** the first `StrReplace`, `Write`, `Delete`, or implementation `Shell` (anything that changes the repo or runs non-readonly shell). Switching from exploration to implementation **restarts** Full track from Phase 1–4 as needed.
-
----
-
-## Recovery protocol (phases were skipped)
-
-1. **Stop** further code changes until recovery is in order.
-2. **Backfill** in order: ticket file → plan (if applicable) → branch (`git stash` → checkout `dev` → pull → branch → `git stash pop`).
-3. **Acknowledge** which phase was skipped and that it is being remediated.
-4. Continue with lint, docs, commit, push, PR, **merge**, **cleanup** — unless the user opted out.
-
----
-
-## Clarification first
-
-Before Phase 1, if material details are missing, ask **in a single message**:
-
-- Scope / boundaries
-- Expected behavior and edge cases (bugs)
-- Which area owns the change if multiple modules apply
-- UX or API choices with different trade-offs
-- Required env/config (never invent secrets; use `.env.example` patterns)
-
-Do not implement while blocking questions are unanswered.
-
----
-
-## Phase 1 — Analyze
-
-1. Classify: feature / bug / chore.
-2. Use `SemanticSearch`, `Grep`, `Glob`, `Read` for Laravel (`app/`, `routes/`, `config/`), Blade (`resources/views/`), assets (`resources/js`, `resources/sass`), Lang (`resources/lang/` only — Laravel prefers this path when the directory exists), tests (`tests/`).
-3. Reuse existing patterns: thin controllers, Form Requests where appropriate, Eloquent, Blade components, Vite entrypoints, bilingual `__('frontend.key')` / `__('backend.key')`.
-4. **Output:** mental model of affected files, risks, test surfaces.
-
-5. **Roadmap scan:** Read **`docs/roadmap.md`** **only when** classification = `feature` or the chore explicitly maps to a roadmap bullet. If this change **implements, completes, or materially advances** any item, plan a **`docs/roadmap.md` edit in the same PR** (Phase 8). For bugfixes restoring documented behavior: **Roadmap: N/A** — no scan required.
-
-6. **Public-facing copy (when applicable):** When a change materially affects **guest-visible** UI, landing/legal trust, or headline flows, plan updates in the **same PR** to:
-   - **`CHANGELOG.md`** `[Unreleased]` (user-visible notes), and
-   - relevant **`resources/lang/en/`** and **`resources/lang/de/`** for new/changed strings.
-   If the change is **internal-only** or **invisible to users**, state **Public copy: N/A**.
-
----
-
-## Phase 2 — Ticket (Full track only)
-
-Follow **`ticket-authoring.mdc`**.
-
-- `Write` the ticket to `docs/tickets/YYYY-MM-DD-short-slug.md` (content matches chat).
-- **Ticket vs Plan:** Keep the ticket focused on **Requirements**, **Testing**, and **Impact** — do **not** duplicate the full ordered step list from Plan mode; a short cross-reference is enough when Phase 3 runs.
-- **IssueForge (optional, non-blocking):** Only if `.env` defines `ISSUE_FORGE_BASE_URL`, `ISSUE_FORGE_PROJECT_ID`, and `API_ADMIN_TOKEN`. After the ticket file exists, `POST` with `project_id`, `title`, `description`, `status: "open"`, `priority`. On **201**, report id. **Do not** delay Phase 4+ on IssueForge latency; on missing env or failure, note **IssueForge: skipped** and continue.
-
----
-
-## Phase 3 — Plan (Full track only)
-
-Use Cursor **Plan mode** when **any** of the following applies:
-- New DB migration
-- New public route or controller
-- More than 5 files changed
-- New external dependency
-- Architectural trade-offs with no clear winner
-
-`SwitchMode(plan)` → `CreatePlan` — never substitute with an inline markdown plan.  
-Wait for **explicit user confirmation**, then return to Agent mode.
-
-For changes that meet Full track criteria but **none** of the Plan mode triggers above: skip Plan mode, document reasoning briefly, proceed to Phase 4.
-
-When Plan mode **is** used, **CreatePlan** holds the ordered steps; keep the ticket free of copy-pasted plan prose.
-
----
-
-## Phase 4 — Branch (base `dev`)
-
-```bash
-git checkout dev && git pull origin dev
-git checkout -b feat/short-description   # or fix/chore/test/...
-```
-
-If `dev` is missing, **ask** whether to use `main` or another base.
-
----
-
-## Phase 5 — Implement
-
-- **Before running artisan / Composer / npm:** use `ddev exec …` / `ddev composer …` / `ddev npm run …` (project uses DDEV; see `README.md`). If DDEV cannot be run, list exact commands for the user's machine.
-- **Laravel:** thin controllers, Form Requests, policies/middleware as needed, Eloquent, strict types, PSR-12, DocBlocks.
-- **Frontend:** Blade + Vite; **vanilla JS** (and Alpine as already used); keep scripts in `resources/js/`.
-- **No** mock/fake data in dev or prod paths (tests only).
-- After migrations in dev: `ddev exec php artisan migrate`.
-- Keep files roughly under 200–300 lines; extract services when justified.
-- **GDPR:** no tracking/analytics without explicit product decision and legal review.
-
----
-
-## Phase 6 — Tests
-
-- **PHPUnit:** `tests/Feature`, `tests/Unit`; factories/mocks; no real external services.
-- **Run** tests: `ddev exec php artisan test`. Do not only author tests — run them.
-
----
-
-## Phase 7 — Lint & static analysis
-
-- **PHP:** PSR-12; run `./vendor/bin/pint --test` if Pint is installed (`composer.json`).
-- **JS:** consistent with existing files; run ESLint only if the project already uses it.
-- **`ReadLints`** on all changed files before commit.
-
----
-
-## Phase 8 — Docs & changelog
-
-- Update **`README.md`** / **`docs/`** when behavior or onboarding changes.
-- **`CHANGELOG.md`:** add under `[Unreleased]` when the change is user-visible or operationally notable.
-
-### `docs/roadmap.md`
-
-Update **only if** Phase 1 triggered a roadmap scan and found a match: move completed items toward **Shipped**, adjust **Now** / **Next**.
-
-**Valid Roadmap: N/A:** bugfix restoring documented behavior; internal refactor not listed in Now/Next; dependency bump with no product story.  
-**Invalid:** "docs only" / "small chore" if **Now** / **Next** explicitly lists that work.
-
----
-
-## Phase 9 — Browser / manual verification
-
-- **UI changes:** use Cursor browser MCP when available; otherwise concrete steps aligned with ticket **Requirements** (include EN/DE if both are affected).
-- **Backend-only / CLI-only:** state **no browser test required** and rely on automated tests.
-
----
-
-## Phase 10 — Commit
-
-**Pre-commit gate:**
+### Pre-commit gate (all tracks that change code)
 
 ```
-[ ] Phase 8 satisfied (README/docs/CHANGELOG as needed)
-[ ] Roadmap: `docs/roadmap.md` updated if scan matched — or valid Roadmap: N/A
-[ ] Public copy: Lang + CHANGELOG touched if visitor-notable — or valid Public copy: N/A
+[ ] Tests run (ddev exec php artisan test) + ReadLints on touched files; Pint if present
+[ ] Docs: README/docs/CHANGELOG per detail Phase 8
+[ ] Roadmap: updated if Phase 1 scan matched — or valid Roadmap: N/A
+[ ] Public copy: EN/DE lang + CHANGELOG if visitor-notable — or Public copy: N/A
 ```
 
-- Use **`TodoWrite`** for full workflow runs; do not leave stale `in_progress`.
-- Conventional-style subjects: `feat:`, `fix:`, `chore:`, `docs:`.
-- No secrets or IDE junk in commits.
+**Efficiency:** While tests/Pint run, **draft** `[Unreleased]` bullets and lang keys. **Do not commit** on red tests/lint.
 
 ---
 
-## Phase 11 — Push
+## Ordering (abbreviated)
 
-```bash
-git push -u origin <branch-name>
-```
+**Full:** Analyze → Ticket → Plan (if triggered) → Branch → Implement → Tests → Lint → Docs (draft) → Browser (if UI) → Docs (finalize) → Commit → Push → PR → Merge → Cleanup.
 
----
-
-## Phase 12 — Pull request (GitHub)
-
-- Target **`dev`** unless opted out or another base is agreed.
-- PR body: note **Roadmap** (updated vs N/A) and **Public copy** (CHANGELOG/Lang vs N/A).
-- Prefer **`gh pr create`** when available.
-
----
-
-## Phase 13 — Merge (GitHub)
-
-- After PR creation, **attempt merge in the same workflow** when GitHub allows and **required checks are green**, unless the user opted out.
-- If checks are **queued or pending**, report status and **wait** for green (or stop with next steps) — do not merge on a red or unknown CI state unless the user explicitly overrides.
-- Prefer: `gh pr merge <number> --squash --delete-branch`
-- Do **not** merge if required checks failed unless the user explicitly overrides.
-
----
-
-## Phase 14 — Post-merge cleanup
-
-- `git checkout dev && git pull origin dev`
-- Delete local feature branch; remote often removed by `--delete-branch`.
+**Quick:** Branch → Implement → Tests (when code warrants) → Lint → Commit → Push → PR → Merge → Cleanup.
 
 ---
 
 ## Violations — NEVER
 
-- Skip the ticket file (Full track) or use an inline plan instead of `CreatePlan` (when Plan mode applies).
-- Commit without running tests + `ReadLints`.
-- Finish after push + PR without attempting merge (unless opted out).
-- Ship roadmap-tracked work without updating `docs/roadmap.md` (unless deferred in ticket + user agreed).
+- Skip the ticket file on Full track; use inline plan instead of `CreatePlan` when Plan mode is required.
+- Commit without tests + `ReadLints` (for code you changed).
+- Merge on failing/unknown required CI unless the user explicitly overrides.
+- Ship roadmap-matched work without `docs/roadmap.md` update (unless deferred in ticket + user agreed).
 
 ---
 
-## Ordering
+## Project stack (reminder)
 
-**Full track:** Analyze → Ticket → Plan (if triggered) → Branch → Implement → Tests → Lint → Docs → Browser → Commit → Push → PR → Merge → Cleanup.
-
-**Quick track:** Branch → Implement → Lint → Commit → Push → PR → Merge → Cleanup.
-
----
-
-## Project-specific stack (reminder)
-
-- Laravel 13, **PHP 8.3+**, **MariaDB 10.4 in DDEV**, Blade, Sanctum & Passport, **Vite 5**, **Tailwind CSS 4** (`@tailwindcss/vite`), jQuery/Alpine (Node **20+**).
-- Bilingual: maintain **EN and DE** for user-facing strings under **`resources/lang/`** (do not add a second `lang/` tree at the repo root).
-- **Canonical onboarding:** `README.md` (DDEV hostname: `smash-up-randomizer.ddev.site`).
+Laravel 13, PHP 8.3+, DDEV, Blade, Vite 5, Tailwind 4, bilingual `resources/lang/` EN+DE. Onboarding: `README.md`.

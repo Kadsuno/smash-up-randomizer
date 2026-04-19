@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\MaintenanceController;
 use App\Http\Controllers\Admin\ShuffleStatsController;
 use App\Http\Controllers\Admin\UserAdminController;
 use App\Http\Controllers\DeckController;
+use App\Http\Controllers\SharedShuffleController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use Spatie\Sitemap\Sitemap;
@@ -69,6 +70,9 @@ Route::post('/shuffle/result', [
     DeckController::class,
     'shuffle'
 ])->name('shuffle-result');
+
+Route::get('/shuffle/share/{publicId}', [SharedShuffleController::class, 'show'])
+    ->name('shuffle.share');
 
 Route::get('/imprint', function () {
     return view('legal.imprint');

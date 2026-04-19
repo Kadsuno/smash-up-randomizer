@@ -14,7 +14,7 @@ High-level product and engineering priorities. Update this file in the same PR w
 | Core app | Laravel 13, Blade, Vite, **Tailwind CSS 4** (dark-first UI), Alpine.js (`sur-*` layout components, scroll-reveal), bilingual frontend strings; modern public header/footer (pill nav, footer columns); custom global scrollbar (indigo/violet “SUR” thumb + zinc track, `.sur-scrollbar` utility); **marketing landing** on `/` (carousels, CTAs, **faction spotlight** hero art — four base factions, original AI — see `docs/image-credits.md`); **shuffle `<dialog>`** wizard (stepper, radio player tiles, sticky footer); **landing marketing enhancements** — stats bar, "How it works" 3-step section, faction combo tiles, faction teaser strip, improved eyebrow copy (EN/DE); **landing phase 3** — FAQ accordion (4 Q&As, EN/DE), result-preview image section, improved OG/Twitter meta, Schema.org WebApplication JSON-LD |
 | Branding | SVG logo mark + generated favicons / touch icons; manifest paths under `/images/favicons/` |
 | Privacy  | First-party cookie UI (bottom strip + preference modal); web analytics via **self-hosted Matomo** (`analytics.kadsuno.com`) only after opt-in, configurable (see `config/matomo.php`, CHANGELOG) |
-| Ops      | Optional **Sentry** error reporting (`sentry/sentry-laravel`, `SENTRY_LARAVEL_DSN`, `config/sentry.php`); transactional email via Laravel mailer — **SMTP** (`MAIL_*`) or **Brevo API** (`MAIL_MAILER=brevo`, `BREVO_API_KEY`, same pattern as Issue Forge; see README) |
+| Ops      | Optional **Sentry** error reporting (`sentry/sentry-laravel`, `SENTRY_LARAVEL_DSN`, `config/sentry.php`); transactional email via Laravel mailer — **SMTP** (`MAIL_*`) or **Brevo API** (`MAIL_MAILER=brevo`, `BREVO_API_KEY`, same pattern as Issue Forge; see README); **GitHub Actions CI** (PHPUnit + Vite build on `dev` / `master`) |
 
 
 *Add rows or subsections here as major capabilities ship.*
@@ -30,10 +30,30 @@ High-level product and engineering priorities. Update this file in the same PR w
 
 ## Next
 
-- *(Open — add items as priorities emerge.)*
+Backlog from product discussion (2026-04-19). **Suggested pick order:** near-term items first — lower risk, fits existing account/shuffle/history surfaces.
+
+### Near-term (high impact, manageable scope)
+
+- **Anti-repeat / fairness option** — Optionally exclude or downweight faction combos that appear in recent **play history** (logged-in users); configurable window or count; tests for edge cases (small pools, presets).
+- **History actions** — Repeat a past shuffle, or **spawn a preset** from a history row (reuses existing presets + `shuffle_histories`).
+- **Print-friendly result view** — Dedicated Blade route/layout for a clean table printout (optional: browser PDF via print CSS).
+- **Shuffle `<dialog>` accessibility** — Keyboard, focus management / trap, and screen reader labels for the home shuffle wizard (`<dialog>` stepper).
+
+### Larger scope (only with clear need)
+
+- **Multi-device session room** — Short code so all clients see the same result; implies realtime or polling, conflict handling, and guest vs auth policy.
+- **Public read-only API** — Only if a concrete consumer exists (e.g. bot); abuse limits, versioning; Laravel Passport already in stack — scope deliberately narrow.
+- **Faction synergy / tag system** — Game-feel uplift but ongoing **content** ownership and disagreement surface; needs editorial rules before build.
+
+### Nice-to-have / speculative
+
+- **More locales** beyond EN/DE (if audience demands).
+- **BoardGameGeek** or external metadata links (maintenance + relevance).
+- **Curated combo hints** (non-random suggestions) — overlaps with tags; treat as content product.
 
 ## Shipped (account & shuffle)
 
+- **Shareable shuffle results** ✅ — `/shuffle/share/{id}` permalink for each run of `POST /shuffle/result` and `/random`; **Copy link** / **Copy as text** on the result view (`shared_shuffle_results`).
 - **Faction collection** ✅ — `/account/collection`: users tick owned expansion sets; when at least one is saved, `ShuffleDeckPool` constrains the home wizard, `POST /shuffle/result`, and `/random` to factions from those expansions.
 - **Shuffle presets** ✅ — `/account/presets`: named presets (players + optional include/exclude); **Use in shuffle** opens `/?shuffle_preset={id}` and pre-fills the dialog.
 - **Play history** ✅ — `/account/history`: last 50 shuffles while logged in (`shuffle_histories` table).

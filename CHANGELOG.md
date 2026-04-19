@@ -4,6 +4,16 @@ All notable changes to this project are documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- **Shareable shuffle results:** Each successful **`POST /shuffle/result`** and **`GET /random`** stores the assignment in **`shared_shuffle_results`** (public ULID). **`GET /shuffle/share/{id}`** reopens the same table layout; the result screen adds **Copy link** and **Copy as text** (EN/DE). Permalink responses use **`noindex`** robots meta.
+
+- **CI:** GitHub Actions workflow **`.github/workflows/ci.yml`** runs on **push** and **pull_request** to **`dev`** and **`master`**: Composer install, **`npm ci`** + **`npm run build`** first (so `public/build/manifest.json` exists for Blade `@vite` during tests), then **`php artisan test`**. README badge links to the workflow run list.
+
+### Changed
+
+- **npm:** Removed unused **`axios`** devDependency (not referenced by any `resources/js` entry); shrinks install and audit surface.
+
 ### Fixed
 
 - **i18n source of truth:** Removed the duplicate root `lang/` directory. Laravel resolves translations from **`resources/lang`** when that folder exists, so the previous landing-copy update in root `lang/` never reached the running app. Landing strings are synced in **`resources/lang/en/frontend.php`** and **`resources/lang/de/frontend.php`**.
