@@ -161,7 +161,7 @@
                 <p class="mb-8 text-zinc-400">
                     The table is set, the snacks are ready. All you need is a fair deal on factions.
                 </p>
-                <a href="{{ route('home') }}" class="sur-btn-primary inline-flex min-h-12 items-center gap-2 transition-transform hover:scale-[1.02] active:scale-[0.98]">
+                <a href="{{ route('home') }}" class="sur-btn-primary inline-flex min-h-12 items-center gap-2">
                     <i class="fa-solid fa-shuffle" aria-hidden="true"></i>
                     Shuffle Now
                 </a>

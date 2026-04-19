@@ -36,7 +36,7 @@
                 <div
                     class="flex h-8 w-8 items-center justify-center rounded-full border text-xs font-bold transition"
                     :class="step >= {{ $n }}
-                        ? 'border-indigo-500 bg-indigo-600 text-white'
+                        ? 'border-indigo-500 bg-indigo-500 text-white'
                         : 'border-white/10 bg-zinc-900 text-zinc-600'"
                 >{{ $n }}</div>
                 <span class="hidden text-[0.6rem] font-semibold uppercase tracking-wide text-zinc-600 sm:block"
@@ -62,7 +62,7 @@
                     <div>
                         <label for="name" class="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-zinc-500">Name <span class="text-red-400">*</span></label>
                         <input type="text" id="name" name="name" value="{{ $v('name') }}" required
-                            class="w-full rounded-xl border border-white/10 bg-zinc-800/60 px-4 py-2.5 text-sm text-zinc-100 outline-none transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20">
+                            class="sur-input">
                     </div>
                     <x-decks.rich-field id="teaser"       label="Teaser"       :value="$v('teaser')" />
                     <x-decks.rich-field id="description"  label="Description"  :value="$v('description')" />
@@ -84,7 +84,7 @@
                     <div>
                         <label for="expansion" class="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-zinc-500">Expansion</label>
                         <input type="text" id="expansion" name="expansion" value="{{ $v('expansion') }}"
-                            class="w-full rounded-xl border border-white/10 bg-zinc-800/60 px-4 py-2.5 text-sm text-zinc-100 outline-none transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20">
+                            class="sur-input">
                     </div>
                     <x-decks.rich-field id="effects"   label="Effects"   :value="$v('effects')" />
                     <x-decks.rich-field id="playstyle" label="Playstyle" :value="$v('playstyle')" />
@@ -95,7 +95,7 @@
             <div class="mt-8 flex items-center justify-between">
                 @if($n > 1)
                 <button type="button" @click="step--"
-                    class="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-zinc-800/60 px-4 py-2 text-sm font-semibold text-zinc-300 transition hover:border-white/20 hover:text-white">
+                    class="sur-btn-secondary inline-flex items-center gap-2">
                     <i class="fa-solid fa-chevron-left text-xs" aria-hidden="true"></i> Previous
                 </button>
                 @else
@@ -104,12 +104,12 @@
 
                 @if($n < 5)
                 <button type="button" @click="step++"
-                    class="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo-500">
+                    class="sur-btn-primary inline-flex items-center gap-2">
                     Next <i class="fa-solid fa-chevron-right text-xs" aria-hidden="true"></i>
                 </button>
                 @else
                 <button type="submit"
-                    class="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-indigo-500 active:scale-[0.98]">
+                    class="sur-btn-primary inline-flex items-center gap-2">
                     <i class="fa-solid fa-floppy-disk text-xs" aria-hidden="true"></i>
                     {{ $submitLabel }}
                 </button>

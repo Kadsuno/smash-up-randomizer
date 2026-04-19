@@ -44,7 +44,7 @@
             <h1 class="truncate text-base font-bold text-white">{{ $deck->name }}</h1>
         </div>
         <button type="submit" form="factionForm"
-            class="inline-flex shrink-0 items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo-500 active:scale-[0.98]">
+            class="sur-btn-primary inline-flex shrink-0 items-center gap-2">
             <i class="fa-solid fa-floppy-disk text-xs" aria-hidden="true"></i>
             Save changes
         </button>
@@ -107,12 +107,12 @@
                         Name <span class="text-red-400">*</span>
                     </label>
                     <input type="text" id="name" name="name" value="{{ $v('name') }}" required
-                        class="w-full rounded-xl border border-white/8 bg-zinc-800/60 px-4 py-2.5 text-sm text-zinc-100 outline-none transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 @error('name') border-red-500/40 @enderror">
+                        class="sur-input @error('name') border-red-500/40 @enderror">
                 </div>
                 <div>
                     <label for="expansion" class="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-zinc-500">Expansion</label>
                     <input type="text" id="expansion" name="expansion" value="{{ $v('expansion') }}"
-                        class="w-full rounded-xl border border-white/8 bg-zinc-800/60 px-4 py-2.5 text-sm text-zinc-100 outline-none transition focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20">
+                        class="sur-input">
                 </div>
             </div>
 
@@ -176,9 +176,9 @@
 
     {{-- Bottom save button --}}
     <div class="flex items-center justify-end gap-3">
-        <a href="{{ route('decks-manager') }}" class="text-sm text-zinc-600 transition hover:text-zinc-400">Cancel</a>
+        <a href="{{ route('decks-manager') }}" class="sur-btn-ghost text-sm">Cancel</a>
         <button type="submit"
-            class="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-500 active:scale-[0.98]">
+            class="sur-btn-primary inline-flex items-center gap-2">
             <i class="fa-solid fa-floppy-disk text-xs" aria-hidden="true"></i>
             Save changes
         </button>

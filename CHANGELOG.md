@@ -14,6 +14,8 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- **Blade UI / design system:** Public account overview, 2FA setup, saved presets, expansion detail shuffle CTA, faction detail empty-state + footer shuffle CTA, backend faction edit + wizard form + manager filters/CSV, contact/about submit CTAs, and footer contact chip now use **`sur-btn-*`** / **`sur-input`** instead of raw indigo Tailwind; extra **`hover:scale`** on **`sur-btn-primary`** (contact/about) removed so hover matches the shared button token.
+
 - **Shuffle result actions:** Primary/secondary CTAs use **`sur-btn-primary`** / **`sur-btn-secondary`** with **`frontend.browse_all_factions`** (EN/DE) instead of hard-coded English and inline Tailwind.
 
 - **npm:** Removed unused **`axios`** devDependency (not referenced by any `resources/js` entry); shrinks install and audit surface.

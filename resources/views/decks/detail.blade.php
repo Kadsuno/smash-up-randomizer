@@ -206,7 +206,7 @@
                             <p class="text-base font-semibold text-zinc-300">No details yet for {{ $deck->name }}</p>
                             <p class="mt-1 text-sm text-zinc-600">This faction hasn't been documented yet.</p>
                         </div>
-                        <a href="{{ route('contact') }}" class="mt-2 inline-flex items-center gap-2 rounded-xl border border-indigo-500/30 bg-indigo-900/20 px-4 py-2 text-sm font-semibold text-indigo-400 transition hover:bg-indigo-900/40">
+                        <a href="{{ route('contact') }}" class="sur-btn-secondary mt-2 inline-flex items-center gap-2 text-indigo-300 hover:border-indigo-500/35 hover:bg-indigo-500/10 hover:text-indigo-200">
                             <i class="fa-regular fa-envelope text-xs" aria-hidden="true"></i>
                             Know this faction? Get in touch
                         </a>
@@ -222,7 +222,7 @@
                         <i class="fa-solid fa-arrow-left text-xs" aria-hidden="true"></i>
                         All factions
                     </a>
-                    <a href="{{ route('home') }}#wizard" class="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo-500">
+                    <a href="{{ route('home') }}#wizard" class="sur-btn-primary inline-flex items-center gap-2">
                         <i class="fa-solid fa-shuffle text-xs" aria-hidden="true"></i>
                         Shuffle now
                     </a>

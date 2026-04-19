@@ -13,7 +13,7 @@
                 <p class="mb-5 max-w-xs text-sm leading-relaxed text-zinc-400">
                     {{ __('frontend.footer_tagline') }}
                 </p>
-                <a href="{{ route('contact') }}" class="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.03] px-3.5 py-2 text-xs font-medium text-zinc-400 transition duration-200 hover:border-indigo-500/30 hover:bg-indigo-500/8 hover:text-indigo-300">
+                <a href="{{ route('contact') }}" class="sur-btn-ghost min-h-9 gap-2 px-3.5 py-2 text-xs font-medium text-zinc-400 hover:text-indigo-300">
                     <i class="fa-regular fa-envelope text-indigo-400" aria-hidden="true"></i>
                     Missing a faction or found a bug? Get in touch
                 </a>

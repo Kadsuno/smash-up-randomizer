@@ -25,13 +25,13 @@
                             </div>
                         </div>
                     <div class="flex shrink-0 items-center gap-3">
-                        <a href="{{ route('account.edit') }}" class="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.05] px-5 py-2.5 text-sm font-medium text-zinc-300 transition hover:bg-white/[0.08] hover:text-white">
+                        <a href="{{ route('account.edit') }}" class="sur-btn-secondary inline-flex items-center gap-2">
                             <i class="fa-solid fa-pen text-xs" aria-hidden="true"></i>
                             {{ __('frontend.account_edit_link') }}
                         </a>
                         <form method="POST" action="{{ route('frontend.logout') }}">
                             @csrf
-                            <button type="submit" class="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.05] px-5 py-2.5 text-sm font-medium text-zinc-300 transition hover:border-red-500/40 hover:bg-red-500/10 hover:text-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500/40">
+                            <button type="submit" class="sur-btn-secondary inline-flex items-center gap-2 hover:border-red-500/40 hover:bg-red-500/10 hover:text-red-400 focus-visible:ring-red-500/40">
                                 <i class="fa-solid fa-right-from-bracket text-xs" aria-hidden="true"></i>
                                 {{ __('frontend.nav_logout') }}
                             </button>
@@ -141,11 +141,11 @@
                 <div class="inline-block rounded-2xl border border-white/10 bg-white/[0.04] shadow-lg shadow-black/20 backdrop-blur-sm" style="padding: 2.5rem 2rem">
                     <h2 class="mb-5 text-sm font-semibold text-zinc-400">{{ __('frontend.account_quick_actions') }}</h2>
                     <div class="flex flex-wrap gap-3">
-                        <a href="{{ route('home') }}#wizard" class="sur-btn-primary inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-medium">
+                        <a href="{{ route('home') }}#wizard" class="sur-btn-primary inline-flex items-center gap-2">
                             <i class="fa-solid fa-shuffle text-xs" aria-hidden="true"></i>
                             {{ __('frontend.nav_shuffle') }}
                         </a>
-                        <a href="{{ route('factionList') }}" class="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.05] px-5 py-2.5 text-sm font-medium text-zinc-300 transition hover:bg-white/[0.08] hover:text-white">
+                        <a href="{{ route('factionList') }}" class="sur-btn-secondary inline-flex items-center gap-2">
                             <i class="fa-solid fa-layer-group text-xs" aria-hidden="true"></i>
                             {{ __('frontend.nav_factions') }}
                         </a>

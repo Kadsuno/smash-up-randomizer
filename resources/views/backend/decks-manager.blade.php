@@ -18,7 +18,7 @@
         </p>
     </div>
     <a href="{{ route('add-deck') }}"
-        class="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo-500 active:scale-[0.98]">
+        class="sur-btn-primary inline-flex items-center gap-2">
         <i class="fas fa-plus text-xs" aria-hidden="true"></i>
         {{ __('backend.add_decks') }}
     </a>
@@ -51,7 +51,7 @@
         <i class="fa-solid fa-magnifying-glass pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-xs text-zinc-600" aria-hidden="true"></i>
         <input type="search" name="q" value="{{ $f['q'] }}"
             placeholder="{{ __('backend.search_factions_placeholder') }}"
-            class="w-full rounded-xl border border-white/8 bg-zinc-900/60 py-2 pl-9 pr-4 text-sm text-zinc-200 placeholder-zinc-600 outline-none transition focus:border-indigo-500/40 focus:ring-2 focus:ring-indigo-500/15">
+            class="sur-input py-2 pl-9 pr-4 text-sm placeholder:text-zinc-600">
     </div>
     <select name="filter"
         class="rounded-xl border border-white/8 bg-zinc-900/60 px-3 py-2 text-sm text-zinc-300 outline-none transition focus:border-indigo-500/40 focus:ring-2 focus:ring-indigo-500/15 cursor-pointer">
@@ -67,7 +67,7 @@
             <option value="{{ $exp }}" @selected($f['expansion'] === $exp)>{{ $exp }}</option>
         @endforeach
     </select>
-    <button type="submit" class="rounded-xl border border-white/8 bg-zinc-800/60 px-4 py-2 text-sm font-semibold text-zinc-300 transition hover:border-white/20 hover:text-white">
+    <button type="submit" class="sur-btn-secondary">
         {{ __('backend.apply_filters') }}
     </button>
     @if($f['q'] !== '' || $f['filter'] !== 'all' || $f['expansion'] !== '')
@@ -95,7 +95,7 @@
                     $hasTeaser = !empty($deck->teaser);
                     $hasDesc   = !empty($deck->description);
                     $letter    = strtoupper(substr($deck->name, 0, 1));
-                    $avatarColors = ['bg-indigo-600','bg-violet-600','bg-sky-600','bg-emerald-600','bg-rose-600','bg-amber-600','bg-teal-600','bg-fuchsia-600'];
+                    $avatarColors = ['bg-indigo-500','bg-violet-600','bg-sky-600','bg-emerald-600','bg-rose-600','bg-amber-600','bg-teal-600','bg-fuchsia-600'];
                     $avatarBg    = $avatarColors[abs(crc32($deck->name)) % count($avatarColors)];
                 @endphp
                 <tr class="transition hover:bg-white/[0.02]">
@@ -174,9 +174,9 @@
             @csrf
             <label class="sr-only" for="csv-import">{{ __('backend.headline_csv') }}</label>
             <input type="file" id="csv-import" name="csv" accept=".csv,.txt" required
-                class="block cursor-pointer rounded-xl border border-white/8 bg-zinc-800/60 px-3 py-2 text-sm text-zinc-300
-                       file:mr-3 file:rounded-lg file:border-0 file:bg-indigo-600 file:px-3 file:py-1.5 file:text-sm file:font-semibold file:text-white hover:file:bg-indigo-500">
-            <button class="inline-flex items-center gap-2 rounded-xl border border-white/8 bg-zinc-800/60 px-4 py-2 text-sm font-semibold text-zinc-300 transition hover:border-white/20 hover:text-white" type="submit">
+                class="sur-input block cursor-pointer px-3 py-2 text-sm text-zinc-300
+                       file:mr-3 file:rounded-lg file:border-0 file:bg-indigo-500 file:px-3 file:py-1.5 file:text-sm file:font-semibold file:text-white hover:file:bg-indigo-400">
+            <button class="sur-btn-secondary inline-flex items-center gap-2" type="submit">
                 <i class="fas fa-upload text-xs" aria-hidden="true"></i>
                 {{ __('backend.upload') }}
             </button>

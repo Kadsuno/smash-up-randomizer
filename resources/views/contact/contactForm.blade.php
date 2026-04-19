@@ -126,7 +126,7 @@
                         <input type="hidden" name="start_time" value="{{ time() }}">
 
                         <div class="mt-7">
-                            <button type="submit" class="sur-btn-primary min-h-12 w-full transition-transform hover:scale-[1.01] active:scale-[0.99] sm:w-auto sm:px-10">
+                            <button type="submit" class="sur-btn-primary min-h-12 w-full sm:w-auto sm:px-10">
                                 <i class="fa-solid fa-paper-plane me-2" aria-hidden="true"></i>
                                 Send message
                             </button>

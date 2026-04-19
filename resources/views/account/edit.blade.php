@@ -39,7 +39,7 @@
                                 value="{{ old('name', $user->name) }}"
                                 required
                                 autocomplete="name"
-                                class="w-full rounded-xl border border-white/10 bg-zinc-800/60 px-4 py-2.5 text-sm text-white placeholder-zinc-600 outline-none transition focus:border-indigo-500/60 focus:ring-2 focus:ring-indigo-500/20 @error('name') border-red-500/40 @enderror"
+                                class="sur-input @error('name') border-red-500/40 @enderror"
                             >
                             @error('name')
                                 <p class="mt-1.5 text-xs text-red-400">{{ $message }}</p>
@@ -55,14 +55,14 @@
                                 value="{{ old('email', $user->email) }}"
                                 required
                                 autocomplete="email"
-                                class="w-full rounded-xl border border-white/10 bg-zinc-800/60 px-4 py-2.5 text-sm text-white placeholder-zinc-600 outline-none transition focus:border-indigo-500/60 focus:ring-2 focus:ring-indigo-500/20 @error('email') border-red-500/40 @enderror"
+                                class="sur-input @error('email') border-red-500/40 @enderror"
                             >
                             @error('email')
                                 <p class="mt-1.5 text-xs text-red-400">{{ $message }}</p>
                             @enderror
                         </div>
 
-                        <button type="submit" class="flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 active:scale-[0.98]">
+                        <button type="submit" class="sur-btn-primary w-full inline-flex items-center justify-center gap-2">
                             <i class="fa-solid fa-floppy-disk text-xs" aria-hidden="true"></i>
                             {{ __('frontend.account_edit_profile_save') }}
                         </button>
@@ -95,7 +95,7 @@
                                 name="current_password"
                                 required
                                 autocomplete="current-password"
-                                class="w-full rounded-xl border border-white/10 bg-zinc-800/60 px-4 py-2.5 text-sm text-white outline-none transition focus:border-indigo-500/60 focus:ring-2 focus:ring-indigo-500/20 {{ $errors->passwordErrors->has('current_password') ? 'border-red-500/40' : '' }}"
+                                class="sur-input {{ $errors->passwordErrors->has('current_password') ? 'border-red-500/40' : '' }}"
                             >
                             @if($errors->passwordErrors->has('current_password'))
                                 <p class="mt-1.5 text-xs text-red-400">{{ $errors->passwordErrors->first('current_password') }}</p>
@@ -110,7 +110,7 @@
                                 name="password"
                                 required
                                 autocomplete="new-password"
-                                class="w-full rounded-xl border border-white/10 bg-zinc-800/60 px-4 py-2.5 text-sm text-white outline-none transition focus:border-indigo-500/60 focus:ring-2 focus:ring-indigo-500/20 @error('password') border-red-500/40 @enderror"
+                                class="sur-input @error('password') border-red-500/40 @enderror"
                             >
                             @error('password')
                                 <p class="mt-1.5 text-xs text-red-400">{{ $message }}</p>
@@ -125,11 +125,11 @@
                                 name="password_confirmation"
                                 required
                                 autocomplete="new-password"
-                                class="w-full rounded-xl border border-white/10 bg-zinc-800/60 px-4 py-2.5 text-sm text-white outline-none transition focus:border-indigo-500/60 focus:ring-2 focus:ring-indigo-500/20"
+                                class="sur-input"
                             >
                         </div>
 
-                        <button type="submit" class="flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 active:scale-[0.98]">
+                        <button type="submit" class="sur-btn-primary w-full inline-flex items-center justify-center gap-2">
                             <i class="fa-solid fa-lock text-xs" aria-hidden="true"></i>
                             {{ __('frontend.account_password_save') }}
                         </button>
@@ -176,13 +176,13 @@
                                     type="text"
                                     name="code"
                                     autocomplete="one-time-code"
-                                    class="w-full rounded-xl border border-white/10 bg-zinc-800/60 px-4 py-2.5 text-sm text-white outline-none transition focus:border-indigo-500/60 focus:ring-2 focus:ring-indigo-500/20 {{ $errors->twoFactorRecovery->has('code') ? 'border-red-500/40' : '' }}"
+                                    class="sur-input {{ $errors->twoFactorRecovery->has('code') ? 'border-red-500/40' : '' }}"
                                 >
                                 @if($errors->twoFactorRecovery->has('code'))
                                     <p class="mt-1.5 text-xs text-red-400">{{ $errors->twoFactorRecovery->first('code') }}</p>
                                 @endif
                             </div>
-                            <button type="submit" class="w-full rounded-xl border border-white/10 bg-zinc-800/60 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-zinc-800">
+                            <button type="submit" class="sur-btn-secondary w-full">
                                 {{ __('frontend.two_factor_regenerate_button') }}
                             </button>
                         </form>
@@ -198,7 +198,7 @@
                                         type="password"
                                         name="password"
                                         autocomplete="current-password"
-                                        class="w-full rounded-xl border border-white/10 bg-zinc-800/60 px-4 py-2.5 text-sm text-white outline-none transition focus:border-indigo-500/60 focus:ring-2 focus:ring-indigo-500/20 {{ $errors->twoFactorDisable->has('password') ? 'border-red-500/40' : '' }}"
+                                        class="sur-input {{ $errors->twoFactorDisable->has('password') ? 'border-red-500/40' : '' }}"
                                     >
                                     @if($errors->twoFactorDisable->has('password'))
                                         <p class="mt-1.5 text-xs text-red-400">{{ $errors->twoFactorDisable->first('password') }}</p>
@@ -213,14 +213,14 @@
                                         type="text"
                                         name="code"
                                         autocomplete="one-time-code"
-                                        class="w-full rounded-xl border border-white/10 bg-zinc-800/60 px-4 py-2.5 text-sm text-white outline-none transition focus:border-indigo-500/60 focus:ring-2 focus:ring-indigo-500/20 {{ $errors->twoFactorDisable->has('code') ? 'border-red-500/40' : '' }}"
+                                        class="sur-input {{ $errors->twoFactorDisable->has('code') ? 'border-red-500/40' : '' }}"
                                     >
                                     @if($errors->twoFactorDisable->has('code'))
                                         <p class="mt-1.5 text-xs text-red-400">{{ $errors->twoFactorDisable->first('code') }}</p>
                                     @endif
                                 </div>
                             @endif
-                            <button type="submit" class="flex w-full items-center justify-center gap-2 rounded-xl border border-red-500/30 bg-red-950/30 px-4 py-2.5 text-sm font-semibold text-red-300 transition hover:bg-red-950/50">
+                            <button type="submit" class="sur-btn-secondary w-full border-red-500/40 text-red-200 hover:border-red-400/50 hover:bg-red-500/10">
                                 {{ __('frontend.two_factor_disable_button') }}
                             </button>
                         </form>
@@ -228,7 +228,7 @@
                         <p class="mb-4 text-center text-sm text-zinc-500">{{ __('frontend.two_factor_status_off') }}</p>
                         <form method="POST" action="{{ route('account.two-factor.start') }}">
                             @csrf
-                            <button type="submit" class="flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-500">
+                            <button type="submit" class="sur-btn-primary w-full inline-flex items-center justify-center gap-2">
                                 <i class="fa-solid fa-shield-halved text-xs" aria-hidden="true"></i>
                                 {{ __('frontend.two_factor_enable_button') }}
                             </button>

@@ -39,13 +39,13 @@
                             required
                             autocomplete="one-time-code"
                             inputmode="numeric"
-                            class="w-full rounded-xl border border-white/10 bg-zinc-800/60 px-4 py-2.5 text-sm text-white outline-none transition focus:border-indigo-500/60 focus:ring-2 focus:ring-indigo-500/20 @error('code', 'twoFactor') border-red-500/40 @enderror"
+                            class="sur-input @error('code', 'twoFactor') border-red-500/40 @enderror"
                         >
                         @error('code', 'twoFactor')
                             <p class="mt-1.5 text-xs text-red-400">{{ $message }}</p>
                         @enderror
                     </div>
-                    <button type="submit" class="mb-3 flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 active:scale-[0.98]">
+                    <button type="submit" class="sur-btn-primary mb-3 w-full gap-2">
                         <i class="fa-solid fa-check text-xs" aria-hidden="true"></i>
                         {{ __('frontend.two_factor_setup_confirm') }}
                     </button>
@@ -53,7 +53,7 @@
 
                 <form method="POST" action="{{ route('account.two-factor.cancel') }}">
                     @csrf
-                    <button type="submit" class="w-full rounded-xl border border-white/10 bg-transparent px-4 py-2.5 text-sm text-zinc-400 transition hover:border-white/20 hover:text-zinc-200">
+                    <button type="submit" class="sur-btn-ghost w-full">
                         {{ __('frontend.two_factor_setup_cancel') }}
                     </button>
                 </form>

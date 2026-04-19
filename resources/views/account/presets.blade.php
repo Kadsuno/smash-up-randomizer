@@ -29,14 +29,14 @@
                                 </p>
                             </div>
                             <div class="flex flex-wrap gap-2">
-                                <a href="{{ route('home', ['shuffle_preset' => $preset->id]) }}" class="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-indigo-500">
+                                <a href="{{ route('home', ['shuffle_preset' => $preset->id]) }}" class="sur-btn-primary inline-flex items-center gap-2">
                                     <i class="fa-solid fa-wand-magic-sparkles text-xs" aria-hidden="true"></i>
                                     {{ __('frontend.account_preset_apply') }}
                                 </a>
                                 <form method="POST" action="{{ route('account.presets.destroy', $preset) }}" onsubmit="return confirm({{ json_encode(__('frontend.account_preset_delete_confirm')) }})">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="inline-flex items-center gap-2 rounded-xl border border-white/10 px-4 py-2 text-sm text-zinc-400 transition hover:border-red-500/40 hover:text-red-400">
+                                    <button type="submit" class="sur-btn-secondary inline-flex items-center gap-2 text-zinc-400 hover:border-red-500/40 hover:text-red-400">
                                         {{ __('frontend.account_preset_delete') }}
                                     </button>
                                 </form>
@@ -57,7 +57,7 @@
 
                     <div>
                         <label for="preset_name" class="mb-3 block text-xs font-semibold uppercase tracking-wide text-zinc-400">{{ __('frontend.account_preset_name_label') }}</label>
-                        <input type="text" name="name" id="preset_name" value="{{ old('name') }}" required maxlength="100" class="w-full rounded-xl border border-white/10 bg-zinc-900/60 px-4 py-2.5 text-sm text-white outline-none focus:border-indigo-500/60 @error('name') border-red-500/40 @enderror">
+                        <input type="text" name="name" id="preset_name" value="{{ old('name') }}" required maxlength="100" class="sur-input @error('name') border-red-500/40 @enderror">
                         @error('name')
                             <p class="mt-1 text-xs text-red-400">{{ $message }}</p>
                         @enderror

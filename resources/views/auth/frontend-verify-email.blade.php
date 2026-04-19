@@ -24,7 +24,7 @@
                 <p class="mb-6 text-sm leading-relaxed text-zinc-500">{{ __('frontend.auth_verify_body') }}</p>
                 <form method="POST" action="{{ route('verification.send') }}">
                     @csrf
-                    <button type="submit" class="flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 active:scale-[0.98]">
+                    <button type="submit" class="sur-btn-primary w-full inline-flex items-center justify-center gap-2">
                         <i class="fa-solid fa-paper-plane text-xs" aria-hidden="true"></i>
                         {{ __('frontend.auth_verify_resend') }}
                     </button>

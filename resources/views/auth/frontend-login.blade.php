@@ -27,20 +27,20 @@
                     @csrf
                     <div class="mb-4">
                         <label for="email" class="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-zinc-400">{{ __('frontend.email') }}</label>
-                        <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="email" class="w-full rounded-xl border border-white/10 bg-zinc-800/60 px-4 py-2.5 text-sm text-white placeholder-zinc-600 outline-none transition focus:border-indigo-500/60 focus:ring-2 focus:ring-indigo-500/20 @error('email') border-red-500/40 @enderror">
+                        <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="email" class="sur-input @error('email') border-red-500/40 @enderror">
                     </div>
                     <div class="mb-4">
                         <div class="mb-1.5 flex items-center justify-between">
                             <label for="password" class="block text-xs font-semibold uppercase tracking-wide text-zinc-400">{{ __('frontend.password') }}</label>
                             <a href="{{ route('password.request') }}" class="text-xs text-indigo-500 transition hover:text-indigo-400">{{ __('frontend.auth_login_forgot') }}</a>
                         </div>
-                        <input id="password" type="password" name="password" required autocomplete="current-password" class="w-full rounded-xl border border-white/10 bg-zinc-800/60 px-4 py-2.5 text-sm text-white outline-none transition focus:border-indigo-500/60 focus:ring-2 focus:ring-indigo-500/20 @error('password') border-red-500/40 @enderror">
+                        <input id="password" type="password" name="password" required autocomplete="current-password" class="sur-input @error('password') border-red-500/40 @enderror">
                     </div>
                     <div class="mb-6 flex items-center gap-2">
                         <input id="remember_me" type="checkbox" name="remember" class="h-4 w-4 rounded border-white/20 bg-zinc-800 text-indigo-500 focus:ring-indigo-500/50">
                         <label for="remember_me" class="text-sm text-zinc-500">{{ __('frontend.remember_me') }}</label>
                     </div>
-                    <button type="submit" class="flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 active:scale-[0.98]">
+                    <button type="submit" class="sur-btn-primary w-full inline-flex items-center justify-center gap-2">
                         <i class="fa-solid fa-right-to-bracket text-xs" aria-hidden="true"></i>
                         {{ __('frontend.login') }}
                     </button>

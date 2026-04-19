@@ -90,7 +90,7 @@
                     <i class="fa-solid fa-arrow-left text-xs" aria-hidden="true"></i>
                     {{ __('frontend.expansion_back_link') }}
                 </a>
-                <a href="{{ route('home') }}#wizard" class="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo-500">
+                <a href="{{ route('home') }}#wizard" class="sur-btn-primary inline-flex items-center gap-2">
                     <i class="fa-solid fa-shuffle text-xs" aria-hidden="true"></i>
                     {{ __('frontend.nav_shuffle') }}
                 </a>
