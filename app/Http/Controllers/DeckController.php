@@ -135,8 +135,6 @@ class DeckController extends Controller
 
     /**
      * Shuffle random factions and assign to players (wizard POST).
-     *
-     * @return RedirectResponse|View
      */
     public function shuffle(Request $request): RedirectResponse|View
     {

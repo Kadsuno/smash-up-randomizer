@@ -27,7 +27,7 @@ trait ManagesFactionJsonFiles
 
         foreach ($files as $file) {
             $factions = json_decode(file_get_contents($file), true);
-            if (!is_array($factions)) {
+            if (! is_array($factions)) {
                 continue;
             }
             foreach ($factions as $faction) {
@@ -45,15 +45,15 @@ trait ManagesFactionJsonFiles
      * By default, only empty fields are overwritten; pass $force = true to
      * overwrite all fields regardless of current value.
      *
-     * @param  array<string, mixed>   $faction  Faction data incl. '__file__' key
-     * @param  array<string, string>  $fields   Fields to write
+     * @param  array<string, mixed>  $faction  Faction data incl. '__file__' key
+     * @param  array<string, string>  $fields  Fields to write
      */
     private function updateJsonFile(array $faction, array $fields, bool $force = false): bool
     {
         $file = $faction['__file__'];
         $factions = json_decode(file_get_contents($file), true);
 
-        if (!is_array($factions)) {
+        if (! is_array($factions)) {
             return false;
         }
 
@@ -76,7 +76,7 @@ trait ManagesFactionJsonFiles
         if ($updated) {
             file_put_contents(
                 $file,
-                json_encode($factions, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . "\n"
+                json_encode($factions, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)."\n"
             );
         }
 

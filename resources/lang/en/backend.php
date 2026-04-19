@@ -1,4 +1,5 @@
 <?php
+
 return [
     'dashboard_header' => 'Welcome to the SUR Backend!',
     'dashboard_body' => 'In the SUR backend, you can view and delete existing factions via the Deck Manager. Additionally, new factions can be added through the Deck Manager.',

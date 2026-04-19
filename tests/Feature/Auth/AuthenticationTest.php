@@ -27,7 +27,7 @@ class AuthenticationTest extends TestCase
         $user = User::factory()->create(['role' => 'user']);
 
         $response = $this->post(route('login'), [
-            'email'    => $user->email,
+            'email' => $user->email,
             'password' => 'password',
         ]);
 
@@ -40,7 +40,7 @@ class AuthenticationTest extends TestCase
         $admin = User::factory()->admin()->create();
 
         $response = $this->post(route('admin.login'), [
-            'email'    => $admin->email,
+            'email' => $admin->email,
             'password' => 'password',
         ]);
 
@@ -53,7 +53,7 @@ class AuthenticationTest extends TestCase
         $user = User::factory()->create(['role' => 'user']);
 
         $response = $this->post(route('admin.login'), [
-            'email'    => $user->email,
+            'email' => $user->email,
             'password' => 'password',
         ]);
 
@@ -66,7 +66,7 @@ class AuthenticationTest extends TestCase
         $user = User::factory()->create();
 
         $this->post(route('login'), [
-            'email'    => $user->email,
+            'email' => $user->email,
             'password' => 'wrong-password',
         ]);
 

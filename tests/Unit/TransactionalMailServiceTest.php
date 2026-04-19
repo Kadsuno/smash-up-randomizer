@@ -26,7 +26,7 @@ class TransactionalMailServiceTest extends TestCase
             ->once()
             ->with([], [], Mockery::type('Closure'));
 
-        $service = new TransactionalMailService();
+        $service = new TransactionalMailService;
         $ok = $service->send('recipient@example.com', 'Subject line', 'Plain body', null, []);
 
         $this->assertTrue($ok);
@@ -38,7 +38,7 @@ class TransactionalMailServiceTest extends TestCase
             ->once()
             ->with([], [], Mockery::type('Closure'));
 
-        $service = new TransactionalMailService();
+        $service = new TransactionalMailService;
         $ok = $service->send(
             'recipient@example.com',
             'Test',

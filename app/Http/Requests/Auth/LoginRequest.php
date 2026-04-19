@@ -42,7 +42,7 @@ class LoginRequest extends FormRequest
      *
      * @return void
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function authenticate()
     {
@@ -67,7 +67,7 @@ class LoginRequest extends FormRequest
      * Validate e-mail and password and return the user model.
      *
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     private function validateUserCredentials(): User
     {
@@ -94,7 +94,7 @@ class LoginRequest extends FormRequest
      *
      * @return void
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function ensureIsNotRateLimited()
     {

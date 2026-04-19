@@ -85,9 +85,9 @@ class FrontendSocialAuthController extends Controller
             }
 
             $existing->forceFill([
-                'provider'    => $provider,
+                'provider' => $provider,
                 'provider_id' => (string) $socialUser->getId(),
-                'name'        => filled($existing->name) ? $existing->name : ($socialUser->getName() ?: Str::before($email, '@')),
+                'name' => filled($existing->name) ? $existing->name : ($socialUser->getName() ?: Str::before($email, '@')),
             ])->save();
 
             return $this->loginOrTwoFactorChallenge($existing, true);
@@ -100,11 +100,11 @@ class FrontendSocialAuthController extends Controller
         $verified = $this->oauthEmailVerified($provider, $socialUser);
 
         $user = User::query()->create([
-            'name'        => $name,
-            'email'       => $email,
-            'password'    => null,
-            'role'        => 'user',
-            'provider'    => $provider,
+            'name' => $name,
+            'email' => $email,
+            'password' => null,
+            'role' => 'user',
+            'provider' => $provider,
             'provider_id' => (string) $socialUser->getId(),
         ]);
 

@@ -10,9 +10,9 @@ use Illuminate\Queue\SerializesModels;
 class ContactMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
-   
+
     public $data;
-  
+
     /**
      * Create a new message instance.
      *
@@ -22,7 +22,7 @@ class ContactMail extends Mailable implements ShouldQueue
     {
         $this->data = $data;
     }
-  
+
     /**
      * Build the message.
      *
@@ -30,7 +30,7 @@ class ContactMail extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->subject('New Contact - '. $this->data->subject)
-                    ->view('emails.contact');
+        return $this->subject('New Contact - '.$this->data->subject)
+            ->view('emails.contact');
     }
 }

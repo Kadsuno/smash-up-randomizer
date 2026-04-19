@@ -20,6 +20,7 @@ class FrontendAuthenticatedSessionController extends Controller
     {
         $request->authenticate();
         $request->session()->regenerate();
+
         return redirect()->intended(route('account'));
     }
 
@@ -28,6 +29,7 @@ class FrontendAuthenticatedSessionController extends Controller
         Auth::guard('web')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
         return redirect()->route('home');
     }
 }
