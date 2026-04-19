@@ -96,7 +96,7 @@ Do not implement while blocking questions are unanswered.
 ## Phase 1 — Analyze
 
 1. Classify: feature / bug / chore.
-2. Use `SemanticSearch`, `Grep`, `Glob`, `Read` for Laravel (`app/`, `routes/`, `config/`), Blade (`resources/views/`), assets (`resources/js`, `resources/sass`), Lang (`resources/lang/`, `lang/`), tests (`tests/`).
+2. Use `SemanticSearch`, `Grep`, `Glob`, `Read` for Laravel (`app/`, `routes/`, `config/`), Blade (`resources/views/`), assets (`resources/js`, `resources/sass`), Lang (`resources/lang/` only — Laravel prefers this path when the directory exists), tests (`tests/`).
 3. Reuse existing patterns: thin controllers, Form Requests where appropriate, Eloquent, Blade components, Vite entrypoints, bilingual `__('frontend.key')` / `__('backend.key')`.
 4. **Output:** mental model of affected files, risks, test surfaces.
 
@@ -264,5 +264,5 @@ git push -u origin <branch-name>
 ## Project-specific stack (reminder)
 
 - Laravel 13, **PHP 8.3+**, **MariaDB 10.4 in DDEV**, Blade, Sanctum & Passport, **Vite 5**, **Tailwind CSS 4** (`@tailwindcss/vite`), jQuery/Alpine (Node **20+**).
-- Bilingual: maintain **EN and DE** for user-facing strings (`resources/lang/`, `lang/`).
+- Bilingual: maintain **EN and DE** for user-facing strings under **`resources/lang/`** (do not add a second `lang/` tree at the repo root).
 - **Canonical onboarding:** `README.md` (DDEV hostname: `smash-up-randomizer.ddev.site`).

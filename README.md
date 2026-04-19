@@ -230,7 +230,7 @@ docs: update README prerequisites
 
 - **PHP**: PSR-12, typed properties/parameters where appropriate, DocBlocks for public API per project conventions
 - **JS**: ES modules, match existing file style in `resources/js/`
-- **Blade / i18n**: User-visible strings via `__('frontend.*')` etc.; maintain **EN** (`resources/lang/en/`, `lang/en/`) and **DE** (`resources/lang/de/`, `lang/de/`) when changing copy
+- **Blade / i18n**: User-visible strings via `__('frontend.*')` etc.; maintain **EN** and **DE** under **`resources/lang/{locale}/`** only (Laravel loads `resources/lang` when that directory exists — a second `lang/` tree at the repo root caused stale copy).
 
 ## License
 
