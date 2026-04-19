@@ -1,8 +1,8 @@
 ---
 alwaysApply: false
-description: Legacy pointer — use smash-up-full-workflow
+description: Pointer — use smash-up-full-workflow + smash-up-full-workflow-detail
 ---
 
-Superseded by **`smash-up-full-workflow.mdc`** (branching from `dev`, DDEV, tests, CHANGELOG, PR, merge).
+Use **`smash-up-full-workflow.mdc`** (quick reference) + **`smash-up-full-workflow-detail.mdc`** (full phases) for implementation order, branching from `dev`, DDEV, tests, CHANGELOG, PR, merge.
 
-Use that rule for implementation order; keep **`README.md`** as the source for DDEV commands.
+Keep **`README.md`** as the source for DDEV commands.

@@ -10,6 +10,7 @@ alwaysApply: true
   - Use clear, concise language; avoid unnecessary fluff.
   - One ticket = one coherent, shippable change (feature, improvement, bug fix, chore).
   - Prefer splitting large changes into multiple smaller tickets.
+  - **Lean tickets:** **Requirements** stay checkbox-only where possible. **Technical notes** ≤5 short bullets (affected paths, constraints, data/API notes). If Cursor Plan mode runs, **do not** duplicate its step list — link or say "see CreatePlan".
 - **Markdown structure** — use this base structure for **all** tickets:
 
 ```md

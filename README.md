@@ -35,7 +35,7 @@ Smash Up Randomizer supports:
 | `.cursor/rules/`  | Cursor project rules (full workflow, ticket format, etc.)                           |
 
 
-Default branch for integration work is **dev** (see `.cursor/rules/smash-up-full-workflow.mdc`).
+Default branch for integration work is **dev** (workflow: `.cursor/rules/smash-up-full-workflow.mdc`, full phases: `smash-up-full-workflow-detail.mdc`).
 
 ## Features
 
