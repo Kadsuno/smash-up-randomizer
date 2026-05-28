@@ -1,5 +1,9 @@
 <x-layouts.main>
 
+@push('head')
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+@endpush
+
     {{-- Hero --}}
     <section class="relative overflow-hidden bg-linear-to-br from-violet-950/50 via-zinc-950 to-zinc-950 py-20 md:py-24">
         <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgb(139_92_246_/_0.10),transparent)]" aria-hidden="true"></div>
@@ -121,9 +125,15 @@
                             @enderror
                         </div>
 
-                        {{-- Honeypot + timing spam protection --}}
+                        {{-- Honeypot spam protection --}}
                         <input type="text" name="context" id="context" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
-                        <input type="hidden" name="start_time" value="{{ time() }}">
+
+                        {{-- Cloudflare Turnstile CAPTCHA --}}
+                        @if(config('services.turnstile.site_key'))
+                            <div class="cf-turnstile mt-5"
+                                 data-sitekey="{{ config('services.turnstile.site_key') }}"
+                                 data-theme="dark"></div>
+                        @endif
 
                         <div class="mt-7">
                             <button type="submit" class="sur-btn-primary min-h-12 w-full sm:w-auto sm:px-10">

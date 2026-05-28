@@ -93,7 +93,7 @@ Route::post('contact-us', [
     ContactController::class,
     'store',
 ])
-    ->middleware('throttle:5,1')
+    ->middleware('throttle:5,10')
     ->name('contact.us.store');
 
 Route::get('/factions', [
