@@ -25,6 +25,12 @@ alwaysApply: true
 
 **Prefer Quick** for typos, single-file fixes, and internal refactors that do not hit the Full triggers — less ticket overhead, same quality gates.
 
+### Track decision (before branch or code edits)
+
+1. Classify **Read-only** vs **Quick** vs **Full** using the trigger matrix and Quick rules.
+2. If **Quick** fits and the user did not ask for Full workflow, use **Quick** — do **not** open a ticket or run the Full pre-code gate.
+3. **Full** only when a Full trigger applies or scope is unclear until analyzed; then finish the pre-code gate before the first implementation edit.
+
 ### First response (when starting a change)
 
 State the track:
@@ -50,6 +56,8 @@ Use **any row** in "Full + Plan" as a **Full track** trigger. Use the **Plan col
 | None of the above + ≤3 files + internal/low risk | No — use Quick if Quick rules match | No | Yes |
 
 **Plan mode skip (Full track):** If the change **follows an existing repo pattern 1:1** (e.g. same controller/Request/Blade shape as a recent feature) and there is **no** migration, **no** new route, **no** dependency, **no** arch fork — skip `CreatePlan`; add one short **Approach** line in the ticket (e.g. "Mirror `FooController` / `store` flow") and proceed to Branch.
+
+**Plan mode (Full track):** Before `SwitchMode(plan)` / `CreatePlan`, confirm **at least one** Plan trigger from the matrix applies. If **none** apply, skip Plan and record one sentence in the ticket (e.g. "Plan: skipped — no migration, route, >5 files, dependency, or arch fork").
 
 ---
 
@@ -77,7 +85,11 @@ Do **not** call `StrReplace`, `Write`, `Delete`, or implementation `Shell` until
 [ ] Public copy: EN/DE lang + CHANGELOG if visitor-notable — or Public copy: N/A
 ```
 
-**Efficiency:** While tests/Pint run, **draft** `[Unreleased]` bullets and lang keys. **Do not commit** on red tests/lint.
+**Efficiency:**
+
+- While tests run, **draft** `[Unreleased]` bullets and lang keys. **Do not commit** on red tests/lint.
+- **Parallel runs:** When useful, run `ddev exec php artisan test` and `./vendor/bin/pint --test` (if Pint is present) in **parallel** (e.g. two terminals). **Both** must pass before commit.
+- **PR / merge:** Prefer `gh pr create` and, once required checks are **green**, merge in the same session (`gh pr merge --squash --delete-branch`) unless the user deferred merge or CI is still pending (see detail Phase 13).
 
 ---
 

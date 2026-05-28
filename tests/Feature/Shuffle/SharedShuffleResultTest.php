@@ -75,4 +75,50 @@ class SharedShuffleResultTest extends TestCase
     {
         $this->get(route('shuffle.share', ['publicId' => '01ARZ3NDEKTSV4RRFFQ69G5FAV']))->assertNotFound();
     }
+
+    public function test_shuffle_redirects_with_conflict_when_every_included_faction_is_excluded(): void
+    {
+        $this->seedFactionsForTwoPlayers();
+        $names = ['A1', 'A2', 'A3', 'A4'];
+
+        $response = $this->post(route('shuffle-result'), [
+            'numberOfPlayers' => '2',
+            'includeFactions' => $names,
+            'excludeFactions' => $names,
+        ]);
+
+        $response->assertRedirect();
+        $response->assertSessionHas('error', __('frontend.shuffle_error_include_exclude_conflict'));
+    }
+
+    public function test_shuffle_redirects_with_pool_empty_when_all_factions_excluded(): void
+    {
+        $this->seedFactionsForTwoPlayers();
+        $names = ['A1', 'A2', 'A3', 'A4'];
+
+        $response = $this->post(route('shuffle-result'), [
+            'numberOfPlayers' => '2',
+            'includeFactions' => [],
+            'excludeFactions' => $names,
+        ]);
+
+        $response->assertRedirect();
+        $response->assertSessionHas('error', __('frontend.shuffle_error_pool_empty'));
+    }
+
+    public function test_shuffle_redirects_when_pool_too_small_for_player_count(): void
+    {
+        foreach (['B1', 'B2', 'B3'] as $name) {
+            Deck::query()->create(['name' => $name, 'expansion' => 'Core']);
+        }
+
+        $response = $this->post(route('shuffle-result'), [
+            'numberOfPlayers' => '2',
+            'includeFactions' => [],
+            'excludeFactions' => [],
+        ]);
+
+        $response->assertRedirect();
+        $response->assertSessionHas('error', __('frontend.shuffle_error_not_enough_factions'));
+    }
 }

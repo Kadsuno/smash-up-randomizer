@@ -20,8 +20,8 @@ class WikitextParserTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->parser = new WikitextParser();
-        $this->rawWikitext = file_get_contents(__DIR__ . '/../Fixtures/aliens-wikitext.txt');
+        $this->parser = new WikitextParser;
+        $this->rawWikitext = file_get_contents(__DIR__.'/../Fixtures/aliens-wikitext.txt');
         // Individual extraction method tests operate on preprocessed wikitext,
         // matching exactly what parse() does internally.
         $this->aliensWikitext = $this->parser->preprocessWikitext($this->rawWikitext);
@@ -35,7 +35,7 @@ class WikitextParserTest extends TestCase
             "<s>3x '''Scout''' - old errata'd text</s>\n3x Scout - current text"
         );
 
-        $this->assertStringNotContainsString("<s>", $result);
+        $this->assertStringNotContainsString('<s>', $result);
         $this->assertStringNotContainsString("old errata'd text", $result);
         $this->assertStringContainsString('Scout - current text', $result);
     }
@@ -43,7 +43,7 @@ class WikitextParserTest extends TestCase
     public function test_preprocess_removes_faq_superscripts(): void
     {
         $result = $this->parser->preprocessWikitext(
-            "1x Abduction - Return a minion. <sup>[[#Questions on Abduction|FAQ]]</sup>"
+            '1x Abduction - Return a minion. <sup>[[#Questions on Abduction|FAQ]]</sup>'
         );
 
         $this->assertStringNotContainsString('<sup>', $result);

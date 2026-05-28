@@ -37,6 +37,7 @@ class ImportFactions extends Command
 
         if (empty($files)) {
             $this->error('No faction JSON files found in database/data/factions/.');
+
             return self::FAILURE;
         }
 
@@ -51,28 +52,31 @@ class ImportFactions extends Command
         foreach ($files as $file) {
             $factions = json_decode(file_get_contents($file), true);
 
-            if (!is_array($factions)) {
-                $this->warn('Skipping invalid JSON: ' . basename($file));
+            if (! is_array($factions)) {
+                $this->warn('Skipping invalid JSON: '.basename($file));
+
                 continue;
             }
 
             foreach ($factions as $faction) {
                 if (empty($faction['name'])) {
                     $skipped++;
+
                     continue;
                 }
 
                 $name = $faction['name'];
                 $attributes = array_filter(
                     $faction,
-                    static fn(string $key) => $key !== 'name' && !str_starts_with($key, '__'),
+                    static fn (string $key) => $key !== 'name' && ! str_starts_with($key, '__'),
                     ARRAY_FILTER_USE_KEY
                 );
 
                 if ($isDryRun) {
                     $exists = Deck::where('name', $name)->exists();
-                    $this->line(($exists ? '[update] ' : '[create] ') . $name);
+                    $this->line(($exists ? '[update] ' : '[create] ').$name);
                     $exists ? $updated++ : $imported++;
+
                     continue;
                 }
 

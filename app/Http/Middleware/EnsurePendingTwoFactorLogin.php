@@ -13,7 +13,7 @@ class EnsurePendingTwoFactorLogin
     /**
      * Ensure the session has a pending MFA login (user id) before accessing the challenge routes.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  Closure(Request): (Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
     {

@@ -28,7 +28,8 @@ class FactionIcons extends Command
     protected $description = 'Download game-icons.net SVGs and generate coloured badge icons for each faction.';
 
     private const GITHUB_BASE = 'https://raw.githubusercontent.com/game-icons/icons/master';
-    private const DELAY_MS    = 150_000; // 150 ms between downloads
+
+    private const DELAY_MS = 150_000; // 150 ms between downloads
 
     /**
      * Execute the console command.
@@ -39,6 +40,7 @@ class FactionIcons extends Command
 
         if (empty($mapping)) {
             $this->error('Icon mapping not found at database/data/faction-icons.json.');
+
             return self::FAILURE;
         }
 
@@ -46,6 +48,7 @@ class FactionIcons extends Command
 
         if (empty($factions)) {
             $this->error('No factions found. Run factions:import first.');
+
             return self::FAILURE;
         }
 
@@ -53,57 +56,61 @@ class FactionIcons extends Command
         if ($filterName) {
             $factions = array_filter(
                 $factions,
-                static fn(array $f) => strcasecmp($f['name'], $filterName) === 0
+                static fn (array $f) => strcasecmp($f['name'], $filterName) === 0
             );
 
             if (empty($factions)) {
                 $this->error("Faction \"{$filterName}\" not found.");
+
                 return self::FAILURE;
             }
         }
 
         $isDryRun = (bool) $this->option('dry-run');
-        $force    = (bool) $this->option('force');
+        $force = (bool) $this->option('force');
 
         if ($isDryRun) {
             $this->warn('[Dry run] No files will be written or updated.');
         }
 
         $iconDir = public_path('images/factions');
-        if (!$isDryRun && !is_dir($iconDir)) {
+        if (! $isDryRun && ! is_dir($iconDir)) {
             mkdir($iconDir, 0755, true);
         }
 
         $generated = 0;
-        $skipped   = 0;
-        $failed    = 0;
+        $skipped = 0;
+        $failed = 0;
 
         foreach ($factions as $faction) {
             $name = $faction['name'];
-            $def  = $mapping[$name] ?? null;
+            $def = $mapping[$name] ?? null;
 
-            if (!$def) {
+            if (! $def) {
                 $this->warn("[skip] {$name}: not in icon mapping");
                 $skipped++;
+
                 continue;
             }
 
-            $slug      = Str::slug($name);
+            $slug = Str::slug($name);
             $localPath = "/images/factions/{$slug}.svg";
-            $absPath   = public_path("images/factions/{$slug}.svg");
+            $absPath = public_path("images/factions/{$slug}.svg");
 
             if ($isDryRun) {
                 $this->line("[dry]  <fg=cyan>{$name}</> → {$localPath}");
                 $this->line("       icon={$def['icon']}  color={$def['color']}");
+
                 continue;
             }
 
-            if (!$force && file_exists($absPath)) {
-                if (empty($faction['image']) || !str_ends_with((string) $faction['image'], '.svg')) {
+            if (! $force && file_exists($absPath)) {
+                if (empty($faction['image']) || ! str_ends_with((string) $faction['image'], '.svg')) {
                     $this->updateJsonFile($faction, ['image' => $localPath], false);
                 }
                 $this->line("[exists] {$name}");
                 $skipped++;
+
                 continue;
             }
 
@@ -113,6 +120,7 @@ class FactionIcons extends Command
                 $this->warn("[fail]  {$name}: could not fetch icon {$def['icon']}");
                 $failed++;
                 usleep(self::DELAY_MS);
+
                 continue;
             }
 
@@ -127,8 +135,9 @@ class FactionIcons extends Command
         $this->newLine();
         $this->info("Done. Generated: {$generated}, skipped: {$skipped}, failed: {$failed}.");
 
-        if (!$isDryRun && !(bool) $this->option('skip-import')) {
+        if (! $isDryRun && ! (bool) $this->option('skip-import')) {
             $this->info('Running factions:import...');
+
             return $this->call('factions:import');
         }
 
@@ -145,16 +154,16 @@ class FactionIcons extends Command
      * We replace the background rectangle with a rounded-square in the faction
      * colour and keep the white icon path unchanged.
      *
-     * @return string|null  Coloured SVG markup, or null on fetch failure.
+     * @return string|null Coloured SVG markup, or null on fetch failure.
      */
     private function buildBadgeSvg(string $iconPath, string $color): ?string
     {
-        $url = self::GITHUB_BASE . '/' . $iconPath . '.svg';
+        $url = self::GITHUB_BASE.'/'.$iconPath.'.svg';
 
         try {
             $response = Http::timeout(15)->get($url);
 
-            if (!$response->successful()) {
+            if (! $response->successful()) {
                 return null;
             }
 
@@ -163,12 +172,12 @@ class FactionIcons extends Command
             // Replace the solid black background rect with a rounded-square badge
             $svg = preg_replace(
                 '/<path\s+d="M0\s+0h512v512H0z"\s*\/>/',
-                '<rect width="512" height="512" rx="96" ry="96" fill="' . htmlspecialchars($color, ENT_XML1) . '"/>',
+                '<rect width="512" height="512" rx="96" ry="96" fill="'.htmlspecialchars($color, ENT_XML1).'"/>',
                 $svg
             );
 
             // Ensure the icon path stays white (some SVGs omit fill="#fff")
-            if (!str_contains($svg, 'fill="#fff"') && !str_contains($svg, "fill='#fff'")) {
+            if (! str_contains($svg, 'fill="#fff"') && ! str_contains($svg, "fill='#fff'")) {
                 $svg = str_replace('<path d="', '<path fill="#fff" d="', $svg);
             }
 
@@ -187,7 +196,7 @@ class FactionIcons extends Command
     {
         $file = database_path('data/faction-icons.json');
 
-        if (!file_exists($file)) {
+        if (! file_exists($file)) {
             return [];
         }
 

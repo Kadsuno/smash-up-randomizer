@@ -235,8 +235,45 @@
 </x-layouts.main>
 
 <style>
-    .deck-html p  { margin-bottom: 0.6rem; }
-    .deck-html ul { list-style: disc; padding-left: 1.25rem; margin-bottom: 0.6rem; }
-    .deck-html li { margin-bottom: 0.25rem; }
-    .deck-html a  { color: #818cf8; text-decoration: underline; text-underline-offset: 2px; }
+    .deck-html {
+        line-height: 1.65;
+        font-size: 0.9375rem;
+    }
+    .deck-html p {
+        margin-bottom: 1rem;
+    }
+    .deck-html p:last-child {
+        margin-bottom: 0;
+    }
+    .deck-html h3,
+    .deck-html h4 {
+        margin-top: 1.25rem;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: rgb(228 228 231);
+    }
+    .deck-html h3:first-child,
+    .deck-html h4:first-child {
+        margin-top: 0;
+    }
+    .deck-html ul,
+    .deck-html ol {
+        list-style: disc;
+        padding-left: 1.25rem;
+        margin-bottom: 1rem;
+    }
+    .deck-html ol {
+        list-style: decimal;
+    }
+    .deck-html li {
+        margin-bottom: 0.4rem;
+    }
+    .deck-html li:last-child {
+        margin-bottom: 0;
+    }
+    .deck-html a {
+        color: #818cf8;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
 </style>

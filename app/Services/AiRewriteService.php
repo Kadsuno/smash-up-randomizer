@@ -21,28 +21,31 @@ use RuntimeException;
  */
 class AiRewriteService
 {
-    private const GROQ_API   = 'https://api.groq.com/openai/v1/chat/completions';
+    private const GROQ_API = 'https://api.groq.com/openai/v1/chat/completions';
+
     private const GEMINI_API = 'https://generativelanguage.googleapis.com/v1beta/models/%s:generateContent';
 
     private string $provider;
+
     private string $key;
+
     private string $model;
 
     public function __construct()
     {
         $this->provider = (string) config('services.ai_rewrite.provider', 'groq');
-        $this->key      = (string) config('services.ai_rewrite.key', '');
-        $this->model    = (string) config('services.ai_rewrite.model', 'llama-3.3-70b-versatile');
+        $this->key = (string) config('services.ai_rewrite.key', '');
+        $this->model = (string) config('services.ai_rewrite.model', 'llama-3.3-70b-versatile');
     }
 
     /**
      * Rewrite a single text field for a given faction.
      *
      * @param  string  $factionName  e.g. "Aliens"
-     * @param  string  $expansion    e.g. "Core Set"
-     * @param  string  $field        e.g. "description"
-     * @param  string  $original     The original wiki-scraped text to rewrite
-     * @return string                The rewritten text
+     * @param  string  $expansion  e.g. "Core Set"
+     * @param  string  $field  e.g. "description"
+     * @param  string  $original  The original wiki-scraped text to rewrite
+     * @return string The rewritten text
      *
      * @throws RuntimeException when the provider is misconfigured or the request fails
      */
@@ -51,9 +54,9 @@ class AiRewriteService
         $prompt = $this->buildPrompt($factionName, $expansion, $field, $original);
 
         return match ($this->provider) {
-            'groq'   => $this->callGroq($prompt),
+            'groq' => $this->callGroq($prompt),
             'gemini' => $this->callGemini($prompt),
-            default  => throw new RuntimeException("Unknown AI provider: {$this->provider}"),
+            default => throw new RuntimeException("Unknown AI provider: {$this->provider}"),
         };
     }
 
@@ -86,14 +89,14 @@ class AiRewriteService
     private function buildPrompt(string $faction, string $expansion, string $field, string $original): string
     {
         $fieldContext = match ($field) {
-            'description'    => 'a brief introductory description of the faction for a card game randomizer app',
-            'effects'        => 'a description of the faction\'s core mechanics in a competitive card game',
-            'cardsTeaser'    => 'a short overview of the faction\'s card composition (minions and actions count and highlights)',
-            'actionTeaser'   => 'a one- or two-sentence intro summarising the types of actions the faction uses',
-            'tips'           => 'strategic gameplay tips for using this faction effectively',
-            'synergy'        => 'recommendations for which other factions pair well with this one, and why',
+            'description' => 'a brief introductory description of the faction for a card game randomizer app',
+            'effects' => 'a description of the faction\'s core mechanics in a competitive card game',
+            'cardsTeaser' => 'a short overview of the faction\'s card composition (minions and actions count and highlights)',
+            'actionTeaser' => 'a one- or two-sentence intro summarising the types of actions the faction uses',
+            'tips' => 'strategic gameplay tips for using this faction effectively',
+            'synergy' => 'recommendations for which other factions pair well with this one, and why',
             'suggestionTeaser' => 'a single-sentence teaser highlighting the best faction pairing',
-            default          => 'a descriptive text about the faction for a card game app',
+            default => 'a descriptive text about the faction for a card game app',
         };
 
         $lines = [
@@ -129,24 +132,24 @@ class AiRewriteService
         $response = Http::withToken($this->key)
             ->timeout(30)
             ->post(self::GROQ_API, [
-                'model'       => $this->model,
-                'messages'    => [
+                'model' => $this->model,
+                'messages' => [
                     [
-                        'role'    => 'system',
+                        'role' => 'system',
                         'content' => 'You are an expert copywriter for a board game companion app. '
-                            . 'You rewrite faction descriptions to be original and engaging while staying 100% factually accurate. '
-                            . 'Return only the rewritten text, nothing else.',
+                            .'You rewrite faction descriptions to be original and engaging while staying 100% factually accurate. '
+                            .'Return only the rewritten text, nothing else.',
                     ],
                     [
-                        'role'    => 'user',
+                        'role' => 'user',
                         'content' => $prompt,
                     ],
                 ],
                 'temperature' => 0.6,
-                'max_tokens'  => 1024,
+                'max_tokens' => 1024,
             ]);
 
-        if (!$response->successful()) {
+        if (! $response->successful()) {
             throw new RuntimeException("Groq API error {$response->status()}: {$response->body()}");
         }
 
@@ -158,11 +161,11 @@ class AiRewriteService
      */
     private function callGemini(string $prompt): string
     {
-        $url = sprintf(self::GEMINI_API, $this->model) . '?key=' . urlencode($this->key);
+        $url = sprintf(self::GEMINI_API, $this->model).'?key='.urlencode($this->key);
 
         $systemInstruction = 'You are an expert copywriter for a board game companion app. '
-            . 'You rewrite faction descriptions to be original and engaging while staying 100% factually accurate. '
-            . 'Return only the rewritten text, nothing else.';
+            .'You rewrite faction descriptions to be original and engaging while staying 100% factually accurate. '
+            .'Return only the rewritten text, nothing else.';
 
         $response = Http::timeout(30)->post($url, [
             'system_instruction' => [
@@ -170,17 +173,17 @@ class AiRewriteService
             ],
             'contents' => [
                 [
-                    'role'  => 'user',
+                    'role' => 'user',
                     'parts' => [['text' => $prompt]],
                 ],
             ],
             'generationConfig' => [
-                'temperature'     => 0.6,
+                'temperature' => 0.6,
                 'maxOutputTokens' => 1024,
             ],
         ]);
 
-        if (!$response->successful()) {
+        if (! $response->successful()) {
             throw new RuntimeException("Gemini API error {$response->status()}: {$response->body()}");
         }
 

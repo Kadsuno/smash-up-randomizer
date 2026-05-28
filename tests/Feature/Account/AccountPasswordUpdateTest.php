@@ -16,7 +16,7 @@ class AccountPasswordUpdateTest extends TestCase
     private function actingAsVerifiedUser(string $password = 'current-password'): User
     {
         $user = User::factory()->create([
-            'password'          => Hash::make($password),
+            'password' => Hash::make($password),
             'email_verified_at' => now(),
         ]);
 
@@ -30,8 +30,8 @@ class AccountPasswordUpdateTest extends TestCase
         $user = $this->actingAsVerifiedUser('current-password');
 
         $this->patch('/account/password', [
-            'current_password'      => 'current-password',
-            'password'              => 'new-password-123',
+            'current_password' => 'current-password',
+            'password' => 'new-password-123',
             'password_confirmation' => 'new-password-123',
         ])->assertRedirect(route('account.edit'));
 
@@ -44,8 +44,8 @@ class AccountPasswordUpdateTest extends TestCase
         $this->actingAsVerifiedUser('correct-password');
 
         $this->patch('/account/password', [
-            'current_password'      => 'wrong-password',
-            'password'              => 'new-password-123',
+            'current_password' => 'wrong-password',
+            'password' => 'new-password-123',
             'password_confirmation' => 'new-password-123',
         ])->assertSessionHasErrors('current_password', errorBag: 'passwordErrors');
     }
@@ -55,8 +55,8 @@ class AccountPasswordUpdateTest extends TestCase
         $this->actingAsVerifiedUser();
 
         $this->patch('/account/password', [
-            'current_password'      => 'current-password',
-            'password'              => 'new-password-123',
+            'current_password' => 'current-password',
+            'password' => 'new-password-123',
             'password_confirmation' => 'different-password',
         ])->assertSessionHasErrors('password');
     }
@@ -66,8 +66,8 @@ class AccountPasswordUpdateTest extends TestCase
         $this->actingAsVerifiedUser();
 
         $this->patch('/account/password', [
-            'current_password'      => 'current-password',
-            'password'              => 'short',
+            'current_password' => 'current-password',
+            'password' => 'short',
             'password_confirmation' => 'short',
         ])->assertSessionHasErrors('password');
     }
@@ -77,8 +77,8 @@ class AccountPasswordUpdateTest extends TestCase
         $this->actingAsVerifiedUser();
 
         $this->patch('/account/password', [
-            'current_password'      => '',
-            'password'              => 'new-password-123',
+            'current_password' => '',
+            'password' => 'new-password-123',
             'password_confirmation' => 'new-password-123',
         ])->assertSessionHasErrors('current_password');
     }
@@ -86,8 +86,8 @@ class AccountPasswordUpdateTest extends TestCase
     public function test_unauthenticated_user_is_redirected(): void
     {
         $this->patch('/account/password', [
-            'current_password'      => 'any',
-            'password'              => 'new-password-123',
+            'current_password' => 'any',
+            'password' => 'new-password-123',
             'password_confirmation' => 'new-password-123',
         ])->assertRedirect(route('login'));
     }

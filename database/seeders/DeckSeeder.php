@@ -21,6 +21,7 @@ class DeckSeeder extends Seeder
 
         if (empty($files)) {
             $this->command->warn('No faction JSON files found in database/data/factions/.');
+
             return;
         }
 
@@ -30,8 +31,9 @@ class DeckSeeder extends Seeder
         foreach ($files as $file) {
             $factions = json_decode(file_get_contents($file), true);
 
-            if (!is_array($factions)) {
-                $this->command->warn("Skipping invalid JSON file: " . basename($file));
+            if (! is_array($factions)) {
+                $this->command->warn('Skipping invalid JSON file: '.basename($file));
+
                 continue;
             }
 
@@ -43,7 +45,7 @@ class DeckSeeder extends Seeder
                 $name = $faction['name'];
                 $attributes = array_filter(
                     $faction,
-                    static fn(string $key) => $key !== 'name' && !str_starts_with($key, '__'),
+                    static fn (string $key) => $key !== 'name' && ! str_starts_with($key, '__'),
                     ARRAY_FILTER_USE_KEY
                 );
 

@@ -21,6 +21,8 @@ class HomeLandingTest extends TestCase
         $response->assertSee(__('frontend.landing_slide_1_title'), false);
         $response->assertSee(__('frontend.landing_slide_3_title'), false);
         $response->assertSee(__('frontend.shuffle_modal_subtitle'), false);
+        $response->assertSee(__('frontend.landing_demo_carousel_badge'), false);
+        $response->assertSee(__('frontend.landing_demo_carousel_hint'), false);
     }
 
     public function test_home_page_renders_stats_bar(): void

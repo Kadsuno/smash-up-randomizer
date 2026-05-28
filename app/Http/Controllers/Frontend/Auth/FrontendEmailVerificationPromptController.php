@@ -14,6 +14,7 @@ class FrontendEmailVerificationPromptController extends Controller
         if ($request->user()->hasVerifiedEmail()) {
             return redirect()->intended(route('account'));
         }
+
         return view('auth.frontend-verify-email');
     }
 }

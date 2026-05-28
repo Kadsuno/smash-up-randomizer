@@ -8,7 +8,8 @@ use PHPUnit\Framework\TestCase;
 
 class DeckSeederTest extends TestCase
 {
-    private string $dataPath = __DIR__ . '/../../database/data/factions';
+    private string $dataPath = __DIR__.'/../../database/data/factions';
+
     /**
      * Verify that every faction JSON file contains valid JSON and required fields.
      */
@@ -22,15 +23,15 @@ class DeckSeederTest extends TestCase
             $content = file_get_contents($file);
             $factions = json_decode($content, true);
 
-            $this->assertIsArray($factions, "Invalid JSON in: " . basename($file));
-            $this->assertNotEmpty($factions, "Empty faction list in: " . basename($file));
+            $this->assertIsArray($factions, 'Invalid JSON in: '.basename($file));
+            $this->assertNotEmpty($factions, 'Empty faction list in: '.basename($file));
 
             foreach ($factions as $faction) {
-                $this->assertArrayHasKey('name', $faction, "Missing 'name' key in " . basename($file));
-                $this->assertArrayHasKey('expansion', $faction, "Missing 'expansion' key in " . basename($file));
-                $this->assertArrayHasKey('teaser', $faction, "Missing 'teaser' key in " . basename($file));
-                $this->assertNotEmpty($faction['name'], "Empty 'name' in " . basename($file));
-                $this->assertNotEmpty($faction['expansion'], "Empty 'expansion' in " . basename($file));
+                $this->assertArrayHasKey('name', $faction, "Missing 'name' key in ".basename($file));
+                $this->assertArrayHasKey('expansion', $faction, "Missing 'expansion' key in ".basename($file));
+                $this->assertArrayHasKey('teaser', $faction, "Missing 'teaser' key in ".basename($file));
+                $this->assertNotEmpty($faction['name'], "Empty 'name' in ".basename($file));
+                $this->assertNotEmpty($faction['expansion'], "Empty 'expansion' in ".basename($file));
             }
         }
     }
@@ -62,7 +63,7 @@ class DeckSeederTest extends TestCase
 
         foreach ($files as $file) {
             $factions = json_decode(file_get_contents($file), true);
-            if (!is_array($factions)) {
+            if (! is_array($factions)) {
                 continue;
             }
 
@@ -70,7 +71,7 @@ class DeckSeederTest extends TestCase
             $this->assertSame(
                 count($names),
                 count(array_unique($names)),
-                "Duplicate faction names found in: " . basename($file)
+                'Duplicate faction names found in: '.basename($file)
             );
         }
     }
@@ -85,7 +86,7 @@ class DeckSeederTest extends TestCase
 
         foreach ($files as $file) {
             $factions = json_decode(file_get_contents($file), true);
-            if (!is_array($factions)) {
+            if (! is_array($factions)) {
                 continue;
             }
             $allNames = array_merge($allNames, array_column($factions, 'name'));

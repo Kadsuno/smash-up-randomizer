@@ -27,9 +27,11 @@ class FactionImages extends Command
      */
     protected $description = 'Download faction images from the Smash Up Wiki and store them in public/images/factions/.';
 
-    private const WIKI_API   = 'https://smashup.fandom.com/api.php';
+    private const WIKI_API = 'https://smashup.fandom.com/api.php';
+
     private const BATCH_SIZE = 50;
-    private const DELAY_MS   = 250_000; // 250 ms between HTTP calls
+
+    private const DELAY_MS = 250_000; // 250 ms between HTTP calls
 
     /**
      * Execute the console command.
@@ -40,6 +42,7 @@ class FactionImages extends Command
 
         if (empty($factions)) {
             $this->error('No factions found. Run factions:import first.');
+
             return self::FAILURE;
         }
 
@@ -47,17 +50,18 @@ class FactionImages extends Command
         if ($filterName) {
             $factions = array_filter(
                 $factions,
-                static fn(array $f) => strcasecmp($f['name'], $filterName) === 0
+                static fn (array $f) => strcasecmp($f['name'], $filterName) === 0
             );
 
             if (empty($factions)) {
                 $this->error("Faction \"{$filterName}\" not found in JSON files.");
+
                 return self::FAILURE;
             }
         }
 
         $isDryRun = (bool) $this->option('dry-run');
-        $force    = (bool) $this->option('force');
+        $force = (bool) $this->option('force');
 
         if ($isDryRun) {
             $this->warn('[Dry run] No files will be downloaded or updated.');
@@ -65,59 +69,63 @@ class FactionImages extends Command
 
         // Ensure output directory exists
         $imageDir = public_path('images/factions');
-        if (!$isDryRun && !is_dir($imageDir)) {
+        if (! $isDryRun && ! is_dir($imageDir)) {
             mkdir($imageDir, 0755, true);
         }
 
         // Batch-fetch all image URLs upfront (2–3 API calls for all 106 factions)
         $this->info('Fetching image URLs from wiki...');
-        $names     = array_column(array_values($factions), 'name');
+        $names = array_column(array_values($factions), 'name');
         $imageUrls = $this->batchFetchImageUrls($names);
-        $this->info(count($imageUrls) . ' image URLs found.');
+        $this->info(count($imageUrls).' image URLs found.');
         $this->newLine();
 
         $downloaded = 0;
-        $skipped    = 0;
-        $failed     = 0;
+        $skipped = 0;
+        $failed = 0;
 
         foreach ($factions as $faction) {
             $name = $faction['name'];
-            $url  = $imageUrls[$name] ?? null;
+            $url = $imageUrls[$name] ?? null;
 
-            if (!$url) {
+            if (! $url) {
                 $this->warn("[skip] {$name}: no image found on wiki");
                 $skipped++;
+
                 continue;
             }
 
-            $ext       = $this->extractExtension($url);
-            $slug      = Str::slug($name);
+            $ext = $this->extractExtension($url);
+            $slug = Str::slug($name);
             $localPath = "/images/factions/{$slug}.{$ext}";
-            $absPath   = public_path("images/factions/{$slug}.{$ext}");
+            $absPath = public_path("images/factions/{$slug}.{$ext}");
 
             if ($isDryRun) {
                 $this->line("[dry]  <fg=cyan>{$name}</> → {$localPath}");
                 $this->line("       <fg=gray>{$url}</>");
+
                 continue;
             }
 
-            if (!$force && file_exists($absPath)) {
+            if (! $force && file_exists($absPath)) {
                 // File already there; ensure the JSON field is set
                 if (empty($faction['image'])) {
                     $this->updateJsonFile($faction, ['image' => $localPath]);
                 }
                 $this->line("[exists] {$name}");
                 $skipped++;
+
                 continue;
             }
 
             try {
                 $response = Http::timeout(30)->get($url);
 
-                if (!$response->successful()) {
+                if (! $response->successful()) {
                     $this->warn("[fail]  {$name}: HTTP {$response->status()}");
                     $failed++;
                     usleep(self::DELAY_MS);
+
                     continue;
                 }
 
@@ -136,8 +144,9 @@ class FactionImages extends Command
         $this->newLine();
         $this->info("Done. Downloaded: {$downloaded}, skipped: {$skipped}, failed: {$failed}.");
 
-        if (!$isDryRun && !(bool) $this->option('skip-import')) {
+        if (! $isDryRun && ! (bool) $this->option('skip-import')) {
             $this->info('Running factions:import...');
+
             return $this->call('factions:import');
         }
 
@@ -149,7 +158,7 @@ class FactionImages extends Command
      * Handles the Unicode apostrophe fallback for names like "Grimms' Fairy Tales".
      *
      * @param  string[]  $names
-     * @return array<string, string>  ['FactionName' => 'https://...']
+     * @return array<string, string> ['FactionName' => 'https://...']
      */
     private function batchFetchImageUrls(array $names): array
     {
@@ -164,7 +173,7 @@ class FactionImages extends Command
         // Second pass: retry missing names with Unicode right-single-quotation-mark (U+2019)
         $missing = [];
         foreach ($names as $name) {
-            if (!isset($result[$name])) {
+            if (! isset($result[$name])) {
                 $unicode = str_replace("'", "\u{2019}", $name);
                 if ($unicode !== $name) {
                     $missing[$unicode] = $name; // unicode → original
@@ -172,7 +181,7 @@ class FactionImages extends Command
             }
         }
 
-        if (!empty($missing)) {
+        if (! empty($missing)) {
             $unicodeResult = [];
             foreach (array_chunk(array_keys($missing), self::BATCH_SIZE) as $chunk) {
                 $this->fetchImageUrlBatch($chunk, $unicodeResult);
@@ -192,7 +201,7 @@ class FactionImages extends Command
     /**
      * Perform a single pageimages batch request and populate $result in-place.
      *
-     * @param  string[]               $names
+     * @param  string[]  $names
      * @param  array<string, string>  $result
      */
     private function fetchImageUrlBatch(array $names, array &$result): void
@@ -200,13 +209,13 @@ class FactionImages extends Command
         try {
             $response = Http::timeout(15)->get(self::WIKI_API, [
                 'action' => 'query',
-                'prop'   => 'pageimages',
+                'prop' => 'pageimages',
                 'piprop' => 'original',
                 'titles' => implode('|', $names),
                 'format' => 'json',
             ]);
 
-            if (!$response->successful()) {
+            if (! $response->successful()) {
                 return;
             }
 
@@ -220,11 +229,11 @@ class FactionImages extends Command
             }
 
             foreach ($data['query']['pages'] ?? [] as $page) {
-                if (!isset($page['original']['source'])) {
+                if (! isset($page['original']['source'])) {
                     continue;
                 }
 
-                $title          = $normalized[$page['title']] ?? $page['title'];
+                $title = $normalized[$page['title']] ?? $page['title'];
                 $result[$title] = $page['original']['source'];
             }
         } catch (\Exception) {

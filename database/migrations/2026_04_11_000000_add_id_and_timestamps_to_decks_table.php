@@ -16,11 +16,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('decks', function (Blueprint $table) {
-            if (!Schema::hasColumn('decks', 'id')) {
+            if (! Schema::hasColumn('decks', 'id')) {
                 $table->id()->first();
             }
 
-            if (!Schema::hasColumn('decks', 'created_at')) {
+            if (! Schema::hasColumn('decks', 'created_at')) {
                 $table->timestamps();
             }
         });

@@ -14,6 +14,46 @@
 
 A web application to help Smash Up players randomly assign factions (decks) and browse faction details. UI copy is maintained in **English and German** where applicable.
 
+## Architecture at a glance
+
+High-level stack and data flow (Mermaid renders on GitHub):
+
+```mermaid
+flowchart TB
+  subgraph Browser["Browser"]
+    FE["Blade views · Tailwind 4 · Alpine.js · Vite-built assets"]
+  end
+
+  subgraph App["Laravel application"]
+    R["Routes: web.php, auth.php, frontend-auth.php"]
+    C["Controllers: Home, Deck, Contact, Shared shuffle, Admin…"]
+    M["Models: User, Deck, Contact, SharedShuffleResult…"]
+    S["Services: mail, sitemap, etc."]
+  end
+
+  DB[("MariaDB / MySQL")]
+  Mail["Outbound email · SMTP or Brevo API"]
+  Opt["Optional: Matomo · Sentry"]
+
+  Browser --> R --> C
+  C --> M
+  M --> DB
+  C --> Mail
+  FE -.-> Opt
+```
+
+Main public journeys (simplified):
+
+```mermaid
+flowchart LR
+  Home["/ — home + shuffle UI"] --> Shuffle["POST /shuffle/result"]
+  Shuffle --> Share["GET /shuffle/share/{id} — optional link"]
+  List["/factions"] --> Detail["/factions/{name}"]
+  Exp["/expansions"] --> ExpD["/expansions/{slug}"]
+  Contact["/contact-us"] --> MailOut["Email via Laravel mailer"]
+  Admin["/admin — login"] --> Backend["/admin/backend/* — decks, contacts, users…"]
+```
+
 ## About the Project
 
 Smash Up Randomizer supports:
@@ -28,13 +68,14 @@ Smash Up Randomizer supports:
 ## Repository layout & workflow
 
 
-| Path              | Purpose                                                                             |
-| ----------------- | ----------------------------------------------------------------------------------- |
-| `docs/roadmap.md` | Product/engineering priorities — update when work matches listed items              |
-| `docs/tickets/`   | Ticket specs (`YYYY-MM-DD-short-slug.md`), see `.cursor/rules/ticket-authoring.mdc` |
-| `docs/image-credits.md` | AI carousel: four base-game faction spotlights (original art, not AEG illustrations) |
-| `.cursor/rules/`  | Cursor project rules (full workflow, ticket format, etc.)                           |
-| `.github/workflows/ci.yml` | **CI** — on push/PR to `dev` or `master`: Composer install, `npm ci`, `npm run build` (Vite manifest for `@vite` in Blade), then `php artisan test` (SQLite in-memory per `phpunit.xml`) |
+| Path                       | Purpose                                                                                                                                                                                  |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `docs/roadmap.md`          | Product/engineering priorities — update when work matches listed items                                                                                                                   |
+| `docs/tickets/`            | Ticket specs (`YYYY-MM-DD-short-slug.md`), see `.cursor/rules/ticket-authoring.mdc`                                                                                                      |
+| `docs/image-credits.md`    | AI carousel: four base-game faction spotlights (original art, not AEG illustrations)                                                                                                     |
+| `.cursor/rules/`           | Cursor project rules (full workflow, ticket format, etc.)                                                                                                                                |
+| `.github/workflows/ci.yml` | **CI** — on push/PR to `dev` or `master`: Composer install, **`composer audit`**, **`pint --test`**, `npm ci`, `npm run build` (Vite manifest for `@vite` in Blade), then `php artisan test` (SQLite in-memory per `phpunit.xml`) |
+| `.github/dependabot.yml`  | **Dependabot** — weekly version PRs for Composer, npm, and GitHub Actions |
 
 
 Default branch for integration work is **dev** (workflow: `.cursor/rules/smash-up-full-workflow.mdc`, full phases: `smash-up-full-workflow-detail.mdc`). Pull requests should stay green on **GitHub Actions** before merge.
@@ -63,53 +104,38 @@ Local stack is defined in `.ddev/config.yaml` (PHP 8.3, MariaDB 10.4, Node 22, n
 
 1. Install [DDEV](https://ddev.readthedocs.io/en/stable/)
 2. Clone the repository:
-
-    ```bash
+  ```bash
     git clone https://github.com/kadsuno/smash-up-randomizer.git
     cd smash-up-randomizer
-    ```
-
+  ```
 3. Start DDEV:
-
-    ```bash
+  ```bash
     ddev start
-    ```
-
+  ```
 4. Install dependencies:
-
-    ```bash
+  ```bash
     ddev composer install
     ddev npm install
-    ```
-
+  ```
 5. Environment and app key:
-
-    ```bash
+  ```bash
     ddev exec cp .env.example .env
     ddev exec php artisan key:generate
-    ```
-
+  ```
 6. Configure `.env` (database credentials are usually pre-filled for DDEV; set mail for outbound email — local dev often uses Mailpit on `127.0.0.1:1025`; production can use **`MAIL_MAILER=brevo`** + `BREVO_API_KEY` (Issue Forge–style) or **SMTP** — see **Email** below). Optional **Matomo** (public site analytics): `MATOMO_ENABLED` (default `true`), `MATOMO_TRACKER_URL` (default `https://analytics.kadsuno.com`), `MATOMO_SITE_ID` (default `1`) — see `config/matomo.php`. Set `MATOMO_ENABLED=false` locally if you do not want the tracker script loaded. Optional **Sentry** (error monitoring): set `SENTRY_LARAVEL_DSN` from your Sentry project (leave empty to disable). See `config/sentry.php` and run `php artisan sentry:test` after configuring. For full stack trace *argument* values in PHP error reports, set `zend.exception_ignore_args=Off` in `php.ini` (server-level).
-
 7. Migrations:
-
-    ```bash
+  ```bash
     ddev exec php artisan migrate
-    ```
-
+  ```
     **Admin role:** The `users.role` column defaults to `user`. Existing accounts created before that migration are **not** automatically admins. To open `/admin/backend`, promote your account once:
-
     ```bash
     ddev exec php artisan users:promote you@example.com
     ```
-
 8. Frontend assets:
-
-    ```bash
+  ```bash
     ddev npm run dev
-    ```
-
-9. Open **https://smash-up-randomizer.ddev.site** (hostname follows `name:` in `.ddev/config.yaml`).
+  ```
+9. Open **[https://smash-up-randomizer.ddev.site](https://smash-up-randomizer.ddev.site)** (hostname follows `name:` in `.ddev/config.yaml`).
 
 ### Standard installation (without DDEV)
 
@@ -164,7 +190,7 @@ Blade under `resources/views/`: `start/`, `shuffle/`, `decks/`, `frontend/`, `ba
 ### Frontend assets
 
 - **Vite** (`vite.config.js`): `@tailwindcss/vite` plugin + `laravel-vite-plugin`; global styles in `resources/css/app.css` (`@import "tailwindcss"`, design tokens in `@theme`, PostCSS for Autoprefixer only)
-- **Stack**: Tailwind CSS 4, Alpine.js, jQuery (legacy where present), Font Awesome, animate.css (see `package.json`)
+- **Stack**: Tailwind CSS 4, Alpine.js, Font Awesome (see `package.json`)
 
 ### Email
 
@@ -190,18 +216,18 @@ Other Symfony mail transports remain available in `composer.json` if you switch 
 ### Routes (high level)
 
 
-| Path                                               | Notes                                                                          |
-| -------------------------------------------------- | ------------------------------------------------------------------------------ |
-| `/`                                                | Home (shuffle modal → `POST /shuffle/result`)                                  |
-| `POST /shuffle/result`                             | Shuffle results (`DeckController@shuffle`)                                   |
-| `/factions`, `/factions/{name}`                    | Faction list & detail                                                          |
-| `/contact-us`                                      | GET/POST contact                                                               |
-| `/about`                                           | About                                                                          |
-| `/imprint`, `/privacy-policy`                      | Legal                                                                          |
-| `/sitemap`                                         | Dynamic XML sitemap                                                            |
-| `/admin`, `POST /admin`                            | Login                                                                          |
-| `/admin/register`                                  | Registration (guest)                                                           |
-| `/admin/backend`, `/admin/backend/decks-manager/*` | Admin UI (auth)                                                                |
+| Path                                               | Notes                                         |
+| -------------------------------------------------- | --------------------------------------------- |
+| `/`                                                | Home (shuffle modal → `POST /shuffle/result`) |
+| `POST /shuffle/result`                             | Shuffle results (`DeckController@shuffle`)    |
+| `/factions`, `/factions/{name}`                    | Faction list & detail                         |
+| `/contact-us`                                      | GET/POST contact                              |
+| `/about`                                           | About                                         |
+| `/imprint`, `/privacy-policy`                      | Legal                                         |
+| `/sitemap`                                         | Dynamic XML sitemap                           |
+| `/admin`, `POST /admin`                            | Login                                         |
+| `/admin/register`                                  | Registration (guest)                          |
+| `/admin/backend`, `/admin/backend/decks-manager/*` | Admin UI (auth)                               |
 
 
 ## Development

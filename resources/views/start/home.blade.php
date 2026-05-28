@@ -1,4 +1,13 @@
 <x-layouts.main>
+    @if (session('error'))
+        <div
+            class="border-b border-amber-500/35 bg-amber-950/50 px-4 py-3 text-center text-sm leading-snug text-amber-100"
+            role="alert"
+        >
+            {{ session('error') }}
+        </div>
+    @endif
+
     {{-- Marketing hero --}}
     <section id="wizard" class="relative overflow-hidden border-b border-white/10">
         <div class="pointer-events-none absolute inset-0 bg-linear-to-b from-indigo-950/50 via-zinc-950 to-zinc-950"></div>
@@ -37,9 +46,21 @@
                     @mouseleave="start()"
                     role="region"
                     aria-roledescription="carousel"
-                    aria-label="{{ __('frontend.logo_alt') }}"
+                    aria-label="{{ __('frontend.landing_demo_carousel_region_label') }}"
                 >
                     <div class="sur-landing-carousel relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-white/10 shadow-2xl shadow-black/50 sm:aspect-[16/10] lg:min-h-[22rem]">
+
+                        <div
+                            class="pointer-events-none absolute inset-x-0 top-11 z-20 flex justify-center px-2 sm:px-4"
+                            aria-hidden="true"
+                        >
+                            <p
+                                class="max-w-full rounded-full border border-white/12 bg-black/55 px-3 py-1.5 text-center text-[0.62rem] leading-snug text-zinc-300 shadow-sm backdrop-blur-sm sm:text-xs sm:leading-normal"
+                            >
+                                <span class="font-semibold text-indigo-300">{{ __('frontend.landing_demo_carousel_badge') }}</span>
+                                <span class="text-zinc-400"> — {{ __('frontend.landing_demo_carousel_hint') }}</span>
+                            </p>
+                        </div>
 
                         {{-- Slide 1: Choose your players --}}
                         <div
@@ -66,7 +87,7 @@
                                         <p class="text-center text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400/90">Step 1</p>
                                         <div class="mx-auto grid w-full max-w-[15.5rem] grid-cols-3 gap-2 sm:max-w-sm sm:gap-3">
                                             @foreach([2, 3, 4] as $n)
-                                                <div class="flex min-h-[5.25rem] min-w-0 flex-col items-center justify-center rounded-2xl border px-1 py-3 text-center sm:min-h-[6rem] sm:px-2 sm:py-4
+                                                <div class="pointer-events-none select-none flex min-h-[5.25rem] min-w-0 flex-col items-center justify-center rounded-2xl border px-1 py-3 text-center sm:min-h-[6rem] sm:px-2 sm:py-4
                                                     {{ $n === 2 ? 'border-indigo-500 bg-indigo-500/15 shadow-lg shadow-indigo-500/20' : 'border-white/15 bg-zinc-900/60' }}">
                                                     <span class="text-3xl font-extrabold tabular-nums {{ $n === 2 ? 'text-white' : 'text-zinc-400' }} sm:text-4xl">{{ $n }}</span>
                                                     <span class="mt-1 text-[0.65rem] font-medium uppercase tracking-wider {{ $n === 2 ? 'text-indigo-200' : 'text-zinc-600' }}">{{ __('frontend.shuffle_wizard_players_unit') }}</span>
@@ -117,7 +138,7 @@
                                         @if($factions->isNotEmpty())
                                             <div class="mx-auto w-full max-w-xl shrink-0 grid grid-cols-2 gap-1.5 sm:grid-cols-5 sm:gap-2">
                                                 @foreach($factions->take(10) as $idx => $faction)
-                                                    <span class="flex min-h-[2.55rem] items-center justify-center rounded-lg border px-1.5 py-1.5 text-center text-[0.625rem] font-medium leading-snug transition sm:min-h-[3rem] sm:px-2 sm:py-2 sm:text-xs
+                                                    <span class="pointer-events-none select-none flex min-h-[2.55rem] items-center justify-center rounded-lg border px-1.5 py-1.5 text-center text-[0.625rem] font-medium leading-snug sm:min-h-[3rem] sm:px-2 sm:py-2 sm:text-xs
                                                         {{ $idx < 6 ? 'border-indigo-500/40 bg-indigo-500/12 text-indigo-200' : 'border-white/10 bg-zinc-800/60 text-zinc-500 line-through' }}">
                                                         <span class="line-clamp-2 break-words">{{ $faction->name }}</span>
                                                     </span>
@@ -175,7 +196,7 @@
                                                         $nameA = $demoFactions[$pair[0]]->name;
                                                         $nameB = $demoFactions[$pair[1]]->name;
                                                     @endphp
-                                                    <div class="flex min-h-[5.25rem] flex-col justify-center rounded-2xl border border-white/10 bg-zinc-800/50 px-3 py-2 sm:min-h-[6rem] sm:px-4 sm:py-3">
+                                                    <div class="pointer-events-none select-none flex min-h-[5.25rem] flex-col justify-center rounded-2xl border border-white/10 bg-zinc-800/50 px-3 py-2 sm:min-h-[6rem] sm:px-4 sm:py-3">
                                                         <p class="mb-1.5 text-center text-[0.65rem] font-semibold uppercase tracking-wider text-zinc-500 sm:mb-2">
                                                             {{ str_replace(':n', $pi + 1, __('frontend.landing_slide_player_label')) }}
                                                         </p>
@@ -590,7 +611,16 @@
                 </div>
             </div>
 
-            <form id="shuffle-wizard-form" class="shuffle-wizard-form flex min-h-0 flex-1 flex-col" method="POST" action="{{ route('shuffle-result') }}" novalidate>
+            <form
+                id="shuffle-wizard-form"
+                class="shuffle-wizard-form flex min-h-0 flex-1 flex-col"
+                method="POST"
+                action="{{ route('shuffle-result') }}"
+                novalidate
+                data-msg-conflict="{{ e(__('frontend.shuffle_error_include_exclude_conflict')) }}"
+                data-msg-pool-empty="{{ e(__('frontend.shuffle_error_pool_empty')) }}"
+                data-msg-insufficient="{{ e(__('frontend.shuffle_error_not_enough_factions')) }}"
+            >
                 @csrf
                 <div class="shuffle-modal-chrome shrink-0 border-b border-white/10 px-5 pb-4 pt-1 sm:px-8">
                     <div class="mb-3 flex flex-wrap items-center justify-between gap-3">
@@ -617,6 +647,12 @@
                 </div>
 
                 <div class="shuffle-modal-scroll sur-scrollbar min-h-0 flex-1 overflow-y-auto overflow-x-hidden px-5 py-5 sm:px-8 sm:py-6">
+                    <div
+                        id="shuffle-wizard-toast"
+                        class="mb-4 hidden rounded-xl border border-amber-500/35 bg-amber-950/45 px-4 py-3 text-sm font-medium leading-snug text-amber-100 shadow-lg shadow-black/20"
+                        role="alert"
+                        aria-live="assertive"
+                    ></div>
                     <div class="shuffle-step-content" id="step1-content">
                         <h3 class="mb-1 text-lg font-semibold text-white sm:text-xl">{{ __('frontend.shuffle_wizard_heading_players') }}</h3>
                         <p class="mb-5 text-sm text-zinc-500">{{ __('frontend.shuffle_wizard_players_hint') }}</p>
@@ -791,6 +827,7 @@
                 el.classList.remove('slide-out', 'slide-in');
             });
             playerFieldset?.classList.remove('shuffle-wizard--error');
+            document.getElementById('shuffle-wizard-toast')?.classList.add('hidden');
             updateChrome(1);
             scrollModalBodyToTop();
         }
@@ -868,12 +905,58 @@
             radio.addEventListener('change', () => playerFieldset?.classList.remove('shuffle-wizard--error'));
         });
 
+        const shuffleForm = document.getElementById('shuffle-wizard-form');
+        const shuffleToastEl = document.getElementById('shuffle-wizard-toast');
+
+        function computeEligibleFactionNames() {
+            const allNames = Array.from(document.querySelectorAll('.include-faction')).map((cb) => cb.value);
+            const included = Array.from(document.querySelectorAll('.include-faction:checked')).map((cb) => cb.value);
+            const excluded = new Set(
+                Array.from(document.querySelectorAll('.exclude-faction:checked')).map((cb) => cb.value),
+            );
+            const pool = included.length === 0 ? allNames : included;
+            return pool.filter((name) => !excluded.has(name));
+        }
+
+        function isIncludeFullyExcluded() {
+            const included = Array.from(document.querySelectorAll('.include-faction:checked')).map((cb) => cb.value);
+            if (included.length === 0) {
+                return false;
+            }
+            const excluded = new Set(
+                Array.from(document.querySelectorAll('.exclude-faction:checked')).map((cb) => cb.value),
+            );
+            return included.every((name) => excluded.has(name));
+        }
+
+        function showShuffleToast(message) {
+            if (!shuffleToastEl || !message) {
+                return;
+            }
+            shuffleToastEl.textContent = message;
+            shuffleToastEl.classList.remove('hidden');
+            window.clearTimeout(showShuffleToast._timer);
+            showShuffleToast._timer = window.setTimeout(() => {
+                shuffleToastEl.classList.add('hidden');
+            }, 7000);
+        }
+
+        function maybeWarnEmptyPool() {
+            const eligible = computeEligibleFactionNames();
+            if (eligible.length === 0 && shuffleForm) {
+                const d = shuffleForm.dataset;
+                const msg = isIncludeFullyExcluded() ? d.msgConflict : d.msgPoolEmpty;
+                showShuffleToast(msg);
+            }
+        }
+
         document.getElementById('selectAllInclude')?.addEventListener('click', () => {
             const checkboxes = document.querySelectorAll('.include-faction');
             const allChecked = Array.from(checkboxes).every((cb) => cb.checked);
             checkboxes.forEach((cb) => {
                 cb.checked = !allChecked;
             });
+            maybeWarnEmptyPool();
         });
 
         document.getElementById('selectAllExclude')?.addEventListener('click', () => {
@@ -882,9 +965,9 @@
             checkboxes.forEach((cb) => {
                 cb.checked = !allChecked;
             });
+            maybeWarnEmptyPool();
         });
 
-        const shuffleForm = document.getElementById('shuffle-wizard-form');
         shuffleForm?.addEventListener('keydown', (e) => {
             if (e.key !== 'Enter') {
                 return;
@@ -897,6 +980,20 @@
         shuffleForm?.addEventListener('submit', (e) => {
             if (submitBtn && submitBtn.disabled) {
                 e.preventDefault();
+                return;
+            }
+            const players = parseInt(document.querySelector('input[name="numberOfPlayers"]:checked')?.value ?? '0', 10);
+            const needed = Number.isFinite(players) ? players * 2 : 0;
+            const eligible = computeEligibleFactionNames();
+            const d = shuffleForm.dataset;
+            if (eligible.length === 0) {
+                e.preventDefault();
+                showShuffleToast(isIncludeFullyExcluded() ? d.msgConflict : d.msgPoolEmpty);
+                return;
+            }
+            if (needed > 0 && eligible.length < needed) {
+                e.preventDefault();
+                showShuffleToast(d.msgInsufficient);
             }
         });
 

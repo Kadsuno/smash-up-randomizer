@@ -25,7 +25,7 @@ class SocialAuthTest extends TestCase
     public function test_google_redirect_returns_redirect_when_configured(): void
     {
         config([
-            'services.google.client_id'     => 'test-client-id',
+            'services.google.client_id' => 'test-client-id',
             'services.google.client_secret' => 'secret',
         ]);
 
@@ -53,7 +53,7 @@ class SocialAuthTest extends TestCase
     public function test_google_callback_creates_user_and_logs_in(): void
     {
         config([
-            'services.google.client_id'     => 'test-client-id',
+            'services.google.client_id' => 'test-client-id',
             'services.google.client_secret' => 'secret',
         ]);
 
@@ -83,12 +83,12 @@ class SocialAuthTest extends TestCase
     public function test_google_callback_links_existing_email_user(): void
     {
         config([
-            'services.google.client_id'     => 'test-client-id',
+            'services.google.client_id' => 'test-client-id',
             'services.google.client_secret' => 'secret',
         ]);
 
         $existing = User::factory()->create([
-            'email'    => 'same@example.com',
+            'email' => 'same@example.com',
             'password' => 'password',
             'provider' => null,
         ]);

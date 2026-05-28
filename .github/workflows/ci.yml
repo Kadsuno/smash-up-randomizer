@@ -45,6 +45,12 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --no-interaction --prefer-dist --no-progress
 
+      - name: Composer audit
+        run: composer audit
+
+      - name: Laravel Pint (style)
+        run: ./vendor/bin/pint --test
+
       - name: Prepare environment
         run: cp .env.example .env
 

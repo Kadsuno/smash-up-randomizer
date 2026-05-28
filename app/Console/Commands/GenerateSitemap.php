@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Deck;
 use Illuminate\Console\Command;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url;
@@ -33,13 +34,12 @@ class GenerateSitemap extends Command
                 ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY)
                 ->setPriority(1.0));
 
-        $decks = \App\Models\Deck::all();
+        $decks = Deck::all();
         $date = null;
         foreach ($decks as $deck) {
             if ($deck->updated_at) {
                 $date = $deck->updated_at;
-            }
-            else {
+            } else {
                 $date = now();
             }
 

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Http;
 class EnrichFactions extends Command
 {
     use ManagesFactionJsonFiles;
+
     /**
      * The name and signature of the console command.
      *
@@ -31,7 +32,9 @@ class EnrichFactions extends Command
     protected $description = 'Fetch faction data from the Smash Up Wiki and enrich the JSON seed files, then import to DB.';
 
     private const WIKI_API = 'https://smashup.fandom.com/api.php';
+
     private const DELAY_MS = 300_000; // 300 ms between requests
+
     private const MAX_RETRIES = 3;
 
     /**
@@ -43,6 +46,7 @@ class EnrichFactions extends Command
 
         if (empty($factions)) {
             $this->error('No factions found in database/data/factions/. Run factions:import first.');
+
             return self::FAILURE;
         }
 
@@ -50,11 +54,12 @@ class EnrichFactions extends Command
         if ($filterName) {
             $factions = array_filter(
                 $factions,
-                static fn(array $f) => strcasecmp($f['name'], $filterName) === 0
+                static fn (array $f) => strcasecmp($f['name'], $filterName) === 0
             );
 
             if (empty($factions)) {
                 $this->error("Faction \"{$filterName}\" not found in JSON files.");
+
                 return self::FAILURE;
             }
         }
@@ -77,6 +82,7 @@ class EnrichFactions extends Command
                 $this->warn("  → Wiki page not found or request failed for: {$name}");
                 $failed++;
                 usleep(self::DELAY_MS);
+
                 continue;
             }
 
@@ -85,6 +91,7 @@ class EnrichFactions extends Command
             if (empty($parsed)) {
                 $this->warn("  → No extractable content for: {$name}");
                 usleep(self::DELAY_MS);
+
                 continue;
             }
 
@@ -94,11 +101,12 @@ class EnrichFactions extends Command
                     $this->line("  <fg=cyan>{$field}</>: {$preview}");
                 }
                 usleep(self::DELAY_MS);
+
                 continue;
             }
 
             if ($this->updateJsonFile($faction, $parsed, (bool) $this->option('force'))) {
-                $this->line("  → <fg=green>Updated</>");
+                $this->line('  → <fg=green>Updated</>');
                 $enriched++;
             }
 
@@ -108,8 +116,9 @@ class EnrichFactions extends Command
         $this->newLine();
         $this->info("Done. Enriched: {$enriched}, failed: {$failed}.");
 
-        if (!$isDryRun && !(bool) $this->option('skip-import')) {
+        if (! $isDryRun && ! (bool) $this->option('skip-import')) {
             $this->info('Running factions:import...');
+
             return $this->call('factions:import');
         }
 
@@ -121,7 +130,7 @@ class EnrichFactions extends Command
      * Retries up to MAX_RETRIES times with exponential backoff on 429 or timeout.
      * If the exact name returns a missing-page error, retries with Unicode apostrophe variant.
      *
-     * @return string|null  Null if the page is missing or all retries failed.
+     * @return string|null Null if the page is missing or all retries failed.
      */
     private function fetchWikitext(string $factionName): ?string
     {
@@ -144,7 +153,7 @@ class EnrichFactions extends Command
     /**
      * Perform the actual HTTP fetch for a given page name.
      *
-     * @return string|null  Null on missing page or repeated failure.
+     * @return string|null Null on missing page or repeated failure.
      */
     private function fetchWikitextByName(string $factionName): ?string
     {
@@ -155,8 +164,8 @@ class EnrichFactions extends Command
             try {
                 $response = Http::timeout(15)->get(self::WIKI_API, [
                     'action' => 'parse',
-                    'page'   => $factionName,
-                    'prop'   => 'wikitext',
+                    'page' => $factionName,
+                    'prop' => 'wikitext',
                     'format' => 'json',
                 ]);
 
@@ -164,13 +173,15 @@ class EnrichFactions extends Command
                     $attempt++;
                     usleep($delay);
                     $delay *= 2;
+
                     continue;
                 }
 
-                if (!$response->successful()) {
+                if (! $response->successful()) {
                     $attempt++;
                     usleep($delay);
                     $delay *= 2;
+
                     continue;
                 }
 
@@ -192,6 +203,4 @@ class EnrichFactions extends Command
 
         return null;
     }
-
-
 }
