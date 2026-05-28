@@ -18,8 +18,8 @@ class ContactFormTest extends TestCase
     private function validPayload(array $overrides = []): array
     {
         return array_merge([
-            'name'    => 'Test User',
-            'email'   => 'test@gmail.com',
+            'name' => 'Test User',
+            'email' => 'test@gmail.com',
             'subject' => 'Bug report',
             'message' => 'This is a valid test message with enough characters.',
             'context' => '',

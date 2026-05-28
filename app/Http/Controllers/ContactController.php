@@ -27,7 +27,7 @@ class ContactController extends Controller
     public function store(Request $request): RedirectResponse
     {
         // Honeypot: any bot that fills the hidden field is rejected immediately.
-        if (! empty($request->input('context'))) {
+        if (!empty($request->input('context'))) {
             return redirect()->back()->with(['error' => 'Spam detected!']);
         }
 
@@ -38,15 +38,15 @@ class ContactController extends Controller
         }
 
         $request->validate([
-            'name'    => 'required|string|max:255',
-            'email'   => 'required|email:rfc,dns',
-            'phone'   => 'nullable|regex:/^[0-9\s\-()+]+$/',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email:rfc,dns',
+            'phone' => 'nullable|regex:/^[0-9\s\-()+]+$/',
             'subject' => 'required|in:Bug report,Missing faction,Feature request,General feedback,Other',
             'message' => 'required|string|min:20',
         ]);
 
         // Turnstile CAPTCHA verification.
-        if (! $this->verifyTurnstile($request->input('cf-turnstile-response', ''))) {
+        if (!$this->verifyTurnstile($request->input('cf-turnstile-response', ''))) {
             return redirect()->back()->with(['error' => 'Spam detected!']);
         }
 
@@ -56,9 +56,9 @@ class ContactController extends Controller
         $phone = $request->filled('phone') ? (string) $request->input('phone') : null;
 
         Contact::create([
-            'name'    => (string) $request->input('name'),
-            'email'   => (string) $request->input('email'),
-            'phone'   => $phone,
+            'name' => (string) $request->input('name'),
+            'email' => (string) $request->input('email'),
+            'phone' => $phone,
             'subject' => (string) $request->input('subject'),
             'message' => (string) $request->input('message'),
         ]);
@@ -66,9 +66,9 @@ class ContactController extends Controller
         $mailer = new TransactionalMailService;
 
         $mailPayload = [
-            'name'    => (string) $request->input('name'),
-            'email'   => (string) $request->input('email'),
-            'phone'   => $phone,
+            'name' => (string) $request->input('name'),
+            'email' => (string) $request->input('email'),
+            'phone' => $phone,
             'subject' => (string) $request->input('subject'),
             'message' => (string) $request->input('message'),
         ];
@@ -120,7 +120,7 @@ class ContactController extends Controller
         $response = Http::asForm()->post(
             'https://challenges.cloudflare.com/turnstile/v0/siteverify',
             [
-                'secret'   => $secret,
+                'secret' => $secret,
                 'response' => $token,
             ]
         );
