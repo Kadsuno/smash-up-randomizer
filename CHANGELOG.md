@@ -4,6 +4,10 @@ All notable changes to this project are documented in this file.
 
 ## [Unreleased]
 
+### Security
+
+- **Contact form spam hardening:** Five layered bot-protection measures — rate limiting (`throttle:5,10` per IP), server-side session timing (3 s minimum delay, no longer client-controlled), stricter field validation (subject whitelist, 20-char message minimum, `email:rfc,dns`), and **Cloudflare Turnstile** CAPTCHA (invisible to real users; configure via `TURNSTILE_SITE_KEY` / `TURNSTILE_SECRET_KEY`). Existing honeypot field retained.
+
 ### Added
 
 - **GitHub automation:** **Dependabot** (`.github/dependabot.yml`) opens weekly update PRs for **Composer**, **npm**, and **GitHub Actions**. **CI** runs **`composer audit`** and **`./vendor/bin/pint --test`** after `composer install`. **`laravel/pint`** is a Composer **dev** dependency; PHP style is normalized project-wide to match Pint defaults.
