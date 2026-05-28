@@ -31,9 +31,9 @@ class ContactController extends Controller
             return redirect()->back()->with(['error' => 'Spam detected!']);
         }
 
-        // Timing: reject submissions that arrive before the minimum human delay.
-        $formStart = session('contact_form_start', 0);
-        if (now()->timestamp - $formStart < 3) {
+        // Timing: reject if the session seed is absent (no GET visit) or too recent.
+        $formStart = session('contact_form_start');
+        if ($formStart === null || now()->timestamp - $formStart < 3) {
             return redirect()->back()->with(['error' => 'Spam detected!']);
         }
 
