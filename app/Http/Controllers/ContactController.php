@@ -27,7 +27,7 @@ class ContactController extends Controller
     public function store(Request $request): RedirectResponse
     {
         // Honeypot: any bot that fills the hidden field is rejected immediately.
-        if (!empty($request->input('context'))) {
+        if (! empty($request->input('context'))) {
             return redirect()->back()->with(['error' => 'Spam detected!']);
         }
 
@@ -46,7 +46,7 @@ class ContactController extends Controller
         ]);
 
         // Turnstile CAPTCHA verification.
-        if (!$this->verifyTurnstile($request->input('cf-turnstile-response', ''))) {
+        if (! $this->verifyTurnstile($request->input('cf-turnstile-response', ''))) {
             return redirect()->back()->with(['error' => 'Spam detected!']);
         }
 
