@@ -56,7 +56,7 @@ Follow **`ticket-authoring.mdc`**.
 
 - `Write` the ticket to `docs/tickets/YYYY-MM-DD-short-slug.md` (content matches chat).
 - **Ticket vs Plan:** Requirements = checkboxes; **Technical notes** short (see ticket-authoring). Do **not** paste the full ordered step list from Plan mode; a cross-reference is enough when Phase 3 runs.
-- **IssueForge (optional, non-blocking):** Only if `.env` defines `ISSUE_FORGE_BASE_URL`, `ISSUE_FORGE_PROJECT_ID`, and `API_ADMIN_TOKEN`. After the ticket file exists, `POST` with `project_id`, `title`, `description`, `status: "open"`, `priority`. On **201**, report id. **Do not** delay Phase 4+ on IssueForge latency; on missing env or failure, note **IssueForge: skipped** and continue.
+- **IssueForge (optional, non-blocking):** Only if `.env` defines `ISSUE_FORGE_BASE_URL`, `ISSUE_FORGE_PROJECT_ID`, and `API_ADMIN_TOKEN`. After the ticket file exists, `POST https://{ISSUE_FORGE_BASE_URL}/api/v1/tickets` with `project_id`, `title`, `description`, `priority` (`low`/`medium`/`high`). Do **not** send `status` — it is set server-side. On **201**, report the returned `id` (e.g. "IssueForge: #67"). **Do not** delay Phase 4+ on IssueForge latency; on missing env or failure, note **IssueForge: skipped** and continue.
 
 ---
 
@@ -202,6 +202,6 @@ git push -u origin <branch-name>
 
 ## Project-specific stack (reminder)
 
-- Laravel 13, **PHP 8.3+**, **MariaDB 10.4 in DDEV**, Blade, Sanctum & Passport, **Vite 5**, **Tailwind CSS 4** (`@tailwindcss/vite`), Alpine.js (Node **20+**).
+- Laravel 13, **PHP 8.3+**, **MariaDB 10.4 in DDEV**, Blade, Sanctum & Passport, **Vite 6**, **Tailwind CSS 4** (`@tailwindcss/vite`), Alpine.js (Node **20+**).
 - Bilingual: maintain **EN and DE** for user-facing strings under **`resources/lang/`** (do not add a second `lang/` tree at the repo root).
 - **Canonical onboarding:** `README.md` (DDEV hostname: `smash-up-randomizer.ddev.site`).
