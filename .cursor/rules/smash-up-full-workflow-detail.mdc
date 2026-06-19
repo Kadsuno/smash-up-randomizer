@@ -92,7 +92,7 @@ If `dev` is missing, **ask** whether to use `main` or another base.
 
 ## Phase 5 — Implement
 
-- **Before running artisan / Composer / npm:** use `php artisan …` / `composer …` / `npm run …` directly (no DDEV required; see `AGENTS.md` for server setup). On a DDEV machine, prefix with `ddev exec` / `ddev composer` / `ddev npm run` as needed.
+- **Before running artisan / Composer / npm:** use `ddev exec …` / `ddev composer …` / `ddev npm run …` (project uses DDEV; see `README.md`). If DDEV cannot be run, use `php artisan …` / `composer …` / `npm run …` directly.
 - **Laravel:** thin controllers, Form Requests, policies/middleware as needed, Eloquent, strict types, PSR-12, DocBlocks.
 - **Frontend:** Blade + Vite; **vanilla JS** (and Alpine as already used); keep scripts in `resources/js/`.
 - **No** mock/fake data in dev or prod paths (tests only).
