@@ -56,7 +56,7 @@ Follow **`ticket-authoring.mdc`**.
 
 - `Write` the ticket to `docs/tickets/YYYY-MM-DD-short-slug.md` (content matches chat).
 - **Ticket vs Plan:** Requirements = checkboxes; **Technical notes** short (see ticket-authoring). Do **not** paste the full ordered step list from Plan mode; a cross-reference is enough when Phase 3 runs.
-- **IssueForge (optional, non-blocking):** Only if `.env` defines `ISSUE_FORGE_BASE_URL`, `ISSUE_FORGE_PROJECT_ID`, and `API_ADMIN_TOKEN`. After the ticket file exists, `POST` with `project_id`, `title`, `description`, `status: "open"`, `priority`. On **201**, report id. **Do not** delay Phase 4+ on IssueForge latency; on missing env or failure, note **IssueForge: skipped** and continue.
+- **IssueForge (optional, non-blocking):** Only if `.env` defines `ISSUE_FORGE_BASE_URL`, `ISSUE_FORGE_PROJECT_ID`, and `API_ADMIN_TOKEN`. After the ticket file exists, `POST https://{ISSUE_FORGE_BASE_URL}/api/v1/tickets` with `project_id`, `title`, `description`, `priority` (`low`/`medium`/`high`). Do **not** send `status` — it is set server-side. On **201**, report the returned `id` (e.g. "IssueForge: #67"). **Do not** delay Phase 4+ on IssueForge latency; on missing env or failure, note **IssueForge: skipped** and continue.
 
 ---
 
@@ -66,7 +66,7 @@ Use Cursor **Plan mode** when **any** of the following applies:
 
 - New DB migration
 - New public route or controller
-- More than 5 files changed
+- More than 8 files changed
 - New external dependency
 - Architectural trade-offs with no clear winner
 
@@ -92,11 +92,11 @@ If `dev` is missing, **ask** whether to use `main` or another base.
 
 ## Phase 5 — Implement
 
-- **Before running artisan / Composer / npm:** use `ddev exec …` / `ddev composer …` / `ddev npm run …` (project uses DDEV; see `README.md`). If DDEV cannot be run, list exact commands for the user's machine.
+- **Before running artisan / Composer / npm:** use `php artisan …` / `composer …` / `npm run …` directly (no DDEV required; see `AGENTS.md` for server setup). On a DDEV machine, prefix with `ddev exec` / `ddev composer` / `ddev npm run` as needed.
 - **Laravel:** thin controllers, Form Requests, policies/middleware as needed, Eloquent, strict types, PSR-12, DocBlocks.
 - **Frontend:** Blade + Vite; **vanilla JS** (and Alpine as already used); keep scripts in `resources/js/`.
 - **No** mock/fake data in dev or prod paths (tests only).
-- After migrations in dev: `ddev exec php artisan migrate`.
+- After migrations in dev: `php artisan migrate`.
 - Keep files roughly under 200–300 lines; extract services when justified.
 - **GDPR:** no tracking/analytics without explicit product decision and legal review.
 
@@ -105,15 +105,14 @@ If `dev` is missing, **ask** whether to use `main` or another base.
 ## Phase 6 — Tests
 
 - **PHPUnit:** `tests/Feature`, `tests/Unit`; factories/mocks; no real external services.
-- **Run** tests: `ddev exec php artisan test`. Do not only author tests — run them.
-- **Parallel with Phase 7:** You may run tests and Pint **at the same time** (e.g. two terminals) to save wall time. **Both** must pass before Phase 10.
+- **Run** tests: `php artisan test`. Do not only author tests — run them.
 
 ---
 
 ## Phase 7 — Lint & static analysis
 
-- **PHP:** PSR-12; run `./vendor/bin/pint --test` if Pint is installed (`composer.json`).
-- **JS:** consistent with existing files; run ESLint only if the project already uses it.
+- **PHP:** PSR-12 style convention; no Pint configured in this project.
+- **JS:** consistent with existing files; no ESLint configured in this project.
 - **`ReadLints`** on all changed files before commit.
 
 ---
@@ -202,6 +201,6 @@ git push -u origin <branch-name>
 
 ## Project-specific stack (reminder)
 
-- Laravel 13, **PHP 8.3+**, **MariaDB 10.4 in DDEV**, Blade, Sanctum & Passport, **Vite 5**, **Tailwind CSS 4** (`@tailwindcss/vite`), Alpine.js (Node **20+**).
+- Laravel 13, **PHP 8.3+**, **SQLite** (dev + tests in-memory), Blade, **Vite 5**, **Tailwind CSS 4** (`@tailwindcss/vite`), Alpine.js (Node **20+**).
 - Bilingual: maintain **EN and DE** for user-facing strings under **`resources/lang/`** (do not add a second `lang/` tree at the repo root).
-- **Canonical onboarding:** `README.md` (DDEV hostname: `smash-up-randomizer.ddev.site`).
+- **Authoritative stack + CLI commands:** `AGENTS.md`. Canonical onboarding: `README.md`.
