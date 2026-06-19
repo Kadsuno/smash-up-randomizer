@@ -92,11 +92,11 @@ If `dev` is missing, **ask** whether to use `main` or another base.
 
 ## Phase 5 — Implement
 
-- **Before running artisan / Composer / npm:** use `ddev exec …` / `ddev composer …` / `ddev npm run …` (project uses DDEV; see `README.md`). If DDEV cannot be run, list exact commands for the user's machine.
+- **Before running artisan / Composer / npm:** use `php artisan …` / `composer …` / `npm run …` directly (no DDEV required; see `AGENTS.md` for server setup). On a DDEV machine, prefix with `ddev exec` / `ddev composer` / `ddev npm run` as needed.
 - **Laravel:** thin controllers, Form Requests, policies/middleware as needed, Eloquent, strict types, PSR-12, DocBlocks.
 - **Frontend:** Blade + Vite; **vanilla JS** (and Alpine as already used); keep scripts in `resources/js/`.
 - **No** mock/fake data in dev or prod paths (tests only).
-- After migrations in dev: `ddev exec php artisan migrate`.
+- After migrations in dev: `php artisan migrate`.
 - Keep files roughly under 200–300 lines; extract services when justified.
 - **GDPR:** no tracking/analytics without explicit product decision and legal review.
 
@@ -203,4 +203,4 @@ git push -u origin <branch-name>
 
 - Laravel 13, **PHP 8.3+**, **MariaDB 10.4 in DDEV**, Blade, Sanctum & Passport, **Vite 6**, **Tailwind CSS 4** (`@tailwindcss/vite`), Alpine.js (Node **20+**).
 - Bilingual: maintain **EN and DE** for user-facing strings under **`resources/lang/`** (do not add a second `lang/` tree at the repo root).
-- **Canonical onboarding:** `README.md` (DDEV hostname: `smash-up-randomizer.ddev.site`).
+- **Authoritative stack + CLI commands:** `AGENTS.md`. Canonical onboarding: `README.md`.

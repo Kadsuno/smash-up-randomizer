@@ -21,7 +21,7 @@ alwaysApply: true
 | Small, safe change | **Quick** | Branch from `dev` exists (ticket/plan/roadmap scan skipped). |
 | Anything else | **Full** | **Pre-code gate** below is complete. |
 
-**Quick track** — use when the user says quick fix **or** **all** are true: ≤3 files, no DB migration, no new public route/controller, no guest-visible UX change. Still: branch → implement → **tests** (`ddev exec php artisan test` when PHP/app or test code changed; doc-only may run a quick smoke or skip if nothing executable changed) → lint → commit → push → PR → merge (or defer merge; see detail Phase 13).
+**Quick track** — use when the user says quick fix **or** **all** are true: ≤3 files, no DB migration, no new public route/controller, no guest-visible UX change. Still: branch → implement → **tests** (`php artisan test` when PHP/app or test code changed; doc-only may run a quick smoke or skip if nothing executable changed) → lint → commit → push → PR → merge (or defer merge; see detail Phase 13).
 
 **Prefer Quick** for typos, single-file fixes, and internal refactors that do not hit the Full triggers — less ticket overhead, same quality gates.
 
