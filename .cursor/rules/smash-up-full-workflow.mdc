@@ -111,4 +111,4 @@ Do **not** call `StrReplace`, `Write`, `Delete`, or implementation `Shell` until
 
 ## Project stack (reminder)
 
-Laravel 13, PHP 8.3+, Blade, Vite 5, Tailwind 4, SQLite (dev + tests), bilingual `resources/lang/` EN+DE. See `AGENTS.md` for authoritative stack details and CLI commands.
+Laravel 13, PHP 8.3+, DDEV (MariaDB 10.4), Blade, Vite 6, Tailwind 4, bilingual `resources/lang/` EN+DE. Onboarding: `README.md`.
