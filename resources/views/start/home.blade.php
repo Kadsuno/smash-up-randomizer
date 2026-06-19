@@ -668,6 +668,35 @@
                                 @endforeach
                             </div>
                         </fieldset>
+
+                        {{-- Anti-repeat / fairness option --}}
+                        @auth
+                            <label class="mt-4 flex cursor-pointer items-start gap-3 rounded-xl border border-white/10 bg-zinc-900/40 px-4 py-3 transition hover:border-indigo-500/30 hover:bg-zinc-800/60 has-[:checked]:border-indigo-500/50 has-[:checked]:bg-indigo-950/30">
+                                <input
+                                    type="checkbox"
+                                    name="avoidRecent"
+                                    value="1"
+                                    id="avoidRecentCheck"
+                                    class="mt-0.5 h-4 w-4 shrink-0 accent-indigo-500"
+                                >
+                                <div class="min-w-0">
+                                    <span class="block text-sm font-medium text-zinc-200">{{ __('frontend.shuffle_avoid_recent_label') }}</span>
+                                    <span class="block text-xs leading-relaxed text-zinc-500">{{ __('frontend.shuffle_avoid_recent_hint', ['window' => config('shuffle.anti_repeat_window', 5)]) }}</span>
+                                </div>
+                            </label>
+                        @else
+                            <div
+                                class="mt-4 flex cursor-not-allowed items-start gap-3 rounded-xl border border-white/8 bg-zinc-900/25 px-4 py-3 opacity-50"
+                                title="{{ __('frontend.shuffle_avoid_recent_guest_hint') }}"
+                                aria-disabled="true"
+                            >
+                                <div class="mt-0.5 h-4 w-4 shrink-0 rounded border border-white/20 bg-zinc-800"></div>
+                                <div class="min-w-0">
+                                    <span class="block text-sm font-medium text-zinc-200">{{ __('frontend.shuffle_avoid_recent_label') }}</span>
+                                    <span class="block text-xs leading-relaxed text-zinc-500">{{ __('frontend.shuffle_avoid_recent_guest_hint') }}</span>
+                                </div>
+                            </div>
+                        @endauth
                     </div>
 
                     <div class="shuffle-step-content hidden" id="step2-content">

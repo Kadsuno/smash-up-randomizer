@@ -440,4 +440,10 @@ return [
     'email_field_timestamp' => 'Zeitstempel',
     'email_field_application' => 'Anwendung',
     'email_test_ok' => 'Wenn du das hier lesen kannst, funktioniert deine Mail-Konfiguration.',
+
+    // Anti-Repeat / Fairness-Option
+    'shuffle_avoid_recent_label' => 'Zuletzt gespielte Fraktionen vermeiden',
+    'shuffle_avoid_recent_hint' => 'Überspringt Fraktionen aus deinen letzten :window Shuffles — ideal für mehrere Spiele hintereinander.',
+    'shuffle_avoid_recent_guest_hint' => 'Anmelden erforderlich — braucht Spielverlauf.',
+    'shuffle_anti_repeat_fallback' => 'Nicht genug neue Fraktionen, um den Verlauf vollständig zu vermeiden — vollständiger Pool wurde verwendet.',
 ];

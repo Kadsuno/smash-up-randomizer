@@ -98,11 +98,22 @@ class DeckController extends Controller
 
     /**
      * Quick-shuffle two players using the eligible faction pool (respects logged-in user's collection).
+     * Anti-repeat is applied automatically for logged-in users; falls back to the full pool when the
+     * filtered pool is too small.
      */
     public function quickShuffle(Request $request): View
     {
         $user = $request->user();
-        $decks = $this->shufflePool->eligibleDecks($user, [], [])->shuffle();
+        $antiRepeatFallback = false;
+
+        $decks = $this->shufflePool->eligibleDecks($user, [], [], avoidRecent: $user !== null);
+
+        if ($user !== null && $decks->count() < 4) {
+            $decks = $this->shufflePool->eligibleDecks($user, [], []);
+            $antiRepeatFallback = true;
+        }
+
+        $decks = $decks->shuffle();
         $selectedDecks = [];
 
         for ($i = 0; $i < 2; $i++) {
@@ -130,6 +141,7 @@ class DeckController extends Controller
             'sharePublicId' => $share->public_id,
             'sharePlainText' => SharedShuffleResult::plainTextSummary($selectedDecks),
             'metaRobots' => 'index, follow',
+            'antiRepeatFallback' => $antiRepeatFallback,
         ]);
     }
 
@@ -147,7 +159,16 @@ class DeckController extends Controller
         }
 
         $user = $request->user();
-        $decks = $this->shufflePool->eligibleDecks($user, $includedFactions, $excludedFactions);
+        $avoidRecent = $user !== null && $request->boolean('avoidRecent');
+        $antiRepeatFallback = false;
+
+        $decks = $this->shufflePool->eligibleDecks($user, $includedFactions, $excludedFactions, $avoidRecent);
+
+        // Soft fallback: if anti-repeat shrinks the pool below minimum, retry without it.
+        if ($avoidRecent && $decks->count() < $numberOfPlayers * 2) {
+            $decks = $this->shufflePool->eligibleDecks($user, $includedFactions, $excludedFactions);
+            $antiRepeatFallback = true;
+        }
 
         if ($decks->isEmpty()) {
             if ($includedFactions !== [] && array_diff($includedFactions, $excludedFactions) === []) {
@@ -165,9 +186,7 @@ class DeckController extends Controller
 
         for ($i = 1; $i <= $numberOfPlayers; $i++) {
             $playerDecks = $decks->random(2);
-            $selectedDecks[] = $playerDecks->map(function ($deck) {
-                return ['name' => $deck->name];
-            })->toArray();
+            $selectedDecks[] = $playerDecks->map(fn ($deck) => ['name' => $deck->name])->toArray();
             $decks = $decks->diff($playerDecks);
         }
 
@@ -190,6 +209,7 @@ class DeckController extends Controller
             'sharePublicId' => $share->public_id,
             'sharePlainText' => SharedShuffleResult::plainTextSummary($selectedDecks),
             'metaRobots' => 'index, follow',
+            'antiRepeatFallback' => $antiRepeatFallback,
         ]);
     }
 }
