@@ -21,7 +21,7 @@ alwaysApply: true
 | Small, safe change | **Quick** | Branch from `dev` exists (ticket/plan/roadmap scan skipped). |
 | Anything else | **Full** | **Pre-code gate** below is complete. |
 
-**Quick track** — use when the user says quick fix **or** **all** are true: ≤3 files, no DB migration, no new public route/controller, no guest-visible UX change. Still: branch → implement → **tests** (`ddev exec php artisan test` when PHP/app or test code changed; doc-only may run a quick smoke or skip if nothing executable changed) → lint → commit → push → PR → merge (or defer merge; see detail Phase 13).
+**Quick track** — use when the user says quick fix **or** **all** are true: ≤3 files, no DB migration, no new public route/controller, no guest-visible UX change. Still: branch → implement → **tests** (`php artisan test` when PHP/app or test code changed; doc-only may run a quick smoke or skip if nothing executable changed) → lint → commit → push → PR → merge (or defer merge; see detail Phase 13).
 
 **Prefer Quick** for typos, single-file fixes, and internal refactors that do not hit the Full triggers — less ticket overhead, same quality gates.
 
@@ -49,7 +49,7 @@ Use **any row** in "Full + Plan" as a **Full track** trigger. Use the **Plan col
 |--------|------------|---------------------------|----------------------|
 | New DB migration | Yes | Yes | No |
 | New public route or controller | Yes | Yes | No |
-| More than 5 files changed (expected) | Yes | Yes | No |
+| More than 8 files changed (expected) | Yes | Yes | No |
 | New external dependency | Yes | Yes | No |
 | Guest-visible UX change | Yes | If unclear / trade-offs | No |
 | Architectural / design choice with no obvious winner | Yes (if shipping code) | Yes | No |
@@ -57,7 +57,7 @@ Use **any row** in "Full + Plan" as a **Full track** trigger. Use the **Plan col
 
 **Plan mode skip (Full track):** If the change **follows an existing repo pattern 1:1** (e.g. same controller/Request/Blade shape as a recent feature) and there is **no** migration, **no** new route, **no** dependency, **no** arch fork — skip `CreatePlan`; add one short **Approach** line in the ticket (e.g. "Mirror `FooController` / `store` flow") and proceed to Branch.
 
-**Plan mode (Full track):** Before `SwitchMode(plan)` / `CreatePlan`, confirm **at least one** Plan trigger from the matrix applies. If **none** apply, skip Plan and record one sentence in the ticket (e.g. "Plan: skipped — no migration, route, >5 files, dependency, or arch fork").
+**Plan mode (Full track):** Before `SwitchMode(plan)` / `CreatePlan`, confirm **at least one** Plan trigger from the matrix applies. If **none** apply, skip Plan and record one sentence in the ticket (e.g. "Plan: skipped — no migration, route, >8 files, dependency, or arch fork").
 
 ---
 
@@ -79,7 +79,7 @@ Do **not** call `StrReplace`, `Write`, `Delete`, or implementation `Shell` until
 ### Pre-commit gate (all tracks that change code)
 
 ```
-[ ] Tests run (ddev exec php artisan test) + ReadLints on touched files; Pint if present
+[ ] Tests run (`php artisan test`) + ReadLints on touched files
 [ ] Docs: README/docs/CHANGELOG per detail Phase 8
 [ ] Roadmap: updated if Phase 1 scan matched — or valid Roadmap: N/A
 [ ] Public copy: EN/DE lang + CHANGELOG if visitor-notable — or Public copy: N/A
@@ -88,7 +88,6 @@ Do **not** call `StrReplace`, `Write`, `Delete`, or implementation `Shell` until
 **Efficiency:**
 
 - While tests run, **draft** `[Unreleased]` bullets and lang keys. **Do not commit** on red tests/lint.
-- **Parallel runs:** When useful, run `ddev exec php artisan test` and `./vendor/bin/pint --test` (if Pint is present) in **parallel** (e.g. two terminals). **Both** must pass before commit.
 - **PR / merge:** Prefer `gh pr create` and, once required checks are **green**, merge in the same session (`gh pr merge --squash --delete-branch`) unless the user deferred merge or CI is still pending (see detail Phase 13).
 
 ---
@@ -112,4 +111,4 @@ Do **not** call `StrReplace`, `Write`, `Delete`, or implementation `Shell` until
 
 ## Project stack (reminder)
 
-Laravel 13, PHP 8.3+, DDEV, Blade, Vite 5, Tailwind 4, bilingual `resources/lang/` EN+DE. Onboarding: `README.md`.
+Laravel 13, PHP 8.3+, Blade, Vite 5, Tailwind 4, SQLite (dev + tests), bilingual `resources/lang/` EN+DE. See `AGENTS.md` for authoritative stack details and CLI commands.
