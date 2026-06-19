@@ -66,7 +66,7 @@ Use Cursor **Plan mode** when **any** of the following applies:
 
 - New DB migration
 - New public route or controller
-- More than 5 files changed
+- More than 8 files changed
 - New external dependency
 - Architectural trade-offs with no clear winner
 
@@ -106,14 +106,13 @@ If `dev` is missing, **ask** whether to use `main` or another base.
 
 - **PHPUnit:** `tests/Feature`, `tests/Unit`; factories/mocks; no real external services.
 - **Run** tests: `ddev exec php artisan test`. Do not only author tests — run them.
-- **Parallel with Phase 7:** You may run tests and Pint **at the same time** (e.g. two terminals) to save wall time. **Both** must pass before Phase 10.
 
 ---
 
 ## Phase 7 — Lint & static analysis
 
-- **PHP:** PSR-12; run `./vendor/bin/pint --test` if Pint is installed (`composer.json`).
-- **JS:** consistent with existing files; run ESLint only if the project already uses it.
+- **PHP:** PSR-12 style convention; no Pint configured in this project.
+- **JS:** consistent with existing files; no ESLint configured in this project.
 - **`ReadLints`** on all changed files before commit.
 
 ---
