@@ -50,6 +50,18 @@
         </x-sur.container>
     </section>
 
+    {{-- Anti-repeat fallback notice --}}
+    @if($antiRepeatFallback ?? false)
+        <div class="border-b border-amber-500/20 bg-amber-950/30 px-4 py-3">
+            <x-sur.container>
+                <p class="flex items-center gap-2 text-xs leading-relaxed text-amber-300">
+                    <i class="fa-solid fa-circle-info shrink-0" aria-hidden="true"></i>
+                    {{ __('frontend.shuffle_anti_repeat_fallback') }}
+                </p>
+            </x-sur.container>
+        </div>
+    @endif
+
     {{-- Results grid --}}
     <x-sur.section>
         <x-sur.container>

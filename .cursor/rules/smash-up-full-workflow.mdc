@@ -13,6 +13,22 @@ alwaysApply: true
 
 ---
 
+## Subagent map (MUST follow)
+
+Use the correct subagent type for each phase. Launching in the wrong mode or skipping subagents is a workflow violation.
+
+| Phase | Subagent type | Background? | Notes |
+|-------|--------------|-------------|-------|
+| 1 — Analyze | `explore` | No (await result) | thoroughness: medium / very thorough |
+| 5 — Implement | `best-of-n-runner` | No | Only when genuine arch uncertainty; else parent |
+| 6 — Tests | `shell` | **Yes** | Frees parent to run Phase 8 draft in parallel |
+| 9 — Browser | `generalPurpose` | No | UI changes only; skip for backend-only |
+| 12/13 — PR & Merge | `shell` | No | `gh pr create` + CI poll + merge |
+
+**Parallel rule:** Phase 6 (`shell` subagent, background) **and** Phase 8 draft (parent agent) **MUST** run concurrently. Await the shell subagent before Phase 10.
+
+---
+
 ## Track pick (before the first implementation edit)
 
 | Goal | Track | First productive edit allowed when |
@@ -21,7 +37,7 @@ alwaysApply: true
 | Small, safe change | **Quick** | Branch from `dev` exists (ticket/plan/roadmap scan skipped). |
 | Anything else | **Full** | **Pre-code gate** below is complete. |
 
-**Quick track** — use when the user says quick fix **or** **all** are true: ≤3 files, no DB migration, no new public route/controller, no guest-visible UX change. Still: branch → implement → **tests** (`php artisan test` when PHP/app or test code changed; doc-only may run a quick smoke or skip if nothing executable changed) → lint → commit → push → PR → merge (or defer merge; see detail Phase 13).
+**Quick track** — use when the user says quick fix **or** **all** are true: ≤3 files, no DB migration, no new public route/controller, no guest-visible UX change. Still: branch → implement → **tests** (`shell` subagent: `ddev exec php artisan test` when PHP/app or test code changed; doc-only may run a quick smoke or skip if nothing executable changed) → lint → commit → push → PR → merge (or defer merge; see detail Phase 13).
 
 **Prefer Quick** for typos, single-file fixes, and internal refactors that do not hit the Full triggers — less ticket overhead, same quality gates.
 
@@ -68,7 +84,7 @@ Use **any row** in "Full + Plan" as a **Full track** trigger. Use the **Plan col
 Do **not** call `StrReplace`, `Write`, `Delete`, or implementation `Shell` until:
 
 ```
-[ ] Phase 1 — Analyze: explored; affected files/patterns known (see detail)
+[ ] Phase 1 — Analyze: explore subagent launched and awaited; affected files/patterns known
 [ ] Phase 2 — Ticket: docs/tickets/YYYY-MM-DD-short-slug.md (ticket-authoring.mdc)
 [ ] Phase 3 — Plan: if matrix says Plan → SwitchMode(plan) + CreatePlan + user confirm; else skip with brief rationale
 [ ] Phase 4 — Branch: from latest dev (see detail)
@@ -79,30 +95,36 @@ Do **not** call `StrReplace`, `Write`, `Delete`, or implementation `Shell` until
 ### Pre-commit gate (all tracks that change code)
 
 ```
-[ ] Tests run (`php artisan test`) + ReadLints on touched files
+[ ] shell subagent (background) ran tests — awaited, green
+    Local:    ddev exec php artisan test
+    Cloud VM: php artisan test   (only when ddev describe confirms DDEV absent)
+[ ] ReadLints on all touched files — clean
 [ ] Docs: README/docs/CHANGELOG per detail Phase 8
 [ ] Roadmap: updated if Phase 1 scan matched — or valid Roadmap: N/A
 [ ] Public copy: EN/DE lang + CHANGELOG if visitor-notable — or Public copy: N/A
 ```
 
+**DDEV rule:** Always prefer `ddev exec php artisan …` / `ddev composer …` / `ddev npm …`. Use bare commands **only** after confirming DDEV is absent (`ddev describe 2>/dev/null | grep -q "smash-up-randomizer"` returns non-zero).
+
 **Efficiency:**
 
-- While tests run, **draft** `[Unreleased]` bullets and lang keys. **Do not commit** on red tests/lint.
-- **PR / merge:** Prefer `gh pr create` and, once required checks are **green**, merge in the same session (`gh pr merge --squash --delete-branch`) unless the user deferred merge or CI is still pending (see detail Phase 13).
+- Launch `shell` subagent for tests (`run_in_background: true`); while it runs, **draft** `[Unreleased]` bullets and lang keys in the parent agent. **Do not commit** until subagent returns green.
+- **PR / merge:** Use a `shell` subagent: `gh pr create`, poll CI, then `gh pr merge --squash --delete-branch` once checks are **green** — unless the user deferred merge or CI is still pending (see detail Phase 13).
 
 ---
 
 ## Ordering (abbreviated)
 
-**Full:** Analyze → Ticket → Plan (if triggered) → Branch → Implement → Tests → Lint → Docs (draft) → Browser (if UI) → Docs (finalize) → Commit → Push → PR → Merge → Cleanup.
+**Full:** Analyze (`explore`) → Ticket → Plan (if triggered) → Branch → Implement → Tests (`shell` bg) ‖ Docs draft (parent) → Lint → Browser (`generalPurpose`, if UI) → Docs finalize → Commit → Push → PR+Merge (`shell`) → Cleanup.
 
-**Quick:** Branch → Implement → Tests (when code warrants) → Lint → Commit → Push → PR → Merge → Cleanup.
+**Quick:** Branch → Implement → Tests (`shell` bg) → Lint → Commit → Push → PR → Merge → Cleanup.
 
 ---
 
 ## Violations — NEVER
 
 - Skip the ticket file on Full track; use inline plan instead of `CreatePlan` when Plan mode is required.
+- Skip required subagent types (use wrong type or parent agent directly when a subagent is mandated).
 - Commit without tests + `ReadLints` (for code you changed).
 - Merge on failing/unknown required CI unless the user explicitly overrides.
 - Ship roadmap-matched work without `docs/roadmap.md` update (unless deferred in ticket + user agreed).
