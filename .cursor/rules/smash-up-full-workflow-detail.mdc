@@ -101,7 +101,7 @@ If `dev` is missing, **ask** whether to use `main` or another base.
 
 **Subagent: use `best-of-n-runner`** only when there is genuine architectural uncertainty with no clear winner (e.g. two viable approaches that differ in structure). Each runner gets an isolated worktree. Otherwise implement directly in the parent agent.
 
-- **Before running artisan / Composer / npm:** use `ddev exec …` / `ddev composer …` / `ddev npm run …` (project uses DDEV; see `README.md`). If DDEV cannot be run, use `php artisan …` / `composer …` / `npm run …` directly.
+- **Before running artisan / Composer / npm:** ALWAYS use `ddev exec …` / `ddev composer …` / `ddev npm run …`. Direct `php` / `composer` / `npm` invocations are **only** allowed in Cloud VM environments where DDEV is confirmed unavailable (detect: `ddev describe 2>/dev/null | grep -q "smash-up-randomizer"`). Never assume DDEV is absent without checking.
 - **Laravel:** thin controllers, Form Requests, policies/middleware as needed, Eloquent, strict types, PSR-12, DocBlocks.
 - **Frontend:** Blade + Vite; **vanilla JS** (and Alpine as already used); keep scripts in `resources/js/`.
 - **No** mock/fake data in dev or prod paths (tests only).
@@ -115,7 +115,13 @@ If `dev` is missing, **ask** whether to use `main` or another base.
 
 **Subagent: MUST use `shell`** (`run_in_background: true`).
 
-- Launch the `shell` subagent with `ddev exec php artisan test` immediately after Phase 5.
+- Launch the `shell` subagent with this command (environment-aware):
+  ```bash
+  ddev describe 2>/dev/null | grep -q "smash-up-randomizer" \
+    && ddev exec php artisan test \
+    || php artisan test
+  ```
+  Do not hardcode `php artisan test` alone — that bypasses DDEV on local machines.
 - While the subagent runs, the **parent agent executes Phase 8 (Docs draft) in parallel** — do not wait idle.
 - **Await** the shell subagent before Phase 10 (Commit). Tests must be green.
 - **PHPUnit:** `tests/Feature`, `tests/Unit`; factories/mocks; no real external services.

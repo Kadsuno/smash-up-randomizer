@@ -95,12 +95,16 @@ Do **not** call `StrReplace`, `Write`, `Delete`, or implementation `Shell` until
 ### Pre-commit gate (all tracks that change code)
 
 ```
-[ ] shell subagent (background) ran `ddev exec php artisan test` — awaited, green
+[ ] shell subagent (background) ran tests — awaited, green
+    Local:    ddev exec php artisan test
+    Cloud VM: php artisan test   (only when ddev describe confirms DDEV absent)
 [ ] ReadLints on all touched files — clean
 [ ] Docs: README/docs/CHANGELOG per detail Phase 8
 [ ] Roadmap: updated if Phase 1 scan matched — or valid Roadmap: N/A
 [ ] Public copy: EN/DE lang + CHANGELOG if visitor-notable — or Public copy: N/A
 ```
+
+**DDEV rule:** Always prefer `ddev exec php artisan …` / `ddev composer …` / `ddev npm …`. Use bare commands **only** after confirming DDEV is absent (`ddev describe 2>/dev/null | grep -q "smash-up-randomizer"` returns non-zero).
 
 **Efficiency:**
 
