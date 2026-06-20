@@ -34,7 +34,7 @@ Backlog from product discussion (2026-04-19). **Suggested pick order:** near-ter
 
 ### Near-term (high impact, manageable scope)
 
-- **Anti-repeat / fairness option** — Optionally exclude or downweight faction combos that appear in recent **play history** (logged-in users); configurable window or count; tests for edge cases (small pools, presets).
+- **Anti-repeat / fairness option** ✅ — "Avoid recently played factions" checkbox in shuffle wizard (step 1); auto-applied for logged-in users on quick shuffle. Soft fallback when pool too small. Configurable window (`SHUFFLE_ANTI_REPEAT_WINDOW`, default 5). Guests see greyed-out hint.
 - **History actions** — Repeat a past shuffle, or **spawn a preset** from a history row (reuses existing presets + `shuffle_histories`).
 - **Print-friendly result view** — Dedicated Blade route/layout for a clean table printout (optional: browser PDF via print CSS).
 - **Shuffle `<dialog>` accessibility** — Keyboard, focus management / trap, and screen reader labels for the home shuffle wizard (`<dialog>` stepper).

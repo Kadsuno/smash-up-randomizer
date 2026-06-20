@@ -10,6 +10,8 @@ All notable changes to this project are documented in this file.
 
 ### Added
 
+- **Anti-repeat / fairness option:** Logged-in users can tick **"Avoid recently played factions"** in the shuffle wizard (step 1) to exclude factions seen in their last 5 shuffles (configurable via `SHUFFLE_ANTI_REPEAT_WINDOW`). **Quick shuffle (`/random`)** applies anti-repeat automatically for logged-in users. Soft fallback: when the filtered pool is too small, the full pool is used and a notice is shown on the result screen. Guests see the option greyed out with a sign-in hint. New lang keys `shuffle_avoid_recent_*` + `shuffle_anti_repeat_fallback` (EN + DE).
+
 - **GitHub automation:** **Dependabot** (`.github/dependabot.yml`) opens weekly update PRs for **Composer**, **npm**, and **GitHub Actions**. **CI** runs **`composer audit`** and **`./vendor/bin/pint --test`** after `composer install`. **`laravel/pint`** is a Composer **dev** dependency; PHP style is normalized project-wide to match Pint defaults.
 
 - **Landing hero demo:** The marketing carousel is labeled as **preview-only** (bilingual badge + hint), uses a clearer `aria-label`, and decorative tiles/chips use `pointer-events-none` so they do not feel clickable. **Shuffle wizard:** In-modal **toast** when include/exclude leaves no factions or too few for the player count; **server-side** distinct flash messages for include/exclude conflict vs. empty pool. **Faction detail:** `.deck-html` spacing and list typography improved for long descriptions (EN/DE strings where new).

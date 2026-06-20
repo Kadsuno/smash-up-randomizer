@@ -375,6 +375,12 @@ return [
     'shuffle_error_pool_empty' => 'No factions left: adjust include or exclude (for example, do not exclude the entire list).',
     'shuffle_error_not_enough_factions' => 'Not enough factions in the pool for the selected player count (each player needs two factions).',
 
+    // Anti-repeat / fairness option
+    'shuffle_avoid_recent_label' => 'Avoid recently played factions',
+    'shuffle_avoid_recent_hint' => 'Skips factions from your last :window shuffles — great for back-to-back games.',
+    'shuffle_avoid_recent_guest_hint' => 'Sign in to use this — requires play history.',
+    'shuffle_anti_repeat_fallback' => 'Not enough new factions to fully avoid recent history — used the complete pool instead.',
+
     // Account — edit page
     'account_edit_page_heading' => 'Edit account',
     'account_edit_page_sub' => 'Update your display name, e-mail address, and password.',
