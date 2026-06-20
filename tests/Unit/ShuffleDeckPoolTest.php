@@ -20,7 +20,7 @@ class ShuffleDeckPoolTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->pool = new ShuffleDeckPool();
+        $this->pool = new ShuffleDeckPool;
     }
 
     // -----------------------------------------------------------------------
