@@ -3,14 +3,6 @@ description: Full phased workflow for Smash Up Randomizer — analyze, ticket, p
 alwaysApply: false
 ---
 
-## Scope
-
-Same defaults and opt-outs as **`smash-up-full-workflow.mdc`**. This file is the **long playbook**; the other file stays small for token cost.
-
-**Efficiency:** Obeying the Full **pre-code gate** in the quick-reference file avoids **Recovery** backfill — cheaper than fixing a skipped phase later.
-
----
-
 ## Recovery protocol (phases were skipped)
 
 1. **Stop** further code changes until recovery is in order.
@@ -69,15 +61,7 @@ Follow **`ticket-authoring.mdc`**.
 
 ## Phase 3 — Plan (Full track only)
 
-Use Cursor **Plan mode** when **any** of the following applies:
-
-- New DB migration
-- New public route or controller
-- More than 8 files changed
-- New external dependency
-- Architectural trade-offs with no clear winner
-
-**Gate (before `SwitchMode`):** Confirm **at least one** bullet above applies. If **none** apply — including a solution that **mirrors an existing pattern 1:1** with no other trigger — **skip Plan**; add one sentence to the ticket (e.g. "Plan: skipped — triggers not met" or the one-line **Approach** from the quick-reference **Plan mode skip** rule) and go to Phase 4.
+**Gate (before `SwitchMode`):** Confirm **at least one** trigger from the **trigger matrix** in `smash-up-full-workflow.mdc` applies. If **none** apply — including a solution that **mirrors an existing pattern 1:1** — **skip Plan**; add one sentence to the ticket (e.g. "Plan: skipped — triggers not met") and go to Phase 4.
 
 When Plan mode **is** required: `SwitchMode(plan)` → `CreatePlan` — never substitute with an inline markdown plan.  
 Wait for **explicit user confirmation**, then return to Agent mode.
@@ -101,11 +85,12 @@ If `dev` is missing, **ask** whether to use `main` or another base.
 
 **Subagent: use `best-of-n-runner`** only when there is genuine architectural uncertainty with no clear winner (e.g. two viable approaches that differ in structure). Each runner gets an isolated worktree. Otherwise implement directly in the parent agent.
 
-- **Before running artisan / Composer / npm:** ALWAYS use `ddev exec …` / `ddev composer …` / `ddev npm run …`. Direct `php` / `composer` / `npm` invocations are **only** allowed in Cloud VM environments where DDEV is confirmed unavailable (detect: `ddev describe 2>/dev/null | grep -q "smash-up-randomizer"`). Never assume DDEV is absent without checking.
+- **Before running artisan / Composer / npm:** Always use `ddev exec …` / `ddev composer …` / `ddev npm run …`. Bare `php` / `composer` / `npm` are **forbidden** locally. Cloud VM fallback only when `ddev describe 2>/dev/null | grep -q "smash-up-randomizer"` returns non-zero.
 - **Laravel:** thin controllers, Form Requests, policies/middleware as needed, Eloquent, strict types, PSR-12, DocBlocks.
 - **Frontend:** Blade + Vite; **vanilla JS** (and Alpine as already used); keep scripts in `resources/js/`.
 - **No** mock/fake data in dev or prod paths (tests only).
-- After migrations in dev: `ddev exec php artisan migrate`.
+- After migrations in dev: run `ddev exec php artisan migrate`, then immediately test rollback: `ddev exec php artisan migrate:rollback && ddev exec php artisan migrate`. A failing rollback is a blocker — fix the `down()` method before continuing.
+- If new env variables are introduced: add them with placeholder values to `.env.example` in the same commit.
 - Keep files roughly under 200–300 lines; extract services when justified.
 - **GDPR:** no tracking/analytics without explicit product decision and legal review.
 
@@ -133,8 +118,10 @@ If `dev` is missing, **ask** whether to use `main` or another base.
 
 **No dedicated subagent** — run `ReadLints` in the parent agent on all changed files.
 
-- **PHP:** PSR-12 style convention; no Pint configured in this project.
-- **JS:** consistent with existing files; no ESLint configured in this project.
+- **PHP style:** PSR-12 via Laravel Pint. Run `ddev exec ./vendor/bin/pint` (bare `./vendor/bin/pint` on Cloud VM). CI runs `pint --test`; fix any violations before commit.
+- **Security audit:** Run `ddev exec composer audit` on every Full run. Advisory-level findings: note in PR body. Critical/high CVEs: **block the PR** until resolved or a conscious decision is documented.
+- **i18n completeness:** When any `resources/lang/` file was added or modified, run `ddev exec php artisan lang:check`. Fix or justify any missing keys before commit.
+- **JS:** consistent with existing files; no ESLint configured.
 - **`ReadLints`** on all changed files before commit. Fix any introduced linter errors.
 
 ---
@@ -166,50 +153,91 @@ Update **only if** Phase 1 triggered a roadmap scan and found a match: move comp
 
 ---
 
-## Phase 10 — Commit
+## Phase 10 — Commit & Push
 
 Satisfy the **Pre-commit gate** in **`smash-up-full-workflow.mdc`**. Both Phase 6 subagent and Phase 7 `ReadLints` must be complete and green before committing.
 
 - Use **`TodoWrite`** for full workflow runs; do not leave stale `in_progress`.
 - Conventional-style subjects: `feat:`, `fix:`, `chore:`, `docs:`.
 - No secrets or IDE junk in commits.
+- Push: `git push -u origin <branch-name>`
 
 ---
 
-## Phase 11 — Push
+## Phase 11 — Pull request & Merge (GitHub)
 
-```bash
-git push -u origin <branch-name>
-```
-
----
-
-## Phase 12 — Pull request (GitHub)
-
-**Subagent: MUST use `shell`** for PR creation (`run_in_background: false`).
+**Subagent: MUST use `shell`** (`run_in_background: false`). Single subagent handles both PR creation and merge.
 
 - Target **`dev`** unless opted out or another base is agreed.
 - PR body: note **Roadmap** (updated vs N/A) and **Public copy** (CHANGELOG/Lang vs N/A).
-- Use `gh pr create` inside the `shell` subagent.
-- **Same-session flow:** After PR creation, poll CI status and proceed directly to Phase 13 merge in the same shell subagent when checks are green.
+- Run `gh pr create`, then poll CI and merge in the same subagent when checks are green.
+- Merge command: `gh pr merge <number> --squash --delete-branch`
+- **If checks are queued/pending:** report PR URL + status; either wait with bounded polling then merge, or stop with documented next steps. **Do not merge** on red/unknown CI unless the user explicitly overrides.
+- **Defer merge** allowed when user asked or only CI wait remains — but never skip the merge attempt when checks are already green and user did not opt out.
 
 ---
 
-## Phase 13 — Merge (GitHub)
-
-**Subagent: continue in the same `shell` subagent from Phase 12.**
-
-- After PR creation, **attempt merge** when GitHub allows and **required checks are green**, unless the user opted out (`no merge` / `kein Merge`).
-- If checks are **queued or pending:** report PR URL and current status. Either **wait** with bounded polling until green, then merge — or stop with **documented next steps** if the session must end (e.g. "CI pending; merge with `gh pr merge <n> --squash --delete-branch` when green"). **Do not merge** on red or unknown CI unless the user explicitly overrides.
-- Prefer: `gh pr merge <number> --squash --delete-branch`
-- **Defer merge** is allowed when the user asked for it or when only CI wait remains and stopping is necessary — but **never** skip the merge **attempt** when checks are already green and the user did not opt out.
-
----
-
-## Phase 14 — Post-merge cleanup
+## Phase 12 — Post-merge cleanup
 
 - `git checkout dev && git pull origin dev`
 - Delete local feature branch; remote often removed by `--delete-branch`.
+- **Sentry release (conditional):** If `SENTRY_DSN` is set in `.env` and the merge target was `main` or a production branch, create a Sentry release:
+  ```bash
+  sentry-cli releases new <version> --project <slug>
+  sentry-cli releases set-commits <version> --auto
+  sentry-cli releases finalize <version>
+  ```
+  Skip silently if `sentry-cli` is not installed or the merge target is `dev` only.
+
+---
+
+## Phase 13 — Compliance audit + Self-optimize (mandatory after every Full run)
+
+After cleanup, **before ending the session**, run both steps in order.
+
+### Step A — Compliance audit
+
+Check each item against what actually happened in this session. Log `✓` or `✗ <reason>` for each.
+
+```
+[ ] Phase 1  — explore subagent launched and awaited (Full track)
+[ ] Phase 2  — ticket file written to docs/tickets/ (Full track)
+[ ] Phase 3  — Plan triggered + user-confirmed, OR explicitly skipped with rationale in ticket
+[ ] Phase 4  — branch cut from latest dev (not main, not stale)
+[ ] Phase 5  — migration rollback tested (if migration included)
+[ ] Phase 5  — .env.example updated (if new env vars introduced)
+[ ] Phase 6  — shell subagent ran tests; returned green before commit
+[ ] Phase 7  — composer audit run; no unresolved critical/high CVEs
+[ ] Phase 7  — lang:check clean (if lang files changed)
+[ ] Phase 7  — ReadLints run on all changed files; no introduced errors
+[ ] Phase 8  — CHANGELOG/lang/README updated or marked N/A with reason
+[ ] Phase 9  — browser subagent ran (UI change) OR explicitly skipped (backend-only)
+[ ] Phase 10 — commit has conventional prefix (feat/fix/chore/docs)
+[ ] Phase 11 — PR created; merge attempted when CI green (or defer documented)
+[ ] Phase 12 — Sentry release created (if SENTRY_DSN set and merged to main/prod)
+```
+
+If **any item is `✗`**: state the violation clearly, note the root cause (missed rule, ambiguity, time pressure), and carry it into Step B as a forced optimization target.
+
+If **all items are `✓`**: log `Compliance: clean` and proceed to Step B.
+
+### Step B — Self-optimize
+
+**Checklist (scan in order — skip if nothing found):**
+
+1. **Redundancy:** Any instruction repeated across `smash-up-full-workflow.mdc` and this file? Consolidate to the canonical location.
+2. **Ambiguity:** Any phase where you had to re-read or guess intent? Sharpen the wording.
+3. **Missing guardrail:** A mistake or near-miss in this run that no rule would have caught? Add the guard.
+4. **Stale content:** A rule that references a pattern, file path, or tool that no longer exists? Update or remove.
+5. **Overhead:** A required step that added no value for this type of change? Add a skip condition.
+
+**How to apply:**
+
+- Edit `smash-up-full-workflow.mdc` or `smash-up-full-workflow-detail.mdc` directly with `StrReplace`.
+- One commit on `dev`: `chore: self-optimize workflow after <branch-name>` — keep it small, targeted, and reviewable.
+- If nothing warrants a change: log **Self-optimize: N/A — no friction found** and end the session.
+
+**Constraint:** Do not restructure or rewrite entire sections speculatively. Only address friction that **actually occurred** in this iteration.
 
 ---
 
@@ -225,7 +253,7 @@ git push -u origin <branch-name>
 
 ## Ordering
 
-**Full track:** Analyze (`explore`) → Ticket → Plan (if triggered) → Branch → Implement → Tests (`shell` bg) ‖ Docs draft (parent) → Lint → Browser (`generalPurpose`, UI only) → Docs finalize → Commit → Push → PR+Merge (`shell`) → Cleanup.
+**Full track:** Analyze (`explore`) → Ticket → Plan (if triggered) → Branch → Implement → Tests (`shell` bg) ‖ Docs draft (parent) → Lint → Browser (`generalPurpose`, UI only) → Docs finalize → Commit+Push → PR+Merge (`shell`) → Cleanup → **Self-optimize**.
 
 **Quick track:** Branch → Implement → Tests (`shell` bg) → Lint → Commit → Push → PR → Merge → Cleanup.
 

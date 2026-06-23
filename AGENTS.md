@@ -1,5 +1,7 @@
 # AGENTS.md
 
+> **Scope:** This file is read by **Cursor Cloud agents and CI runners** that operate without DDEV. Local development uses DDEV; see `.cursor/rules/smash-up-full-workflow-detail.mdc` for the authoritative local workflow.
+
 ## Stack overview
 
 Laravel 13 + PHP 8.3 + Vite 5 + Tailwind CSS 4 + Alpine.js. See `README.md` for full details.

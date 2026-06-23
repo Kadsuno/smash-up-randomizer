@@ -23,9 +23,9 @@ Use the correct subagent type for each phase. Launching in the wrong mode or ski
 | 5 — Implement | `best-of-n-runner` | No | Only when genuine arch uncertainty; else parent |
 | 6 — Tests | `shell` | **Yes** | Frees parent to run Phase 8 draft in parallel |
 | 9 — Browser | `generalPurpose` | No | UI changes only; skip for backend-only |
-| 12/13 — PR & Merge | `shell` | No | `gh pr create` + CI poll + merge |
+| 11 — PR & Merge | `shell` | No | `gh pr create` + CI poll + merge |
 
-**Parallel rule:** Phase 6 (`shell` subagent, background) **and** Phase 8 draft (parent agent) **MUST** run concurrently. Await the shell subagent before Phase 10.
+**Parallel rule:** Phase 6 (`shell` subagent, background) **and** Phase 8 draft (parent agent) **MUST** run concurrently. Await the shell subagent before Phase 10 (Commit & Push).
 
 ---
 
@@ -41,17 +41,11 @@ Use the correct subagent type for each phase. Launching in the wrong mode or ski
 
 **Prefer Quick** for typos, single-file fixes, and internal refactors that do not hit the Full triggers — less ticket overhead, same quality gates.
 
-### Track decision (before branch or code edits)
-
-1. Classify **Read-only** vs **Quick** vs **Full** using the trigger matrix and Quick rules.
-2. If **Quick** fits and the user did not ask for Full workflow, use **Quick** — do **not** open a ticket or run the Full pre-code gate.
-3. **Full** only when a Full trigger applies or scope is unclear until analyzed; then finish the pre-code gate before the first implementation edit.
-
 ### First response (when starting a change)
 
 State the track:
 
-> **Full workflow:** Analyze → Ticket → Plan (if triggered) → Branch → Implement → Tests → Lint → Docs (draft) → Browser (if UI) → Docs (finalize) → Commit → Push → PR → Merge → Cleanup. Detail: `.cursor/rules/smash-up-full-workflow-detail.mdc`.
+> **Full workflow:** Analyze → Ticket → Plan (if triggered) → Branch → Implement → Tests → Lint → Docs (draft) → Browser (if UI) → Docs (finalize) → Commit+Push → PR+Merge → Cleanup → Self-optimize. Detail: `.cursor/rules/smash-up-full-workflow-detail.mdc`.
 
 > **Quick track:** Branch → Implement → Tests (when code warrants) → Lint → Commit → Push → PR → Merge (or documented defer).
 
@@ -99,38 +93,17 @@ Do **not** call `StrReplace`, `Write`, `Delete`, or implementation `Shell` until
     Local:    ddev exec php artisan test
     Cloud VM: php artisan test   (only when ddev describe confirms DDEV absent)
 [ ] ReadLints on all touched files — clean
+[ ] composer audit run — no unresolved critical/high CVEs
+[ ] Migration rollback tested (migrate:rollback + migrate) — if migration included
+[ ] .env.example updated — if new env vars introduced
+[ ] lang:check clean — if any resources/lang/ file changed
 [ ] Docs: README/docs/CHANGELOG per detail Phase 8
 [ ] Roadmap: updated if Phase 1 scan matched — or valid Roadmap: N/A
 [ ] Public copy: EN/DE lang + CHANGELOG if visitor-notable — or Public copy: N/A
 ```
 
-**DDEV rule:** Always prefer `ddev exec php artisan …` / `ddev composer …` / `ddev npm …`. Use bare commands **only** after confirming DDEV is absent (`ddev describe 2>/dev/null | grep -q "smash-up-randomizer"` returns non-zero).
-
-**Efficiency:**
-
-- Launch `shell` subagent for tests (`run_in_background: true`); while it runs, **draft** `[Unreleased]` bullets and lang keys in the parent agent. **Do not commit** until subagent returns green.
-- **PR / merge:** Use a `shell` subagent: `gh pr create`, poll CI, then `gh pr merge --squash --delete-branch` once checks are **green** — unless the user deferred merge or CI is still pending (see detail Phase 13).
+**DDEV rule:** Always prefer `ddev exec php artisan …` / `ddev composer …` / `ddev npm …`. Bare commands only on confirmed Cloud VM (DDEV absent).
 
 ---
 
-## Ordering (abbreviated)
-
-**Full:** Analyze (`explore`) → Ticket → Plan (if triggered) → Branch → Implement → Tests (`shell` bg) ‖ Docs draft (parent) → Lint → Browser (`generalPurpose`, if UI) → Docs finalize → Commit → Push → PR+Merge (`shell`) → Cleanup.
-
-**Quick:** Branch → Implement → Tests (`shell` bg) → Lint → Commit → Push → PR → Merge → Cleanup.
-
----
-
-## Violations — NEVER
-
-- Skip the ticket file on Full track; use inline plan instead of `CreatePlan` when Plan mode is required.
-- Skip required subagent types (use wrong type or parent agent directly when a subagent is mandated).
-- Commit without tests + `ReadLints` (for code you changed).
-- Merge on failing/unknown required CI unless the user explicitly overrides.
-- Ship roadmap-matched work without `docs/roadmap.md` update (unless deferred in ticket + user agreed).
-
----
-
-## Project stack (reminder)
-
-Laravel 13, PHP 8.3+, DDEV (MariaDB 10.4), Blade, Vite 6, Tailwind 4, bilingual `resources/lang/` EN+DE. Onboarding: `README.md`.
+> Violations, ordering details, and project stack: see **`smash-up-full-workflow-detail.mdc`**.
