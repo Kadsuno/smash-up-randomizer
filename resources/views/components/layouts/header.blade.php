@@ -24,6 +24,11 @@
     <meta name="twitter:image" content="{{ asset('images/og-share.png') }}?v={{ config('app.og_share_version') }}" />
     <meta name="robots" content="{{ $metaRobots }}" />
     <meta name="googlebot" content="{{ $metaRobots }}" />
+    @if(config('services.sentry_browser.dsn'))
+    <meta name="sentry-dsn" content="{{ config('services.sentry_browser.dsn') }}">
+    <meta name="sentry-environment" content="{{ config('sentry.environment') }}">
+    <meta name="sentry-release" content="{{ config('sentry.release') }}">
+    @endif
     <title>Smash Up Randomizer</title>
     @vite(['resources/css/app.css'])
     <link rel="icon" type="image/svg+xml" href="{{ asset('images/brand/logo-mark.svg') }}">
