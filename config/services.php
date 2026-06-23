@@ -57,4 +57,9 @@ return [
         'secret' => env('TURNSTILE_SECRET_KEY', ''),
     ],
 
+    // Sentry browser/frontend DSN — exposed via meta tag; client-side DSNs are public by design.
+    'sentry_browser' => [
+        'dsn' => env('SENTRY_BROWSER_DSN', env('SENTRY_LARAVEL_DSN', env('SENTRY_DSN'))),
+    ],
+
 ];
