@@ -1,5 +1,10 @@
 <?php
 
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 /**
  * Sentry Laravel SDK configuration file.
  *
@@ -16,12 +21,11 @@ return [
     // @see: https://docs.sentry.io/platforms/php/guides/laravel/configuration/options/#logger
     // 'logger' => Sentry\Logger\DebugFileLogger::class, // By default this will log to `storage_path('logs/sentry.log')`
 
-    // The release version of your application
-    // Example with dynamic git hash: trim(exec('git --git-dir ' . base_path('.git') . ' log --pretty="%h" -n1 HEAD'))
-    'release' => env('SENTRY_RELEASE'),
+    // Falls back to short git hash when SENTRY_RELEASE env var is not set (e.g. local dev without CI).
+    'release' => env('SENTRY_RELEASE', @trim(@shell_exec('git -C '.escapeshellarg(base_path()).' log --pretty="%h" -n1 HEAD 2>/dev/null'))),
 
-    // When left empty or `null` the Laravel environment will be used (usually discovered from `APP_ENV` in your `.env`)
-    'environment' => env('SENTRY_ENVIRONMENT'),
+    // Explicit environment prevents local dev errors from leaking into production Sentry project.
+    'environment' => env('SENTRY_ENVIRONMENT', env('APP_ENV', 'production')),
 
     // Override the organization ID used for trace continuation checks.
     'org_id' => env('SENTRY_ORG_ID') === null ? null : (int) env('SENTRY_ORG_ID'),
@@ -30,7 +34,8 @@ return [
     'sample_rate' => env('SENTRY_SAMPLE_RATE') === null ? 1.0 : (float) env('SENTRY_SAMPLE_RATE'),
 
     // @see: https://docs.sentry.io/platforms/php/guides/laravel/configuration/options/#traces_sample_rate
-    'traces_sample_rate' => env('SENTRY_TRACES_SAMPLE_RATE') === null ? null : (float) env('SENTRY_TRACES_SAMPLE_RATE'),
+    // Default 0.1 (10%) in all environments. Set SENTRY_TRACES_SAMPLE_RATE=0 to disable.
+    'traces_sample_rate' => (float) env('SENTRY_TRACES_SAMPLE_RATE', 0.1),
 
     // @see: https://docs.sentry.io/platforms/php/guides/laravel/configuration/options/#profiles_sample_rate
     'profiles_sample_rate' => env('SENTRY_PROFILES_SAMPLE_RATE') === null ? null : (float) env('SENTRY_PROFILES_SAMPLE_RATE'),
@@ -39,7 +44,7 @@ return [
     'strict_trace_continuation' => env('SENTRY_STRICT_TRACE_CONTINUATION', false),
 
     // @see: https://docs.sentry.io/platforms/php/guides/laravel/configuration/options/#enable_logs
-    'enable_logs' => env('SENTRY_ENABLE_LOGS', false),
+    'enable_logs' => env('SENTRY_ENABLE_LOGS', true),
 
     // @see: https://docs.sentry.io/platforms/php/guides/laravel/configuration/options/#log_flush_threshold
     'log_flush_threshold' => env('SENTRY_LOG_FLUSH_THRESHOLD') === null ? null : (int) env('SENTRY_LOG_FLUSH_THRESHOLD'),
@@ -51,7 +56,12 @@ return [
     'send_default_pii' => env('SENTRY_SEND_DEFAULT_PII', false),
 
     // @see: https://docs.sentry.io/platforms/php/guides/laravel/configuration/options/#ignore_exceptions
-    // 'ignore_exceptions' => [],
+    'ignore_exceptions' => [
+        NotFoundHttpException::class,
+        ValidationException::class,
+        AuthenticationException::class,
+        ModelNotFoundException::class,
+    ],
 
     // @see: https://docs.sentry.io/platforms/php/guides/laravel/configuration/options/#ignore_transactions
     'ignore_transactions' => [

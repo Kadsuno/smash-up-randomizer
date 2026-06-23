@@ -5,6 +5,7 @@ use App\Http\Middleware\EnsurePendingTwoFactorLogin;
 use App\Http\Middleware\EnsureUserIsAdmin;
 use App\Http\Middleware\Localization;
 use App\Http\Middleware\RedirectIfAuthenticated;
+use App\Http\Middleware\SentryUserContext;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -30,6 +31,7 @@ return Application::configure(basePath: dirname(__DIR__))
         );
         $middleware->web(append: [
             Localization::class,
+            SentryUserContext::class,
         ]);
         $middleware->alias([
             'auth' => Authenticate::class,
