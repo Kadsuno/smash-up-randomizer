@@ -24,7 +24,7 @@
         "@alpinejs/collapse": "^3.15.11",
         "@alpinejs/intersect": "^3.15.11",
         "@fortawesome/fontawesome-free": "^7.3.1",
-        "@sentry/browser": "^10.68.0"
+        "@sentry/browser": "^10.69.0"
     },
     "type": "module"
 }
